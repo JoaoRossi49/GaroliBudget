@@ -6,5 +6,11 @@ namespace GaroliBudget
         {
             InitializeComponent();
         }
+
+        private void btnIncluir_Click(object sender, EventArgs e)
+        {
+            MT0001mnIncluir form = new MT0001mnIncluir();
+            form.ShowDialog();
+        }
     }
 }

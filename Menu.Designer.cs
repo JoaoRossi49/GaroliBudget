@@ -76,6 +76,7 @@
             btnMateriais.TabIndex = 1;
             btnMateriais.Text = "Cadastro de Materiais";
             btnMateriais.UseVisualStyleBackColor = false;
+            btnMateriais.Click += btnMateriais_Click;
             // 
             // Menu
             // 
