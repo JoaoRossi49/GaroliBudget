@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GaroliBudget.Database
+namespace GaroliBudget.Infrastructure
 {
-    public static class DBSqLite
+    public abstract class DBSqLite
     {
         public static string CaminhoDb { get; } =
             Path.Combine(
