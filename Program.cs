@@ -1,4 +1,4 @@
-using GaroliBudget.Database;
+using GaroliBudget.Infrastructure;
 using SQLitePCL;
 
 namespace GaroliBudget

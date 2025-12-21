@@ -6,5 +6,10 @@ namespace GaroliBudget
         {
             InitializeComponent();
         }
+
+        private void CL0001mnIncluir_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
