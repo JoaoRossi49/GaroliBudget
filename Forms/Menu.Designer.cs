@@ -170,6 +170,7 @@
             Controls.Add(label1);
             Name = "Menu";
             Text = "Menu principal";
+            Load += Menu_Load;
             ResumeLayout(false);
             PerformLayout();
         }

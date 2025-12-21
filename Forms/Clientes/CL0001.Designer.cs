@@ -30,36 +30,85 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CL0001));
             btnPesquisar = new Button();
-            dataGridView1 = new DataGridView();
+            dgvClientes = new DataGridView();
+            clienasdasdteId = new DataGridViewTextBoxColumn();
+            RazoSocial = new DataGridViewTextBoxColumn();
+            Nomeantasia = new DataGridViewTextBoxColumn();
+            telefone = new DataGridViewTextBoxColumn();
+            email = new DataGridViewTextBoxColumn();
+            cnpj = new DataGridViewTextBoxColumn();
             tbNomeCliente = new TextBox();
             label1 = new Label();
-            id = new DataGridViewTextBoxColumn();
-            razaoSocial = new DataGridViewTextBoxColumn();
-            nomeFantasia = new DataGridViewTextBoxColumn();
-            cnpj = new DataGridViewTextBoxColumn();
             btnExcluir = new Button();
             btnIncluir = new Button();
             btnEditar = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
             // btnPesquisar
             // 
-            btnPesquisar.Location = new Point(287, 19);
+            btnPesquisar.Location = new Point(298, 19);
             btnPesquisar.Name = "btnPesquisar";
             btnPesquisar.Size = new Size(89, 43);
             btnPesquisar.TabIndex = 0;
             btnPesquisar.Text = "Pesquisar";
             btnPesquisar.UseVisualStyleBackColor = true;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
-            // dataGridView1
+            // dgvClientes
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id, razaoSocial, nomeFantasia, cnpj });
-            dataGridView1.Location = new Point(12, 84);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(693, 150);
-            dataGridView1.TabIndex = 1;
+            dgvClientes.BackgroundColor = SystemColors.Control;
+            dgvClientes.BorderStyle = BorderStyle.Fixed3D;
+            dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClientes.Columns.AddRange(new DataGridViewColumn[] { clienasdasdteId, RazoSocial, Nomeantasia, telefone, email, cnpj });
+            dgvClientes.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgvClientes.GridColor = SystemColors.ScrollBar;
+            dgvClientes.Location = new Point(12, 84);
+            dgvClientes.Name = "dgvClientes";
+            dgvClientes.Size = new Size(693, 295);
+            dgvClientes.TabIndex = 1;
+            // 
+            // clienasdasdteId
+            // 
+            clienasdasdteId.DataPropertyName = "IdCliente";
+            clienasdasdteId.HeaderText = "IdCliente";
+            clienasdasdteId.Name = "clienasdasdteId";
+            clienasdasdteId.Visible = false;
+            // 
+            // RazoSocial
+            // 
+            RazoSocial.DataPropertyName = "RazaoSocial";
+            RazoSocial.FillWeight = 250F;
+            RazoSocial.HeaderText = "Razão Social";
+            RazoSocial.Name = "RazoSocial";
+            RazoSocial.Width = 250;
+            // 
+            // Nomeantasia
+            // 
+            Nomeantasia.DataPropertyName = "NomeFantasia";
+            Nomeantasia.HeaderText = "Nome Fantasia";
+            Nomeantasia.Name = "Nomeantasia";
+            Nomeantasia.Width = 200;
+            // 
+            // telefone
+            // 
+            telefone.DataPropertyName = "Telefone";
+            telefone.HeaderText = "Telefone";
+            telefone.Name = "telefone";
+            // 
+            // email
+            // 
+            email.DataPropertyName = "Email";
+            email.HeaderText = "Email";
+            email.Name = "email";
+            // 
+            // cnpj
+            // 
+            cnpj.DataPropertyName = "Cnpj";
+            cnpj.HeaderText = "CNPJ";
+            cnpj.Name = "cnpj";
+            cnpj.Width = 200;
             // 
             // tbNomeCliente
             // 
@@ -77,31 +126,6 @@
             label1.Size = new Size(78, 15);
             label1.TabIndex = 3;
             label1.Text = "Nome cliente";
-            // 
-            // id
-            // 
-            id.HeaderText = "id";
-            id.Name = "id";
-            id.Visible = false;
-            // 
-            // razaoSocial
-            // 
-            razaoSocial.FillWeight = 250F;
-            razaoSocial.HeaderText = "Razão Social";
-            razaoSocial.Name = "razaoSocial";
-            razaoSocial.Width = 250;
-            // 
-            // nomeFantasia
-            // 
-            nomeFantasia.HeaderText = "Nome Fantasia";
-            nomeFantasia.Name = "nomeFantasia";
-            nomeFantasia.Width = 200;
-            // 
-            // cnpj
-            // 
-            cnpj.HeaderText = "CNPJ";
-            cnpj.Name = "cnpj";
-            cnpj.Width = 200;
             // 
             // btnExcluir
             // 
@@ -128,6 +152,7 @@
             btnIncluir.TabIndex = 13;
             btnIncluir.TextAlign = ContentAlignment.TopCenter;
             btnIncluir.UseVisualStyleBackColor = false;
+            btnIncluir.Click += btnIncluir_Click;
             // 
             // btnEditar
             // 
@@ -152,11 +177,11 @@
             Controls.Add(btnEditar);
             Controls.Add(label1);
             Controls.Add(tbNomeCliente);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgvClientes);
             Controls.Add(btnPesquisar);
             Name = "CL0001";
             Text = "CL0001 - Listagem de clientes";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -164,15 +189,17 @@
         #endregion
 
         private Button btnPesquisar;
-        private DataGridView dataGridView1;
+        private DataGridView dgvClientes;
         private TextBox tbNomeCliente;
         private Label label1;
-        private DataGridViewTextBoxColumn id;
-        private DataGridViewTextBoxColumn razaoSocial;
-        private DataGridViewTextBoxColumn nomeFantasia;
-        private DataGridViewTextBoxColumn cnpj;
         private Button btnExcluir;
         private Button btnIncluir;
         private Button btnEditar;
+        private DataGridViewTextBoxColumn clienasdasdteId;
+        private DataGridViewTextBoxColumn RazoSocial;
+        private DataGridViewTextBoxColumn Nomeantasia;
+        private DataGridViewTextBoxColumn telefone;
+        private DataGridViewTextBoxColumn email;
+        private DataGridViewTextBoxColumn cnpj;
     }
 }

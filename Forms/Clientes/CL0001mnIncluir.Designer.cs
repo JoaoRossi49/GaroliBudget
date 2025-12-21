@@ -33,10 +33,14 @@
             label1 = new Label();
             btnCancelar = new Button();
             btnGravar = new Button();
-            tbPreco = new TextBox();
-            tbNome = new TextBox();
+            tbNomeFantasia = new TextBox();
+            tbRazaoSocial = new TextBox();
             label3 = new Label();
-            maskedTextBox1 = new MaskedTextBox();
+            mtbCnpj = new MaskedTextBox();
+            mtbTelefone = new MaskedTextBox();
+            label4 = new Label();
+            label5 = new Label();
+            tbEmail = new TextBox();
             SuspendLayout();
             // 
             // label2
@@ -61,39 +65,41 @@
             // 
             btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(231, 201);
+            btnCancelar.Location = new Point(231, 262);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 23);
             btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGravar
             // 
             btnGravar.Image = (Image)resources.GetObject("btnGravar.Image");
             btnGravar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGravar.Location = new Point(144, 201);
+            btnGravar.Location = new Point(144, 262);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(75, 23);
             btnGravar.TabIndex = 8;
             btnGravar.Text = "Gravar";
             btnGravar.TextAlign = ContentAlignment.MiddleRight;
             btnGravar.UseVisualStyleBackColor = true;
+            btnGravar.Click += btnGravar_Click;
             // 
-            // tbPreco
+            // tbNomeFantasia
             // 
-            tbPreco.Location = new Point(12, 86);
-            tbPreco.Name = "tbPreco";
-            tbPreco.Size = new Size(278, 23);
-            tbPreco.TabIndex = 7;
+            tbNomeFantasia.Location = new Point(12, 86);
+            tbNomeFantasia.Name = "tbNomeFantasia";
+            tbNomeFantasia.Size = new Size(278, 23);
+            tbNomeFantasia.TabIndex = 7;
             // 
-            // tbNome
+            // tbRazaoSocial
             // 
-            tbNome.Location = new Point(12, 29);
-            tbNome.Name = "tbNome";
-            tbNome.Size = new Size(278, 23);
-            tbNome.TabIndex = 6;
+            tbRazaoSocial.Location = new Point(12, 29);
+            tbRazaoSocial.Name = "tbRazaoSocial";
+            tbRazaoSocial.Size = new Size(278, 23);
+            tbRazaoSocial.TabIndex = 6;
             // 
             // label3
             // 
@@ -104,27 +110,64 @@
             label3.TabIndex = 13;
             label3.Text = "CNPJ";
             // 
-            // maskedTextBox1
+            // mtbCnpj
             // 
-            maskedTextBox1.Location = new Point(12, 145);
-            maskedTextBox1.Mask = "00.000.000/0000-00";
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(97, 23);
-            maskedTextBox1.TabIndex = 14;
+            mtbCnpj.Location = new Point(12, 145);
+            mtbCnpj.Mask = "00.000.000/0000-00";
+            mtbCnpj.Name = "mtbCnpj";
+            mtbCnpj.Size = new Size(97, 23);
+            mtbCnpj.TabIndex = 14;
+            // 
+            // mtbTelefone
+            // 
+            mtbTelefone.Location = new Point(122, 145);
+            mtbTelefone.Mask = "(00) 00000-0000";
+            mtbTelefone.Name = "mtbTelefone";
+            mtbTelefone.Size = new Size(97, 23);
+            mtbTelefone.TabIndex = 16;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(122, 127);
+            label4.Name = "label4";
+            label4.Size = new Size(52, 15);
+            label4.TabIndex = 15;
+            label4.Text = "Telefone";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 180);
+            label5.Name = "label5";
+            label5.Size = new Size(36, 15);
+            label5.TabIndex = 17;
+            label5.Text = "Email";
+            // 
+            // tbEmail
+            // 
+            tbEmail.Location = new Point(12, 198);
+            tbEmail.Name = "tbEmail";
+            tbEmail.Size = new Size(278, 23);
+            tbEmail.TabIndex = 18;
             // 
             // CL0001mnIncluir
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(318, 236);
-            Controls.Add(maskedTextBox1);
+            ClientSize = new Size(318, 297);
+            Controls.Add(tbEmail);
+            Controls.Add(label5);
+            Controls.Add(mtbTelefone);
+            Controls.Add(label4);
+            Controls.Add(mtbCnpj);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnCancelar);
             Controls.Add(btnGravar);
-            Controls.Add(tbPreco);
-            Controls.Add(tbNome);
+            Controls.Add(tbNomeFantasia);
+            Controls.Add(tbRazaoSocial);
             Name = "CL0001mnIncluir";
             Text = "Menu principal";
             Load += CL0001mnIncluir_Load;
@@ -138,9 +181,13 @@
         private Label label1;
         private Button btnCancelar;
         private Button btnGravar;
-        private TextBox tbPreco;
-        private TextBox tbNome;
+        private TextBox tbNomeFantasia;
+        private TextBox tbRazaoSocial;
         private Label label3;
-        private MaskedTextBox maskedTextBox1;
+        private MaskedTextBox mtbCnpj;
+        private MaskedTextBox mtbTelefone;
+        private Label label4;
+        private Label label5;
+        private TextBox tbEmail;
     }
 }

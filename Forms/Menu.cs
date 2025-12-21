@@ -32,5 +32,10 @@ namespace GaroliBudget
         {
             AbrirFormNoPainel(new CL0001());
         }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+            AbrirFormNoPainel(new CL0001());
+        }
     }
 }

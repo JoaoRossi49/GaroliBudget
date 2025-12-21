@@ -7,77 +7,139 @@ using System.Collections.Generic;
 using GaroliBudget.Models;
 using Microsoft.Data.Sqlite;
 using GaroliBudget.Infrastructure;
+using GaroliBudget.Repositories.Interfaces;
 
 namespace GaroliBudget.Repositories
-{ 
-    public class ClienteRepository : DBSqLite
+{
+    public class ClienteRepository : IClienteRepository
     {
+        public int Inserir(Cliente cliente)
+        {
+            using var conn = DBSqLite.GetConnection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = @"
+                INSERT INTO CLIENTE 
+                (RAZAO_SOCIAL, NOME_FANTASIA, CNPJ, EMAIL, TELEFONE, ATIVO)
+                VALUES 
+                (@razao, @fantasia, @cnpj, @email, @telefone, 1);
+                SELECT last_insert_rowid();
+            ";
+
+            cmd.Parameters.AddWithValue("@razao", cliente.RazaoSocial);
+            cmd.Parameters.AddWithValue("@fantasia", cliente.NomeFantasia);
+            cmd.Parameters.AddWithValue("@cnpj", cliente.Cnpj);
+            cmd.Parameters.AddWithValue("@email", cliente.Email);
+            cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
+
+            return System.Convert.ToInt32(cmd.ExecuteScalar());
+        }
+
+        public void Atualizar(Cliente cliente)
+        {
+            using var conn = DBSqLite.GetConnection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = @"
+                UPDATE CLIENTE SET
+                    RAZAO_SOCIAL = @razao,
+                    NOME_FANTASIA = @fantasia,
+                    CNPJ = @cnpj,
+                    EMAIL = @email,
+                    TELEFONE = @telefone,
+                    ATIVO = @ativo
+                WHERE ID_CLIENTE = @id;
+            ";
+
+            cmd.Parameters.AddWithValue("@razao", cliente.RazaoSocial);
+            cmd.Parameters.AddWithValue("@fantasia", cliente.NomeFantasia);
+            cmd.Parameters.AddWithValue("@cnpj", cliente.Cnpj);
+            cmd.Parameters.AddWithValue("@email", cliente.Email);
+            cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
+            cmd.Parameters.AddWithValue("@ativo", cliente.Ativo ? 1 : 0);
+            cmd.Parameters.AddWithValue("@id", cliente.IdCliente);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public Cliente ObterPorId(int idCliente)
+        {
+            using var conn = DBSqLite.GetConnection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = @"SELECT * FROM CLIENTE WHERE ID_CLIENTE = @id;";
+            cmd.Parameters.AddWithValue("@id", idCliente);
+
+            using var reader = cmd.ExecuteReader();
+            if (!reader.Read()) return null;
+
+            return Mapear(reader);
+        }
+
         public List<Cliente> ListarAtivos()
+        {
+            return Listar("WHERE ATIVO = 1");
+        }
+
+        public List<Cliente> ListarTodos()
+        {
+            return Listar(string.Empty);
+        }
+
+        public bool ExisteCnpj(string cnpj, int? ignorarId = null)
+        {
+            using var conn = DBSqLite.GetConnection();
+            conn.Open();
+
+            var sql = "SELECT COUNT(1) FROM CLIENTE WHERE CNPJ = @cnpj";
+
+            if (ignorarId.HasValue)
+                sql += " AND ID_CLIENTE <> @id";
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("@cnpj", cnpj);
+
+            if (ignorarId.HasValue)
+                cmd.Parameters.AddWithValue("@id", ignorarId.Value);
+
+            return System.Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+        }
+
+        private List<Cliente> Listar(string where)
         {
             var lista = new List<Cliente>();
 
-            using var conn = GetConnection();
-            using var cmd = new SqliteCommand(
-                @"SELECT ID_CLIENTE, RAZAO_SOCIAL, NOME_FANTASIA, CNPJ, ATIVO
-              FROM CLIENTE
-              WHERE ATIVO = 1
-              ORDER BY RAZAO_SOCIAL", conn);
+            using var conn = DBSqLite.GetConnection();
+            conn.Open();
 
-            using var dr = cmd.ExecuteReader();
-            while (dr.Read())
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = $"SELECT * FROM CLIENTE {where};";
+
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                lista.Add(new Cliente
-                {
-                    Id = dr.GetInt32(0),
-                    RazaoSocial = dr.GetString(1),
-                    NomeFantasia = dr.IsDBNull(2) ? null : dr.GetString(2),
-                    Cnpj = dr.IsDBNull(3) ? null : dr.GetString(3),
-                    Ativo = dr.GetInt32(4) == 1
-                });
+                lista.Add(Mapear(reader));
             }
+
             return lista;
         }
 
-        public void Inserir(Cliente c)
+        private Cliente Mapear(SqliteDataReader reader)
         {
-            using var conn = GetConnection();
-            using var cmd = new SqliteCommand(
-                @"INSERT INTO CLIENTE (RAZAO_SOCIAL, NOME_FANTASIA, CNPJ, ATIVO)
-              VALUES (@razao, @fantasia, @cnpj, 1)", conn);
-
-            cmd.Parameters.AddWithValue("@razao", c.RazaoSocial);
-            cmd.Parameters.AddWithValue("@fantasia", c.NomeFantasia);
-            cmd.Parameters.AddWithValue("@cnpj", c.Cnpj);
-
-            cmd.ExecuteNonQuery();
-        }
-
-        public void Atualizar(Cliente c)
-        {
-            using var conn = GetConnection();
-            using var cmd = new SqliteCommand(
-                @"UPDATE CLIENTE
-              SET RAZAO_SOCIAL = @razao,
-                  NOME_FANTASIA = @fantasia,
-                  CNPJ = @cnpj
-              WHERE ID_CLIENTE = @id", conn);
-
-            cmd.Parameters.AddWithValue("@razao", c.RazaoSocial);
-            cmd.Parameters.AddWithValue("@fantasia", c.NomeFantasia);
-            cmd.Parameters.AddWithValue("@cnpj", c.Cnpj);
-            cmd.Parameters.AddWithValue("@id", c.Id);
-
-            cmd.ExecuteNonQuery();
-        }
-
-        public void Inativar(int id)
-        {
-            using var conn = GetConnection();
-            using var cmd = new SqliteCommand(
-                @"UPDATE CLIENTE SET ATIVO = 0 WHERE ID_CLIENTE = @id", conn);
-
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.ExecuteNonQuery();
+            return new Cliente
+            {
+                IdCliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE")),
+                RazaoSocial = reader["RAZAO_SOCIAL"].ToString(),
+                NomeFantasia = reader["NOME_FANTASIA"].ToString(),
+                Cnpj = reader["CNPJ"].ToString(),
+                Email = reader["EMAIL"].ToString(),
+                Telefone = reader["TELEFONE"].ToString(),
+                Ativo = reader.GetInt32(reader.GetOrdinal("ATIVO")) == 1
+            };
         }
     }
 
