@@ -67,6 +67,11 @@ namespace GaroliBudget.Services
             return _clienteRepository.ListarTodos();
         }
 
+        public List<Cliente> ListarWhere(string where)
+        {
+            return _clienteRepository.ListarWhere(where);
+        }
+
         public void InativarCliente(int idCliente)
         {
             var cliente = ObterPorId(idCliente);

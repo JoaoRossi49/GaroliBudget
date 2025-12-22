@@ -115,12 +115,12 @@
             mtbCnpj.Location = new Point(12, 145);
             mtbCnpj.Mask = "00.000.000/0000-00";
             mtbCnpj.Name = "mtbCnpj";
-            mtbCnpj.Size = new Size(97, 23);
+            mtbCnpj.Size = new Size(108, 23);
             mtbCnpj.TabIndex = 14;
             // 
             // mtbTelefone
             // 
-            mtbTelefone.Location = new Point(122, 145);
+            mtbTelefone.Location = new Point(144, 145);
             mtbTelefone.Mask = "(00) 00000-0000";
             mtbTelefone.Name = "mtbTelefone";
             mtbTelefone.Size = new Size(97, 23);
@@ -129,7 +129,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(122, 127);
+            label4.Location = new Point(144, 127);
             label4.Name = "label4";
             label4.Size = new Size(52, 15);
             label4.TabIndex = 15;

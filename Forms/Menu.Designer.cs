@@ -89,6 +89,7 @@
             // 
             // pnlConteudo
             // 
+            pnlConteudo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlConteudo.Location = new Point(156, 80);
             pnlConteudo.Name = "pnlConteudo";
             pnlConteudo.Size = new Size(732, 384);

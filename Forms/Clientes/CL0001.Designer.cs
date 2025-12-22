@@ -37,17 +37,19 @@
             telefone = new DataGridViewTextBoxColumn();
             email = new DataGridViewTextBoxColumn();
             cnpj = new DataGridViewTextBoxColumn();
-            tbNomeCliente = new TextBox();
+            tbRazaoSocial = new TextBox();
             label1 = new Label();
             btnExcluir = new Button();
             btnIncluir = new Button();
             btnEditar = new Button();
+            label2 = new Label();
+            tbNomeCliente = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
             // btnPesquisar
             // 
-            btnPesquisar.Location = new Point(298, 19);
+            btnPesquisar.Location = new Point(616, 4);
             btnPesquisar.Name = "btnPesquisar";
             btnPesquisar.Size = new Size(89, 43);
             btnPesquisar.TabIndex = 0;
@@ -68,6 +70,7 @@
             dgvClientes.Name = "dgvClientes";
             dgvClientes.Size = new Size(693, 295);
             dgvClientes.TabIndex = 1;
+            dgvClientes.CellDoubleClick += dgvClientes_CellDoubleClick;
             // 
             // clienasdasdteId
             // 
@@ -110,22 +113,22 @@
             cnpj.Name = "cnpj";
             cnpj.Width = 200;
             // 
-            // tbNomeCliente
+            // tbRazaoSocial
             // 
-            tbNomeCliente.Location = new Point(12, 30);
-            tbNomeCliente.Name = "tbNomeCliente";
-            tbNomeCliente.Size = new Size(269, 23);
-            tbNomeCliente.TabIndex = 2;
-            tbNomeCliente.TextChanged += tbNomeCliente_TextChanged;
+            tbRazaoSocial.Location = new Point(13, 53);
+            tbRazaoSocial.Name = "tbRazaoSocial";
+            tbRazaoSocial.Size = new Size(256, 23);
+            tbRazaoSocial.TabIndex = 2;
+            tbRazaoSocial.TextChanged += tbNomeCliente_TextChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 12);
+            label1.Location = new Point(13, 35);
             label1.Name = "label1";
-            label1.Size = new Size(78, 15);
+            label1.Size = new Size(71, 15);
             label1.TabIndex = 3;
-            label1.Text = "Nome cliente";
+            label1.Text = "Razão social";
             // 
             // btnExcluir
             // 
@@ -139,6 +142,7 @@
             btnExcluir.TabIndex = 14;
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnIncluir
             // 
@@ -166,17 +170,36 @@
             btnEditar.TabIndex = 12;
             btnEditar.TextAlign = ContentAlignment.TopCenter;
             btnEditar.UseVisualStyleBackColor = false;
+            btnEditar.Click += btnEditar_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(288, 35);
+            label2.Name = "label2";
+            label2.Size = new Size(84, 15);
+            label2.TabIndex = 16;
+            label2.Text = "Nome fantasia";
+            // 
+            // tbNomeCliente
+            // 
+            tbNomeCliente.Location = new Point(288, 53);
+            tbNomeCliente.Name = "tbNomeCliente";
+            tbNomeCliente.Size = new Size(236, 23);
+            tbNomeCliente.TabIndex = 15;
             // 
             // CL0001
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(717, 391);
+            Controls.Add(label2);
+            Controls.Add(tbNomeCliente);
             Controls.Add(btnExcluir);
             Controls.Add(btnIncluir);
             Controls.Add(btnEditar);
             Controls.Add(label1);
-            Controls.Add(tbNomeCliente);
+            Controls.Add(tbRazaoSocial);
             Controls.Add(dgvClientes);
             Controls.Add(btnPesquisar);
             Name = "CL0001";
@@ -190,7 +213,7 @@
 
         private Button btnPesquisar;
         private DataGridView dgvClientes;
-        private TextBox tbNomeCliente;
+        private TextBox tbRazaoSocial;
         private Label label1;
         private Button btnExcluir;
         private Button btnIncluir;
@@ -201,5 +224,7 @@
         private DataGridViewTextBoxColumn telefone;
         private DataGridViewTextBoxColumn email;
         private DataGridViewTextBoxColumn cnpj;
+        private Label label2;
+        private TextBox tbNomeCliente;
     }
 }

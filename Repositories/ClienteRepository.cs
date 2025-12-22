@@ -89,6 +89,11 @@ namespace GaroliBudget.Repositories
             return Listar(string.Empty);
         }
 
+        public List<Cliente> ListarWhere(string where)
+        {
+            return Listar(where);
+        }
+
         public bool ExisteCnpj(string cnpj, int? ignorarId = null)
         {
             using var conn = DBSqLite.GetConnection();

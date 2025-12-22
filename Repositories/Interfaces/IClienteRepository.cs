@@ -23,6 +23,7 @@ namespace GaroliBudget.Repositories.Interfaces
         Cliente ObterPorId(int idCliente);
         List<Cliente> ListarAtivos();
         List<Cliente> ListarTodos();
+        List<Cliente> ListarWhere(string where);
         bool ExisteCnpj(string cnpj, int? ignorarId = null);
     }
 }
