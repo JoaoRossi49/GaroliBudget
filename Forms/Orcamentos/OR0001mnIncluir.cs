@@ -38,25 +38,33 @@ namespace GaroliBudget
         {
             decimal totalGeral = 0;
 
-            // 1. Somar Materiais
             foreach (DataGridViewRow linha in dgvMateriais.Rows)
             {
                 // Verifica se a linha não está vazia (aquela linha em branco no final do grid)
-                if (linha.Cells["valorTotal"].Value != null)
+                if (linha.Cells["valorTotalMaterial"].Value != null)
                 {
-                    string valorString = linha.Cells["valorTotal"].Value.ToString();
+                    string valorString = linha.Cells["valorTotalMaterial"].Value.ToString();
                     totalGeral += Convert.ToDecimal(valorString, CultureInfo.InvariantCulture);
                 }
             }
 
-            //// 2. Somar Processos (Mão de obra)
-            //foreach (DataGridViewRow linha in dgvProcessos.Rows)
-            //{
-            //    if (linha.Cells["colCustoProcesso"].Value != null)
-            //    {
-            //        totalGeral += Convert.ToDecimal(linha.Cells["colCustoProcesso"].Value);
-            //    }
-            //}
+            foreach (DataGridViewRow linha in dgvComponentes.Rows)
+            {
+                if (linha.Cells["valorTotalComponente"].Value != null)
+                {
+                    string valorString = linha.Cells["valorTotalComponente"].Value.ToString();
+                    totalGeral += Convert.ToDecimal(valorString, CultureInfo.InvariantCulture);
+                }
+            }
+
+            foreach (DataGridViewRow linha in dgvProcessos.Rows)
+            {
+                if (linha.Cells["valorTotalProcesso"].Value != null)
+                {
+                    string valorString = linha.Cells["valorTotalProcesso"].Value.ToString();
+                    totalGeral += Convert.ToDecimal(valorString, CultureInfo.InvariantCulture);
+                }
+            }
 
             // 3. Atualiza a tela com o símbolo de Real (C2 = Currency 2 casas decimais)
             lblValorFinal.Text = totalGeral.ToString("C2");
@@ -120,7 +128,19 @@ namespace GaroliBudget
 
         private void btnIncluir_Click(object sender, EventArgs e)
         {
-            dgvMateriais.Rows.Add("Parafuso Sextavado", "10", "1.50", "15.00");
+            if (tcOrcamento.SelectedTab == tpMateriais)
+            {
+                dgvMateriais.Rows.Add("Parafuso Sextavado", "10", "1.50", "15.00");
+            }
+            else if (tcOrcamento.SelectedTab == tpComponentes)
+            {
+                dgvComponentes.Rows.Add("Motor 2400W", "1", "150.00", "150.00");
+            }
+            else if (tcOrcamento.SelectedTab == tpProcessos)
+            {
+                dgvProcessos.Rows.Add("Montagem", "1", "20.00", "20.00");
+            }
+
             CalcularTotalGeral();
         }
 
