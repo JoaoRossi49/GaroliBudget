@@ -84,6 +84,8 @@
             label6 = new Label();
             lblValorFinal = new Label();
             nmMargem = new NumericUpDown();
+            comboBox1 = new ComboBox();
+            label13 = new Label();
             panel1.SuspendLayout();
             tcOrcamento.SuspendLayout();
             tpMateriais.SuspendLayout();
@@ -160,6 +162,8 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.InactiveCaption;
+            panel1.Controls.Add(comboBox1);
+            panel1.Controls.Add(label13);
             panel1.Controls.Add(label12);
             panel1.Controls.Add(label11);
             panel1.Controls.Add(tbTelefone);
@@ -660,6 +664,23 @@
             nmMargem.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nmMargem.ValueChanged += nmMargem_ValueChanged;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(131, 23);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(278, 23);
+            comboBox1.TabIndex = 25;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(131, 5);
+            label13.Name = "label13";
+            label13.Size = new Size(78, 15);
+            label13.TabIndex = 24;
+            label13.Text = "Equipamento";
+            // 
             // OR0001mnIncluir
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -750,5 +771,7 @@
         private Label label12;
         private Label label11;
         private NumericUpDown nmMargem;
+        private ComboBox comboBox1;
+        private Label label13;
     }
 }

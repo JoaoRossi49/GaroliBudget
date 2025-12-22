@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\Indisponivel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Orcamentos\OR0001.cs">
       <SubType>Form</SubType>
     </Compile>
