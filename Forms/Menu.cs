@@ -25,17 +25,26 @@ namespace GaroliBudget
 
         private void btnMateriais_Click(object sender, EventArgs e)
         {
+            tbNomeForm.Text = "Controle de Materiais";
             AbrirFormNoPainel(new MT0001());
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
+            tbNomeForm.Text = "Controle de Clientes";
             AbrirFormNoPainel(new CL0001());
         }
 
         private void Menu_Load(object sender, EventArgs e)
         {
+            tbNomeForm.Text = "Controle de Clientes";
             AbrirFormNoPainel(new CL0001());
+        }
+
+        private void btnOracamentos_Click(object sender, EventArgs e)
+        {
+            tbNomeForm.Text = "Controle de Orçamentos";
+            AbrirFormNoPainel(new OR0001());
         }
     }
 }

@@ -19,6 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\Oracamentos\OR0001.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Oracamentos\OR0001mnIncluir.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Clientes\CL0001mnIncluir.cs">
       <SubType>Form</SubType>
     </Compile>

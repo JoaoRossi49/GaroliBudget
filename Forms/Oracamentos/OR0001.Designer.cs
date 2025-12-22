@@ -1,6 +1,6 @@
 ﻿namespace GaroliBudget
 {
-    partial class CL0001
+    partial class OR0001
     {
         /// <summary>
         ///  Required designer variable.
@@ -130,9 +130,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(5, 23);
             label1.Name = "label1";
-            label1.Size = new Size(71, 15);
+            label1.Size = new Size(44, 15);
             label1.TabIndex = 3;
-            label1.Text = "Razão social";
+            label1.Text = "Cliente";
             // 
             // btnExcluir
             // 
@@ -184,9 +184,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(280, 23);
             label2.Name = "label2";
-            label2.Size = new Size(84, 15);
+            label2.Size = new Size(46, 15);
             label2.TabIndex = 16;
-            label2.Text = "Nome fantasia";
+            label2.Text = "Código";
             // 
             // tbNomeCliente
             // 
@@ -213,7 +213,7 @@
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros";
             // 
-            // CL0001
+            // OR0001
             // 
             AcceptButton = btnPesquisar;
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -221,7 +221,7 @@
             ClientSize = new Size(717, 403);
             Controls.Add(gbFiltros);
             Controls.Add(dgvClientes);
-            Name = "CL0001";
+            Name = "OR0001";
             Text = "CL0001 - Listagem de clientes";
             ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
             gbFiltros.ResumeLayout(false);
