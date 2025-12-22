@@ -66,6 +66,8 @@ namespace GaroliBudget
                 }
             }
 
+            totalGeral = totalGeral * nmMargem.Value;
+
             // 3. Atualiza a tela com o símbolo de Real (C2 = Currency 2 casas decimais)
             lblValorFinal.Text = totalGeral.ToString("C2");
         }
@@ -77,35 +79,8 @@ namespace GaroliBudget
 
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cliente cadastrado com sucesso!");
-            //var clienteParaSalvar = _clienteExistente ?? new Cliente();
-
-            //clienteParaSalvar.RazaoSocial = tbRazaoSocial.Text;
-            //clienteParaSalvar.NomeFantasia = tbNomeFantasia.Text;
-            //clienteParaSalvar.Cnpj = mtbCnpj.Text;
-            //clienteParaSalvar.Telefone = mtbTelefone.Text;
-            //clienteParaSalvar.Email = tbEmail.Text;
-
-            //try
-            //{
-            //    if (_clienteExistente == null)
-            //    {
-            //        _clienteService.CriarCliente(clienteParaSalvar);
-            //        MessageBox.Show("Cliente cadastrado com sucesso!");
-            //    }
-            //    else
-            //    {
-            //        _clienteService.AtualizarCliente(clienteParaSalvar);
-            //        MessageBox.Show("Cliente atualizado com sucesso!");
-            //    }
-
-            //    this.DialogResult = DialogResult.OK;
-            //    this.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Erro ao salvar: {ex.Message}");
-            //}
+            MessageBox.Show("Orçamento incluído com sucesso!");
+            this.Close();
         }
 
         private void CarregarComboClientes()
@@ -161,6 +136,27 @@ namespace GaroliBudget
             {
                 MessageBox.Show("Selecione uma linha inteira clicando na barra lateral esquerda do Grid.");
             }
+        }
+
+        private void cbClientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbClientes.SelectedItem != null)
+            {
+                Cliente clienteSelecionado = (Cliente)cbClientes.SelectedItem;
+
+                tbCnpj.Text = clienteSelecionado.Cnpj;
+                tbTelefone.Text = clienteSelecionado.Telefone;
+            }
+            else
+            {
+                tbCnpj.Clear();
+                tbTelefone.Clear();
+            }
+        }
+
+        private void nmMargem_ValueChanged(object sender, EventArgs e)
+        {
+            CalcularTotalGeral();
         }
     }
 }

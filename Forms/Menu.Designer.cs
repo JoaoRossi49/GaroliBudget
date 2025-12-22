@@ -63,9 +63,9 @@
             // 
             // btnClientes
             // 
-            btnClientes.IconChar = FontAwesome.Sharp.IconChar.User;
+            btnClientes.IconChar = FontAwesome.Sharp.IconChar.Users;
             btnClientes.IconColor = Color.Black;
-            btnClientes.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            btnClientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnClientes.IconSize = 36;
             btnClientes.ImageAlign = ContentAlignment.MiddleLeft;
             btnClientes.Location = new Point(4, 56);
@@ -132,6 +132,7 @@
             btnComponentes.Text = "Componentes";
             btnComponentes.TextAlign = ContentAlignment.MiddleRight;
             btnComponentes.UseVisualStyleBackColor = true;
+            btnComponentes.Click += btnComponentes_Click;
             // 
             // btnProcessos
             // 
@@ -147,6 +148,7 @@
             btnProcessos.Text = "Processos";
             btnProcessos.TextAlign = ContentAlignment.MiddleRight;
             btnProcessos.UseVisualStyleBackColor = true;
+            btnProcessos.Click += btnProcessos_Click;
             // 
             // btnEquipamentos
             // 
@@ -162,6 +164,7 @@
             btnEquipamentos.Text = "Equipamentos";
             btnEquipamentos.TextAlign = ContentAlignment.MiddleRight;
             btnEquipamentos.UseVisualStyleBackColor = true;
+            btnEquipamentos.Click += btnEquipamentos_Click;
             // 
             // pnlMenu
             // 

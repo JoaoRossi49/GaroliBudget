@@ -36,8 +36,10 @@
             tbRazaoSocial = new TextBox();
             cbClientes = new ComboBox();
             panel1 = new Panel();
-            tbTelefoneCliente = new TextBox();
-            tbNomeCliente = new TextBox();
+            label12 = new Label();
+            label11 = new Label();
+            tbTelefone = new TextBox();
+            tbCnpj = new TextBox();
             tcOrcamento = new TabControl();
             tpMateriais = new TabPage();
             label4 = new Label();
@@ -48,6 +50,10 @@
             btnIncluirMaterial = new Button();
             btnEditar = new Button();
             dgvMateriais = new DataGridView();
+            descricaoMaterial = new DataGridViewTextBoxColumn();
+            quantidadeMaterial = new DataGridViewTextBoxColumn();
+            valorUnitarioMaterial = new DataGridViewTextBoxColumn();
+            valorTotalMaterial = new DataGridViewTextBoxColumn();
             tpComponentes = new TabPage();
             label7 = new Label();
             tbComponentesQuantidade = new TextBox();
@@ -57,6 +63,10 @@
             btnIncluirComponente = new Button();
             button3 = new Button();
             dgvComponentes = new DataGridView();
+            descricaoComponente = new DataGridViewTextBoxColumn();
+            quantidadeComponente = new DataGridViewTextBoxColumn();
+            valorUnitarioComponente = new DataGridViewTextBoxColumn();
+            valorTotalComponente = new DataGridViewTextBoxColumn();
             tpProcessos = new TabPage();
             label9 = new Label();
             tbProcessosQuantidade = new TextBox();
@@ -66,22 +76,14 @@
             btnIncluirProcesso = new Button();
             button6 = new Button();
             dgvProcessos = new DataGridView();
-            label5 = new Label();
-            label6 = new Label();
-            textBox2 = new TextBox();
-            lblValorFinal = new Label();
-            descricaoMaterial = new DataGridViewTextBoxColumn();
-            quantidadeMaterial = new DataGridViewTextBoxColumn();
-            valorUnitarioMaterial = new DataGridViewTextBoxColumn();
-            valorTotalMaterial = new DataGridViewTextBoxColumn();
-            descricaoComponente = new DataGridViewTextBoxColumn();
-            quantidadeComponente = new DataGridViewTextBoxColumn();
-            valorUnitarioComponente = new DataGridViewTextBoxColumn();
-            valorTotalComponente = new DataGridViewTextBoxColumn();
             descricaoProcesso = new DataGridViewTextBoxColumn();
             quantidadeProcesso = new DataGridViewTextBoxColumn();
             valorUnitarioProcesso = new DataGridViewTextBoxColumn();
             valorTotalProcesso = new DataGridViewTextBoxColumn();
+            label5 = new Label();
+            label6 = new Label();
+            lblValorFinal = new Label();
+            nmMargem = new NumericUpDown();
             panel1.SuspendLayout();
             tcOrcamento.SuspendLayout();
             tpMateriais.SuspendLayout();
@@ -90,6 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvComponentes).BeginInit();
             tpProcessos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProcessos).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nmMargem).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -152,12 +155,15 @@
             cbClientes.Name = "cbClientes";
             cbClientes.Size = new Size(278, 23);
             cbClientes.TabIndex = 19;
+            cbClientes.SelectedIndexChanged += cbClientes_SelectedIndexChanged;
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.InactiveCaption;
-            panel1.Controls.Add(tbTelefoneCliente);
-            panel1.Controls.Add(tbNomeCliente);
+            panel1.Controls.Add(label12);
+            panel1.Controls.Add(label11);
+            panel1.Controls.Add(tbTelefone);
+            panel1.Controls.Add(tbCnpj);
             panel1.Controls.Add(tbRazaoSocial);
             panel1.Controls.Add(cbClientes);
             panel1.Controls.Add(label1);
@@ -167,23 +173,43 @@
             panel1.Size = new Size(667, 106);
             panel1.TabIndex = 20;
             // 
-            // tbTelefoneCliente
+            // label12
             // 
-            tbTelefoneCliente.Location = new Point(449, 69);
-            tbTelefoneCliente.Name = "tbTelefoneCliente";
-            tbTelefoneCliente.ReadOnly = true;
-            tbTelefoneCliente.Size = new Size(138, 23);
-            tbTelefoneCliente.TabIndex = 21;
-            tbTelefoneCliente.Text = "<Telefone>";
+            label12.AutoSize = true;
+            label12.Location = new Point(446, 51);
+            label12.Name = "label12";
+            label12.Size = new Size(51, 15);
+            label12.TabIndex = 23;
+            label12.Text = "Telefone";
             // 
-            // tbNomeCliente
+            // label11
             // 
-            tbNomeCliente.Location = new Point(305, 69);
-            tbNomeCliente.Name = "tbNomeCliente";
-            tbNomeCliente.ReadOnly = true;
-            tbNomeCliente.Size = new Size(138, 23);
-            tbNomeCliente.TabIndex = 20;
-            tbNomeCliente.Text = "<Nome>";
+            label11.AutoSize = true;
+            label11.Location = new Point(303, 51);
+            label11.Name = "label11";
+            label11.Size = new Size(34, 15);
+            label11.TabIndex = 22;
+            label11.Text = "CNPJ";
+            // 
+            // tbTelefone
+            // 
+            tbTelefone.Enabled = false;
+            tbTelefone.Location = new Point(449, 69);
+            tbTelefone.Name = "tbTelefone";
+            tbTelefone.ReadOnly = true;
+            tbTelefone.Size = new Size(138, 23);
+            tbTelefone.TabIndex = 21;
+            tbTelefone.Text = "<Telefone>";
+            // 
+            // tbCnpj
+            // 
+            tbCnpj.Enabled = false;
+            tbCnpj.Location = new Point(305, 69);
+            tbCnpj.Name = "tbCnpj";
+            tbCnpj.ReadOnly = true;
+            tbCnpj.Size = new Size(138, 23);
+            tbCnpj.TabIndex = 20;
+            tbCnpj.Text = "<CNPJ>";
             // 
             // tcOrcamento
             // 
@@ -304,6 +330,31 @@
             dgvMateriais.Size = new Size(633, 268);
             dgvMateriais.TabIndex = 0;
             // 
+            // descricaoMaterial
+            // 
+            descricaoMaterial.HeaderText = "Descrição";
+            descricaoMaterial.Name = "descricaoMaterial";
+            descricaoMaterial.ReadOnly = true;
+            descricaoMaterial.Width = 280;
+            // 
+            // quantidadeMaterial
+            // 
+            quantidadeMaterial.HeaderText = "Quantidade";
+            quantidadeMaterial.Name = "quantidadeMaterial";
+            quantidadeMaterial.ReadOnly = true;
+            // 
+            // valorUnitarioMaterial
+            // 
+            valorUnitarioMaterial.HeaderText = "Valor unitário";
+            valorUnitarioMaterial.Name = "valorUnitarioMaterial";
+            valorUnitarioMaterial.ReadOnly = true;
+            // 
+            // valorTotalMaterial
+            // 
+            valorTotalMaterial.HeaderText = "Valor total";
+            valorTotalMaterial.Name = "valorTotalMaterial";
+            valorTotalMaterial.ReadOnly = true;
+            // 
             // tpComponentes
             // 
             tpComponentes.Controls.Add(label7);
@@ -410,6 +461,31 @@
             dgvComponentes.ReadOnly = true;
             dgvComponentes.Size = new Size(633, 268);
             dgvComponentes.TabIndex = 24;
+            // 
+            // descricaoComponente
+            // 
+            descricaoComponente.HeaderText = "Descrição";
+            descricaoComponente.Name = "descricaoComponente";
+            descricaoComponente.ReadOnly = true;
+            descricaoComponente.Width = 280;
+            // 
+            // quantidadeComponente
+            // 
+            quantidadeComponente.HeaderText = "Quantidade";
+            quantidadeComponente.Name = "quantidadeComponente";
+            quantidadeComponente.ReadOnly = true;
+            // 
+            // valorUnitarioComponente
+            // 
+            valorUnitarioComponente.HeaderText = "Valor unitário";
+            valorUnitarioComponente.Name = "valorUnitarioComponente";
+            valorUnitarioComponente.ReadOnly = true;
+            // 
+            // valorTotalComponente
+            // 
+            valorTotalComponente.HeaderText = "Valor total";
+            valorTotalComponente.Name = "valorTotalComponente";
+            valorTotalComponente.ReadOnly = true;
             // 
             // tpProcessos
             // 
@@ -518,92 +594,6 @@
             dgvProcessos.Size = new Size(633, 268);
             dgvProcessos.TabIndex = 24;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label5.Location = new Point(12, 537);
-            label5.Name = "label5";
-            label5.Size = new Size(49, 15);
-            label5.TabIndex = 22;
-            label5.Text = "TOTAL: ";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(11, 484);
-            label6.Name = "label6";
-            label6.Size = new Size(138, 15);
-            label6.TabIndex = 25;
-            label6.Text = "Margem de contribuição";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(11, 502);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(138, 23);
-            textBox2.TabIndex = 24;
-            // 
-            // lblValorFinal
-            // 
-            lblValorFinal.AutoSize = true;
-            lblValorFinal.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblValorFinal.Location = new Point(62, 537);
-            lblValorFinal.Name = "lblValorFinal";
-            lblValorFinal.Size = new Size(31, 15);
-            lblValorFinal.TabIndex = 26;
-            lblValorFinal.Text = "0.00";
-            // 
-            // descricaoMaterial
-            // 
-            descricaoMaterial.HeaderText = "Descrição";
-            descricaoMaterial.Name = "descricaoMaterial";
-            descricaoMaterial.ReadOnly = true;
-            descricaoMaterial.Width = 280;
-            // 
-            // quantidadeMaterial
-            // 
-            quantidadeMaterial.HeaderText = "Quantidade";
-            quantidadeMaterial.Name = "quantidadeMaterial";
-            quantidadeMaterial.ReadOnly = true;
-            // 
-            // valorUnitarioMaterial
-            // 
-            valorUnitarioMaterial.HeaderText = "Valor unitário";
-            valorUnitarioMaterial.Name = "valorUnitarioMaterial";
-            valorUnitarioMaterial.ReadOnly = true;
-            // 
-            // valorTotalMaterial
-            // 
-            valorTotalMaterial.HeaderText = "Valor total";
-            valorTotalMaterial.Name = "valorTotalMaterial";
-            valorTotalMaterial.ReadOnly = true;
-            // 
-            // descricaoComponente
-            // 
-            descricaoComponente.HeaderText = "Descrição";
-            descricaoComponente.Name = "descricaoComponente";
-            descricaoComponente.ReadOnly = true;
-            descricaoComponente.Width = 280;
-            // 
-            // quantidadeComponente
-            // 
-            quantidadeComponente.HeaderText = "Quantidade";
-            quantidadeComponente.Name = "quantidadeComponente";
-            quantidadeComponente.ReadOnly = true;
-            // 
-            // valorUnitarioComponente
-            // 
-            valorUnitarioComponente.HeaderText = "Valor unitário";
-            valorUnitarioComponente.Name = "valorUnitarioComponente";
-            valorUnitarioComponente.ReadOnly = true;
-            // 
-            // valorTotalComponente
-            // 
-            valorTotalComponente.HeaderText = "Valor total";
-            valorTotalComponente.Name = "valorTotalComponente";
-            valorTotalComponente.ReadOnly = true;
-            // 
             // descricaoProcesso
             // 
             descricaoProcesso.HeaderText = "Descrição";
@@ -629,15 +619,56 @@
             valorTotalProcesso.Name = "valorTotalProcesso";
             valorTotalProcesso.ReadOnly = true;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            label5.Location = new Point(236, 513);
+            label5.Name = "label5";
+            label5.Size = new Size(83, 28);
+            label5.TabIndex = 22;
+            label5.Text = "TOTAL: ";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(12, 488);
+            label6.Name = "label6";
+            label6.Size = new Size(138, 15);
+            label6.TabIndex = 25;
+            label6.Text = "Margem de contribuição";
+            // 
+            // lblValorFinal
+            // 
+            lblValorFinal.AutoSize = true;
+            lblValorFinal.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            lblValorFinal.Location = new Point(309, 513);
+            lblValorFinal.Name = "lblValorFinal";
+            lblValorFinal.Size = new Size(53, 28);
+            lblValorFinal.TabIndex = 26;
+            lblValorFinal.Text = "0.00";
+            // 
+            // nmMargem
+            // 
+            nmMargem.DecimalPlaces = 2;
+            nmMargem.Font = new Font("Segoe UI", 15F);
+            nmMargem.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+            nmMargem.Location = new Point(12, 506);
+            nmMargem.Name = "nmMargem";
+            nmMargem.Size = new Size(120, 34);
+            nmMargem.TabIndex = 27;
+            nmMargem.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            nmMargem.ValueChanged += nmMargem_ValueChanged;
+            // 
             // OR0001mnIncluir
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(661, 574);
+            Controls.Add(nmMargem);
             Controls.Add(lblValorFinal);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(textBox2);
             Controls.Add(tcOrcamento);
             Controls.Add(panel1);
             Controls.Add(btnCancelar);
@@ -657,6 +688,7 @@
             tpProcessos.ResumeLayout(false);
             tpProcessos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProcessos).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nmMargem).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -670,8 +702,8 @@
         private TextBox tbRazaoSocial;
         private ComboBox cbClientes;
         private Panel panel1;
-        private TextBox tbTelefoneCliente;
-        private TextBox tbNomeCliente;
+        private TextBox tbTelefone;
+        private TextBox tbCnpj;
         private TabControl tcOrcamento;
         private TabPage tpMateriais;
         private TabPage tpComponentes;
@@ -686,7 +718,6 @@
         private TextBox tbMateriaisQuantidade;
         private Label label5;
         private Label label6;
-        private TextBox textBox2;
         private Label lblValorFinal;
         private Label label7;
         private TextBox tbComponentesQuantidade;
@@ -716,5 +747,8 @@
         private DataGridViewTextBoxColumn quantidadeProcesso;
         private DataGridViewTextBoxColumn valorUnitarioProcesso;
         private DataGridViewTextBoxColumn valorTotalProcesso;
+        private Label label12;
+        private Label label11;
+        private NumericUpDown nmMargem;
     }
 }
