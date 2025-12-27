@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             btnClientes = new FontAwesome.Sharp.IconButton();
             btnOracamentos = new FontAwesome.Sharp.IconButton();
             pnlConteudo = new Panel();
@@ -53,13 +52,6 @@
             label1.Size = new Size(270, 35);
             label1.TabIndex = 0;
             label1.Text = "Garoli Equipamentos - ";
-            // 
-            // sqliteCommand1
-            // 
-            sqliteCommand1.CommandTimeout = 30;
-            sqliteCommand1.Connection = null;
-            sqliteCommand1.Transaction = null;
-            sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
             // 
             // btnClientes
             // 
@@ -219,7 +211,6 @@
         #endregion
 
         private Label label1;
-        private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
         private FontAwesome.Sharp.IconButton btnClientes;
         private FontAwesome.Sharp.IconButton btnOracamentos;
         private Panel pnlConteudo;

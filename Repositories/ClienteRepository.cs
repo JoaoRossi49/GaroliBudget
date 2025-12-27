@@ -8,6 +8,7 @@ using GaroliBudget.Models;
 using Microsoft.Data.Sqlite;
 using GaroliBudget.Infrastructure;
 using GaroliBudget.Repositories.Interfaces;
+using Npgsql;
 
 namespace GaroliBudget.Repositories
 {
@@ -15,7 +16,7 @@ namespace GaroliBudget.Repositories
     {
         public int Inserir(Cliente cliente)
         {
-            using var conn = DBSqLite.GetConnection();
+            using var conn = DBPostgres.GetConnection();
             conn.Open();
 
             var cmd = conn.CreateCommand();
@@ -38,7 +39,7 @@ namespace GaroliBudget.Repositories
 
         public void Atualizar(Cliente cliente)
         {
-            using var conn = DBSqLite.GetConnection();
+            using var conn = DBPostgres.GetConnection();
             conn.Open();
 
             var cmd = conn.CreateCommand();
@@ -66,7 +67,7 @@ namespace GaroliBudget.Repositories
 
         public Cliente ObterPorId(int idCliente)
         {
-            using var conn = DBSqLite.GetConnection();
+            using var conn = DBPostgres.GetConnection();
             conn.Open();
 
             var cmd = conn.CreateCommand();
@@ -96,7 +97,7 @@ namespace GaroliBudget.Repositories
 
         public bool ExisteCnpj(string cnpj, int? ignorarId = null)
         {
-            using var conn = DBSqLite.GetConnection();
+            using var conn = DBPostgres.GetConnection();
             conn.Open();
 
             var sql = "SELECT COUNT(1) FROM CLIENTE WHERE CNPJ = @cnpj";
@@ -118,7 +119,7 @@ namespace GaroliBudget.Repositories
         {
             var lista = new List<Cliente>();
 
-            using var conn = DBSqLite.GetConnection();
+            using var conn = DBPostgres.GetConnection();
             conn.Open();
 
             var cmd = conn.CreateCommand();
@@ -133,7 +134,7 @@ namespace GaroliBudget.Repositories
             return lista;
         }
 
-        private Cliente Mapear(SqliteDataReader reader)
+        private Cliente Mapear(NpgsqlDataReader reader)
         {
             return new Cliente
             {

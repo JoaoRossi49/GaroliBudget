@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,49 +8,32 @@ using System.Threading.Tasks;
 
 namespace GaroliBudget.Infrastructure
 {
-    public abstract class DBSqLite
+    public abstract class DBPostgres
     {
-        public static string CaminhoDb { get; } =
-            Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Garoli",
-                "GaroliBudget",
-                "GaroliBudget.db"
-            );
+        private static string Host = "127.0.0.1"; // IP do computador que servirá de servidor
+        private static string Database = "garoli";
+        private static string User = "postgres";
+        private static string Password = "1234";
 
-        public static SqliteConnection GetConnection()
+        public static string ConnectionString =>
+                    $"Host={Host};Username={User};Password={Password};Database={Database};Port=5432;";
+
+        public static NpgsqlConnection GetConnection()
         {
-            return new SqliteConnection($"Data Source={CaminhoDb}");
+            return new NpgsqlConnection(ConnectionString);
         }
 
-        public static void CriarBancoSeNaoExistir()
+        public static void Initialize()
         {
-            var pastaDb = Path.GetDirectoryName(CaminhoDb);
-
-            if (!Directory.Exists(pastaDb))
-            {
-                Directory.CreateDirectory(pastaDb);
-            }
-            if (!File.Exists(CaminhoDb))
-            {
-                File.Create(CaminhoDb);
-            }
-        }
-
-        public static void CriarEstruturaInicial()
-        {
-            CriarBancoSeNaoExistir();
-
             using var con = GetConnection();
             con.Open();
 
-            string sql = @"PRAGMA foreign_keys = ON;
-
+            string sql = @"
                             --------------------------------------------------
                             -- CLIENTES
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS CLIENTE (
-                                ID_CLIENTE INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_CLIENTE SERIAL PRIMARY KEY,
                                 RAZAO_SOCIAL TEXT NOT NULL,
                                 NOME_FANTASIA TEXT,
                                 CNPJ TEXT,
@@ -62,7 +46,7 @@ namespace GaroliBudget.Infrastructure
                             -- MATERIAIS
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS MATERIAL (
-                                ID_MATERIAL INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_MATERIAL SERIAL PRIMARY KEY,
                                 CODIGO TEXT NOT NULL UNIQUE,
                                 DESCRICAO TEXT NOT NULL,
                                 UNIDADE TEXT NOT NULL,
@@ -74,7 +58,7 @@ namespace GaroliBudget.Infrastructure
                             -- COMPONENTES
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS COMPONENTE (
-                                ID_COMPONENTE INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_COMPONENTE SERIAL PRIMARY KEY,
                                 CODIGO TEXT NOT NULL UNIQUE,
                                 DESCRICAO TEXT NOT NULL,
                                 CUSTO_UNITARIO REAL NOT NULL,
@@ -85,7 +69,7 @@ namespace GaroliBudget.Infrastructure
                             -- PROCESSOS / MÃO DE OBRA
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS PROCESSO (
-                                ID_PROCESSO INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_PROCESSO SERIAL PRIMARY KEY,
                                 DESCRICAO TEXT NOT NULL,
                                 CUSTO_HORA REAL NOT NULL,
                                 ATIVO INTEGER NOT NULL DEFAULT 1
@@ -95,7 +79,7 @@ namespace GaroliBudget.Infrastructure
                             -- EQUIPAMENTOS (TEMPLATE)
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS EQUIPAMENTO (
-                                ID_EQUIPAMENTO INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_EQUIPAMENTO SERIAL PRIMARY KEY,
                                 CODIGO TEXT NOT NULL UNIQUE,
                                 DESCRICAO TEXT NOT NULL,
                                 OBSERVACOES TEXT,
@@ -106,7 +90,7 @@ namespace GaroliBudget.Infrastructure
                             -- RECEITA DO EQUIPAMENTO - MATERIAIS
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS EQUIPAMENTO_MATERIAL (
-                                ID_EQUIPAMENTO_MATERIAL INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_EQUIPAMENTO_MATERIAL SERIAL PRIMARY KEY,
                                 ID_EQUIPAMENTO INTEGER NOT NULL,
                                 ID_MATERIAL INTEGER NOT NULL,
                                 DESCRICAO_MATERIAL TEXT,
@@ -121,7 +105,7 @@ namespace GaroliBudget.Infrastructure
                             -- RECEITA DO EQUIPAMENTO - COMPONENTES
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS EQUIPAMENTO_COMPONENTE (
-                                ID_EQUIPAMENTO_COMPONENTE INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_EQUIPAMENTO_COMPONENTE SERIAL PRIMARY KEY,
                                 ID_EQUIPAMENTO INTEGER NOT NULL,
                                 ID_COMPONENTE INTEGER NOT NULL,
                                 DESCRICAO_COMPONENTE TEXT,
@@ -135,7 +119,7 @@ namespace GaroliBudget.Infrastructure
                             -- RECEITA DO EQUIPAMENTO - MÃO DE OBRA
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS EQUIPAMENTO_MAO_OBRA (
-                                ID_EQUIPAMENTO_MAO_OBRA INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_EQUIPAMENTO_MAO_OBRA SERIAL PRIMARY KEY,
                                 ID_EQUIPAMENTO INTEGER NOT NULL,
                                 ID_PROCESSO INTEGER NOT NULL,
                                 DESCRICAO_PROCESSO TEXT,
@@ -149,7 +133,7 @@ namespace GaroliBudget.Infrastructure
                             -- ORÇAMENTO (CABECALHO)
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS ORCAMENTO (
-                                ID_ORCAMENTO INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_ORCAMENTO SERIAL PRIMARY KEY,
                                 NUMERO TEXT NOT NULL UNIQUE,
                                 DATA_ORCAMENTO TEXT NOT NULL,
                                 ID_CLIENTE INTEGER NOT NULL,
@@ -168,7 +152,7 @@ namespace GaroliBudget.Infrastructure
                             -- ORÇAMENTO - MATERIAIS (CÓPIA DO TEMPLATE)
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS ORCAMENTO_MATERIAL (
-                                ID_ORCAMENTO_MATERIAL INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_ORCAMENTO_MATERIAL SERIAL PRIMARY KEY,
                                 ID_ORCAMENTO INTEGER NOT NULL,
                                 ID_MATERIAL INTEGER,
                                 DESCRICAO TEXT NOT NULL,
@@ -185,7 +169,7 @@ namespace GaroliBudget.Infrastructure
                             -- ORÇAMENTO - COMPONENTES
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS ORCAMENTO_COMPONENTE (
-                                ID_ORCAMENTO_COMPONENTE INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_ORCAMENTO_COMPONENTE SERIAL PRIMARY KEY,
                                 ID_ORCAMENTO INTEGER NOT NULL,
                                 ID_COMPONENTE INTEGER,
                                 DESCRICAO TEXT NOT NULL,
@@ -201,7 +185,7 @@ namespace GaroliBudget.Infrastructure
                             -- ORÇAMENTO - MÃO DE OBRA
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS ORCAMENTO_MAO_OBRA (
-                                ID_ORCAMENTO_MAO_OBRA INTEGER PRIMARY KEY AUTOINCREMENT,
+                                ID_ORCAMENTO_MAO_OBRA SERIAL PRIMARY KEY,
                                 ID_ORCAMENTO INTEGER NOT NULL,
                                 ID_PROCESSO INTEGER,
                                 DESCRICAO TEXT NOT NULL,
@@ -214,7 +198,7 @@ namespace GaroliBudget.Infrastructure
                             );
            ";
 
-            using var cmd = new SqliteCommand(sql, con);
+            using var cmd = new NpgsqlCommand(sql, con);
             cmd.ExecuteNonQuery();
         }
     }

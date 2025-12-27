@@ -1,17 +1,18 @@
 ﻿using GaroliBudget.Models;
 using Microsoft.Data.Sqlite;
 using GaroliBudget.Infrastructure;
+using Npgsql;
 
 namespace GaroliBudget.Repositories
 {
-    public class MaterialRepository : DBSqLite
+    public class MaterialRepository : DBPostgres
     {
         public List<Material> ListarAtivos()
         {
             var lista = new List<Material>();
 
             using var conn = GetConnection();
-            using var cmd = new SqliteCommand(
+            using var cmd = new NpgsqlCommand(
                 @"SELECT ID_MATERIAL, CODIGO, DESCRICAO, UNIDADE, CUSTO_UNITARIO, ATIVO
               FROM MATERIAL
               WHERE ATIVO = 1
@@ -36,7 +37,7 @@ namespace GaroliBudget.Repositories
         public Material ObterPorId(int id)
         {
             using var conn = GetConnection();
-            using var cmd = new SqliteCommand(
+            using var cmd = new NpgsqlCommand(
                 @"SELECT ID_MATERIAL, CODIGO, DESCRICAO, UNIDADE, CUSTO_UNITARIO, ATIVO
               FROM MATERIAL WHERE ID_MATERIAL = @id", conn);
 
@@ -59,7 +60,7 @@ namespace GaroliBudget.Repositories
         public void Inserir(Material m)
         {
             using var conn = GetConnection();
-            using var cmd = new SqliteCommand(
+            using var cmd = new NpgsqlCommand(
                 @"INSERT INTO MATERIAL (CODIGO, DESCRICAO, UNIDADE, CUSTO_UNITARIO, ATIVO)
               VALUES (@codigo, @descricao, @unidade, @custo, 1)", conn);
 
@@ -74,7 +75,7 @@ namespace GaroliBudget.Repositories
         public void Atualizar(Material m)
         {
             using var conn = GetConnection();
-            using var cmd = new SqliteCommand(
+            using var cmd = new NpgsqlCommand(
                 @"UPDATE MATERIAL
               SET CODIGO = @codigo,
                   DESCRICAO = @descricao,
@@ -94,7 +95,7 @@ namespace GaroliBudget.Repositories
         public void Inativar(int id)
         {
             using var conn = GetConnection();
-            using var cmd = new SqliteCommand(
+            using var cmd = new NpgsqlCommand(
                 @"UPDATE MATERIAL SET ATIVO = 0 WHERE ID_MATERIAL = @id", conn);
 
             cmd.Parameters.AddWithValue("@id", id);
