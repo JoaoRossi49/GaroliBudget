@@ -31,12 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OR0001));
             btnPesquisar = new Button();
             dgvClientes = new DataGridView();
-            clienasdasdteId = new DataGridViewTextBoxColumn();
-            RazoSocial = new DataGridViewTextBoxColumn();
-            Nomeantasia = new DataGridViewTextBoxColumn();
-            telefone = new DataGridViewTextBoxColumn();
-            email = new DataGridViewTextBoxColumn();
-            cnpj = new DataGridViewTextBoxColumn();
             tbRazaoSocial = new TextBox();
             label1 = new Label();
             btnExcluir = new Button();
@@ -62,60 +56,21 @@
             // 
             // dgvClientes
             // 
+            dgvClientes.AllowUserToAddRows = false;
+            dgvClientes.AllowUserToDeleteRows = false;
             dgvClientes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvClientes.BackgroundColor = SystemColors.Control;
             dgvClientes.BorderStyle = BorderStyle.Fixed3D;
             dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Columns.AddRange(new DataGridViewColumn[] { clienasdasdteId, RazoSocial, Nomeantasia, telefone, email, cnpj });
             dgvClientes.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvClientes.GridColor = SystemColors.ScrollBar;
             dgvClientes.Location = new Point(12, 84);
             dgvClientes.Name = "dgvClientes";
+            dgvClientes.ReadOnly = true;
             dgvClientes.Size = new Size(702, 315);
             dgvClientes.TabIndex = 7;
             dgvClientes.CellDoubleClick += dgvClientes_CellDoubleClick;
-            // 
-            // clienasdasdteId
-            // 
-            clienasdasdteId.DataPropertyName = "IdCliente";
-            clienasdasdteId.HeaderText = "IdCliente";
-            clienasdasdteId.Name = "clienasdasdteId";
-            clienasdasdteId.Visible = false;
-            // 
-            // RazoSocial
-            // 
-            RazoSocial.DataPropertyName = "RazaoSocial";
-            RazoSocial.FillWeight = 250F;
-            RazoSocial.HeaderText = "Razão Social";
-            RazoSocial.Name = "RazoSocial";
-            RazoSocial.Width = 250;
-            // 
-            // Nomeantasia
-            // 
-            Nomeantasia.DataPropertyName = "NomeFantasia";
-            Nomeantasia.HeaderText = "Nome Fantasia";
-            Nomeantasia.Name = "Nomeantasia";
-            Nomeantasia.Width = 200;
-            // 
-            // telefone
-            // 
-            telefone.DataPropertyName = "Telefone";
-            telefone.HeaderText = "Telefone";
-            telefone.Name = "telefone";
-            // 
-            // email
-            // 
-            email.DataPropertyName = "Email";
-            email.HeaderText = "Email";
-            email.Name = "email";
-            // 
-            // cnpj
-            // 
-            cnpj.DataPropertyName = "Cnpj";
-            cnpj.HeaderText = "CNPJ";
-            cnpj.Name = "cnpj";
-            cnpj.Width = 200;
             // 
             // tbRazaoSocial
             // 
@@ -238,12 +193,6 @@
         private Button btnExcluir;
         private Button btnIncluir;
         private Button btnEditar;
-        private DataGridViewTextBoxColumn clienasdasdteId;
-        private DataGridViewTextBoxColumn RazoSocial;
-        private DataGridViewTextBoxColumn Nomeantasia;
-        private DataGridViewTextBoxColumn telefone;
-        private DataGridViewTextBoxColumn email;
-        private DataGridViewTextBoxColumn cnpj;
         private Label label2;
         private TextBox tbNomeCliente;
         private GroupBox gbFiltros;

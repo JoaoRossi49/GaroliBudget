@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OR0001));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CL0001));
             btnPesquisar = new Button();
             dgvClientes = new DataGridView();
             clienasdasdteId = new DataGridViewTextBoxColumn();
@@ -62,6 +62,8 @@
             // 
             // dgvClientes
             // 
+            dgvClientes.AllowUserToAddRows = false;
+            dgvClientes.AllowUserToDeleteRows = false;
             dgvClientes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvClientes.BackgroundColor = SystemColors.Control;
             dgvClientes.BorderStyle = BorderStyle.Fixed3D;
@@ -72,6 +74,7 @@
             dgvClientes.GridColor = SystemColors.ScrollBar;
             dgvClientes.Location = new Point(12, 84);
             dgvClientes.Name = "dgvClientes";
+            dgvClientes.ReadOnly = true;
             dgvClientes.Size = new Size(702, 315);
             dgvClientes.TabIndex = 7;
             dgvClientes.CellDoubleClick += dgvClientes_CellDoubleClick;
@@ -81,6 +84,7 @@
             clienasdasdteId.DataPropertyName = "IdCliente";
             clienasdasdteId.HeaderText = "IdCliente";
             clienasdasdteId.Name = "clienasdasdteId";
+            clienasdasdteId.ReadOnly = true;
             clienasdasdteId.Visible = false;
             // 
             // RazoSocial
@@ -89,6 +93,7 @@
             RazoSocial.FillWeight = 250F;
             RazoSocial.HeaderText = "Razão Social";
             RazoSocial.Name = "RazoSocial";
+            RazoSocial.ReadOnly = true;
             RazoSocial.Width = 250;
             // 
             // Nomeantasia
@@ -96,6 +101,7 @@
             Nomeantasia.DataPropertyName = "NomeFantasia";
             Nomeantasia.HeaderText = "Nome Fantasia";
             Nomeantasia.Name = "Nomeantasia";
+            Nomeantasia.ReadOnly = true;
             Nomeantasia.Width = 200;
             // 
             // telefone
@@ -103,18 +109,21 @@
             telefone.DataPropertyName = "Telefone";
             telefone.HeaderText = "Telefone";
             telefone.Name = "telefone";
+            telefone.ReadOnly = true;
             // 
             // email
             // 
             email.DataPropertyName = "Email";
             email.HeaderText = "Email";
             email.Name = "email";
+            email.ReadOnly = true;
             // 
             // cnpj
             // 
             cnpj.DataPropertyName = "Cnpj";
             cnpj.HeaderText = "CNPJ";
             cnpj.Name = "cnpj";
+            cnpj.ReadOnly = true;
             cnpj.Width = 200;
             // 
             // tbRazaoSocial

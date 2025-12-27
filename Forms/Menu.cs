@@ -23,19 +23,13 @@ namespace GaroliBudget
             formFilho.Show();
         }
 
-        private void btnMateriais_Click(object sender, EventArgs e)
-        {
-            tbNomeForm.Text = "Controle de Materiais";
-            AbrirFormNoPainel(new MT0001());
-        }
-
-        private void btnClientes_Click(object sender, EventArgs e)
+        private void Menu_Load(object sender, EventArgs e)
         {
             tbNomeForm.Text = "Controle de Clientes";
             AbrirFormNoPainel(new CL0001());
         }
 
-        private void Menu_Load(object sender, EventArgs e)
+        private void btnClientes_Click(object sender, EventArgs e)
         {
             tbNomeForm.Text = "Controle de Clientes";
             AbrirFormNoPainel(new CL0001());
@@ -45,6 +39,29 @@ namespace GaroliBudget
         {
             tbNomeForm.Text = "Controle de Orçamentos";
             AbrirFormNoPainel(new OR0001());
+        }
+
+        private void btnEquipamentos_Click(object sender, EventArgs e)
+        {
+            tbNomeForm.Text = "Equipamentos";
+            AbrirFormNoPainel(new Indisponivel());
+        }
+        private void btnMateriais_Click(object sender, EventArgs e)
+        {
+            tbNomeForm.Text = "Controle de Materiais";
+            AbrirFormNoPainel(new Indisponivel());
+        }
+
+        private void btnComponentes_Click(object sender, EventArgs e)
+        {
+            tbNomeForm.Text = "Componentes";
+            AbrirFormNoPainel(new Indisponivel());
+        }
+
+        private void btnProcessos_Click(object sender, EventArgs e)
+        {
+            tbNomeForm.Text = "Mão de obra";
+            AbrirFormNoPainel(new Indisponivel());
         }
     }
 }
