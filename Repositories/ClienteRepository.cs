@@ -24,8 +24,8 @@ namespace GaroliBudget.Repositories
                 INSERT INTO CLIENTE 
                 (RAZAO_SOCIAL, NOME_FANTASIA, CNPJ, EMAIL, TELEFONE, ATIVO)
                 VALUES 
-                (@razao, @fantasia, @cnpj, @email, @telefone, 1);
-                SELECT last_insert_rowid();
+                (@razao, @fantasia, @cnpj, @email, @telefone, 1)
+                RETURNING ID_CLIENTE;
             ";
 
             cmd.Parameters.AddWithValue("@razao", cliente.RazaoSocial);

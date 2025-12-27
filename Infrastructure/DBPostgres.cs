@@ -10,7 +10,7 @@ namespace GaroliBudget.Infrastructure
 {
     public abstract class DBPostgres
     {
-        private static string Host = "127.0.0.1"; // IP do computador que servirá de servidor
+        private static string Host = "127.0.0.1";
         private static string Database = "garoli";
         private static string User = "postgres";
         private static string Password = "1234";
@@ -149,10 +149,23 @@ namespace GaroliBudget.Infrastructure
                             );
 
                             --------------------------------------------------
+                            -- MÓDULOS DO ORÇAMENTO (Subconjuntos)
+                            --------------------------------------------------
+                            CREATE TABLE IF NOT EXISTS ORCAMENTO_MODULO (
+                                ID_MODULO SERIAL PRIMARY KEY,
+                                ID_ORCAMENTO INTEGER NOT NULL,
+                                NOME_MODULO TEXT NOT NULL, -- Ex: 'Elétrica', 'Revestimento'
+                                ORDEM INTEGER DEFAULT 0,    -- Para organizar a exibição
+    
+                                FOREIGN KEY (ID_ORCAMENTO) REFERENCES ORCAMENTO(ID_ORCAMENTO)
+                            );
+
+                            --------------------------------------------------
                             -- ORÇAMENTO - MATERIAIS (CÓPIA DO TEMPLATE)
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS ORCAMENTO_MATERIAL (
                                 ID_ORCAMENTO_MATERIAL SERIAL PRIMARY KEY,
+                                ID_MODULO INTEGER,
                                 ID_ORCAMENTO INTEGER NOT NULL,
                                 ID_MATERIAL INTEGER,
                                 DESCRICAO TEXT NOT NULL,
@@ -161,6 +174,7 @@ namespace GaroliBudget.Infrastructure
                                 CUSTO_UNITARIO REAL NOT NULL,
                                 CUSTO_TOTAL REAL NOT NULL,
 
+                                FOREIGN KEY (ID_MODULO) REFERENCES ORCAMENTO_MODULO(ID_MODULO),
                                 FOREIGN KEY (ID_ORCAMENTO) REFERENCES ORCAMENTO(ID_ORCAMENTO),
                                 FOREIGN KEY (ID_MATERIAL) REFERENCES MATERIAL(ID_MATERIAL)
                             );
@@ -170,6 +184,7 @@ namespace GaroliBudget.Infrastructure
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS ORCAMENTO_COMPONENTE (
                                 ID_ORCAMENTO_COMPONENTE SERIAL PRIMARY KEY,
+                                ID_MODULO INTEGER,
                                 ID_ORCAMENTO INTEGER NOT NULL,
                                 ID_COMPONENTE INTEGER,
                                 DESCRICAO TEXT NOT NULL,
@@ -177,6 +192,7 @@ namespace GaroliBudget.Infrastructure
                                 CUSTO_UNITARIO REAL NOT NULL,
                                 CUSTO_TOTAL REAL NOT NULL,
 
+                                FOREIGN KEY (ID_MODULO) REFERENCES ORCAMENTO_MODULO(ID_MODULO),
                                 FOREIGN KEY (ID_ORCAMENTO) REFERENCES ORCAMENTO(ID_ORCAMENTO),
                                 FOREIGN KEY (ID_COMPONENTE) REFERENCES COMPONENTE(ID_COMPONENTE)
                             );
@@ -186,6 +202,7 @@ namespace GaroliBudget.Infrastructure
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS ORCAMENTO_MAO_OBRA (
                                 ID_ORCAMENTO_MAO_OBRA SERIAL PRIMARY KEY,
+                                ID_MODULO INTEGER,
                                 ID_ORCAMENTO INTEGER NOT NULL,
                                 ID_PROCESSO INTEGER,
                                 DESCRICAO TEXT NOT NULL,
@@ -193,6 +210,7 @@ namespace GaroliBudget.Infrastructure
                                 CUSTO_HORA REAL NOT NULL,
                                 CUSTO_TOTAL REAL NOT NULL,
 
+                                FOREIGN KEY (ID_MODULO) REFERENCES ORCAMENTO_MODULO(ID_MODULO),
                                 FOREIGN KEY (ID_ORCAMENTO) REFERENCES ORCAMENTO(ID_ORCAMENTO),
                                 FOREIGN KEY (ID_PROCESSO) REFERENCES PROCESSO(ID_PROCESSO)
                             );
