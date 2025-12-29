@@ -68,7 +68,7 @@
             btnCancelar.Location = new Point(215, 237);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 23);
-            btnCancelar.TabIndex = 9;
+            btnCancelar.TabIndex = 6;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = true;
@@ -81,7 +81,7 @@
             btnGravar.Location = new Point(128, 237);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(75, 23);
-            btnGravar.TabIndex = 8;
+            btnGravar.TabIndex = 5;
             btnGravar.Text = "Gravar";
             btnGravar.TextAlign = ContentAlignment.MiddleRight;
             btnGravar.UseVisualStyleBackColor = true;
@@ -92,14 +92,14 @@
             tbNomeFantasia.Location = new Point(12, 84);
             tbNomeFantasia.Name = "tbNomeFantasia";
             tbNomeFantasia.Size = new Size(278, 23);
-            tbNomeFantasia.TabIndex = 7;
+            tbNomeFantasia.TabIndex = 1;
             // 
             // tbRazaoSocial
             // 
             tbRazaoSocial.Location = new Point(12, 27);
             tbRazaoSocial.Name = "tbRazaoSocial";
             tbRazaoSocial.Size = new Size(278, 23);
-            tbRazaoSocial.TabIndex = 6;
+            tbRazaoSocial.TabIndex = 0;
             // 
             // label3
             // 
@@ -116,7 +116,7 @@
             mtbCnpj.Mask = "00.000.000/0000-00";
             mtbCnpj.Name = "mtbCnpj";
             mtbCnpj.Size = new Size(108, 23);
-            mtbCnpj.TabIndex = 14;
+            mtbCnpj.TabIndex = 2;
             // 
             // mtbTelefone
             // 
@@ -124,14 +124,14 @@
             mtbTelefone.Mask = "(00) 00000-0000";
             mtbTelefone.Name = "mtbTelefone";
             mtbTelefone.Size = new Size(97, 23);
-            mtbTelefone.TabIndex = 16;
+            mtbTelefone.TabIndex = 3;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Location = new Point(144, 125);
             label4.Name = "label4";
-            label4.Size = new Size(52, 15);
+            label4.Size = new Size(51, 15);
             label4.TabIndex = 15;
             label4.Text = "Telefone";
             // 
@@ -149,10 +149,11 @@
             tbEmail.Location = new Point(12, 196);
             tbEmail.Name = "tbEmail";
             tbEmail.Size = new Size(278, 23);
-            tbEmail.TabIndex = 18;
+            tbEmail.TabIndex = 4;
             // 
             // CL0001mnIncluir
             // 
+            AcceptButton = btnGravar;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(300, 268);

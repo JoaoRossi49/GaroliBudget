@@ -9,8 +9,8 @@ namespace GaroliBudget.Repositories.Interfaces
 {
     public interface IClienteService
     {
-        int CriarCliente(Cliente cliente);
-        void AtualizarCliente(Cliente cliente);
+        void Inserir(Cliente cliente);
+        void Atualizar(Cliente cliente);
         Cliente ObterPorId(int idCliente);
         List<Cliente> ListarAtivos();
         List<Cliente> ListarTodos();
@@ -18,7 +18,7 @@ namespace GaroliBudget.Repositories.Interfaces
 
     public interface IClienteRepository
     {
-        int Inserir(Cliente cliente);
+        void Inserir(Cliente cliente);
         void Atualizar(Cliente cliente);
         Cliente ObterPorId(int idCliente);
         List<Cliente> ListarAtivos();

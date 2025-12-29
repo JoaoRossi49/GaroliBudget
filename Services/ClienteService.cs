@@ -18,7 +18,7 @@ namespace GaroliBudget.Services
             _clienteRepository = clienteRepository;
         }
 
-        public int CriarCliente(Cliente cliente)
+        public void Inserir(Cliente cliente)
         {
             ValidarCliente(cliente);
 
@@ -29,11 +29,9 @@ namespace GaroliBudget.Services
             }
 
             cliente.Ativo = true;
-
-            return _clienteRepository.Inserir(cliente);
         }
 
-        public void AtualizarCliente(Cliente cliente)
+        public void Atualizar(Cliente cliente)
         {
             if (cliente.IdCliente <= 0)
                 throw new Exception("Cliente inválido.");

@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CL0001));
             btnPesquisar = new Button();
             dgvClientes = new DataGridView();
-            clienasdasdteId = new DataGridViewTextBoxColumn();
+            IdCliente = new DataGridViewTextBoxColumn();
             RazoSocial = new DataGridViewTextBoxColumn();
             Nomeantasia = new DataGridViewTextBoxColumn();
             telefone = new DataGridViewTextBoxColumn();
@@ -69,7 +69,7 @@
             dgvClientes.BorderStyle = BorderStyle.Fixed3D;
             dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Columns.AddRange(new DataGridViewColumn[] { clienasdasdteId, RazoSocial, Nomeantasia, telefone, email, cnpj });
+            dgvClientes.Columns.AddRange(new DataGridViewColumn[] { IdCliente, RazoSocial, Nomeantasia, telefone, email, cnpj });
             dgvClientes.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvClientes.GridColor = SystemColors.ScrollBar;
             dgvClientes.Location = new Point(12, 84);
@@ -79,13 +79,13 @@
             dgvClientes.TabIndex = 7;
             dgvClientes.CellDoubleClick += dgvClientes_CellDoubleClick;
             // 
-            // clienasdasdteId
+            // IdCliente
             // 
-            clienasdasdteId.DataPropertyName = "IdCliente";
-            clienasdasdteId.HeaderText = "IdCliente";
-            clienasdasdteId.Name = "clienasdasdteId";
-            clienasdasdteId.ReadOnly = true;
-            clienasdasdteId.Visible = false;
+            IdCliente.DataPropertyName = "IdCliente";
+            IdCliente.HeaderText = "IdCliente";
+            IdCliente.Name = "IdCliente";
+            IdCliente.ReadOnly = true;
+            IdCliente.Visible = false;
             // 
             // RazoSocial
             // 
@@ -247,14 +247,14 @@
         private Button btnExcluir;
         private Button btnIncluir;
         private Button btnEditar;
-        private DataGridViewTextBoxColumn clienasdasdteId;
+        private Label label2;
+        private TextBox tbNomeCliente;
+        private GroupBox gbFiltros;
+        private DataGridViewTextBoxColumn IdCliente;
         private DataGridViewTextBoxColumn RazoSocial;
         private DataGridViewTextBoxColumn Nomeantasia;
         private DataGridViewTextBoxColumn telefone;
         private DataGridViewTextBoxColumn email;
         private DataGridViewTextBoxColumn cnpj;
-        private Label label2;
-        private TextBox tbNomeCliente;
-        private GroupBox gbFiltros;
     }
 }

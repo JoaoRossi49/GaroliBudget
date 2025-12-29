@@ -49,7 +49,7 @@ namespace GaroliBudget
         private void btnMateriais_Click(object sender, EventArgs e)
         {
             tbNomeForm.Text = "Controle de Materiais";
-            AbrirFormNoPainel(new Indisponivel());
+            AbrirFormNoPainel(new MT0001());
         }
 
         private void btnComponentes_Click(object sender, EventArgs e)

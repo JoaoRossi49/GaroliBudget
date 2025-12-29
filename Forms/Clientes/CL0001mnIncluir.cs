@@ -51,12 +51,12 @@ namespace GaroliBudget
             {
                 if (_clienteExistente == null)
                 {
-                    _clienteService.CriarCliente(clienteParaSalvar);
+                    _clienteService.Inserir(clienteParaSalvar);
                     MessageBox.Show("Cliente cadastrado com sucesso!");
                 }
                 else
                 {
-                    _clienteService.AtualizarCliente(clienteParaSalvar);
+                    _clienteService.Atualizar(clienteParaSalvar);
                     MessageBox.Show("Cliente atualizado com sucesso!");
                 }
 

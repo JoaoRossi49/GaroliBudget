@@ -14,7 +14,7 @@ namespace GaroliBudget.Repositories
 {
     public class ClienteRepository : IClienteRepository
     {
-        public int Inserir(Cliente cliente)
+        public void Inserir(Cliente cliente)
         {
             using var conn = DBPostgres.GetConnection();
             conn.Open();
@@ -34,7 +34,7 @@ namespace GaroliBudget.Repositories
             cmd.Parameters.AddWithValue("@email", cliente.Email);
             cmd.Parameters.AddWithValue("@telefone", cliente.Telefone);
 
-            return System.Convert.ToInt32(cmd.ExecuteScalar());
+            cmd.ExecuteNonQuery();
         }
 
         public void Atualizar(Cliente cliente)

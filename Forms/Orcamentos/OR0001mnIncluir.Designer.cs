@@ -36,6 +36,8 @@
             tbRazaoSocial = new TextBox();
             cbClientes = new ComboBox();
             panel1 = new Panel();
+            comboBox1 = new ComboBox();
+            label13 = new Label();
             label12 = new Label();
             label11 = new Label();
             tbTelefone = new TextBox();
@@ -84,8 +86,6 @@
             label6 = new Label();
             lblValorFinal = new Label();
             nmMargem = new NumericUpDown();
-            comboBox1 = new ComboBox();
-            label13 = new Label();
             panel1.SuspendLayout();
             tcOrcamento.SuspendLayout();
             tpMateriais.SuspendLayout();
@@ -176,6 +176,23 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(667, 106);
             panel1.TabIndex = 20;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(131, 23);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(278, 23);
+            comboBox1.TabIndex = 25;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(131, 5);
+            label13.Name = "label13";
+            label13.Size = new Size(78, 15);
+            label13.TabIndex = 24;
+            label13.Text = "Equipamento";
             // 
             // label12
             // 
@@ -664,25 +681,9 @@
             nmMargem.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nmMargem.ValueChanged += nmMargem_ValueChanged;
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(131, 23);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(278, 23);
-            comboBox1.TabIndex = 25;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new Point(131, 5);
-            label13.Name = "label13";
-            label13.Size = new Size(78, 15);
-            label13.TabIndex = 24;
-            label13.Text = "Equipamento";
-            // 
             // OR0001mnIncluir
             // 
+            AcceptButton = btnGravar;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(661, 574);

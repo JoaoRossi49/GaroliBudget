@@ -15,6 +15,7 @@ namespace GaroliBudget
             InitializeComponent();
             IClienteRepository repo = new ClienteRepository();
             _clienteService = new ClienteService(repo);
+            pesquisar();
         }
 
         private void tbNomeCliente_TextChanged(object sender, EventArgs e)
@@ -45,6 +46,7 @@ namespace GaroliBudget
         {
             CL0001mnIncluir form = new CL0001mnIncluir(_clienteService);
             form.ShowDialog();
+            pesquisar();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -79,13 +81,20 @@ namespace GaroliBudget
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             if (dgvClientes.SelectedRows.Count <= 0)
-            { return; }
-
-            foreach (DataRow row in dgvClientes.SelectedRows)
             {
-                _clienteService.InativarCliente(Convert.ToInt32(row["IdCliente"]));
+                MessageBox.Show("Selecione uma linha para exclusão", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
+
+            foreach (DataGridViewRow row in dgvClientes.SelectedRows)
+            {
+                int idCliente = Convert.ToInt32(row.Cells["IdCliente"].Value);
+                _clienteService.InativarCliente(idCliente);
+            }
+
+            pesquisar();
         }
+
 
         private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
