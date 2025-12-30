@@ -13,6 +13,7 @@ namespace GaroliBudget.Repositories.Interfaces
         void AtualizarMaterial(Material Material);
         Material ObterPorId(int idMaterial);
         List<Material> ListarAtivos();
+        List<Material> ListarTodos();
     }
 
     public interface IMaterialRepository
@@ -21,5 +22,8 @@ namespace GaroliBudget.Repositories.Interfaces
         void Atualizar(Material Material);
         Material ObterPorId(int idMaterial);
         List<Material> ListarAtivos();
+        List<Material> ListarTodos();
+        List<Material> ListarWhere(string where);
+
     }
 }

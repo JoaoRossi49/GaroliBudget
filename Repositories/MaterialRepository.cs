@@ -52,7 +52,23 @@ namespace GaroliBudget.Repositories
 
             cmd.ExecuteNonQuery();
         }
+
         public List<Material> ListarAtivos()
+        {
+            return Listar("WHERE ATIVO = 1");
+        }
+
+        public List<Material> ListarTodos()
+        {
+            return Listar(string.Empty);
+        }
+
+        public List<Material> ListarWhere(string where)
+        {
+            return Listar(where);
+        }
+
+        private List<Material> Listar(string where)
         {
             var lista = new List<Material>();
 
@@ -60,27 +76,14 @@ namespace GaroliBudget.Repositories
             conn.Open();
 
             var cmd = conn.CreateCommand();
+            cmd.CommandText = $"SELECT * FROM MATERIAL {where};";
 
-            cmd.CommandText =
-                @"SELECT 
-                    ID_MATERIAL, CODIGO, DESCRICAO, UNIDADE, CUSTO_UNITARIO, ATIVO
-                  FROM MATERIAL
-                  WHERE ATIVO = 1
-                  ORDER BY DESCRICAO;";
-
-            using var dr = cmd.ExecuteReader();
-            while (dr.Read())
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                lista.Add(new Material
-                {
-                    IdMaterial = dr.GetInt32(0),
-                    Codigo = dr.GetString(1),
-                    Descricao = dr.GetString(2),
-                    Unidade = dr.GetString(3),
-                    CustoUnitario = dr.GetDecimal(4),
-                    Ativo = dr.GetInt32(5) == 1
-                });
+                lista.Add(Mapear(reader));
             }
+
             return lista;
         }
 

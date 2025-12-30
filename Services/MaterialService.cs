@@ -46,6 +46,16 @@ namespace GaroliBudget.Services
             return _materialRepository.ListarAtivos();
         }
 
+        public List<Material> ListarTodos()
+        {
+            return _materialRepository.ListarTodos();
+        }
+
+        public List<Material> ListarWhere(string where)
+        {
+            return _materialRepository.ListarWhere(where);
+        }
+
         public void InativarMaterial(int idMaterial)
         {
             var material = ObterPorId(idMaterial);

@@ -132,7 +132,6 @@
             tbRazaoSocial.Name = "tbRazaoSocial";
             tbRazaoSocial.Size = new Size(256, 23);
             tbRazaoSocial.TabIndex = 0;
-            tbRazaoSocial.TextChanged += tbNomeCliente_TextChanged;
             // 
             // label1
             // 

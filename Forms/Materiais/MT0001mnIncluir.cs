@@ -20,11 +20,13 @@ namespace GaroliBudget
         {
             _materialExistente = materialParaEditar;
             this.Text = "Editar material";
-            PreencherCampos();
         }
 
         private void PreencherCampos()
         {
+            if(_materialExistente == null)
+                return;
+
             tbCodigo.Text = _materialExistente.Codigo;
             tbDescricao.Text = _materialExistente.Descricao;
             cbUnidadeMedida.SelectedItem = _materialExistente.Unidade;
@@ -50,6 +52,7 @@ namespace GaroliBudget
                 "PC"
             });
 
+            PreencherCampos();
         }
 
         private void btnGravar_Click(object sender, EventArgs e)

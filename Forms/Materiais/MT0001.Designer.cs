@@ -29,79 +29,41 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MT0001));
-            dgvClientes = new DataGridView();
+            dgvMateriais = new DataGridView();
+            btnExcluir = new Button();
+            btnIncluir = new Button();
+            btnEditar = new Button();
+            btnPesquisar = new Button();
+            tbDescricao = new TextBox();
+            label1 = new Label();
+            gbFiltros = new GroupBox();
             IdMaterial = new DataGridViewTextBoxColumn();
             Codigo = new DataGridViewTextBoxColumn();
             Descricao = new DataGridViewTextBoxColumn();
             UnidadeMedida = new DataGridViewTextBoxColumn();
             CustoUnitario = new DataGridViewTextBoxColumn();
             ativo = new DataGridViewTextBoxColumn();
-            btnExcluir = new Button();
-            btnIncluir = new Button();
-            btnEditar = new Button();
-            btnPesquisar = new Button();
-            tbRazaoSocial = new TextBox();
-            label1 = new Label();
-            gbFiltros = new GroupBox();
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMateriais).BeginInit();
             gbFiltros.SuspendLayout();
             SuspendLayout();
             // 
-            // dgvClientes
+            // dgvMateriais
             // 
-            dgvClientes.AllowUserToAddRows = false;
-            dgvClientes.AllowUserToDeleteRows = false;
-            dgvClientes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvClientes.BackgroundColor = SystemColors.Control;
-            dgvClientes.BorderStyle = BorderStyle.Fixed3D;
-            dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.Columns.AddRange(new DataGridViewColumn[] { IdMaterial, Codigo, Descricao, UnidadeMedida, CustoUnitario, ativo });
-            dgvClientes.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dgvClientes.GridColor = SystemColors.ScrollBar;
-            dgvClientes.Location = new Point(12, 93);
-            dgvClientes.Name = "dgvClientes";
-            dgvClientes.ReadOnly = true;
-            dgvClientes.Size = new Size(693, 298);
-            dgvClientes.TabIndex = 18;
-            // 
-            // IdMaterial
-            // 
-            IdMaterial.HeaderText = "IdMaterial";
-            IdMaterial.Name = "IdMaterial";
-            IdMaterial.ReadOnly = true;
-            IdMaterial.Visible = false;
-            // 
-            // Codigo
-            // 
-            Codigo.HeaderText = "Codigo";
-            Codigo.Name = "Codigo";
-            Codigo.ReadOnly = true;
-            // 
-            // Descricao
-            // 
-            Descricao.HeaderText = "Descricao";
-            Descricao.Name = "Descricao";
-            Descricao.ReadOnly = true;
-            Descricao.Width = 250;
-            // 
-            // UnidadeMedida
-            // 
-            UnidadeMedida.HeaderText = "Unidade de medida";
-            UnidadeMedida.Name = "UnidadeMedida";
-            UnidadeMedida.ReadOnly = true;
-            // 
-            // CustoUnitario
-            // 
-            CustoUnitario.HeaderText = "Custo unitário";
-            CustoUnitario.Name = "CustoUnitario";
-            CustoUnitario.ReadOnly = true;
-            // 
-            // ativo
-            // 
-            ativo.HeaderText = "Ativo";
-            ativo.Name = "ativo";
-            ativo.ReadOnly = true;
+            dgvMateriais.AllowUserToAddRows = false;
+            dgvMateriais.AllowUserToDeleteRows = false;
+            dgvMateriais.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvMateriais.BackgroundColor = SystemColors.Control;
+            dgvMateriais.BorderStyle = BorderStyle.Fixed3D;
+            dgvMateriais.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgvMateriais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvMateriais.Columns.AddRange(new DataGridViewColumn[] { IdMaterial, Codigo, Descricao, UnidadeMedida, CustoUnitario, ativo });
+            dgvMateriais.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgvMateriais.GridColor = SystemColors.ScrollBar;
+            dgvMateriais.Location = new Point(12, 93);
+            dgvMateriais.Name = "dgvMateriais";
+            dgvMateriais.ReadOnly = true;
+            dgvMateriais.Size = new Size(693, 298);
+            dgvMateriais.TabIndex = 18;
             // 
             // btnExcluir
             // 
@@ -145,6 +107,7 @@
             btnEditar.TabIndex = 21;
             btnEditar.TextAlign = ContentAlignment.TopCenter;
             btnEditar.UseVisualStyleBackColor = false;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnPesquisar
             // 
@@ -155,13 +118,14 @@
             btnPesquisar.TabIndex = 19;
             btnPesquisar.Text = "Pesquisar";
             btnPesquisar.UseVisualStyleBackColor = true;
+            btnPesquisar.Click += btnPesquisar_Click;
             // 
-            // tbRazaoSocial
+            // tbDescricao
             // 
-            tbRazaoSocial.Location = new Point(6, 40);
-            tbRazaoSocial.Name = "tbRazaoSocial";
-            tbRazaoSocial.Size = new Size(342, 23);
-            tbRazaoSocial.TabIndex = 23;
+            tbDescricao.Location = new Point(6, 40);
+            tbDescricao.Name = "tbDescricao";
+            tbDescricao.Size = new Size(342, 23);
+            tbDescricao.TabIndex = 23;
             // 
             // label1
             // 
@@ -176,7 +140,7 @@
             // 
             gbFiltros.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             gbFiltros.Controls.Add(btnPesquisar);
-            gbFiltros.Controls.Add(tbRazaoSocial);
+            gbFiltros.Controls.Add(tbDescricao);
             gbFiltros.Controls.Add(btnEditar);
             gbFiltros.Controls.Add(label1);
             gbFiltros.Controls.Add(btnIncluir);
@@ -188,35 +152,80 @@
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros";
             // 
+            // IdMaterial
+            // 
+            IdMaterial.DataPropertyName = "IdMaterial";
+            IdMaterial.HeaderText = "IdMaterial";
+            IdMaterial.Name = "IdMaterial";
+            IdMaterial.ReadOnly = true;
+            IdMaterial.Visible = false;
+            // 
+            // Codigo
+            // 
+            Codigo.DataPropertyName = "Codigo";
+            Codigo.HeaderText = "Codigo";
+            Codigo.Name = "Codigo";
+            Codigo.ReadOnly = true;
+            // 
+            // Descricao
+            // 
+            Descricao.DataPropertyName = "Descricao";
+            Descricao.HeaderText = "Descricao";
+            Descricao.Name = "Descricao";
+            Descricao.ReadOnly = true;
+            Descricao.Width = 300;
+            // 
+            // UnidadeMedida
+            // 
+            UnidadeMedida.DataPropertyName = "Unidade";
+            UnidadeMedida.HeaderText = "Unidade de medida";
+            UnidadeMedida.Name = "UnidadeMedida";
+            UnidadeMedida.ReadOnly = true;
+            // 
+            // CustoUnitario
+            // 
+            CustoUnitario.DataPropertyName = "CustoUnitario";
+            CustoUnitario.HeaderText = "Custo unitário";
+            CustoUnitario.Name = "CustoUnitario";
+            CustoUnitario.ReadOnly = true;
+            // 
+            // ativo
+            // 
+            ativo.DataPropertyName = "Ativo";
+            ativo.HeaderText = "Ativo";
+            ativo.Name = "ativo";
+            ativo.ReadOnly = true;
+            ativo.Visible = false;
+            // 
             // MT0001
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(717, 403);
             Controls.Add(gbFiltros);
-            Controls.Add(dgvClientes);
+            Controls.Add(dgvMateriais);
             Name = "MT0001";
             Text = "MT0001 - Listagem de materiais";
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMateriais).EndInit();
             gbFiltros.ResumeLayout(false);
             gbFiltros.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-        private DataGridView dgvClientes;
+        private DataGridView dgvMateriais;
+        private Button btnExcluir;
+        private Button btnIncluir;
+        private Button btnEditar;
+        private Button btnPesquisar;
+        private TextBox tbDescricao;
+        private Label label1;
+        private GroupBox gbFiltros;
         private DataGridViewTextBoxColumn IdMaterial;
         private DataGridViewTextBoxColumn Codigo;
         private DataGridViewTextBoxColumn Descricao;
         private DataGridViewTextBoxColumn UnidadeMedida;
         private DataGridViewTextBoxColumn CustoUnitario;
         private DataGridViewTextBoxColumn ativo;
-        private Button btnExcluir;
-        private Button btnIncluir;
-        private Button btnEditar;
-        private Button btnPesquisar;
-        private TextBox tbRazaoSocial;
-        private Label label1;
-        private GroupBox gbFiltros;
     }
 }

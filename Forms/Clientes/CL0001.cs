@@ -18,11 +18,6 @@ namespace GaroliBudget
             pesquisar();
         }
 
-        private void tbNomeCliente_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             pesquisar();
