@@ -64,6 +64,7 @@
             dgvMateriais.ReadOnly = true;
             dgvMateriais.Size = new Size(693, 298);
             dgvMateriais.TabIndex = 18;
+            dgvMateriais.CellDoubleClick += dgvMateriais_CellDoubleClick;
             // 
             // btnExcluir
             // 
@@ -78,6 +79,7 @@
             btnExcluir.TabIndex = 22;
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnIncluir
             // 
@@ -173,7 +175,7 @@
             Descricao.HeaderText = "Descricao";
             Descricao.Name = "Descricao";
             Descricao.ReadOnly = true;
-            Descricao.Width = 300;
+            Descricao.Width = 400;
             // 
             // UnidadeMedida
             // 

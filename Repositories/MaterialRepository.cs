@@ -41,13 +41,15 @@ namespace GaroliBudget.Repositories
               SET CODIGO = @codigo,
                   DESCRICAO = @descricao,
                   UNIDADE = @unidade,
-                  CUSTO_UNITARIO = @custo
+                  CUSTO_UNITARIO = @custo,
+                  ATIVO = @ativo
               WHERE ID_MATERIAL = @id;";
 
             cmd.Parameters.AddWithValue("@codigo", m.Codigo);
             cmd.Parameters.AddWithValue("@descricao", m.Descricao);
             cmd.Parameters.AddWithValue("@unidade", m.Unidade);
             cmd.Parameters.AddWithValue("@custo", m.CustoUnitario);
+            cmd.Parameters.AddWithValue("@ativo", m.Ativo ? 1 : 0);
             cmd.Parameters.AddWithValue("@id", m.IdMaterial);
 
             cmd.ExecuteNonQuery();

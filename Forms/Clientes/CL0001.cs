@@ -81,11 +81,21 @@ namespace GaroliBudget
                 return;
             }
 
+            DialogResult confirmacao = MessageBox.Show("Deseja realmente excluir o(s) registro(s) selecionado(s)?", "C O N F I R M A Ç Ã O",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question
+                                            );
+
+            if (confirmacao != DialogResult.Yes)
+                return;
+
             foreach (DataGridViewRow row in dgvClientes.SelectedRows)
             {
                 int idCliente = Convert.ToInt32(row.Cells["IdCliente"].Value);
                 _clienteService.InativarCliente(idCliente);
             }
+
+            MessageBox.Show("Registro(s) excluído(s) com sucesso", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             pesquisar();
         }
