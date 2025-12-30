@@ -55,7 +55,7 @@ namespace GaroliBudget
         private void btnComponentes_Click(object sender, EventArgs e)
         {
             tbNomeForm.Text = "Componentes";
-            AbrirFormNoPainel(new Indisponivel());
+            AbrirFormNoPainel(new CP0001());
         }
 
         private void btnProcessos_Click(object sender, EventArgs e)

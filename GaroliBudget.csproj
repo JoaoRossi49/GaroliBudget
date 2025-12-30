@@ -23,6 +23,12 @@
     <Compile Update="Forms\Indisponivel.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\Componentes\CP0001.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Componentes\CP0001mnIncluir.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Orcamentos\OR0001.cs">
       <SubType>Form</SubType>
     </Compile>
