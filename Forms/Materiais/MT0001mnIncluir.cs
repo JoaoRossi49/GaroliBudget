@@ -65,12 +65,12 @@ namespace GaroliBudget
             {
                 if (_materialExistente == null)
                 {
-                    _materialService.Inserir(obj);
+                    _materialService.CriarMaterial(obj);
                     MessageBox.Show("Material cadastrado com sucesso!");
                 }
                 else
                 {
-                    _materialService.Atualizar(obj);
+                    _materialService.AtualizarMaterial(obj);
                     MessageBox.Show("Material atualizado com sucesso!");
                 }
 

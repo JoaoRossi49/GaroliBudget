@@ -9,15 +9,15 @@ namespace GaroliBudget.Repositories.Interfaces
 {
     public interface IMaterialService
     {
-        void Inserir(Material Material);
-        void Atualizar(Material Material);
+        int CriarMaterial(Material Material);
+        void AtualizarMaterial(Material Material);
         Material ObterPorId(int idMaterial);
         List<Material> ListarAtivos();
     }
 
     public interface IMaterialRepository
     {
-        void Inserir(Material Material);
+        int Inserir(Material Material);
         void Atualizar(Material Material);
         Material ObterPorId(int idMaterial);
         List<Material> ListarAtivos();

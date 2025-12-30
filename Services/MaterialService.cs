@@ -18,14 +18,16 @@ namespace GaroliBudget.Services
             _materialRepository = materialRepository;
         }
 
-        public void Inserir(Material material)
+        public int CriarMaterial(Material material)
         {
             material.Ativo = true;
+
+            return _materialRepository.Inserir(material);
         }
 
-        public void Atualizar(Material material)
+        public void AtualizarMaterial(Material material)
         {
-            if (material.Id <= 0)
+            if (material.IdMaterial <= 0)
                 throw new Exception("Material inválido.");
 
             _materialRepository.Atualizar(material);
