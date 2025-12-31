@@ -129,7 +129,7 @@ namespace GaroliBudget.Repositories
                 Codigo = reader["CODIGO"].ToString(),
                 Descricao = reader["DESCRICAO"].ToString(),
                 Unidade = reader["UNIDADE"].ToString(),
-                CustoUnitario = Convert.ToInt32(reader["CUSTO_UNITARIO"]),
+                CustoUnitario = Convert.ToDecimal(reader["CUSTO_UNITARIO"]),
                 Ativo = reader.GetInt32(reader.GetOrdinal("ATIVO")) == 1
             };
         }

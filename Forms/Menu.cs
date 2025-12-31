@@ -61,7 +61,7 @@ namespace GaroliBudget
         private void btnProcessos_Click(object sender, EventArgs e)
         {
             tbNomeForm.Text = "Mão de obra";
-            AbrirFormNoPainel(new Indisponivel());
+            AbrirFormNoPainel(new PC0001());
         }
     }
 }

@@ -6,29 +6,28 @@ using GaroliBudget.Repositories.Interfaces;
 
 namespace GaroliBudget.Repositories
 {
-    public class ComponenteRepository : IComponenteRepository
+    public class ProcessoRepository : IProcessoRepository
     {
-        public int Inserir(Componente m)
+        public int Inserir(Processo m)
         {
             using var conn = DBPostgres.GetConnection();
             conn.Open();
 
             var cmd = conn.CreateCommand();
             cmd.CommandText = @"
-                INSERT INTO COMPONENTE 
-                (CODIGO, DESCRICAO, CUSTO_UNITARIO, ATIVO)
+                INSERT INTO PROCESSO 
+                (CODIGO, DESCRICAO, CUSTO_HORA, ATIVO)
                 VALUES 
-                (@codigo, @descricao, @custo, 1)
-                RETURNING ID_COMPONENTE";
+                (@descricao, @custo, 1)
+                RETURNING ID_PROCESSO";
 
-            cmd.Parameters.AddWithValue("@codigo", m.Codigo);
             cmd.Parameters.AddWithValue("@descricao", m.Descricao);
-            cmd.Parameters.AddWithValue("@custo", m.CustoUnitario);
+            cmd.Parameters.AddWithValue("@custo", m.CustoHora);
 
             return System.Convert.ToInt32(cmd.ExecuteScalar());
         }
 
-        public void Atualizar(Componente m)
+        public void Atualizar(Processo m)
         {
             using var conn = DBPostgres.GetConnection();
             conn.Open();
@@ -36,46 +35,44 @@ namespace GaroliBudget.Repositories
             var cmd = conn.CreateCommand();
 
             cmd.CommandText = 
-                @"UPDATE COMPONENTE
-              SET CODIGO = @codigo,
-                  DESCRICAO = @descricao,
-                  CUSTO_UNITARIO = @custo,
+                @"UPDATE PROCESSO
+              SET DESCRICAO = @descricao,
+                  CUSTO_HORA = @custo,
                   ATIVO = @ativo
-              WHERE ID_COMPONENTE = @id;";
+              WHERE ID_PROCESSO = @id;";
 
-            cmd.Parameters.AddWithValue("@codigo", m.Codigo);
             cmd.Parameters.AddWithValue("@descricao", m.Descricao);
-            cmd.Parameters.AddWithValue("@custo", m.CustoUnitario);
+            cmd.Parameters.AddWithValue("@custo", m.CustoHora);
             cmd.Parameters.AddWithValue("@ativo", m.Ativo ? 1 : 0);
-            cmd.Parameters.AddWithValue("@id", m.IdComponente);
+            cmd.Parameters.AddWithValue("@id", m.IdProcesso);
 
             cmd.ExecuteNonQuery();
         }
 
-        public List<Componente> ListarAtivos()
+        public List<Processo> ListarAtivos()
         {
             return Listar("WHERE ATIVO = 1");
         }
 
-        public List<Componente> ListarTodos()
+        public List<Processo> ListarTodos()
         {
             return Listar(string.Empty);
         }
 
-        public List<Componente> ListarWhere(string where)
+        public List<Processo> ListarWhere(string where)
         {
             return Listar(where);
         }
 
-        private List<Componente> Listar(string where)
+        private List<Processo> Listar(string where)
         {
-            var lista = new List<Componente>();
+            var lista = new List<Processo>();
 
             using var conn = DBPostgres.GetConnection();
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT * FROM COMPONENTE {where};";
+            cmd.CommandText = $"SELECT * FROM PROCESSO {where};";
 
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -86,7 +83,7 @@ namespace GaroliBudget.Repositories
             return lista;
         }
 
-        public Componente ObterPorId(int id)
+        public Processo ObterPorId(int id)
         {
             using var conn = DBPostgres.GetConnection();
             conn.Open();
@@ -94,8 +91,8 @@ namespace GaroliBudget.Repositories
             var cmd = conn.CreateCommand();
 
             cmd.CommandText = 
-            @"SELECT ID_COMPONENTE, CODIGO, DESCRICAO, UNIDADE, CUSTO_UNITARIO, ATIVO
-              FROM COMPONENTE WHERE ID_COMPONENTE = @id;";
+            @"SELECT ID_PROCESSO, DESCRICAO, CUSTO_HORA, ATIVO
+              FROM PROCESSO WHERE ID_PROCESSO = @id;";
 
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -112,20 +109,19 @@ namespace GaroliBudget.Repositories
 
             var cmd = conn.CreateCommand();
             cmd.CommandText = 
-                @"UPDATE COMPONENTE SET ATIVO = 0 WHERE ID_COMPONENTE = @id;";
+                @"UPDATE PROCESSO SET ATIVO = 0 WHERE ID_PROCESSO = @id;";
 
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
 
-        private Componente Mapear(NpgsqlDataReader reader)
+        private Processo Mapear(NpgsqlDataReader reader)
         {
-            return new Componente
+            return new Processo
             {
-                IdComponente = reader.GetInt32(reader.GetOrdinal("ID_COMPONENTE")),
-                Codigo = reader["CODIGO"].ToString(),
+                IdProcesso = reader.GetInt32(reader.GetOrdinal("ID_PROCESSO")),
                 Descricao = reader["DESCRICAO"].ToString(),
-                CustoUnitario = Convert.ToDecimal(reader["CUSTO_UNITARIO"]),
+                CustoHora = Convert.ToDecimal(reader["CUSTO_HORA"]),
                 Ativo = reader.GetInt32(reader.GetOrdinal("ATIVO")) == 1
             };
         }
