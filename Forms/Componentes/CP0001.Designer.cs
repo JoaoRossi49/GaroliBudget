@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CP0001));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dgvMateriais = new DataGridView();
             btnExcluir = new Button();
             btnIncluir = new Button();
@@ -179,9 +180,13 @@
             // CustoUnitario
             // 
             CustoUnitario.DataPropertyName = "CustoUnitario";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle1;
             CustoUnitario.HeaderText = "Custo unitário";
             CustoUnitario.Name = "CustoUnitario";
             CustoUnitario.ReadOnly = true;
+            CustoUnitario.Width = 150;
             // 
             // ativo
             // 

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MT0001));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dgvMateriais = new DataGridView();
             btnExcluir = new Button();
             btnIncluir = new Button();
@@ -180,6 +182,8 @@
             // UnidadeMedida
             // 
             UnidadeMedida.DataPropertyName = "Unidade";
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            UnidadeMedida.DefaultCellStyle = dataGridViewCellStyle1;
             UnidadeMedida.HeaderText = "Unidade de medida";
             UnidadeMedida.Name = "UnidadeMedida";
             UnidadeMedida.ReadOnly = true;
@@ -187,6 +191,8 @@
             // CustoUnitario
             // 
             CustoUnitario.DataPropertyName = "CustoUnitario";
+            dataGridViewCellStyle2.Format = "C2";
+            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle2;
             CustoUnitario.HeaderText = "Custo unitário";
             CustoUnitario.Name = "CustoUnitario";
             CustoUnitario.ReadOnly = true;

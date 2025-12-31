@@ -94,7 +94,7 @@ namespace GaroliBudget.Repositories
             var cmd = conn.CreateCommand();
 
             cmd.CommandText = 
-            @"SELECT ID_COMPONENTE, CODIGO, DESCRICAO, UNIDADE, CUSTO_UNITARIO, ATIVO
+            @"SELECT ID_COMPONENTE, CODIGO, DESCRICAO, CUSTO_UNITARIO, ATIVO
               FROM COMPONENTE WHERE ID_COMPONENTE = @id;";
 
             cmd.Parameters.AddWithValue("@id", id);

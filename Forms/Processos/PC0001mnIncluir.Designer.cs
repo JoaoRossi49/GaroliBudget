@@ -45,6 +45,7 @@
             nmCustoHora.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
             nmCustoHora.InterceptArrowKeys = false;
             nmCustoHora.Location = new Point(12, 81);
+            nmCustoHora.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
             nmCustoHora.Name = "nmCustoHora";
             nmCustoHora.Size = new Size(120, 23);
             nmCustoHora.TabIndex = 34;

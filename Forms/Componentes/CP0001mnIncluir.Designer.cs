@@ -121,10 +121,10 @@
             nmCustoUnitario.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
             nmCustoUnitario.InterceptArrowKeys = false;
             nmCustoUnitario.Location = new Point(12, 132);
+            nmCustoUnitario.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
             nmCustoUnitario.Name = "nmCustoUnitario";
             nmCustoUnitario.Size = new Size(120, 23);
             nmCustoUnitario.TabIndex = 28;
-            nmCustoUnitario.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // CP0001mnIncluir
             // 
