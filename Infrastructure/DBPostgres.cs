@@ -87,16 +87,29 @@ namespace GaroliBudget.Infrastructure
                             );
 
                             --------------------------------------------------
+                            -- MÓDULOS DO EQUIPAMENTO (TEMPLATE)
+                            --------------------------------------------------
+                            CREATE TABLE IF NOT EXISTS EQUIPAMENTO_MODULO (
+                                ID_MODULO SERIAL PRIMARY KEY,
+                                ID_EQUIPAMENTO INTEGER NOT NULL,
+                                NOME_MODULO TEXT NOT NULL,
+                                ORDEM INTEGER DEFAULT 0,
+                                FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO)
+                            );
+
+                            --------------------------------------------------
                             -- RECEITA DO EQUIPAMENTO - MATERIAIS
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS EQUIPAMENTO_MATERIAL (
                                 ID_EQUIPAMENTO_MATERIAL SERIAL PRIMARY KEY,
+                                ID_MODULO INTEGER,
                                 ID_EQUIPAMENTO INTEGER NOT NULL,
                                 ID_MATERIAL INTEGER NOT NULL,
                                 DESCRICAO_MATERIAL TEXT,
                                 QUANTIDADE_PADRAO REAL NOT NULL,
                                 UNIDADE TEXT NOT NULL,
 
+                                FOREIGN KEY (ID_MODULO) REFERENCES EQUIPAMENTO_MODULO(ID_MODULO),
                                 FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO),
                                 FOREIGN KEY (ID_MATERIAL) REFERENCES MATERIAL(ID_MATERIAL)
                             );
@@ -106,11 +119,13 @@ namespace GaroliBudget.Infrastructure
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS EQUIPAMENTO_COMPONENTE (
                                 ID_EQUIPAMENTO_COMPONENTE SERIAL PRIMARY KEY,
+                                ID_MODULO INTEGER,
                                 ID_EQUIPAMENTO INTEGER NOT NULL,
                                 ID_COMPONENTE INTEGER NOT NULL,
                                 DESCRICAO_COMPONENTE TEXT,
                                 QUANTIDADE_PADRAO REAL NOT NULL,
 
+                                FOREIGN KEY (ID_MODULO) REFERENCES EQUIPAMENTO_MODULO(ID_MODULO),
                                 FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO),
                                 FOREIGN KEY (ID_COMPONENTE) REFERENCES COMPONENTE(ID_COMPONENTE)
                             );
@@ -120,11 +135,13 @@ namespace GaroliBudget.Infrastructure
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS EQUIPAMENTO_MAO_OBRA (
                                 ID_EQUIPAMENTO_MAO_OBRA SERIAL PRIMARY KEY,
+                                ID_MODULO INTEGER,
                                 ID_EQUIPAMENTO INTEGER NOT NULL,
                                 ID_PROCESSO INTEGER NOT NULL,
                                 DESCRICAO_PROCESSO TEXT,
                                 HORAS_PADRAO REAL NOT NULL,
 
+                                FOREIGN KEY (ID_MODULO) REFERENCES EQUIPAMENTO_MODULO(ID_MODULO),
                                 FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO),
                                 FOREIGN KEY (ID_PROCESSO) REFERENCES PROCESSO(ID_PROCESSO)
                             );

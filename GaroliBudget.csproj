@@ -20,6 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\Equipamentos\EQ0001.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Equipamentos\EQ0001mnIncluir.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Processos\PC0001.cs">
       <SubType>Form</SubType>
     </Compile>
