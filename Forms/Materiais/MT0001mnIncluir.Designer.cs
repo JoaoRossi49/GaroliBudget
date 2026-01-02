@@ -31,14 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MT0001mnIncluir));
             btnGravar = new Button();
             btnCancelar = new Button();
-            label4 = new Label();
-            cbUnidadeMedida = new ComboBox();
-            label3 = new Label();
-            tbDescricao = new TextBox();
             label2 = new Label();
+            tbDescricao = new TextBox();
+            label3 = new Label();
+            cbUnidadeMedida = new ComboBox();
+            label4 = new Label();
+            nmCustoUnitario = new NumericUpDown();
             label1 = new Label();
             tbCodigo = new TextBox();
-            nmCustoUnitario = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)nmCustoUnitario).BeginInit();
             SuspendLayout();
             // 
@@ -70,24 +70,23 @@
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
-            // label4
+            // label2
             // 
-            label4.Anchor = AnchorStyles.Left;
-            label4.AutoSize = true;
-            label4.Location = new Point(12, 110);
-            label4.Name = "label4";
-            label4.Size = new Size(110, 15);
-            label4.TabIndex = 17;
-            label4.Text = "Unidade de medida";
+            label2.Anchor = AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Location = new Point(211, 110);
+            label2.Name = "label2";
+            label2.Size = new Size(106, 15);
+            label2.TabIndex = 13;
+            label2.Text = "Custo unitário (R$)";
             // 
-            // cbUnidadeMedida
+            // tbDescricao
             // 
-            cbUnidadeMedida.Anchor = AnchorStyles.Left;
-            cbUnidadeMedida.FormattingEnabled = true;
-            cbUnidadeMedida.Location = new Point(12, 128);
-            cbUnidadeMedida.Name = "cbUnidadeMedida";
-            cbUnidadeMedida.Size = new Size(146, 23);
-            cbUnidadeMedida.TabIndex = 16;
+            tbDescricao.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbDescricao.Location = new Point(12, 77);
+            tbDescricao.Name = "tbDescricao";
+            tbDescricao.Size = new Size(328, 23);
+            tbDescricao.TabIndex = 14;
             // 
             // label3
             // 
@@ -99,23 +98,37 @@
             label3.TabIndex = 15;
             label3.Text = "Descrição";
             // 
-            // tbDescricao
+            // cbUnidadeMedida
             // 
-            tbDescricao.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            tbDescricao.Location = new Point(12, 77);
-            tbDescricao.Name = "tbDescricao";
-            tbDescricao.Size = new Size(328, 23);
-            tbDescricao.TabIndex = 14;
+            cbUnidadeMedida.Anchor = AnchorStyles.Left;
+            cbUnidadeMedida.FormattingEnabled = true;
+            cbUnidadeMedida.Location = new Point(12, 128);
+            cbUnidadeMedida.Name = "cbUnidadeMedida";
+            cbUnidadeMedida.Size = new Size(146, 23);
+            cbUnidadeMedida.TabIndex = 16;
             // 
-            // label2
+            // label4
             // 
-            label2.Anchor = AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.Location = new Point(211, 110);
-            label2.Name = "label2";
-            label2.Size = new Size(106, 15);
-            label2.TabIndex = 13;
-            label2.Text = "Custo unitário (R$)";
+            label4.Anchor = AnchorStyles.Left;
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 110);
+            label4.Name = "label4";
+            label4.Size = new Size(110, 15);
+            label4.TabIndex = 17;
+            label4.Text = "Unidade de medida";
+            // 
+            // nmCustoUnitario
+            // 
+            nmCustoUnitario.DecimalPlaces = 2;
+            nmCustoUnitario.Font = new Font("Segoe UI", 9F);
+            nmCustoUnitario.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+            nmCustoUnitario.InterceptArrowKeys = false;
+            nmCustoUnitario.Location = new Point(211, 128);
+            nmCustoUnitario.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
+            nmCustoUnitario.Name = "nmCustoUnitario";
+            nmCustoUnitario.Size = new Size(120, 23);
+            nmCustoUnitario.TabIndex = 28;
+            nmCustoUnitario.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // label1
             // 
@@ -134,19 +147,6 @@
             tbCodigo.Name = "tbCodigo";
             tbCodigo.Size = new Size(328, 23);
             tbCodigo.TabIndex = 10;
-            // 
-            // nmCustoUnitario
-            // 
-            nmCustoUnitario.DecimalPlaces = 2;
-            nmCustoUnitario.Font = new Font("Segoe UI", 9F);
-            nmCustoUnitario.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            nmCustoUnitario.InterceptArrowKeys = false;
-            nmCustoUnitario.Location = new Point(211, 128);
-            nmCustoUnitario.Maximum = new decimal(new int[] { 99999999, 0, 0, 0 });
-            nmCustoUnitario.Name = "nmCustoUnitario";
-            nmCustoUnitario.Size = new Size(120, 23);
-            nmCustoUnitario.TabIndex = 28;
-            nmCustoUnitario.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // MT0001mnIncluir
             // 
@@ -172,15 +172,16 @@
         }
 
         #endregion
+
         private Button btnGravar;
         private Button btnCancelar;
-        private Label label4;
-        private ComboBox cbUnidadeMedida;
-        private Label label3;
-        private TextBox tbDescricao;
         private Label label2;
+        private TextBox tbDescricao;
+        private Label label3;
+        private ComboBox cbUnidadeMedida;
+        private Label label4;
+        private NumericUpDown nmCustoUnitario;
         private Label label1;
         private TextBox tbCodigo;
-        private NumericUpDown nmCustoUnitario;
     }
 }

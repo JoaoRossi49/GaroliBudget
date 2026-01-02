@@ -34,6 +34,10 @@
             btnGravar = new Button();
             tbRazaoSocial = new TextBox();
             panel1 = new Panel();
+            textBox2 = new TextBox();
+            label11 = new Label();
+            textBox1 = new TextBox();
+            label2 = new Label();
             tcOrcamento = new TabControl();
             tpMateriais = new TabPage();
             label4 = new Label();
@@ -78,10 +82,7 @@
             label6 = new Label();
             lblValorFinal = new Label();
             nmMargem = new NumericUpDown();
-            textBox1 = new TextBox();
-            label2 = new Label();
-            textBox2 = new TextBox();
-            label11 = new Label();
+            treeView1 = new TreeView();
             panel1.SuspendLayout();
             tcOrcamento.SuspendLayout();
             tpMateriais.SuspendLayout();
@@ -106,7 +107,7 @@
             // 
             btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(570, 518);
+            btnCancelar.Location = new Point(673, 539);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 23);
             btnCancelar.TabIndex = 9;
@@ -119,7 +120,7 @@
             // 
             btnGravar.Image = (Image)resources.GetObject("btnGravar.Image");
             btnGravar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGravar.Location = new Point(483, 518);
+            btnGravar.Location = new Point(586, 539);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(75, 23);
             btnGravar.TabIndex = 8;
@@ -148,18 +149,55 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(-4, -2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(667, 106);
+            panel1.Size = new Size(767, 106);
             panel1.TabIndex = 20;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(308, 29);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(402, 61);
+            textBox2.TabIndex = 13;
+            textBox2.Text = "9999";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(308, 11);
+            label11.Name = "label11";
+            label11.Size = new Size(74, 15);
+            label11.TabIndex = 14;
+            label11.Text = "Observações";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 67);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(279, 23);
+            textBox1.TabIndex = 11;
+            textBox1.Text = "9999";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 49);
+            label2.Name = "label2";
+            label2.Size = new Size(58, 15);
+            label2.TabIndex = 12;
+            label2.Text = "Descrição";
             // 
             // tcOrcamento
             // 
             tcOrcamento.Controls.Add(tpMateriais);
             tcOrcamento.Controls.Add(tpComponentes);
             tcOrcamento.Controls.Add(tpProcessos);
-            tcOrcamento.Location = new Point(8, 122);
+            tcOrcamento.Location = new Point(223, 122);
             tcOrcamento.Name = "tcOrcamento";
             tcOrcamento.SelectedIndex = 0;
-            tcOrcamento.Size = new Size(641, 357);
+            tcOrcamento.Size = new Size(529, 357);
             tcOrcamento.TabIndex = 21;
             // 
             // tpMateriais
@@ -175,7 +213,7 @@
             tpMateriais.Location = new Point(4, 24);
             tpMateriais.Name = "tpMateriais";
             tpMateriais.Padding = new Padding(3);
-            tpMateriais.Size = new Size(633, 329);
+            tpMateriais.Size = new Size(491, 329);
             tpMateriais.TabIndex = 0;
             tpMateriais.Text = "Materiais";
             tpMateriais.UseVisualStyleBackColor = true;
@@ -183,7 +221,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(351, 16);
+            label4.Location = new Point(163, 15);
             label4.Name = "label4";
             label4.Size = new Size(69, 15);
             label4.TabIndex = 23;
@@ -191,7 +229,7 @@
             // 
             // tbMateriaisQuantidade
             // 
-            tbMateriaisQuantidade.Location = new Point(351, 34);
+            tbMateriaisQuantidade.Location = new Point(163, 33);
             tbMateriaisQuantidade.Name = "tbMateriaisQuantidade";
             tbMateriaisQuantidade.Size = new Size(100, 23);
             tbMateriaisQuantidade.TabIndex = 22;
@@ -210,7 +248,7 @@
             cbMateriais.FormattingEnabled = true;
             cbMateriais.Location = new Point(6, 34);
             cbMateriais.Name = "cbMateriais";
-            cbMateriais.Size = new Size(328, 23);
+            cbMateriais.Size = new Size(150, 23);
             cbMateriais.TabIndex = 20;
             // 
             // btnExcluir
@@ -220,7 +258,7 @@
             btnExcluir.BackgroundImage = (Image)resources.GetObject("btnExcluir.BackgroundImage");
             btnExcluir.BackgroundImageLayout = ImageLayout.Center;
             btnExcluir.Font = new Font("Segoe UI", 8F);
-            btnExcluir.Location = new Point(579, 31);
+            btnExcluir.Location = new Point(437, 31);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(47, 25);
             btnExcluir.TabIndex = 9;
@@ -235,7 +273,7 @@
             btnIncluirMaterial.BackgroundImage = (Image)resources.GetObject("btnIncluirMaterial.BackgroundImage");
             btnIncluirMaterial.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirMaterial.Font = new Font("Segoe UI", 8F);
-            btnIncluirMaterial.Location = new Point(471, 31);
+            btnIncluirMaterial.Location = new Point(329, 31);
             btnIncluirMaterial.Name = "btnIncluirMaterial";
             btnIncluirMaterial.Size = new Size(47, 25);
             btnIncluirMaterial.TabIndex = 7;
@@ -250,7 +288,7 @@
             btnEditar.BackgroundImage = (Image)resources.GetObject("btnEditar.BackgroundImage");
             btnEditar.BackgroundImageLayout = ImageLayout.Center;
             btnEditar.Font = new Font("Segoe UI", 8F);
-            btnEditar.Location = new Point(524, 31);
+            btnEditar.Location = new Point(382, 31);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(47, 25);
             btnEditar.TabIndex = 8;
@@ -267,7 +305,7 @@
             dgvMateriais.Location = new Point(0, 65);
             dgvMateriais.Name = "dgvMateriais";
             dgvMateriais.ReadOnly = true;
-            dgvMateriais.Size = new Size(633, 268);
+            dgvMateriais.Size = new Size(491, 268);
             dgvMateriais.TabIndex = 0;
             // 
             // descricaoMaterial
@@ -308,7 +346,7 @@
             tpComponentes.Location = new Point(4, 24);
             tpComponentes.Name = "tpComponentes";
             tpComponentes.Padding = new Padding(3);
-            tpComponentes.Size = new Size(633, 329);
+            tpComponentes.Size = new Size(491, 329);
             tpComponentes.TabIndex = 1;
             tpComponentes.Text = "Componentes";
             tpComponentes.UseVisualStyleBackColor = true;
@@ -316,7 +354,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(351, 16);
+            label7.Location = new Point(163, 15);
             label7.Name = "label7";
             label7.Size = new Size(69, 15);
             label7.TabIndex = 31;
@@ -324,7 +362,7 @@
             // 
             // tbComponentesQuantidade
             // 
-            tbComponentesQuantidade.Location = new Point(351, 34);
+            tbComponentesQuantidade.Location = new Point(163, 33);
             tbComponentesQuantidade.Name = "tbComponentesQuantidade";
             tbComponentesQuantidade.Size = new Size(100, 23);
             tbComponentesQuantidade.TabIndex = 30;
@@ -343,7 +381,7 @@
             cbComponentes.FormattingEnabled = true;
             cbComponentes.Location = new Point(6, 34);
             cbComponentes.Name = "cbComponentes";
-            cbComponentes.Size = new Size(328, 23);
+            cbComponentes.Size = new Size(150, 23);
             cbComponentes.TabIndex = 28;
             // 
             // button1
@@ -353,7 +391,7 @@
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Center;
             button1.Font = new Font("Segoe UI", 8F);
-            button1.Location = new Point(579, 31);
+            button1.Location = new Point(437, 31);
             button1.Name = "button1";
             button1.Size = new Size(47, 25);
             button1.TabIndex = 27;
@@ -367,7 +405,7 @@
             btnIncluirComponente.BackgroundImage = (Image)resources.GetObject("btnIncluirComponente.BackgroundImage");
             btnIncluirComponente.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirComponente.Font = new Font("Segoe UI", 8F);
-            btnIncluirComponente.Location = new Point(471, 31);
+            btnIncluirComponente.Location = new Point(329, 31);
             btnIncluirComponente.Name = "btnIncluirComponente";
             btnIncluirComponente.Size = new Size(47, 25);
             btnIncluirComponente.TabIndex = 25;
@@ -382,7 +420,7 @@
             button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
             button3.BackgroundImageLayout = ImageLayout.Center;
             button3.Font = new Font("Segoe UI", 8F);
-            button3.Location = new Point(524, 31);
+            button3.Location = new Point(382, 31);
             button3.Name = "button3";
             button3.Size = new Size(47, 25);
             button3.TabIndex = 26;
@@ -399,7 +437,7 @@
             dgvComponentes.Location = new Point(0, 65);
             dgvComponentes.Name = "dgvComponentes";
             dgvComponentes.ReadOnly = true;
-            dgvComponentes.Size = new Size(633, 268);
+            dgvComponentes.Size = new Size(491, 268);
             dgvComponentes.TabIndex = 24;
             // 
             // descricaoComponente
@@ -440,7 +478,7 @@
             tpProcessos.Location = new Point(4, 24);
             tpProcessos.Name = "tpProcessos";
             tpProcessos.Padding = new Padding(3);
-            tpProcessos.Size = new Size(633, 329);
+            tpProcessos.Size = new Size(521, 329);
             tpProcessos.TabIndex = 2;
             tpProcessos.Text = "Mão de Obra";
             tpProcessos.UseVisualStyleBackColor = true;
@@ -448,7 +486,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(351, 16);
+            label9.Location = new Point(163, 15);
             label9.Name = "label9";
             label9.Size = new Size(69, 15);
             label9.TabIndex = 31;
@@ -456,7 +494,7 @@
             // 
             // tbProcessosQuantidade
             // 
-            tbProcessosQuantidade.Location = new Point(351, 34);
+            tbProcessosQuantidade.Location = new Point(163, 33);
             tbProcessosQuantidade.Name = "tbProcessosQuantidade";
             tbProcessosQuantidade.Size = new Size(100, 23);
             tbProcessosQuantidade.TabIndex = 30;
@@ -475,7 +513,7 @@
             cbProcessos.FormattingEnabled = true;
             cbProcessos.Location = new Point(6, 34);
             cbProcessos.Name = "cbProcessos";
-            cbProcessos.Size = new Size(328, 23);
+            cbProcessos.Size = new Size(150, 23);
             cbProcessos.TabIndex = 28;
             // 
             // button4
@@ -485,7 +523,7 @@
             button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
             button4.BackgroundImageLayout = ImageLayout.Center;
             button4.Font = new Font("Segoe UI", 8F);
-            button4.Location = new Point(579, 31);
+            button4.Location = new Point(467, 31);
             button4.Name = "button4";
             button4.Size = new Size(47, 25);
             button4.TabIndex = 27;
@@ -499,7 +537,7 @@
             btnIncluirProcesso.BackgroundImage = (Image)resources.GetObject("btnIncluirProcesso.BackgroundImage");
             btnIncluirProcesso.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirProcesso.Font = new Font("Segoe UI", 8F);
-            btnIncluirProcesso.Location = new Point(471, 31);
+            btnIncluirProcesso.Location = new Point(359, 31);
             btnIncluirProcesso.Name = "btnIncluirProcesso";
             btnIncluirProcesso.Size = new Size(47, 25);
             btnIncluirProcesso.TabIndex = 25;
@@ -514,7 +552,7 @@
             button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
             button6.BackgroundImageLayout = ImageLayout.Center;
             button6.Font = new Font("Segoe UI", 8F);
-            button6.Location = new Point(524, 31);
+            button6.Location = new Point(412, 31);
             button6.Name = "button6";
             button6.Size = new Size(47, 25);
             button6.TabIndex = 26;
@@ -531,7 +569,7 @@
             dgvProcessos.Location = new Point(0, 65);
             dgvProcessos.Name = "dgvProcessos";
             dgvProcessos.ReadOnly = true;
-            dgvProcessos.Size = new Size(633, 268);
+            dgvProcessos.Size = new Size(521, 268);
             dgvProcessos.TabIndex = 24;
             // 
             // descricaoProcesso
@@ -563,7 +601,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            label5.Location = new Point(244, 506);
+            label5.Location = new Point(317, 512);
             label5.Name = "label5";
             label5.Size = new Size(83, 28);
             label5.TabIndex = 22;
@@ -582,7 +620,7 @@
             // 
             lblValorFinal.AutoSize = true;
             lblValorFinal.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            lblValorFinal.Location = new Point(317, 506);
+            lblValorFinal.Location = new Point(390, 512);
             lblValorFinal.Name = "lblValorFinal";
             lblValorFinal.Size = new Size(53, 28);
             lblValorFinal.TabIndex = 26;
@@ -600,49 +638,20 @@
             nmMargem.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nmMargem.ValueChanged += nmMargem_ValueChanged;
             // 
-            // textBox1
+            // treeView1
             // 
-            textBox1.Location = new Point(12, 67);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(208, 23);
-            textBox1.TabIndex = 11;
-            textBox1.Text = "9999";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 49);
-            label2.Name = "label2";
-            label2.Size = new Size(58, 15);
-            label2.TabIndex = 12;
-            label2.Text = "Descrição";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(240, 29);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(402, 61);
-            textBox2.TabIndex = 13;
-            textBox2.Text = "9999";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(240, 11);
-            label11.Name = "label11";
-            label11.Size = new Size(74, 15);
-            label11.TabIndex = 14;
-            label11.Text = "Observações";
+            treeView1.Location = new Point(8, 146);
+            treeView1.Name = "treeView1";
+            treeView1.Size = new Size(213, 333);
+            treeView1.TabIndex = 28;
             // 
             // EQ0001mnIncluir
             // 
             AcceptButton = btnGravar;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(661, 574);
+            ClientSize = new Size(755, 574);
+            Controls.Add(treeView1);
             Controls.Add(nmMargem);
             Controls.Add(lblValorFinal);
             Controls.Add(label6);
@@ -725,5 +734,6 @@
         private Label label2;
         private TextBox textBox2;
         private Label label11;
+        private TreeView treeView1;
     }
 }
