@@ -12,5 +12,7 @@ namespace GaroliBudget.Models
         public string Descricao { get; set; }
         public decimal CustoHora { get; set; }
         public bool Ativo { get; set; }
+        public decimal Quantidade { get; set; }
+        public Modulo Modulo { get; set; }
     }
 }

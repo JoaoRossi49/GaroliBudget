@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace GaroliBudget.Models
 {
-    public class Material
+    public class Equipamento
     {
-        public int IdMaterial { get; set; }
+        public int IdEquipamento { get; set; }
         public string Codigo { get; set; }
         public string Descricao { get; set; }
-        public string Unidade { get; set; }
-        public decimal CustoUnitario { get; set; }
+        public string Observacao { get; set; }
+        public List<Material> Materiais { get; set; }
+        public List<Componente> Componentes { get; set; }
+        public List<Processo> Processos { get; set; }
         public bool Ativo { get; set; }
-        public decimal Quantidade { get; set; }
-        public Modulo Modulo { get; set; }
     }
+
 }
