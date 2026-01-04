@@ -1,6 +1,9 @@
+using GaroliBudget.Infrastructure;
 using GaroliBudget.Models;
+using GaroliBudget.Repositories;
 using GaroliBudget.Repositories.Interfaces;
 using GaroliBudget.Services;
+using Microsoft.VisualBasic;
 using System.Data;
 using System.Globalization;
 
@@ -140,5 +143,86 @@ namespace GaroliBudget
             CalcularTotalGeral();
         }
 
+        private void btnIncluirModulo_Click(object sender, EventArgs e)
+        {
+            //if (_equipamentoAtual == null)
+            //{
+            //    MessageBox.Show("Selecione um equipamento.");
+            //    return;
+            //}
+
+            string nome = Interaction.InputBox(
+                "Informe o nome do módulo:",
+                "Novo módulo",
+                ""
+            ).Trim();
+
+            if (string.IsNullOrEmpty(nome))
+            {
+                MessageBox.Show("Informe o nome do módulo.");
+                return;
+            }
+
+            var modulo = new Modulo
+            {
+                IdEquipamento = 1, //_equipamentoAtual.IdEquipamento,
+                Nome = nome
+            };
+
+            using var conn = DBPostgres.GetConnection();
+            conn.Open();
+
+            using var tran = conn.BeginTransaction();
+            try
+            {
+                var repo = new EquipamentoModuloRepository();
+                modulo.Id = repo.Inserir(modulo, conn, tran);
+
+                tran.Commit();
+
+                AdicionarModuloTreeView(modulo);
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                MessageBox.Show("Erro ao inserir módulo:\n" + ex.Message);
+            }
+        }
+
+        private void AdicionarModuloTreeView(Modulo modulo)
+        {
+            var node = new TreeNode(modulo.Nome)
+            {
+                Tag = modulo.Id
+            };
+
+            treeViewModulos.Nodes.Add(node);
+            treeViewModulos.SelectedNode = node;
+        }
+
+        private void treeViewModulos_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node == null || e.Node.Tag == null)
+            {
+                treeViewModulos.Enabled = false;
+                LimparGridsModulo();
+                return;
+            }
+
+            int idModulo = Convert.ToInt32(e.Node.Tag);
+
+            treeViewModulos.Enabled = true;
+
+            //CarregarMateriaisModulo(idModulo);
+            //CarregarComponentesModulo(idModulo);
+            //CarregarProcessosModulo(idModulo);
+        }
+
+        private void LimparGridsModulo()
+        {
+            dgvMateriais.DataSource = null;
+            dgvComponentes.DataSource = null;
+            dgvProcessos.DataSource = null;
+        }
     }
 }

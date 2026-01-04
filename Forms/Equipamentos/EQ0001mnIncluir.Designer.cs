@@ -82,7 +82,8 @@
             label6 = new Label();
             lblValorFinal = new Label();
             nmMargem = new NumericUpDown();
-            treeView1 = new TreeView();
+            treeViewModulos = new TreeView();
+            btnIncluirModulo = new FontAwesome.Sharp.IconButton();
             panel1.SuspendLayout();
             tcOrcamento.SuspendLayout();
             tpMateriais.SuspendLayout();
@@ -213,7 +214,7 @@
             tpMateriais.Location = new Point(4, 24);
             tpMateriais.Name = "tpMateriais";
             tpMateriais.Padding = new Padding(3);
-            tpMateriais.Size = new Size(491, 329);
+            tpMateriais.Size = new Size(521, 329);
             tpMateriais.TabIndex = 0;
             tpMateriais.Text = "Materiais";
             tpMateriais.UseVisualStyleBackColor = true;
@@ -346,7 +347,7 @@
             tpComponentes.Location = new Point(4, 24);
             tpComponentes.Name = "tpComponentes";
             tpComponentes.Padding = new Padding(3);
-            tpComponentes.Size = new Size(491, 329);
+            tpComponentes.Size = new Size(521, 329);
             tpComponentes.TabIndex = 1;
             tpComponentes.Text = "Componentes";
             tpComponentes.UseVisualStyleBackColor = true;
@@ -638,12 +639,28 @@
             nmMargem.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nmMargem.ValueChanged += nmMargem_ValueChanged;
             // 
-            // treeView1
+            // treeViewModulos
             // 
-            treeView1.Location = new Point(8, 146);
-            treeView1.Name = "treeView1";
-            treeView1.Size = new Size(213, 333);
-            treeView1.TabIndex = 28;
+            treeViewModulos.Location = new Point(8, 146);
+            treeViewModulos.Name = "treeViewModulos";
+            treeViewModulos.Size = new Size(213, 333);
+            treeViewModulos.TabIndex = 28;
+            treeViewModulos.AfterSelect += treeViewModulos_AfterSelect;
+            // 
+            // btnIncluirModulo
+            // 
+            btnIncluirModulo.IconChar = FontAwesome.Sharp.IconChar.AlignRight;
+            btnIncluirModulo.IconColor = Color.Black;
+            btnIncluirModulo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnIncluirModulo.IconSize = 18;
+            btnIncluirModulo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnIncluirModulo.Location = new Point(8, 117);
+            btnIncluirModulo.Name = "btnIncluirModulo";
+            btnIncluirModulo.Size = new Size(142, 23);
+            btnIncluirModulo.TabIndex = 29;
+            btnIncluirModulo.Text = "Adicionar módulo";
+            btnIncluirModulo.UseVisualStyleBackColor = true;
+            btnIncluirModulo.Click += btnIncluirModulo_Click;
             // 
             // EQ0001mnIncluir
             // 
@@ -651,7 +668,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(755, 574);
-            Controls.Add(treeView1);
+            Controls.Add(btnIncluirModulo);
+            Controls.Add(treeViewModulos);
             Controls.Add(nmMargem);
             Controls.Add(lblValorFinal);
             Controls.Add(label6);
@@ -734,6 +752,7 @@
         private Label label2;
         private TextBox textBox2;
         private Label label11;
-        private TreeView treeView1;
+        private TreeView treeViewModulos;
+        private FontAwesome.Sharp.IconButton btnIncluirModulo;
     }
 }

@@ -44,7 +44,7 @@ namespace GaroliBudget
         private void btnEquipamentos_Click(object sender, EventArgs e)
         {
             tbNomeForm.Text = "Equipamentos";
-            AbrirFormNoPainel(new Indisponivel());
+            AbrirFormNoPainel(new EQ0001());
         }
         private void btnMateriais_Click(object sender, EventArgs e)
         {
