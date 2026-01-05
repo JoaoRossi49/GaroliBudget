@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GaroliBudget.Infrastructure;
 using GaroliBudget.Models;
 using Npgsql;
 
@@ -31,6 +32,37 @@ namespace GaroliBudget.Repositories
 
             return Convert.ToInt32(cmd.ExecuteScalar());
         }
+
+        public Modulo ObterPorId(int id)
+        {
+            using var conn = DBPostgres.GetConnection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+
+            cmd.CommandText =
+            @"SELECT *
+              FROM EQUIPAMENTO_MODULO WHERE ID_MODULO = @id;";
+
+            cmd.Parameters.AddWithValue("@id", id);
+
+            using var dr = cmd.ExecuteReader();
+            if (!dr.Read()) return null;
+
+            return Mapear(dr);
+        }
+
+        private Modulo Mapear(NpgsqlDataReader reader)
+        {
+            return new Modulo
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("ID_MODULO")),
+                IdEquipamento = reader.GetInt32(reader.GetOrdinal("ID_EQUIPAMENTO")),
+                Nome = reader["NOME_MODULO"].ToString(),
+                Ordem = Convert.ToInt32(reader["ORDEM"])
+            };
+        }
+
     }
 
 }

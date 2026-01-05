@@ -6,35 +6,51 @@ using GaroliBudget.Services;
 using Microsoft.VisualBasic;
 using System.Data;
 using System.Globalization;
+using System.Reflection;
 
 namespace GaroliBudget
 {
     public partial class EQ0001mnIncluir : Form
     {
-        private readonly IClienteService _clienteService;
-        private Cliente _clienteExistente;
+        private readonly IEquipamentoService _equipamentoService;
+        private Equipamento _equipamentoExistente;
+        private Equipamento _equipamentoAtual;
+        private List<Modulo> _modulos;
 
-        public EQ0001mnIncluir(IClienteService clienteService)
+        public EQ0001mnIncluir(IEquipamentoService equipamentoService)
         {
             InitializeComponent();
-            _clienteService = clienteService;
-            this.Text = "Novo Cliente";
+            _equipamentoService = equipamentoService;
+            this.Text = "Novo Equipamento";
         }
 
-        public EQ0001mnIncluir(IClienteService clienteService, Cliente clienteParaEditar) : this(clienteService)
+        public EQ0001mnIncluir(IEquipamentoService equipamentoService, Equipamento equipamentoParaEditar) : this(equipamentoService)
         {
-            _clienteExistente = clienteParaEditar;
-            this.Text = "Editar Cliente";
+            _equipamentoExistente = equipamentoParaEditar;
+            this.Text = "Editar Equipamento";
             PreencherCampos();
+        }
+        private void EQ0001mnIncluir_Load(object sender, EventArgs e)
+        {
+            CarregarComboEquipamentos();
+        }
+
+        private void CarregarComboEquipamentos()
+        {
+            List<Equipamento> lista = _equipamentoService.ListarTodos();
         }
 
         private void PreencherCampos()
         {
-            //tbRazaoSocial.Text = _clienteExistente.RazaoSocial;
-            //tbNomeFantasia.Text = _clienteExistente.NomeFantasia;
-            //mtbCnpj.Text = _clienteExistente.Cnpj;
-            //tbEmail.Text = _clienteExistente.Email;
-            //mtbTelefone.Text = _clienteExistente.Telefone;
+            //tbRazaoSocial.Text = _equipamentoExistente.RazaoSocial;
+            //tbNomeFantasia.Text = _equipamentoExistente.NomeFantasia;
+            //mtbCnpj.Text = _equipamentoExistente.Cnpj;
+            //tbEmail.Text = _equipamentoExistente.Email;
+            //mtbTelefone.Text = _equipamentoExistente.Telefone;
+        }
+        private void nmMargem_ValueChanged(object sender, EventArgs e)
+        {
+            CalcularTotalGeral();
         }
 
         private void CalcularTotalGeral()
@@ -82,20 +98,13 @@ namespace GaroliBudget
 
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Orçamento incluído com sucesso!");
+
+            CadastrarModulos(_modulos);
+
             this.Close();
         }
 
-        private void CarregarComboClientes()
-        {
-            List<Cliente> lista = _clienteService.ListarTodos();
-        }
-
-        private void EQ0001mnIncluir_Load(object sender, EventArgs e)
-        {
-            CarregarComboClientes();
-        }
-
+        #region Controles Data grid view
         private void btnIncluir_Click(object sender, EventArgs e)
         {
             if (tcOrcamento.SelectedTab == tpMateriais)
@@ -133,16 +142,9 @@ namespace GaroliBudget
             }
         }
 
-        private void cbClientes_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        #endregion
 
-        }
-
-        private void nmMargem_ValueChanged(object sender, EventArgs e)
-        {
-            CalcularTotalGeral();
-        }
-
+        #region Controles TreeView Módulos
         private void btnIncluirModulo_Click(object sender, EventArgs e)
         {
             //if (_equipamentoAtual == null)
@@ -165,32 +167,42 @@ namespace GaroliBudget
 
             var modulo = new Modulo
             {
-                IdEquipamento = 1, //_equipamentoAtual.IdEquipamento,
+                IdEquipamento = _equipamentoAtual.IdEquipamento > 0 ? _equipamentoAtual.IdEquipamento : 0,
                 Nome = nome
             };
 
-            using var conn = DBPostgres.GetConnection();
-            conn.Open();
+            AdicionarModuloTreeView(modulo);
 
-            using var tran = conn.BeginTransaction();
-            try
+        }
+
+        private void CadastrarModulos(List<Modulo> modulos)
+        {
+            foreach (Modulo modulo in modulos)
             {
-                var repo = new EquipamentoModuloRepository();
-                modulo.Id = repo.Inserir(modulo, conn, tran);
+                using var conn = DBPostgres.GetConnection();
+                conn.Open();
 
-                tran.Commit();
+                using var tran = conn.BeginTransaction();
+                try
+                {
+                    var repo = new EquipamentoModuloRepository();
+                    modulo.Id = repo.Inserir(modulo, conn, tran);
+                    tran.Commit();
 
-                AdicionarModuloTreeView(modulo);
-            }
-            catch (Exception ex)
-            {
-                tran.Rollback();
-                MessageBox.Show("Erro ao inserir módulo:\n" + ex.Message);
+                    //AdicionarModuloTreeView(modulo);
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    MessageBox.Show("Erro ao inserir módulo:\n" + ex.Message);
+                }
             }
         }
 
         private void AdicionarModuloTreeView(Modulo modulo)
         {
+            _modulos.Add(modulo);
+
             var node = new TreeNode(modulo.Nome)
             {
                 Tag = modulo.Id
@@ -199,6 +211,7 @@ namespace GaroliBudget
             treeViewModulos.Nodes.Add(node);
             treeViewModulos.SelectedNode = node;
         }
+        
 
         private void treeViewModulos_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -224,5 +237,6 @@ namespace GaroliBudget
             dgvComponentes.DataSource = null;
             dgvProcessos.DataSource = null;
         }
+        #endregion
     }
 }
