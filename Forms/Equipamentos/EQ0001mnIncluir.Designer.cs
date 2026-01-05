@@ -259,7 +259,7 @@
             btnExcluir.BackgroundImage = (Image)resources.GetObject("btnExcluir.BackgroundImage");
             btnExcluir.BackgroundImageLayout = ImageLayout.Center;
             btnExcluir.Font = new Font("Segoe UI", 8F);
-            btnExcluir.Location = new Point(437, 31);
+            btnExcluir.Location = new Point(467, 31);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(47, 25);
             btnExcluir.TabIndex = 9;
@@ -274,7 +274,7 @@
             btnIncluirMaterial.BackgroundImage = (Image)resources.GetObject("btnIncluirMaterial.BackgroundImage");
             btnIncluirMaterial.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirMaterial.Font = new Font("Segoe UI", 8F);
-            btnIncluirMaterial.Location = new Point(329, 31);
+            btnIncluirMaterial.Location = new Point(359, 31);
             btnIncluirMaterial.Name = "btnIncluirMaterial";
             btnIncluirMaterial.Size = new Size(47, 25);
             btnIncluirMaterial.TabIndex = 7;
@@ -289,7 +289,7 @@
             btnEditar.BackgroundImage = (Image)resources.GetObject("btnEditar.BackgroundImage");
             btnEditar.BackgroundImageLayout = ImageLayout.Center;
             btnEditar.Font = new Font("Segoe UI", 8F);
-            btnEditar.Location = new Point(382, 31);
+            btnEditar.Location = new Point(412, 31);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(47, 25);
             btnEditar.TabIndex = 8;
@@ -306,7 +306,7 @@
             dgvMateriais.Location = new Point(0, 65);
             dgvMateriais.Name = "dgvMateriais";
             dgvMateriais.ReadOnly = true;
-            dgvMateriais.Size = new Size(491, 268);
+            dgvMateriais.Size = new Size(521, 268);
             dgvMateriais.TabIndex = 0;
             // 
             // descricaoMaterial
@@ -392,7 +392,7 @@
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Center;
             button1.Font = new Font("Segoe UI", 8F);
-            button1.Location = new Point(437, 31);
+            button1.Location = new Point(467, 31);
             button1.Name = "button1";
             button1.Size = new Size(47, 25);
             button1.TabIndex = 27;
@@ -406,7 +406,7 @@
             btnIncluirComponente.BackgroundImage = (Image)resources.GetObject("btnIncluirComponente.BackgroundImage");
             btnIncluirComponente.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirComponente.Font = new Font("Segoe UI", 8F);
-            btnIncluirComponente.Location = new Point(329, 31);
+            btnIncluirComponente.Location = new Point(359, 31);
             btnIncluirComponente.Name = "btnIncluirComponente";
             btnIncluirComponente.Size = new Size(47, 25);
             btnIncluirComponente.TabIndex = 25;
@@ -421,7 +421,7 @@
             button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
             button3.BackgroundImageLayout = ImageLayout.Center;
             button3.Font = new Font("Segoe UI", 8F);
-            button3.Location = new Point(382, 31);
+            button3.Location = new Point(412, 31);
             button3.Name = "button3";
             button3.Size = new Size(47, 25);
             button3.TabIndex = 26;
@@ -438,7 +438,7 @@
             dgvComponentes.Location = new Point(0, 65);
             dgvComponentes.Name = "dgvComponentes";
             dgvComponentes.ReadOnly = true;
-            dgvComponentes.Size = new Size(491, 268);
+            dgvComponentes.Size = new Size(521, 268);
             dgvComponentes.TabIndex = 24;
             // 
             // descricaoComponente
