@@ -13,9 +13,9 @@ namespace GaroliBudget.Services
     public class EquipamentoService : IEquipamentoService
     {
         private readonly IEquipamentoRepository _equipamentoRepository;
-        private readonly EquipamentoMaterialRepository _materialRepository;
-        private readonly EquipamentoComponenteRepository _componenteRepository;
-        private readonly EquipamentoProcessoRepository _processoRepository;
+        private readonly EquipamentoMaterialRepository _materialRepository = new EquipamentoMaterialRepository();
+        private readonly EquipamentoComponenteRepository _componenteRepository = new EquipamentoComponenteRepository();
+        private readonly EquipamentoProcessoRepository _processoRepository = new EquipamentoProcessoRepository();
 
         public int Salvar(Equipamento equipamento)
         {

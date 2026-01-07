@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GaroliBudget.Models;
+using GaroliBudget.Repositories.Interfaces;
 using Npgsql;
 
 namespace GaroliBudget.Repositories
 {
-    public class EquipamentoComponenteRepository
+    public class EquipamentoComponenteRepository : IEquipamentoComponenteRepository
     {
         public void InserirLista(
             int idEquipamento,
@@ -16,23 +17,26 @@ namespace GaroliBudget.Repositories
             NpgsqlConnection conn,
             NpgsqlTransaction tran)
         {
-            foreach (var c in componentes)
+            if (componentes != null)
             {
-                var cmd = conn.CreateCommand();
-                cmd.Transaction = tran;
-                cmd.CommandText = @"
+                foreach (var c in componentes)
+                {
+                    var cmd = conn.CreateCommand();
+                    cmd.Transaction = tran;
+                    cmd.CommandText = @"
                 INSERT INTO EQUIPAMENTO_COMPONENTE
                 (ID_EQUIPAMENTO, ID_MODULO, ID_COMPONENTE, DESCRICAO_COMPONENTE, QUANTIDADE_PADRAO)
                 VALUES
                 (@id, @mod, @mat, @descricao, @qtd)";
 
-                cmd.Parameters.AddWithValue("@id", idEquipamento);
-                cmd.Parameters.AddWithValue("@mod", c.Modulo.Id);
-                cmd.Parameters.AddWithValue("@idComponente", c.IdComponente);
-                cmd.Parameters.AddWithValue("@descricao", c.Descricao);
-                cmd.Parameters.AddWithValue("@qtd", c.Quantidade);
+                    cmd.Parameters.AddWithValue("@id", idEquipamento);
+                    cmd.Parameters.AddWithValue("@mod", c.Modulo.Id);
+                    cmd.Parameters.AddWithValue("@idComponente", c.IdComponente);
+                    cmd.Parameters.AddWithValue("@descricao", c.Descricao);
+                    cmd.Parameters.AddWithValue("@qtd", c.Quantidade);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 

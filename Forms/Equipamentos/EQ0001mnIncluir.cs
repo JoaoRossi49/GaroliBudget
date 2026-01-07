@@ -13,9 +13,8 @@ namespace GaroliBudget
     public partial class EQ0001mnIncluir : Form
     {
         private readonly IEquipamentoService _equipamentoService;
-        private Equipamento _equipamentoExistente;
-        private Equipamento _equipamentoAtual;
-        private List<Modulo> _modulos;
+        private Equipamento _equipamento = new Equipamento(); //Sempre vai ser um equipamento em branco
+        private List<Modulo> _modulos = new List<Modulo>();
 
         public EQ0001mnIncluir(IEquipamentoService equipamentoService)
         {
@@ -26,7 +25,7 @@ namespace GaroliBudget
 
         public EQ0001mnIncluir(IEquipamentoService equipamentoService, Equipamento equipamentoParaEditar) : this(equipamentoService)
         {
-            _equipamentoExistente = equipamentoParaEditar;
+            _equipamento = equipamentoParaEditar;
             this.Text = "Editar Equipamento";
             PreencherCampos();
         }
@@ -98,8 +97,17 @@ namespace GaroliBudget
 
         private void btnGravar_Click(object sender, EventArgs e)
         {
+            _equipamento.Descricao = "TESTE";
+            _equipamento.Codigo = "002";
 
-            CadastrarModulos(_modulos);
+            //Salva os módulos criados
+            CadastrarModulos(_modulos, _equipamento);
+
+            //Organiza equipamentos, componentes e processos e atributi os módulos
+
+
+            //Salva itens do equipamento
+            _equipamentoService.Salvar(_equipamento);
 
             this.Close();
         }
@@ -147,12 +155,6 @@ namespace GaroliBudget
         #region Controles TreeView Módulos
         private void btnIncluirModulo_Click(object sender, EventArgs e)
         {
-            //if (_equipamentoAtual == null)
-            //{
-            //    MessageBox.Show("Selecione um equipamento.");
-            //    return;
-            //}
-
             string nome = Interaction.InputBox(
                 "Informe o nome do módulo:",
                 "Novo módulo",
@@ -167,7 +169,7 @@ namespace GaroliBudget
 
             var modulo = new Modulo
             {
-                IdEquipamento = _equipamentoAtual.IdEquipamento > 0 ? _equipamentoAtual.IdEquipamento : 0,
+                IdEquipamento = 0,
                 Nome = nome
             };
 
@@ -175,7 +177,7 @@ namespace GaroliBudget
 
         }
 
-        private void CadastrarModulos(List<Modulo> modulos)
+        private void CadastrarModulos(List<Modulo> modulos, Equipamento equipamento)
         {
             foreach (Modulo modulo in modulos)
             {
@@ -186,6 +188,7 @@ namespace GaroliBudget
                 try
                 {
                     var repo = new EquipamentoModuloRepository();
+                    modulo.IdEquipamento = equipamento.IdEquipamento;
                     modulo.Id = repo.Inserir(modulo, conn, tran);
                     tran.Commit();
 

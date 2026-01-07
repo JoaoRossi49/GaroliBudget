@@ -16,23 +16,26 @@ namespace GaroliBudget.Repositories
             NpgsqlConnection conn,
             NpgsqlTransaction tran)
         {
-            foreach (var p in processos)
+            if (processos != null)
             {
-                var cmd = conn.CreateCommand();
-                cmd.Transaction = tran;
-                cmd.CommandText = @"
+                foreach (var p in processos)
+                {
+                    var cmd = conn.CreateCommand();
+                    cmd.Transaction = tran;
+                    cmd.CommandText = @"
                 INSERT INTO EQUIPAMENTO_MAO_OBRA
                 (ID_EQUIPAMENTO, ID_MODULO, ID_PROCESSO, DESCRICAO_PROCESSO, HORAS_PADRAO)
                 VALUES
                 (@id, @mod, @mat, @descricao, @qtd)";
 
-                cmd.Parameters.AddWithValue("@id", idEquipamento);
-                cmd.Parameters.AddWithValue("@mod", p.Modulo.Id);
-                cmd.Parameters.AddWithValue("@idProcesso", p.IdProcesso);
-                cmd.Parameters.AddWithValue("@descricao", p.Descricao);
-                cmd.Parameters.AddWithValue("@qtd", p.Quantidade);
+                    cmd.Parameters.AddWithValue("@id", idEquipamento);
+                    cmd.Parameters.AddWithValue("@mod", p.Modulo.Id);
+                    cmd.Parameters.AddWithValue("@idProcesso", p.IdProcesso);
+                    cmd.Parameters.AddWithValue("@descricao", p.Descricao);
+                    cmd.Parameters.AddWithValue("@qtd", p.Quantidade);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 

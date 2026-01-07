@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using GaroliBudget.Infrastructure;
 using GaroliBudget.Models;
+using GaroliBudget.Repositories.Interfaces;
 using Npgsql;
 
 namespace GaroliBudget.Repositories
 {
-    public class EquipamentoMaterialRepository
+    public class EquipamentoMaterialRepository : IEquipamentoMaterialRepository
     {
         private readonly EquipamentoModuloRepository _moduloRepository;
 
@@ -19,23 +20,26 @@ namespace GaroliBudget.Repositories
             NpgsqlConnection conn,
             NpgsqlTransaction tran)
         {
-            foreach (var m in materiais)
+            if (materiais != null)
             {
-                var cmd = conn.CreateCommand();
-                cmd.Transaction = tran;
-                cmd.CommandText = @"
+                foreach (var m in materiais)
+                {
+                    var cmd = conn.CreateCommand();
+                    cmd.Transaction = tran;
+                    cmd.CommandText = @"
                 INSERT INTO EQUIPAMENTO_MATERIAL
                 (ID_EQUIPAMENTO, ID_MODULO, ID_MATERIAL, DESCRICAO_MATERIAL, QUANTIDADE_PADRAO)
                 VALUES
                 (@id, @mod, @mat, @descricao, @qtd)";
 
-                cmd.Parameters.AddWithValue("@id", idEquipamento);
-                cmd.Parameters.AddWithValue("@mod", m.Modulo.Id);
-                cmd.Parameters.AddWithValue("@idMaterial", m.IdMaterial);
-                cmd.Parameters.AddWithValue("@descricao", m.Descricao);
-                cmd.Parameters.AddWithValue("@qtd", m.Quantidade);
+                    cmd.Parameters.AddWithValue("@id", idEquipamento);
+                    cmd.Parameters.AddWithValue("@mod", m.Modulo.Id);
+                    cmd.Parameters.AddWithValue("@idMaterial", m.IdMaterial);
+                    cmd.Parameters.AddWithValue("@descricao", m.Descricao);
+                    cmd.Parameters.AddWithValue("@qtd", m.Quantidade);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
@@ -53,7 +57,7 @@ namespace GaroliBudget.Repositories
             cmd.ExecuteNonQuery();
         }
 
-        private List<Material> ListarPorEquipamentoId(int IdEquipamento)
+        public List<Material> ListarPorEquipamentoId(int IdEquipamento)
         {
             var lista = new List<Material>();
 

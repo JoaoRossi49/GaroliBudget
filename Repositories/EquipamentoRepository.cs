@@ -23,7 +23,7 @@ namespace GaroliBudget.Repositories
 
             cmd.Parameters.AddWithValue("@codigo", m.Codigo);
             cmd.Parameters.AddWithValue("@descricao", m.Descricao);
-            cmd.Parameters.AddWithValue("@descricao", m.Observacao);
+            cmd.Parameters.AddWithValue("@observacao", m.Observacao == null ? "" : m.Observacao);
 
             return System.Convert.ToInt32(cmd.ExecuteScalar());
         }

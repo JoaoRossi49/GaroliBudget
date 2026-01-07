@@ -8,13 +8,13 @@ namespace GaroliBudget
 {
     public partial class EQ0001 : Form
     {
-        private readonly ClienteService _clienteService;
+        private readonly EquipamentoService _equipamentoService;
 
         public EQ0001()
         {
             InitializeComponent();
-            IClienteRepository repo = new ClienteRepository();
-            _clienteService = new ClienteService(repo);
+            IEquipamentoRepository repo = new EquipamentoRepository();
+            _equipamentoService = new EquipamentoService(repo);
         }
 
         private void tbNomeCliente_TextChanged(object sender, EventArgs e)
@@ -38,12 +38,12 @@ namespace GaroliBudget
             sqlWhere += nFantasia.Length > 0 ? $@"AND NOME_FANTASIA LIKE '%{nFantasia}%' " : "";
             sqlWhere += rSocial.Length > 0 ? $@"AND RAZAO_SOCIAL LIKE '%{rSocial}%' " : "";
 
-            dgvClientes.DataSource = _clienteService.ListarWhere(sqlWhere);
+            //dgvClientes.DataSource = _clienteService.ListarWhere(sqlWhere);
         }
 
         private void btnIncluir_Click(object sender, EventArgs e)
         {
-            EQ0001mnIncluir form = new EQ0001mnIncluir(_clienteService);
+            EQ0001mnIncluir form = new EQ0001mnIncluir(_equipamentoService);
             form.ShowDialog();
         }
 
@@ -83,7 +83,7 @@ namespace GaroliBudget
 
             foreach (DataRow row in dgvClientes.SelectedRows)
             {
-                _clienteService.InativarCliente(Convert.ToInt32(row["IdCliente"]));
+                //_clienteService.InativarCliente(Convert.ToInt32(row["IdCliente"]));
             }
         }
 
@@ -92,15 +92,15 @@ namespace GaroliBudget
             if (e.RowIndex >= 0)
             {
                 var clienteSelecionado = (Cliente)dgvClientes.Rows[e.RowIndex].DataBoundItem;
-                Cliente cliente = _clienteService.ObterPorId(clienteSelecionado.IdCliente);
+                //Cliente cliente = _clienteService.ObterPorId(clienteSelecionado.IdCliente);
 
-                using (var form = new CL0001mnIncluir(_clienteService, cliente))
-                {
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
-                        pesquisar();
-                    }
-                }
+                //using (var form = new CL0001mnIncluir(_clienteService, cliente))
+                //{
+                //    if (form.ShowDialog() == DialogResult.OK)
+                //    {
+                //        pesquisar();
+                //    }
+               // }
             }
         }
 
