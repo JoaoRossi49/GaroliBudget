@@ -15,6 +15,9 @@ namespace GaroliBudget
         private readonly IEquipamentoService _equipamentoService;
         private Equipamento _equipamento = new Equipamento(); //Sempre vai ser um equipamento em branco
         private List<Modulo> _modulos = new List<Modulo>();
+        private List<Material> _materiais = new List<Material>();
+        private List<Processo> _processo = new List<Processo>();
+        private List<Componente> _componente = new List<Componente>();
 
         public EQ0001mnIncluir(IEquipamentoService equipamentoService)
         {
@@ -117,6 +120,13 @@ namespace GaroliBudget
         {
             if (tcOrcamento.SelectedTab == tpMateriais)
             {
+                //Pra cada um desses vai ter uma tela de controle, pra editar o preço e quantidade
+
+                //No DGV vou alimentar com a lista de objetos relacionada _materiais no caso
+
+                //Além de pegar os atributos da tela de manutenção, vou pegar o Módulo selecionado
+                //no tree view
+
                 dgvMateriais.Rows.Add("Parafuso Sextavado", "10", "1.50", "15.00");
             }
             else if (tcOrcamento.SelectedTab == tpComponentes)
