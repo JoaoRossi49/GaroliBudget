@@ -13,33 +13,83 @@ namespace GaroliBudget
     public partial class EQ0001mnIncluir : Form
     {
         private readonly IEquipamentoService _equipamentoService;
+
+        private MaterialService _materialService;
+        private ComponenteService _componenteService;
+        private ProcessoService _processoService;
+
         private Equipamento _equipamento = new Equipamento(); //Sempre vai ser um equipamento em branco
         private List<Modulo> _modulos = new List<Modulo>();
-        private List<Material> _materiais = new List<Material>();
-        private List<Processo> _processo = new List<Processo>();
-        private List<Componente> _componente = new List<Componente>();
 
         public EQ0001mnIncluir(IEquipamentoService equipamentoService)
         {
             InitializeComponent();
+            CarregarServices();
             _equipamentoService = equipamentoService;
+            _equipamento.Materiais = new List<Material>();
+            _equipamento.Processos = new List<Processo>();
+            _equipamento.Componentes = new List<Componente>();
+
             this.Text = "Novo Equipamento";
         }
 
         public EQ0001mnIncluir(IEquipamentoService equipamentoService, Equipamento equipamentoParaEditar) : this(equipamentoService)
         {
+            CarregarServices();
             _equipamento = equipamentoParaEditar;
             this.Text = "Editar Equipamento";
             PreencherCampos();
         }
+
+        public void CarregarServices()
+        {
+            IMaterialRepository repoMaterial = new MaterialRepository();
+            _materialService = new MaterialService(repoMaterial);
+
+            IComponenteRepository repoComponente = new ComponenteRepository();
+            _componenteService= new ComponenteService(repoComponente);
+
+            IProcessoRepository repoProcesso = new ProcessoRepository();
+            _processoService = new ProcessoService(repoProcesso);
+        }
         private void EQ0001mnIncluir_Load(object sender, EventArgs e)
         {
-            CarregarComboEquipamentos();
+            CarregarComboMateriais();
+            CarregarComboComponentes();
+            CarregarComboProcessos();
         }
 
-        private void CarregarComboEquipamentos()
+        private void CarregarComboMateriais()
         {
-            List<Equipamento> lista = _equipamentoService.ListarTodos();
+            List<Material> lista = _materialService.ListarTodos();
+            cbMateriais.DataSource = lista;
+
+            cbMateriais.DataSource = lista;
+            cbMateriais.DisplayMember = "Descricao";
+            cbMateriais.ValueMember = "IdMaterial";
+            cbMateriais.SelectedIndex = -1;
+        }
+
+        private void CarregarComboComponentes()
+        {
+            List<Componente> lista = _componenteService.ListarTodos();
+            cbComponentes.DataSource = lista;
+
+            cbComponentes.DataSource = lista;
+            cbComponentes.DisplayMember = "Descricao";
+            cbComponentes.ValueMember = "IdComponente";
+            cbComponentes.SelectedIndex = -1;
+        }
+
+        private void CarregarComboProcessos()
+        {
+            List<Processo> lista = _processoService.ListarTodos();
+            cbProcessos.DataSource = lista;
+
+            cbProcessos.DataSource = lista;
+            cbProcessos.DisplayMember = "Descricao";
+            cbProcessos.ValueMember = "IdProcesso";
+            cbProcessos.SelectedIndex = -1;
         }
 
         private void PreencherCampos()
@@ -103,7 +153,8 @@ namespace GaroliBudget
             _equipamento.Descricao = "TESTE";
             _equipamento.Codigo = "002";
 
-            //Salva os módulos criados
+            //Acho que não pode cadastrar aqui, pois ele já tem que existir quando adiciono
+            //no objeto de material, orcamento ou processo
             CadastrarModulos(_modulos, _equipamento);
 
             //Organiza equipamentos, componentes e processos e atributi os módulos
@@ -118,22 +169,24 @@ namespace GaroliBudget
         #region Controles Data grid view
         private void btnIncluir_Click(object sender, EventArgs e)
         {
-            if (tcOrcamento.SelectedTab == tpMateriais)
+            if (tcItens.SelectedTab == tpMateriais)
             {
-                //Pra cada um desses vai ter uma tela de controle, pra editar o preço e quantidade
+                Material materialSelecionado = cbMateriais.SelectedItem as Material;
 
-                //No DGV vou alimentar com a lista de objetos relacionada _materiais no caso
+                materialSelecionado.Quantidade = Convert.ToInt32(tbMateriaisQuantidade.Text);
+                materialSelecionado.Modulo = new Modulo { Id = Convert.ToInt32(treeViewModulos.SelectedNode.Tag) };
 
-                //Além de pegar os atributos da tela de manutenção, vou pegar o Módulo selecionado
-                //no tree view
+                //Adiciona o material, já com o módulo na receita do equipamento
+                _equipamento.Materiais.Add(materialSelecionado);
 
-                dgvMateriais.Rows.Add("Parafuso Sextavado", "10", "1.50", "15.00");
+                //Adiciona no data grid view
+                dgvMateriais.Rows.Add(materialSelecionado);
             }
-            else if (tcOrcamento.SelectedTab == tpComponentes)
+            else if (tcItens.SelectedTab == tpComponentes)
             {
                 dgvComponentes.Rows.Add("Motor 2400W", "1", "150.00", "150.00");
             }
-            else if (tcOrcamento.SelectedTab == tpProcessos)
+            else if (tcItens.SelectedTab == tpProcessos)
             {
                 dgvProcessos.Rows.Add("Montagem", "1", "20.00", "20.00");
             }
@@ -183,6 +236,8 @@ namespace GaroliBudget
                 Nome = nome
             };
 
+            //Adicionar no banco e retornar ID
+
             AdicionarModuloTreeView(modulo);
 
         }
@@ -201,8 +256,6 @@ namespace GaroliBudget
                     modulo.IdEquipamento = equipamento.IdEquipamento;
                     modulo.Id = repo.Inserir(modulo, conn, tran);
                     tran.Commit();
-
-                    //AdicionarModuloTreeView(modulo);
                 }
                 catch (Exception ex)
                 {

@@ -38,7 +38,7 @@
             label11 = new Label();
             textBox1 = new TextBox();
             label2 = new Label();
-            tcOrcamento = new TabControl();
+            tcItens = new TabControl();
             tpMateriais = new TabPage();
             label4 = new Label();
             tbMateriaisQuantidade = new TextBox();
@@ -85,7 +85,7 @@
             treeViewModulos = new TreeView();
             btnIncluirModulo = new FontAwesome.Sharp.IconButton();
             panel1.SuspendLayout();
-            tcOrcamento.SuspendLayout();
+            tcItens.SuspendLayout();
             tpMateriais.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMateriais).BeginInit();
             tpComponentes.SuspendLayout();
@@ -190,16 +190,16 @@
             label2.TabIndex = 12;
             label2.Text = "Descrição";
             // 
-            // tcOrcamento
+            // tcItens
             // 
-            tcOrcamento.Controls.Add(tpMateriais);
-            tcOrcamento.Controls.Add(tpComponentes);
-            tcOrcamento.Controls.Add(tpProcessos);
-            tcOrcamento.Location = new Point(223, 122);
-            tcOrcamento.Name = "tcOrcamento";
-            tcOrcamento.SelectedIndex = 0;
-            tcOrcamento.Size = new Size(529, 357);
-            tcOrcamento.TabIndex = 21;
+            tcItens.Controls.Add(tpMateriais);
+            tcItens.Controls.Add(tpComponentes);
+            tcItens.Controls.Add(tpProcessos);
+            tcItens.Location = new Point(223, 122);
+            tcItens.Name = "tcItens";
+            tcItens.SelectedIndex = 0;
+            tcItens.Size = new Size(529, 357);
+            tcItens.TabIndex = 21;
             // 
             // tpMateriais
             // 
@@ -674,7 +674,7 @@
             Controls.Add(lblValorFinal);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(tcOrcamento);
+            Controls.Add(tcItens);
             Controls.Add(panel1);
             Controls.Add(btnCancelar);
             Controls.Add(btnGravar);
@@ -683,7 +683,7 @@
             Load += EQ0001mnIncluir_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            tcOrcamento.ResumeLayout(false);
+            tcItens.ResumeLayout(false);
             tpMateriais.ResumeLayout(false);
             tpMateriais.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMateriais).EndInit();
@@ -704,7 +704,7 @@
         private Button btnGravar;
         private TextBox tbRazaoSocial;
         private Panel panel1;
-        private TabControl tcOrcamento;
+        private TabControl tcItens;
         private TabPage tpMateriais;
         private TabPage tpComponentes;
         private DataGridView dgvMateriais;
