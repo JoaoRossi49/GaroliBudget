@@ -19,7 +19,6 @@ namespace GaroliBudget
         private ProcessoService _processoService;
 
         private Equipamento _equipamento = new Equipamento(); //Sempre vai ser um equipamento em branco
-        private List<Modulo> _modulos = new List<Modulo>();
 
         public EQ0001mnIncluir(IEquipamentoService equipamentoService)
         {
@@ -153,10 +152,6 @@ namespace GaroliBudget
             _equipamento.Descricao = "TESTE";
             _equipamento.Codigo = "002";
 
-            //Acho que não pode cadastrar aqui, pois ele já tem que existir quando adiciono
-            //no objeto de material, orcamento ou processo
-            CadastrarModulos(_modulos, _equipamento);
-
             //Organiza equipamentos, componentes e processos e atributi os módulos
 
 
@@ -176,19 +171,31 @@ namespace GaroliBudget
                 materialSelecionado.Quantidade = Convert.ToInt32(tbMateriaisQuantidade.Text);
                 materialSelecionado.Modulo = new Modulo { Id = Convert.ToInt32(treeViewModulos.SelectedNode.Tag) };
 
-                //Adiciona o material, já com o módulo na receita do equipamento
                 _equipamento.Materiais.Add(materialSelecionado);
 
-                //Adiciona no data grid view
                 dgvMateriais.Rows.Add(materialSelecionado);
             }
             else if (tcItens.SelectedTab == tpComponentes)
             {
-                dgvComponentes.Rows.Add("Motor 2400W", "1", "150.00", "150.00");
+                Componente componenteSelecionado = cbComponentes.SelectedItem as Componente;
+
+                componenteSelecionado.Quantidade = Convert.ToInt32(tbMateriaisQuantidade.Text);
+                componenteSelecionado.Modulo = new Modulo { Id = Convert.ToInt32(treeViewModulos.SelectedNode.Tag) };
+
+                _equipamento.Componentes.Add(componenteSelecionado);
+
+                dgvComponentes.Rows.Add(componenteSelecionado);
             }
             else if (tcItens.SelectedTab == tpProcessos)
             {
-                dgvProcessos.Rows.Add("Montagem", "1", "20.00", "20.00");
+                Processo processoSelecionado = cbProcessos.SelectedItem as Processo;
+
+                processoSelecionado.Quantidade = Convert.ToInt32(tbProcessosQuantidade.Text);
+                processoSelecionado.Modulo = new Modulo { Id = Convert.ToInt32(treeViewModulos.SelectedNode.Tag) };
+
+                _equipamento.Processos.Add(processoSelecionado);
+
+                dgvProcessos.Rows.Add(processoSelecionado);
             }
 
             CalcularTotalGeral();
@@ -232,42 +239,39 @@ namespace GaroliBudget
 
             var modulo = new Modulo
             {
-                IdEquipamento = 0,
+                IdEquipamento = _equipamento.IdEquipamento,
                 Nome = nome
             };
 
             //Adicionar no banco e retornar ID
-
             AdicionarModuloTreeView(modulo);
 
         }
 
-        private void CadastrarModulos(List<Modulo> modulos, Equipamento equipamento)
+        private void CadastrarModulos(Modulo modulo, Equipamento equipamento)
         {
-            foreach (Modulo modulo in modulos)
-            {
-                using var conn = DBPostgres.GetConnection();
-                conn.Open();
+            using var conn = DBPostgres.GetConnection();
+            conn.Open();
 
-                using var tran = conn.BeginTransaction();
-                try
-                {
-                    var repo = new EquipamentoModuloRepository();
-                    modulo.IdEquipamento = equipamento.IdEquipamento;
-                    modulo.Id = repo.Inserir(modulo, conn, tran);
-                    tran.Commit();
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();
-                    MessageBox.Show("Erro ao inserir módulo:\n" + ex.Message);
-                }
+            using var tran = conn.BeginTransaction();
+            try
+            {
+                var repo = new EquipamentoModuloRepository();
+                modulo.IdEquipamento = equipamento.IdEquipamento;
+                modulo.Id = repo.Inserir(modulo, conn, tran);
+                tran.Commit();
             }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                MessageBox.Show("Erro ao inserir módulo:\n" + ex.Message);
+            }
+
         }
 
         private void AdicionarModuloTreeView(Modulo modulo)
         {
-            _modulos.Add(modulo);
+            CadastrarModulos(modulo, _equipamento);
 
             var node = new TreeNode(modulo.Nome)
             {
