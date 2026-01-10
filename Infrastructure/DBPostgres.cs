@@ -94,7 +94,7 @@ namespace GaroliBudget.Infrastructure
                                 ID_EQUIPAMENTO INTEGER NOT NULL,
                                 NOME_MODULO TEXT NOT NULL,
                                 ORDEM INTEGER DEFAULT 0,
-                                FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO)
+                                FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO) ON DELETE CASCADE
                             );
 
                             --------------------------------------------------
@@ -109,8 +109,8 @@ namespace GaroliBudget.Infrastructure
                                 QUANTIDADE_PADRAO REAL NOT NULL,
                                 UNIDADE TEXT NOT NULL,
 
-                                FOREIGN KEY (ID_MODULO) REFERENCES EQUIPAMENTO_MODULO(ID_MODULO),
-                                FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO),
+                                FOREIGN KEY (ID_MODULO) REFERENCES EQUIPAMENTO_MODULO(ID_MODULO) ON DELETE CASCADE,
+                                FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO) ON DELETE CASCADE,
                                 FOREIGN KEY (ID_MATERIAL) REFERENCES MATERIAL(ID_MATERIAL)
                             );
 
@@ -125,8 +125,8 @@ namespace GaroliBudget.Infrastructure
                                 DESCRICAO_COMPONENTE TEXT,
                                 QUANTIDADE_PADRAO REAL NOT NULL,
 
-                                FOREIGN KEY (ID_MODULO) REFERENCES EQUIPAMENTO_MODULO(ID_MODULO),
-                                FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO),
+                                FOREIGN KEY (ID_MODULO) REFERENCES EQUIPAMENTO_MODULO(ID_MODULO) ON DELETE CASCADE,
+                                FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO) ON DELETE CASCADE,
                                 FOREIGN KEY (ID_COMPONENTE) REFERENCES COMPONENTE(ID_COMPONENTE)
                             );
 
@@ -141,8 +141,8 @@ namespace GaroliBudget.Infrastructure
                                 DESCRICAO_PROCESSO TEXT,
                                 HORAS_PADRAO REAL NOT NULL,
 
-                                FOREIGN KEY (ID_MODULO) REFERENCES EQUIPAMENTO_MODULO(ID_MODULO),
-                                FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO),
+                                FOREIGN KEY (ID_MODULO) REFERENCES EQUIPAMENTO_MODULO(ID_MODULO) ON DELETE CASCADE,
+                                FOREIGN KEY (ID_EQUIPAMENTO) REFERENCES EQUIPAMENTO(ID_EQUIPAMENTO) ON DELETE CASCADE,
                                 FOREIGN KEY (ID_PROCESSO) REFERENCES PROCESSO(ID_PROCESSO)
                             );
 
