@@ -166,6 +166,9 @@ namespace GaroliBudget
         {
             if (tcItens.SelectedTab == tpMateriais)
             {
+                if (!ValidarInclusao(cbMateriais, tbMateriaisQuantidade))
+                    return;
+
                 Material materialSelecionado = cbMateriais.SelectedItem as Material;
 
                 materialSelecionado.Quantidade = Convert.ToInt32(tbMateriaisQuantidade.Text);
@@ -177,6 +180,9 @@ namespace GaroliBudget
             }
             else if (tcItens.SelectedTab == tpComponentes)
             {
+                if (!ValidarInclusao(cbComponentes, tbComponentesQuantidade))
+                    return;
+
                 Componente componenteSelecionado = cbComponentes.SelectedItem as Componente;
 
                 componenteSelecionado.Quantidade = Convert.ToInt32(tbMateriaisQuantidade.Text);
@@ -188,6 +194,9 @@ namespace GaroliBudget
             }
             else if (tcItens.SelectedTab == tpProcessos)
             {
+                if (!ValidarInclusao(cbProcessos, tbProcessosQuantidade))
+                    return;
+
                 Processo processoSelecionado = cbProcessos.SelectedItem as Processo;
 
                 processoSelecionado.Quantidade = Convert.ToInt32(tbProcessosQuantidade.Text);
@@ -199,6 +208,23 @@ namespace GaroliBudget
             }
 
             CalcularTotalGeral();
+        }
+
+        private bool ValidarInclusao(ComboBox combo, TextBox quantidade)
+        {
+            if (combo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Selecione um item a ser adicionado", "A T E N Ç Ã O");
+                return false;
+            }
+
+            if (quantidade.Text.Length == 0)
+            {
+                MessageBox.Show("Informe a quantidade a ser adicionada", "A T E N Ç Ã O");
+                return false;
+            }
+
+            return true;
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
