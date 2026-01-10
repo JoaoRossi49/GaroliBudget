@@ -26,7 +26,7 @@ namespace GaroliBudget.Repositories
                 INSERT INTO EQUIPAMENTO_MAO_OBRA
                 (ID_EQUIPAMENTO, ID_MODULO, ID_PROCESSO, DESCRICAO_PROCESSO, HORAS_PADRAO)
                 VALUES
-                (@id, @mod, @mat, @descricao, @qtd)";
+                (@id, @mod, @idProcesso, @descricao, @qtd)";
 
                     cmd.Parameters.AddWithValue("@id", idEquipamento);
                     cmd.Parameters.AddWithValue("@mod", p.Modulo.Id);

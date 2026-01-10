@@ -28,15 +28,16 @@ namespace GaroliBudget.Repositories
                     cmd.Transaction = tran;
                     cmd.CommandText = @"
                 INSERT INTO EQUIPAMENTO_MATERIAL
-                (ID_EQUIPAMENTO, ID_MODULO, ID_MATERIAL, DESCRICAO_MATERIAL, QUANTIDADE_PADRAO)
+                (ID_EQUIPAMENTO, ID_MODULO, ID_MATERIAL, DESCRICAO_MATERIAL, QUANTIDADE_PADRAO, UNIDADE)
                 VALUES
-                (@id, @mod, @mat, @descricao, @qtd)";
+                (@id, @mod, @idMaterial, @descricao, @qtd, @und)";
 
                     cmd.Parameters.AddWithValue("@id", idEquipamento);
                     cmd.Parameters.AddWithValue("@mod", m.Modulo.Id);
                     cmd.Parameters.AddWithValue("@idMaterial", m.IdMaterial);
                     cmd.Parameters.AddWithValue("@descricao", m.Descricao);
                     cmd.Parameters.AddWithValue("@qtd", m.Quantidade);
+                    cmd.Parameters.AddWithValue("@und", m.Unidade);
 
                     cmd.ExecuteNonQuery();
                 }

@@ -16,7 +16,7 @@ namespace GaroliBudget.Repositories
             var cmd = conn.CreateCommand();
             cmd.CommandText = @"
                 INSERT INTO PROCESSO 
-                (CODIGO, DESCRICAO, CUSTO_HORA, ATIVO)
+                (DESCRICAO, CUSTO_HORA, ATIVO)
                 VALUES 
                 (@descricao, @custo, 1)
                 RETURNING ID_PROCESSO";

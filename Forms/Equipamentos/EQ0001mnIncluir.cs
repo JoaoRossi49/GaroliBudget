@@ -166,7 +166,7 @@ namespace GaroliBudget
         {
             if (tcItens.SelectedTab == tpMateriais)
             {
-                if (!ValidarInclusao(cbMateriais, tbMateriaisQuantidade))
+                if (!ValidarInclusao(cbMateriais, tbMateriaisQuantidade, treeViewModulos.SelectedNode))
                     return;
 
                 Material materialSelecionado = cbMateriais.SelectedItem as Material;
@@ -180,7 +180,7 @@ namespace GaroliBudget
             }
             else if (tcItens.SelectedTab == tpComponentes)
             {
-                if (!ValidarInclusao(cbComponentes, tbComponentesQuantidade))
+                if (!ValidarInclusao(cbComponentes, tbComponentesQuantidade, treeViewModulos.SelectedNode))
                     return;
 
                 Componente componenteSelecionado = cbComponentes.SelectedItem as Componente;
@@ -194,7 +194,7 @@ namespace GaroliBudget
             }
             else if (tcItens.SelectedTab == tpProcessos)
             {
-                if (!ValidarInclusao(cbProcessos, tbProcessosQuantidade))
+                if (!ValidarInclusao(cbProcessos, tbProcessosQuantidade, treeViewModulos.SelectedNode))
                     return;
 
                 Processo processoSelecionado = cbProcessos.SelectedItem as Processo;
@@ -210,7 +210,7 @@ namespace GaroliBudget
             CalcularTotalGeral();
         }
 
-        private bool ValidarInclusao(ComboBox combo, TextBox quantidade)
+        private bool ValidarInclusao(ComboBox combo, TextBox quantidade, TreeNode node)
         {
             if (combo.SelectedIndex == -1)
             {
@@ -221,6 +221,11 @@ namespace GaroliBudget
             if (quantidade.Text.Length == 0)
             {
                 MessageBox.Show("Informe a quantidade a ser adicionada", "A T E N Ç Ã O");
+                return false;
+            }
+
+            if (node == null) {
+                MessageBox.Show("Selecione ou crie um novo módulo", "A T E N Ç Ã O");
                 return false;
             }
 
@@ -263,18 +268,27 @@ namespace GaroliBudget
                 return;
             }
 
+            if (_equipamento.IdEquipamento == 0)
+            {
+                if (!PreCadastroEquipamento())
+                    return;
+            }
+
             var modulo = new Modulo
             {
                 IdEquipamento = _equipamento.IdEquipamento,
                 Nome = nome
             };
 
+            //Cadastra módulo no banco
+            CadastrarModulo(modulo, _equipamento);
+
             //Adicionar no banco e retornar ID
             AdicionarModuloTreeView(modulo);
 
         }
 
-        private void CadastrarModulos(Modulo modulo, Equipamento equipamento)
+        private void CadastrarModulo(Modulo modulo, Equipamento equipamento)
         {
             using var conn = DBPostgres.GetConnection();
             conn.Open();
@@ -295,10 +309,43 @@ namespace GaroliBudget
 
         }
 
+        private bool PreCadastroEquipamento()
+        {
+            if (!ValidarEquipamento())
+                return false;
+
+            _equipamento.Codigo = tbCodigoEquipamento.Text;
+            _equipamento.Descricao = tbDescricaoEquipamento.Text;
+            _equipamento.Observacao = tbObservacaoEquipamento.Text;
+
+            _equipamento.IdEquipamento = _equipamentoService.CriarEquipamento(_equipamento);
+
+            tbCodigoEquipamento.ReadOnly = true;
+            tbObservacaoEquipamento.ReadOnly = true;
+            tbDescricaoEquipamento.ReadOnly = true;
+
+            return (_equipamento.IdEquipamento > 0);
+        }
+
+        private bool ValidarEquipamento()
+        {
+            if (tbCodigoEquipamento.Text.Length == 0)
+            {
+                MessageBox.Show("Informe um código para o equipamento", "A T E N Ç Ã O");
+                return false;
+            }
+
+            if (tbDescricaoEquipamento.Text.Length == 0)
+            {
+                MessageBox.Show("Informe uma descrição para o equipamento", "A T E N Ç Ã O");
+                return false;
+            }
+
+            return true;
+        }
+
         private void AdicionarModuloTreeView(Modulo modulo)
         {
-            CadastrarModulos(modulo, _equipamento);
-
             var node = new TreeNode(modulo.Nome)
             {
                 Tag = modulo.Id

@@ -47,7 +47,7 @@ namespace GaroliBudget.Infrastructure
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS MATERIAL (
                                 ID_MATERIAL SERIAL PRIMARY KEY,
-                                CODIGO TEXT NOT NULL UNIQUE,
+                                CODIGO TEXT NOT NULL,
                                 DESCRICAO TEXT NOT NULL,
                                 UNIDADE TEXT NOT NULL,
                                 CUSTO_UNITARIO REAL NOT NULL,
@@ -59,7 +59,7 @@ namespace GaroliBudget.Infrastructure
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS COMPONENTE (
                                 ID_COMPONENTE SERIAL PRIMARY KEY,
-                                CODIGO TEXT NOT NULL UNIQUE,
+                                CODIGO TEXT NOT NULL,
                                 DESCRICAO TEXT NOT NULL,
                                 CUSTO_UNITARIO REAL NOT NULL,
                                 ATIVO INTEGER NOT NULL DEFAULT 1
@@ -80,7 +80,7 @@ namespace GaroliBudget.Infrastructure
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS EQUIPAMENTO (
                                 ID_EQUIPAMENTO SERIAL PRIMARY KEY,
-                                CODIGO TEXT NOT NULL UNIQUE,
+                                CODIGO TEXT NOT NULL ,
                                 DESCRICAO TEXT NOT NULL,
                                 OBSERVACOES TEXT,
                                 ATIVO INTEGER NOT NULL DEFAULT 1
@@ -151,7 +151,7 @@ namespace GaroliBudget.Infrastructure
                             --------------------------------------------------
                             CREATE TABLE IF NOT EXISTS ORCAMENTO (
                                 ID_ORCAMENTO SERIAL PRIMARY KEY,
-                                NUMERO TEXT NOT NULL UNIQUE,
+                                NUMERO TEXT NOT NULL ,
                                 DATA_ORCAMENTO TEXT NOT NULL,
                                 ID_CLIENTE INTEGER NOT NULL,
                                 ID_EQUIPAMENTO INTEGER NOT NULL,

@@ -32,11 +32,11 @@
             label1 = new Label();
             btnCancelar = new Button();
             btnGravar = new Button();
-            tbRazaoSocial = new TextBox();
+            tbCodigoEquipamento = new TextBox();
             panel1 = new Panel();
-            textBox2 = new TextBox();
+            tbObservacaoEquipamento = new TextBox();
             label11 = new Label();
-            textBox1 = new TextBox();
+            tbDescricaoEquipamento = new TextBox();
             label2 = new Label();
             tcItens = new TabControl();
             tpMateriais = new TabPage();
@@ -130,38 +130,35 @@
             btnGravar.UseVisualStyleBackColor = true;
             btnGravar.Click += btnGravar_Click;
             // 
-            // tbRazaoSocial
+            // tbCodigoEquipamento
             // 
-            tbRazaoSocial.Location = new Point(12, 23);
-            tbRazaoSocial.Name = "tbRazaoSocial";
-            tbRazaoSocial.ReadOnly = true;
-            tbRazaoSocial.Size = new Size(103, 23);
-            tbRazaoSocial.TabIndex = 6;
-            tbRazaoSocial.Text = "9999";
+            tbCodigoEquipamento.Location = new Point(12, 23);
+            tbCodigoEquipamento.Name = "tbCodigoEquipamento";
+            tbCodigoEquipamento.Size = new Size(103, 23);
+            tbCodigoEquipamento.TabIndex = 6;
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.InactiveCaption;
-            panel1.Controls.Add(textBox2);
+            panel1.Controls.Add(tbObservacaoEquipamento);
             panel1.Controls.Add(label11);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(tbDescricaoEquipamento);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(tbRazaoSocial);
+            panel1.Controls.Add(tbCodigoEquipamento);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(-4, -2);
             panel1.Name = "panel1";
             panel1.Size = new Size(767, 106);
             panel1.TabIndex = 20;
             // 
-            // textBox2
+            // tbObservacaoEquipamento
             // 
-            textBox2.Location = new Point(308, 29);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(402, 61);
-            textBox2.TabIndex = 13;
-            textBox2.Text = "9999";
+            tbObservacaoEquipamento.Location = new Point(308, 29);
+            tbObservacaoEquipamento.Multiline = true;
+            tbObservacaoEquipamento.Name = "tbObservacaoEquipamento";
+            tbObservacaoEquipamento.Size = new Size(402, 61);
+            tbObservacaoEquipamento.TabIndex = 13;
+            tbObservacaoEquipamento.Text = "9999";
             // 
             // label11
             // 
@@ -172,14 +169,13 @@
             label11.TabIndex = 14;
             label11.Text = "Observações";
             // 
-            // textBox1
+            // tbDescricaoEquipamento
             // 
-            textBox1.Location = new Point(12, 67);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(279, 23);
-            textBox1.TabIndex = 11;
-            textBox1.Text = "9999";
+            tbDescricaoEquipamento.Location = new Point(12, 67);
+            tbDescricaoEquipamento.Name = "tbDescricaoEquipamento";
+            tbDescricaoEquipamento.Size = new Size(279, 23);
+            tbDescricaoEquipamento.TabIndex = 11;
+            tbDescricaoEquipamento.Text = "9999";
             // 
             // label2
             // 
@@ -702,7 +698,7 @@
         private Label label1;
         private Button btnCancelar;
         private Button btnGravar;
-        private TextBox tbRazaoSocial;
+        private TextBox tbCodigoEquipamento;
         private Panel panel1;
         private TabControl tcItens;
         private TabPage tpMateriais;
@@ -748,9 +744,9 @@
         private DataGridViewTextBoxColumn valorUnitarioProcesso;
         private DataGridViewTextBoxColumn valorTotalProcesso;
         private NumericUpDown nmMargem;
-        private TextBox textBox1;
+        private TextBox tbDescricaoEquipamento;
         private Label label2;
-        private TextBox textBox2;
+        private TextBox tbObservacaoEquipamento;
         private Label label11;
         private TreeView treeViewModulos;
         private FontAwesome.Sharp.IconButton btnIncluirModulo;

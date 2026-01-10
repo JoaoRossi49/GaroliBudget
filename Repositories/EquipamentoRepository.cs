@@ -41,7 +41,7 @@ namespace GaroliBudget.Repositories
                   DESCRICAO = @descricao,
                   OBSERVACOES = @observacao,
                   ATIVO = @ativo
-              WHERE ID_MATERIAL = @id;";
+              WHERE ID_EQUIPAMENTO = @id;";
 
             cmd.Parameters.AddWithValue("@codigo", m.Codigo);
             cmd.Parameters.AddWithValue("@descricao", m.Descricao);
