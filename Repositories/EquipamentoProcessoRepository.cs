@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GaroliBudget.Infrastructure;
 using GaroliBudget.Models;
+using GaroliBudget.Repositories.Interfaces;
 using Npgsql;
 
 namespace GaroliBudget.Repositories
 {
     public class EquipamentoProcessoRepository
     {
+        private EquipamentoModuloRepository _moduloRepository = new EquipamentoModuloRepository();
+
+        private readonly IProcessoRepository _processoRepository = new ProcessoRepository();
+
         public void InserirLista(
             int idEquipamento,
             List<Processo> processos,
@@ -38,7 +44,6 @@ namespace GaroliBudget.Repositories
                 }
             }
         }
-
         public void RemoverPorEquipamento(
             int idEquipamento,
             NpgsqlConnection conn,
@@ -51,6 +56,47 @@ namespace GaroliBudget.Repositories
 
             cmd.Parameters.AddWithValue("@id", idEquipamento);
             cmd.ExecuteNonQuery();
+        }
+
+
+        public List<Processo> ListarPorEquipamentoId(int IdEquipamento)
+        {
+            var lista = new List<Processo>();
+
+            using var conn = DBPostgres.GetConnection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MAO_OBRA WHERE ID_EQUIPAMENTO = {IdEquipamento};";
+
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                lista.Add(Mapear(reader));
+            }
+
+            return lista;
+        }
+
+        private Processo Mapear(NpgsqlDataReader reader)
+        {
+            Processo processo = new Processo();
+
+            var idProcesso = reader.GetInt32(reader.GetOrdinal("ID_PROCESSO"));
+            processo = _processoRepository.ObterPorId(idProcesso);
+
+            processo.Quantidade = Convert.ToInt32(reader["HORAS_PADRAO"]);
+
+            var idModulo = reader.GetInt32(reader.GetOrdinal("ID_MODULO"));
+            var modulo = _moduloRepository.ObterPorId(idModulo);
+
+            processo.Modulo = modulo ?? new Modulo
+            {
+                Id = 0,
+                Nome = "Módulo Não Identificado"
+            };
+
+            return processo;
         }
     }
 }

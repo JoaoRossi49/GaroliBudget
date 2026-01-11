@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 using GaroliBudget.Infrastructure;
 using GaroliBudget.Models;
 using GaroliBudget.Repositories.Interfaces;
+using GaroliBudget.Services;
 using Npgsql;
 
 namespace GaroliBudget.Repositories
 {
     public class EquipamentoMaterialRepository : IEquipamentoMaterialRepository
     {
-        private readonly EquipamentoModuloRepository _moduloRepository;
+        private EquipamentoModuloRepository _moduloRepository  = new EquipamentoModuloRepository();
+
+        private readonly IMaterialRepository _materialRepository = new MaterialRepository();
 
         public void InserirLista(
             int idEquipamento,
@@ -79,16 +82,23 @@ namespace GaroliBudget.Repositories
 
         private Material Mapear(NpgsqlDataReader reader)
         {
-            return new Material
+            Material material = new Material();
+
+            var idMaterial = reader.GetInt32(reader.GetOrdinal("ID_MATERIAL"));
+            material = _materialRepository.ObterPorId(idMaterial);
+
+            material.Quantidade = Convert.ToDecimal(reader["QUANTIDADE_PADRAO"]);
+
+            var idModulo = reader.GetInt32(reader.GetOrdinal("ID_MODULO"));
+            var modulo = _moduloRepository.ObterPorId(idModulo);
+
+            material.Modulo = modulo ?? new Modulo
             {
-                IdMaterial = reader.GetInt32(reader.GetOrdinal("ID_MATERIAL")),
-                Descricao = reader["DESCRICAO_MATERIAL"].ToString(),
-                Unidade = reader["UNIDADE"].ToString(),
-                CustoUnitario = Convert.ToDecimal(reader["CUSTO_UNITARIO"]),
-                Quantidade = Convert.ToDecimal(reader["QUANTIDADE_PADRAO"]),
-                Ativo = reader.GetInt32(reader.GetOrdinal("ATIVO")) == 1,
-                Modulo = _moduloRepository.ObterPorId(reader.GetInt32(reader.GetOrdinal("ID_MODULO")))
+                Id = 0,
+                Nome = "Módulo Não Identificado"
             };
+
+            return material;
         }
     }
 }

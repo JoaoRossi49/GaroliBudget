@@ -16,6 +16,9 @@ namespace GaroliBudget.Repositories.Interfaces
         Equipamento ObterPorId(int idEquipamento);
         List<Equipamento> ListarAtivos();
         List<Equipamento> ListarTodos();
+        List<Material> ListarMateriais(int idEquipamento);
+        List<Processo> ListarProcessos(int idEquipamento);
+        List<Componente> ListarComponentes(int idEquipamento);
     }
 
     public interface IEquipamentoRepository

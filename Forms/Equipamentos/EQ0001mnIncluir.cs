@@ -13,6 +13,7 @@ namespace GaroliBudget
     public partial class EQ0001mnIncluir : Form
     {
         private readonly IEquipamentoService _equipamentoService;
+        
 
         private MaterialService _materialService;
         private ComponenteService _componenteService;
@@ -53,9 +54,23 @@ namespace GaroliBudget
         }
         private void EQ0001mnIncluir_Load(object sender, EventArgs e)
         {
+            CarregarDataGrid();
             CarregarComboMateriais();
             CarregarComboComponentes();
             CarregarComboProcessos();
+        }
+
+        private void CarregarDataGrid()
+        {
+            //_equipamento.IdEquipamento
+            dgvMateriais.AutoGenerateColumns = false;
+            dgvMateriais.DataSource = _equipamentoService.ListarMateriais(4);
+
+            dgvComponentes.AutoGenerateColumns = false;
+            dgvComponentes.DataSource = _equipamentoService.ListarComponentes(4);
+
+            dgvProcessos.AutoGenerateColumns = false;
+            dgvProcessos.DataSource = _equipamentoService.ListarProcessos(4);
         }
 
         private void CarregarComboMateriais()
@@ -176,7 +191,8 @@ namespace GaroliBudget
 
                 _equipamento.Materiais.Add(materialSelecionado);
 
-                dgvMateriais.Rows.Add(materialSelecionado);
+                dgvMateriais.DataSource = null;
+                dgvMateriais.DataSource = _equipamento.Materiais;
             }
             else if (tcItens.SelectedTab == tpComponentes)
             {
@@ -190,7 +206,8 @@ namespace GaroliBudget
 
                 _equipamento.Componentes.Add(componenteSelecionado);
 
-                dgvComponentes.Rows.Add(componenteSelecionado);
+                dgvComponentes.DataSource = null;
+                dgvComponentes.DataSource = _equipamento.Componentes;
             }
             else if (tcItens.SelectedTab == tpProcessos)
             {
@@ -204,7 +221,8 @@ namespace GaroliBudget
 
                 _equipamento.Processos.Add(processoSelecionado);
 
-                dgvProcessos.Rows.Add(processoSelecionado);
+                dgvProcessos.DataSource = null;
+                dgvProcessos.DataSource = _equipamento.Processos;
             }
 
             CalcularTotalGeral();
