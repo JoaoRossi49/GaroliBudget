@@ -62,15 +62,14 @@ namespace GaroliBudget
 
         private void CarregarDataGrid()
         {
-            //_equipamento.IdEquipamento
             dgvMateriais.AutoGenerateColumns = false;
-            dgvMateriais.DataSource = _equipamentoService.ListarMateriais(4);
+            dgvMateriais.DataSource = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento);
 
             dgvComponentes.AutoGenerateColumns = false;
-            dgvComponentes.DataSource = _equipamentoService.ListarComponentes(4);
+            dgvComponentes.DataSource = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento);
 
             dgvProcessos.AutoGenerateColumns = false;
-            dgvProcessos.DataSource = _equipamentoService.ListarProcessos(4);
+            dgvProcessos.DataSource = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento);
         }
 
         private void CarregarComboMateriais()
@@ -164,16 +163,41 @@ namespace GaroliBudget
 
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            _equipamento.Descricao = "TESTE";
-            _equipamento.Codigo = "002";
-
-            //Organiza equipamentos, componentes e processos e atributi os módulos
-
+            AtualizaObjeto();
 
             //Salva itens do equipamento
             _equipamentoService.Salvar(_equipamento);
 
             this.Close();
+        }
+
+        private void AtualizaObjeto()
+        {
+            if(!ValidaFormularioPai())
+                { return; }
+
+            _equipamento.Descricao = tbDescricaoEquipamento.Text;
+            _equipamento.Codigo = tbCodigoEquipamento.Text;
+            _equipamento.Observacao = tbObservacaoEquipamento.Text;
+        }
+
+        private bool ValidaFormularioPai()
+        {
+            if(tbDescricaoEquipamento.Text.Length == 0)
+            {
+                MessageBox.Show("Informe uma DESCRICAO válida para o equipamento", "A T E N Ç Ã O");
+                tbDescricaoEquipamento.Focus();
+                return false;
+            }
+
+            if(tbCodigoEquipamento.Text.Length == 0)
+            {
+                MessageBox.Show("Informe um CÓDIGO válido para o equipamento", "A T E N Ç Ã O");
+                tbCodigoEquipamento.Focus();
+                return false;
+            }
+
+            return true;
         }
 
         #region Controles Data grid view

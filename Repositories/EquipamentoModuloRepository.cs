@@ -52,6 +52,21 @@ namespace GaroliBudget.Repositories
             return Mapear(dr);
         }
 
+        public void RemoverPorId(
+            int idModulo)
+        {
+            using var conn = DBPostgres.GetConnection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+
+            cmd.CommandText =
+                "DELETE FROM EQUIPAMENTO_MODULO WHERE ID_MODULO = @id";
+
+            cmd.Parameters.AddWithValue("@id", idModulo);
+            cmd.ExecuteNonQuery();
+        }
+
         private Modulo Mapear(NpgsqlDataReader reader)
         {
             return new Modulo
