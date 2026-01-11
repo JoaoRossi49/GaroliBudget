@@ -61,6 +61,10 @@
             btnIncluirComponente = new Button();
             button3 = new Button();
             dgvComponentes = new DataGridView();
+            descricaoComponente = new DataGridViewTextBoxColumn();
+            quantidadeComponente = new DataGridViewTextBoxColumn();
+            valorUnitarioComponente = new DataGridViewTextBoxColumn();
+            valorTotalComponente = new DataGridViewTextBoxColumn();
             tpProcessos = new TabPage();
             label9 = new Label();
             tbProcessosQuantidade = new TextBox();
@@ -70,20 +74,17 @@
             btnIncluirProcesso = new Button();
             button6 = new Button();
             dgvProcessos = new DataGridView();
+            descricaoProcesso = new DataGridViewTextBoxColumn();
+            quantidadeProcesso = new DataGridViewTextBoxColumn();
+            valorUnitarioProcesso = new DataGridViewTextBoxColumn();
+            valorTotalProcesso = new DataGridViewTextBoxColumn();
             label5 = new Label();
             label6 = new Label();
             lblValorFinal = new Label();
             nmMargem = new NumericUpDown();
             treeViewModulos = new TreeView();
             btnIncluirModulo = new FontAwesome.Sharp.IconButton();
-            descricaoComponente = new DataGridViewTextBoxColumn();
-            quantidadeComponente = new DataGridViewTextBoxColumn();
-            valorUnitarioComponente = new DataGridViewTextBoxColumn();
-            valorTotalComponente = new DataGridViewTextBoxColumn();
-            descricaoProcesso = new DataGridViewTextBoxColumn();
-            quantidadeProcesso = new DataGridViewTextBoxColumn();
-            valorUnitarioProcesso = new DataGridViewTextBoxColumn();
-            valorTotalProcesso = new DataGridViewTextBoxColumn();
+            btnExcluirModulo = new FontAwesome.Sharp.IconButton();
             panel1.SuspendLayout();
             tcItens.SuspendLayout();
             tpMateriais.SuspendLayout();
@@ -440,6 +441,34 @@
             dgvComponentes.Size = new Size(521, 268);
             dgvComponentes.TabIndex = 24;
             // 
+            // descricaoComponente
+            // 
+            descricaoComponente.DataPropertyName = "Descricao";
+            descricaoComponente.HeaderText = "Descrição";
+            descricaoComponente.Name = "descricaoComponente";
+            descricaoComponente.ReadOnly = true;
+            descricaoComponente.Width = 280;
+            // 
+            // quantidadeComponente
+            // 
+            quantidadeComponente.DataPropertyName = "Quantidade";
+            quantidadeComponente.HeaderText = "Quantidade";
+            quantidadeComponente.Name = "quantidadeComponente";
+            quantidadeComponente.ReadOnly = true;
+            // 
+            // valorUnitarioComponente
+            // 
+            valorUnitarioComponente.DataPropertyName = "CustoUnitario";
+            valorUnitarioComponente.HeaderText = "Valor unitário";
+            valorUnitarioComponente.Name = "valorUnitarioComponente";
+            valorUnitarioComponente.ReadOnly = true;
+            // 
+            // valorTotalComponente
+            // 
+            valorTotalComponente.HeaderText = "Valor total";
+            valorTotalComponente.Name = "valorTotalComponente";
+            valorTotalComponente.ReadOnly = true;
+            // 
             // tpProcessos
             // 
             tpProcessos.Controls.Add(label9);
@@ -547,6 +576,34 @@
             dgvProcessos.Size = new Size(521, 268);
             dgvProcessos.TabIndex = 24;
             // 
+            // descricaoProcesso
+            // 
+            descricaoProcesso.DataPropertyName = "Descricao";
+            descricaoProcesso.HeaderText = "Descrição";
+            descricaoProcesso.Name = "descricaoProcesso";
+            descricaoProcesso.ReadOnly = true;
+            descricaoProcesso.Width = 280;
+            // 
+            // quantidadeProcesso
+            // 
+            quantidadeProcesso.DataPropertyName = "Quantidade";
+            quantidadeProcesso.HeaderText = "Quantidade";
+            quantidadeProcesso.Name = "quantidadeProcesso";
+            quantidadeProcesso.ReadOnly = true;
+            // 
+            // valorUnitarioProcesso
+            // 
+            valorUnitarioProcesso.DataPropertyName = "CustoHora";
+            valorUnitarioProcesso.HeaderText = "Valor unitário";
+            valorUnitarioProcesso.Name = "valorUnitarioProcesso";
+            valorUnitarioProcesso.ReadOnly = true;
+            // 
+            // valorTotalProcesso
+            // 
+            valorTotalProcesso.HeaderText = "Valor total";
+            valorTotalProcesso.Name = "valorTotalProcesso";
+            valorTotalProcesso.ReadOnly = true;
+            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -603,69 +660,26 @@
             btnIncluirModulo.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnIncluirModulo.IconSize = 18;
             btnIncluirModulo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnIncluirModulo.Location = new Point(8, 117);
+            btnIncluirModulo.Location = new Point(8, 110);
             btnIncluirModulo.Name = "btnIncluirModulo";
-            btnIncluirModulo.Size = new Size(142, 23);
+            btnIncluirModulo.Size = new Size(142, 30);
             btnIncluirModulo.TabIndex = 29;
             btnIncluirModulo.Text = "Adicionar módulo";
             btnIncluirModulo.UseVisualStyleBackColor = true;
             btnIncluirModulo.Click += btnIncluirModulo_Click;
             // 
-            // descricaoComponente
+            // btnExcluirModulo
             // 
-            descricaoComponente.DataPropertyName = "Descricao";
-            descricaoComponente.HeaderText = "Descrição";
-            descricaoComponente.Name = "descricaoComponente";
-            descricaoComponente.ReadOnly = true;
-            descricaoComponente.Width = 280;
-            // 
-            // quantidadeComponente
-            // 
-            quantidadeComponente.DataPropertyName = "Quantidade";
-            quantidadeComponente.HeaderText = "Quantidade";
-            quantidadeComponente.Name = "quantidadeComponente";
-            quantidadeComponente.ReadOnly = true;
-            // 
-            // valorUnitarioComponente
-            // 
-            valorUnitarioComponente.DataPropertyName = "CustoUnitario";
-            valorUnitarioComponente.HeaderText = "Valor unitário";
-            valorUnitarioComponente.Name = "valorUnitarioComponente";
-            valorUnitarioComponente.ReadOnly = true;
-            // 
-            // valorTotalComponente
-            // 
-            valorTotalComponente.HeaderText = "Valor total";
-            valorTotalComponente.Name = "valorTotalComponente";
-            valorTotalComponente.ReadOnly = true;
-            // 
-            // descricaoProcesso
-            // 
-            descricaoProcesso.DataPropertyName = "Descricao";
-            descricaoProcesso.HeaderText = "Descrição";
-            descricaoProcesso.Name = "descricaoProcesso";
-            descricaoProcesso.ReadOnly = true;
-            descricaoProcesso.Width = 280;
-            // 
-            // quantidadeProcesso
-            // 
-            quantidadeProcesso.DataPropertyName = "Quantidade";
-            quantidadeProcesso.HeaderText = "Quantidade";
-            quantidadeProcesso.Name = "quantidadeProcesso";
-            quantidadeProcesso.ReadOnly = true;
-            // 
-            // valorUnitarioProcesso
-            // 
-            valorUnitarioProcesso.DataPropertyName = "CustoHora";
-            valorUnitarioProcesso.HeaderText = "Valor unitário";
-            valorUnitarioProcesso.Name = "valorUnitarioProcesso";
-            valorUnitarioProcesso.ReadOnly = true;
-            // 
-            // valorTotalProcesso
-            // 
-            valorTotalProcesso.HeaderText = "Valor total";
-            valorTotalProcesso.Name = "valorTotalProcesso";
-            valorTotalProcesso.ReadOnly = true;
+            btnExcluirModulo.IconChar = FontAwesome.Sharp.IconChar.DeleteLeft;
+            btnExcluirModulo.IconColor = Color.Black;
+            btnExcluirModulo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnExcluirModulo.IconSize = 25;
+            btnExcluirModulo.Location = new Point(156, 110);
+            btnExcluirModulo.Name = "btnExcluirModulo";
+            btnExcluirModulo.Size = new Size(44, 30);
+            btnExcluirModulo.TabIndex = 30;
+            btnExcluirModulo.UseVisualStyleBackColor = true;
+            btnExcluirModulo.Click += btnExcluirModulo_Click;
             // 
             // EQ0001mnIncluir
             // 
@@ -673,6 +687,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(755, 574);
+            Controls.Add(btnExcluirModulo);
             Controls.Add(btnIncluirModulo);
             Controls.Add(treeViewModulos);
             Controls.Add(nmMargem);
@@ -762,5 +777,7 @@
         private DataGridViewTextBoxColumn quantidadeProcesso;
         private DataGridViewTextBoxColumn valorUnitarioProcesso;
         private DataGridViewTextBoxColumn valorTotalProcesso;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton btnExcluirModulo;
     }
 }

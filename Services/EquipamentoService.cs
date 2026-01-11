@@ -96,19 +96,19 @@ namespace GaroliBudget.Services
             return _equipamentoRepository.ListarWhere(where);
         }
 
-        public List<Material> ListarMateriais(int idEquipamento)
+        public List<Material> ListarMateriais(int idEquipamento, int idModulo)
         {
-            return _materialRepository.ListarPorEquipamentoId(idEquipamento);
+            return _materialRepository.ListarPorEquipamentoId(idEquipamento, idModulo);
         }
 
-        public List<Processo> ListarProcessos(int idEquipamento)
+        public List<Processo> ListarProcessos(int idEquipamento, int idModulo)
         {
-            return _processoRepository.ListarPorEquipamentoId(idEquipamento);
+            return _processoRepository.ListarPorEquipamentoId(idEquipamento, idModulo);
         }
 
-        public List<Componente> ListarComponentes(int idEquipamento)
+        public List<Componente> ListarComponentes(int idEquipamento, int idModulo)
         {
-            return _componenteRepository.ListarPorEquipamentoId(idEquipamento);
+            return _componenteRepository.ListarPorEquipamentoId(idEquipamento, idModulo);
         }
 
         public void InativarEquipamento(int idEquipamento)

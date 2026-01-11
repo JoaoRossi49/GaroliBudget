@@ -13,13 +13,13 @@ namespace GaroliBudget
     public partial class EQ0001mnIncluir : Form
     {
         private readonly IEquipamentoService _equipamentoService;
-        
+
 
         private MaterialService _materialService;
         private ComponenteService _componenteService;
         private ProcessoService _processoService;
 
-        private Equipamento _equipamento = new Equipamento(); //Sempre vai ser um equipamento em branco
+        private Equipamento _equipamento = new Equipamento();
 
         public EQ0001mnIncluir(IEquipamentoService equipamentoService)
         {
@@ -47,7 +47,7 @@ namespace GaroliBudget
             _materialService = new MaterialService(repoMaterial);
 
             IComponenteRepository repoComponente = new ComponenteRepository();
-            _componenteService= new ComponenteService(repoComponente);
+            _componenteService = new ComponenteService(repoComponente);
 
             IProcessoRepository repoProcesso = new ProcessoRepository();
             _processoService = new ProcessoService(repoProcesso);
@@ -62,14 +62,16 @@ namespace GaroliBudget
 
         private void CarregarDataGrid()
         {
+            int idModulo = GetModuloSelecionado();
+
             dgvMateriais.AutoGenerateColumns = false;
-            dgvMateriais.DataSource = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento);
+            dgvMateriais.DataSource = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento, idModulo);
 
             dgvComponentes.AutoGenerateColumns = false;
-            dgvComponentes.DataSource = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento);
+            dgvComponentes.DataSource = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento, idModulo);
 
             dgvProcessos.AutoGenerateColumns = false;
-            dgvProcessos.DataSource = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento);
+            dgvProcessos.DataSource = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento, idModulo);
         }
 
         private void CarregarComboMateriais()
@@ -173,8 +175,8 @@ namespace GaroliBudget
 
         private void AtualizaObjeto()
         {
-            if(!ValidaFormularioPai())
-                { return; }
+            if (!ValidaFormularioPai())
+            { return; }
 
             _equipamento.Descricao = tbDescricaoEquipamento.Text;
             _equipamento.Codigo = tbCodigoEquipamento.Text;
@@ -183,14 +185,14 @@ namespace GaroliBudget
 
         private bool ValidaFormularioPai()
         {
-            if(tbDescricaoEquipamento.Text.Length == 0)
+            if (tbDescricaoEquipamento.Text.Length == 0)
             {
                 MessageBox.Show("Informe uma DESCRICAO válida para o equipamento", "A T E N Ç Ã O");
                 tbDescricaoEquipamento.Focus();
                 return false;
             }
 
-            if(tbCodigoEquipamento.Text.Length == 0)
+            if (tbCodigoEquipamento.Text.Length == 0)
             {
                 MessageBox.Show("Informe um CÓDIGO válido para o equipamento", "A T E N Ç Ã O");
                 tbCodigoEquipamento.Focus();
@@ -266,7 +268,8 @@ namespace GaroliBudget
                 return false;
             }
 
-            if (node == null) {
+            if (node == null)
+            {
                 MessageBox.Show("Selecione ou crie um novo módulo", "A T E N Ç Ã O");
                 return false;
             }
@@ -328,6 +331,43 @@ namespace GaroliBudget
             //Adicionar no banco e retornar ID
             AdicionarModuloTreeView(modulo);
 
+        }
+
+        private int GetModuloSelecionado()
+        {
+            var node = treeViewModulos.SelectedNode;
+
+            if (node == null || node.Tag == null)
+                return 0;
+
+            if (!int.TryParse(node.Tag.ToString(), out int idModulo))
+                return 0;
+
+            return idModulo;
+        }
+
+        private void btnExcluirModulo_Click(object sender, EventArgs e)
+        {
+            int idModulo = GetModuloSelecionado();
+
+            if (idModulo == 0)
+                return;
+
+            var result = MessageBox.Show(
+                "Deseja realmente exluir este módulo?",
+                "A T E N Ç Ã O",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.No)
+                return;
+
+            var repo = new EquipamentoModuloRepository();
+            repo.RemoverPorId(idModulo);
+
+            treeViewModulos.Nodes.Remove(treeViewModulos.SelectedNode);
+            MessageBox.Show("Módulo excluído com sucesso!");
         }
 
         private void CadastrarModulo(Modulo modulo, Equipamento equipamento)
@@ -396,7 +436,6 @@ namespace GaroliBudget
             treeViewModulos.Nodes.Add(node);
             treeViewModulos.SelectedNode = node;
         }
-        
 
         private void treeViewModulos_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -423,5 +462,6 @@ namespace GaroliBudget
             dgvProcessos.DataSource = null;
         }
         #endregion
+
     }
 }

@@ -61,7 +61,7 @@ namespace GaroliBudget.Repositories
             cmd.ExecuteNonQuery();
         }
 
-        public List<Material> ListarPorEquipamentoId(int IdEquipamento)
+        public List<Material> ListarPorEquipamentoId(int IdEquipamento, int idModulo)
         {
             var lista = new List<Material>();
 
@@ -69,7 +69,8 @@ namespace GaroliBudget.Repositories
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MATERIAL WHERE ID_EQUIPAMENTO = {IdEquipamento};";
+            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MATERIAL WHERE ID_EQUIPAMENTO = {IdEquipamento} " +
+                $"AND ID_MODULO = {idModulo};";
 
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
