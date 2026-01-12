@@ -647,6 +647,9 @@
             // 
             // treeViewModulos
             // 
+            treeViewModulos.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            treeViewModulos.FullRowSelect = true;
+            treeViewModulos.HideSelection = false;
             treeViewModulos.Location = new Point(8, 146);
             treeViewModulos.Name = "treeViewModulos";
             treeViewModulos.Size = new Size(213, 333);

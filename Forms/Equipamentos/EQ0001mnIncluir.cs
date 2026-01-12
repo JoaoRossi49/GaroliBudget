@@ -37,8 +37,13 @@ namespace GaroliBudget
         {
             CarregarServices();
             _equipamento = equipamentoParaEditar;
+            _equipamento.Materiais = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento);
+            _equipamento.Processos = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento);
+            _equipamento.Componentes = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento);
+
             this.Text = "Editar Equipamento";
             PreencherCampos();
+            CarregarModulos();
         }
 
         public void CarregarServices()
@@ -109,11 +114,9 @@ namespace GaroliBudget
 
         private void PreencherCampos()
         {
-            //tbRazaoSocial.Text = _equipamentoExistente.RazaoSocial;
-            //tbNomeFantasia.Text = _equipamentoExistente.NomeFantasia;
-            //mtbCnpj.Text = _equipamentoExistente.Cnpj;
-            //tbEmail.Text = _equipamentoExistente.Email;
-            //mtbTelefone.Text = _equipamentoExistente.Telefone;
+            tbDescricaoEquipamento.Text = _equipamento.Descricao;
+            tbCodigoEquipamento.Text = _equipamento.Codigo;
+            tbObservacaoEquipamento.Text = _equipamento.Observacao;
         }
         private void nmMargem_ValueChanged(object sender, EventArgs e)
         {
@@ -207,51 +210,61 @@ namespace GaroliBudget
         {
             if (tcItens.SelectedTab == tpMateriais)
             {
-                if (!ValidarInclusao(cbMateriais, tbMateriaisQuantidade, treeViewModulos.SelectedNode))
-                    return;
-
-                Material materialSelecionado = cbMateriais.SelectedItem as Material;
-
-                materialSelecionado.Quantidade = Convert.ToInt32(tbMateriaisQuantidade.Text);
-                materialSelecionado.Modulo = new Modulo { Id = Convert.ToInt32(treeViewModulos.SelectedNode.Tag) };
-
-                _equipamento.Materiais.Add(materialSelecionado);
-
-                dgvMateriais.DataSource = null;
-                dgvMateriais.DataSource = _equipamento.Materiais;
+                IncluirItem<Material>(
+                    cbMateriais,
+                    tbMateriaisQuantidade,
+                    dgvMateriais,
+                    _equipamento.Materiais
+                );
             }
             else if (tcItens.SelectedTab == tpComponentes)
             {
-                if (!ValidarInclusao(cbComponentes, tbComponentesQuantidade, treeViewModulos.SelectedNode))
-                    return;
-
-                Componente componenteSelecionado = cbComponentes.SelectedItem as Componente;
-
-                componenteSelecionado.Quantidade = Convert.ToInt32(tbMateriaisQuantidade.Text);
-                componenteSelecionado.Modulo = new Modulo { Id = Convert.ToInt32(treeViewModulos.SelectedNode.Tag) };
-
-                _equipamento.Componentes.Add(componenteSelecionado);
-
-                dgvComponentes.DataSource = null;
-                dgvComponentes.DataSource = _equipamento.Componentes;
+                IncluirItem<Componente>(
+                    cbComponentes,
+                    tbComponentesQuantidade,
+                    dgvComponentes,
+                    _equipamento.Componentes
+                );
             }
             else if (tcItens.SelectedTab == tpProcessos)
             {
-                if (!ValidarInclusao(cbProcessos, tbProcessosQuantidade, treeViewModulos.SelectedNode))
-                    return;
-
-                Processo processoSelecionado = cbProcessos.SelectedItem as Processo;
-
-                processoSelecionado.Quantidade = Convert.ToInt32(tbProcessosQuantidade.Text);
-                processoSelecionado.Modulo = new Modulo { Id = Convert.ToInt32(treeViewModulos.SelectedNode.Tag) };
-
-                _equipamento.Processos.Add(processoSelecionado);
-
-                dgvProcessos.DataSource = null;
-                dgvProcessos.DataSource = _equipamento.Processos;
+                IncluirItem<Processo>(
+                    cbProcessos,
+                    tbProcessosQuantidade,
+                    dgvProcessos,
+                    _equipamento.Processos
+                );
             }
 
             CalcularTotalGeral();
+        }
+
+        private void IncluirItem<T>(
+                ComboBox combo,
+                TextBox quantidade,
+                DataGridView grid,
+                List<T> lista
+            ) where T : class
+        {
+            var node = treeViewModulos.SelectedNode;
+
+            if (!ValidarInclusao(combo, quantidade, node))
+                return;
+
+            int idModulo = GetModuloSelecionado();
+            int qtd = Convert.ToInt32(quantidade.Text);
+
+            var item = combo.SelectedItem as dynamic;
+
+            item.Quantidade = qtd;
+            item.Modulo = new Modulo { Id = idModulo };
+
+            lista.Add(item);
+
+            grid.DataSource = null;
+            grid.DataSource = lista
+                .Where(m => ((dynamic)m).Modulo != null && ((dynamic)m).Modulo.Id == idModulo)
+                .ToList();
         }
 
         private bool ValidarInclusao(ComboBox combo, TextBox quantidade, TreeNode node)
@@ -273,6 +286,68 @@ namespace GaroliBudget
                 MessageBox.Show("Selecione ou crie um novo módulo", "A T E N Ç Ã O");
                 return false;
             }
+
+            int idModulo = GetModuloSelecionado();
+            var selecionado = combo.SelectedItem;
+
+            if (selecionado is Componente componente)
+            {
+                bool jaExiste = _equipamento.Componentes.Any(c =>
+                    c.IdComponente == componente.IdComponente &&
+                    c.Modulo != null &&
+                    c.Modulo.Id == idModulo
+                );
+
+                if (jaExiste)
+                {
+                    MessageBox.Show(
+                        "Este componente já foi adicionado para este módulo.",
+                        "Aviso",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return false;
+                }
+            }
+            else if (selecionado is Material material)
+            {
+                bool jaExiste = _equipamento.Materiais.Any(m =>
+                    m.IdMaterial == material.IdMaterial &&
+                    m.Modulo != null &&
+                    m.Modulo.Id == idModulo
+                );
+
+                if (jaExiste)
+                {
+                    MessageBox.Show(
+                        "Este material já foi adicionado para este módulo.",
+                        "Aviso",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return false;
+                }
+            }
+            else if (selecionado is Processo processo)
+            {
+                bool jaExiste = _equipamento.Processos.Any(m =>
+                    m.IdProcesso == processo.IdProcesso &&
+                    m.Modulo != null &&
+                    m.Modulo.Id == idModulo
+                );
+
+                if (jaExiste)
+                {
+                    MessageBox.Show(
+                        "Essa mão de obra já foi adicionado para este módulo.",
+                        "Aviso",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return false;
+                }
+            }
+
 
             return true;
         }
@@ -426,6 +501,23 @@ namespace GaroliBudget
             return true;
         }
 
+        private void CarregarModulos()
+        {
+            EquipamentoModuloRepository _moduloRepository = new EquipamentoModuloRepository();
+            
+            List<Modulo> modulos = _moduloRepository.ObterPorEquipamentoId(_equipamento.IdEquipamento);
+
+            foreach(Modulo modulo in modulos)
+            {
+                AdicionarModuloTreeView(modulo);
+            }
+
+            var firstNode = treeViewModulos.Nodes[0];
+            treeViewModulos.SelectedNode = firstNode;
+            firstNode.EnsureVisible();
+            treeViewModulos.Focus();
+        }
+
         private void AdicionarModuloTreeView(Modulo modulo)
         {
             var node = new TreeNode(modulo.Nome)
@@ -449,10 +541,10 @@ namespace GaroliBudget
             int idModulo = Convert.ToInt32(e.Node.Tag);
 
             treeViewModulos.Enabled = true;
-
-            //CarregarMateriaisModulo(idModulo);
-            //CarregarComponentesModulo(idModulo);
-            //CarregarProcessosModulo(idModulo);
+            
+            dgvMateriais.DataSource = _equipamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+            dgvProcessos.DataSource = _equipamento.Processos.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+            dgvComponentes.DataSource = _equipamento.Componentes.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
         }
 
         private void LimparGridsModulo()

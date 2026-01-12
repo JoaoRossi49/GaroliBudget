@@ -17,11 +17,6 @@ namespace GaroliBudget
             _equipamentoService = new EquipamentoService(repo);
         }
 
-        private void tbNomeCliente_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             pesquisar();
@@ -29,16 +24,16 @@ namespace GaroliBudget
 
         private void pesquisar()
         {
-            dgvClientes.AutoGenerateColumns = false;
+            dgvEquipamentos.AutoGenerateColumns = false;
             string sqlWhere = "WHERE ATIVO = 1\n";
 
-            string nFantasia = tbNomeCliente.Text;
-            string rSocial = tbRazaoSocial.Text;
+            string descricao = tbDescricao.Text;
+            string codigo = tbCodigo.Text;
 
-            sqlWhere += nFantasia.Length > 0 ? $@"AND NOME_FANTASIA LIKE '%{nFantasia}%' " : "";
-            sqlWhere += rSocial.Length > 0 ? $@"AND RAZAO_SOCIAL LIKE '%{rSocial}%' " : "";
+            sqlWhere += descricao.Length > 0 ? $@"AND DESCRICAO LIKE '%{descricao}%' " : "";
+            sqlWhere += codigo.Length > 0 ? $@"AND CODIGO LIKE '%{codigo}%' " : "";
 
-            //dgvClientes.DataSource = _clienteService.ListarWhere(sqlWhere);
+            dgvEquipamentos.DataSource = _equipamentoService.ListarWhere(sqlWhere);
         }
 
         private void btnIncluir_Click(object sender, EventArgs e)
@@ -49,39 +44,39 @@ namespace GaroliBudget
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            //if (dgvClientes.SelectedRows.Count == 1)
-            //{
-            //    var clienteSelecionado = (Cliente)dgvClientes.SelectedRows[0].DataBoundItem;
+            if (dgvEquipamentos.SelectedRows.Count == 1)
+            {
+                var equipamentoSelecionado = (Equipamento)dgvEquipamentos.SelectedRows[0].DataBoundItem;
 
-            //    Cliente cliente = _clienteService.ObterPorId(clienteSelecionado.IdCliente);
+                Equipamento equipamento = _equipamentoService.ObterPorId(equipamentoSelecionado.IdEquipamento);
 
 
-            //    using (var form = new CL0001mnIncluir(_clienteService, cliente))
-            //    {
-            //        var resultado = form.ShowDialog();
+                using (var form = new EQ0001mnIncluir(_equipamentoService, equipamento))
+                {
+                    var resultado = form.ShowDialog();
 
-            //        if (resultado == DialogResult.OK)
-            //        {
-            //            pesquisar();
-            //        }
-            //    }
-            //}
-            //else if (dgvClientes.SelectedRows.Count > 1)
-            //{
-            //    MessageBox.Show("Selecione apenas um registro por vez.", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Selecione um cliente na lista para editar.", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+                    if (resultado == DialogResult.OK)
+                    {
+                        pesquisar();
+                    }
+                }
+            }
+            else if (dgvEquipamentos.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Selecione apenas um registro por vez.", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Selecione um equipamento na lista para editar.", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.SelectedRows.Count <= 0)
+            if (dgvEquipamentos.SelectedRows.Count <= 0)
             { return; }
 
-            foreach (DataRow row in dgvClientes.SelectedRows)
+            foreach (DataRow row in dgvEquipamentos.SelectedRows)
             {
                 //_clienteService.InativarCliente(Convert.ToInt32(row["IdCliente"]));
             }
@@ -91,7 +86,7 @@ namespace GaroliBudget
         {
             if (e.RowIndex >= 0)
             {
-                var clienteSelecionado = (Cliente)dgvClientes.Rows[e.RowIndex].DataBoundItem;
+                var clienteSelecionado = (Cliente)dgvEquipamentos.Rows[e.RowIndex].DataBoundItem;
                 //Cliente cliente = _clienteService.ObterPorId(clienteSelecionado.IdCliente);
 
                 //using (var form = new CL0001mnIncluir(_clienteService, cliente))

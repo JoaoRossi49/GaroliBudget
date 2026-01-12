@@ -52,6 +52,25 @@ namespace GaroliBudget.Repositories
             return Mapear(dr);
         }
 
+        public List<Modulo> ObterPorEquipamentoId(int idEquipamento)
+        {
+            var lista = new List<Modulo>();
+
+            using var conn = DBPostgres.GetConnection();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MODULO WHERE ID_EQUIPAMENTO = {idEquipamento};";
+
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                lista.Add(Mapear(reader));
+            }
+
+            return lista;
+        }
+
         public void RemoverPorId(
             int idModulo)
         {

@@ -30,16 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EQ0001));
             btnPesquisar = new Button();
-            dgvClientes = new DataGridView();
-            tbRazaoSocial = new TextBox();
+            dgvEquipamentos = new DataGridView();
+            tbDescricao = new TextBox();
             label1 = new Label();
             btnExcluir = new Button();
             btnIncluir = new Button();
             btnEditar = new Button();
             label2 = new Label();
-            tbNomeCliente = new TextBox();
+            tbCodigo = new TextBox();
             gbFiltros = new GroupBox();
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
+            Codigo = new DataGridViewTextBoxColumn();
+            IdEquipamento = new DataGridViewTextBoxColumn();
+            Descricao = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dgvEquipamentos).BeginInit();
             gbFiltros.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,40 +57,40 @@
             btnPesquisar.UseVisualStyleBackColor = true;
             btnPesquisar.Click += btnPesquisar_Click;
             // 
-            // dgvClientes
+            // dgvEquipamentos
             // 
-            dgvClientes.AllowUserToAddRows = false;
-            dgvClientes.AllowUserToDeleteRows = false;
-            dgvClientes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvClientes.BackgroundColor = SystemColors.Control;
-            dgvClientes.BorderStyle = BorderStyle.Fixed3D;
-            dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dgvClientes.GridColor = SystemColors.ScrollBar;
-            dgvClientes.Location = new Point(12, 84);
-            dgvClientes.Name = "dgvClientes";
-            dgvClientes.ReadOnly = true;
-            dgvClientes.Size = new Size(702, 315);
-            dgvClientes.TabIndex = 7;
-            dgvClientes.CellDoubleClick += dgvClientes_CellDoubleClick;
+            dgvEquipamentos.AllowUserToAddRows = false;
+            dgvEquipamentos.AllowUserToDeleteRows = false;
+            dgvEquipamentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvEquipamentos.BackgroundColor = SystemColors.Control;
+            dgvEquipamentos.BorderStyle = BorderStyle.Fixed3D;
+            dgvEquipamentos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgvEquipamentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEquipamentos.Columns.AddRange(new DataGridViewColumn[] { Codigo, IdEquipamento, Descricao });
+            dgvEquipamentos.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgvEquipamentos.GridColor = SystemColors.ScrollBar;
+            dgvEquipamentos.Location = new Point(12, 84);
+            dgvEquipamentos.Name = "dgvEquipamentos";
+            dgvEquipamentos.ReadOnly = true;
+            dgvEquipamentos.Size = new Size(702, 315);
+            dgvEquipamentos.TabIndex = 7;
+            dgvEquipamentos.CellDoubleClick += dgvClientes_CellDoubleClick;
             // 
-            // tbRazaoSocial
+            // tbDescricao
             // 
-            tbRazaoSocial.Location = new Point(5, 41);
-            tbRazaoSocial.Name = "tbRazaoSocial";
-            tbRazaoSocial.Size = new Size(256, 23);
-            tbRazaoSocial.TabIndex = 0;
-            tbRazaoSocial.TextChanged += tbNomeCliente_TextChanged;
+            tbDescricao.Location = new Point(5, 41);
+            tbDescricao.Name = "tbDescricao";
+            tbDescricao.Size = new Size(256, 23);
+            tbDescricao.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(5, 23);
             label1.Name = "label1";
-            label1.Size = new Size(44, 15);
+            label1.Size = new Size(58, 15);
             label1.TabIndex = 3;
-            label1.Text = "Cliente";
+            label1.Text = "Descrição";
             // 
             // btnExcluir
             // 
@@ -143,20 +146,20 @@
             label2.TabIndex = 16;
             label2.Text = "Código";
             // 
-            // tbNomeCliente
+            // tbCodigo
             // 
-            tbNomeCliente.Location = new Point(280, 41);
-            tbNomeCliente.Name = "tbNomeCliente";
-            tbNomeCliente.Size = new Size(236, 23);
-            tbNomeCliente.TabIndex = 1;
+            tbCodigo.Location = new Point(280, 41);
+            tbCodigo.Name = "tbCodigo";
+            tbCodigo.Size = new Size(236, 23);
+            tbCodigo.TabIndex = 1;
             // 
             // gbFiltros
             // 
             gbFiltros.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            gbFiltros.Controls.Add(tbRazaoSocial);
+            gbFiltros.Controls.Add(tbDescricao);
             gbFiltros.Controls.Add(label1);
             gbFiltros.Controls.Add(label2);
-            gbFiltros.Controls.Add(tbNomeCliente);
+            gbFiltros.Controls.Add(tbCodigo);
             gbFiltros.Controls.Add(btnExcluir);
             gbFiltros.Controls.Add(btnIncluir);
             gbFiltros.Controls.Add(btnEditar);
@@ -168,6 +171,30 @@
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros";
             // 
+            // Codigo
+            // 
+            Codigo.DataPropertyName = "Codigo";
+            Codigo.HeaderText = "Codigo";
+            Codigo.Name = "Codigo";
+            Codigo.ReadOnly = true;
+            Codigo.Width = 200;
+            // 
+            // IdEquipamento
+            // 
+            IdEquipamento.DataPropertyName = "IdEquipamento";
+            IdEquipamento.HeaderText = "IdEquipamento";
+            IdEquipamento.Name = "IdEquipamento";
+            IdEquipamento.ReadOnly = true;
+            IdEquipamento.Visible = false;
+            // 
+            // Descricao
+            // 
+            Descricao.DataPropertyName = "Descricao";
+            Descricao.HeaderText = "Descricao";
+            Descricao.Name = "Descricao";
+            Descricao.ReadOnly = true;
+            Descricao.Width = 450;
+            // 
             // EQ0001
             // 
             AcceptButton = btnPesquisar;
@@ -175,10 +202,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(717, 403);
             Controls.Add(gbFiltros);
-            Controls.Add(dgvClientes);
+            Controls.Add(dgvEquipamentos);
             Name = "EQ0001";
-            Text = "CL0001 - Listagem de clientes";
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
+            Text = "EQ0001 - Listagem de equipamentos";
+            ((System.ComponentModel.ISupportInitialize)dgvEquipamentos).EndInit();
             gbFiltros.ResumeLayout(false);
             gbFiltros.PerformLayout();
             ResumeLayout(false);
@@ -187,14 +214,17 @@
         #endregion
 
         private Button btnPesquisar;
-        private DataGridView dgvClientes;
-        private TextBox tbRazaoSocial;
+        private DataGridView dgvEquipamentos;
+        private TextBox tbDescricao;
         private Label label1;
         private Button btnExcluir;
         private Button btnIncluir;
         private Button btnEditar;
         private Label label2;
-        private TextBox tbNomeCliente;
+        private TextBox tbCodigo;
         private GroupBox gbFiltros;
+        private DataGridViewTextBoxColumn Codigo;
+        private DataGridViewTextBoxColumn IdEquipamento;
+        private DataGridViewTextBoxColumn Descricao;
     }
 }

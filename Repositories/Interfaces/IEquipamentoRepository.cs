@@ -16,9 +16,9 @@ namespace GaroliBudget.Repositories.Interfaces
         Equipamento ObterPorId(int idEquipamento);
         List<Equipamento> ListarAtivos();
         List<Equipamento> ListarTodos();
-        List<Material> ListarMateriais(int idEquipamento, int idModulo);
-        List<Processo> ListarProcessos(int idEquipamento, int idModulo);
-        List<Componente> ListarComponentes(int idEquipamento, int idModulo);
+        List<Material> ListarMateriais(int idEquipamento, int idModulo = 0);
+        List<Processo> ListarProcessos(int idEquipamento, int idModulo = 0);
+        List<Componente> ListarComponentes(int idEquipamento, int idModulo = 0);
     }
 
     public interface IEquipamentoRepository
@@ -43,7 +43,6 @@ namespace GaroliBudget.Repositories.Interfaces
             int idEquipamento,
             NpgsqlConnection conn,
             NpgsqlTransaction tran);
-        List<Material> ListarPorEquipamentoId(int IdEquipamento);
     }
 
     public interface IEquipamentoComponenteRepository
