@@ -15,6 +15,10 @@ namespace GaroliBudget.Models
         public decimal CustoUnitario { get; set; }
         public bool Ativo { get; set; }
         public decimal Quantidade { get; set; }
+        public decimal Total
+        {
+            get { return Quantidade * CustoUnitario; }
+        }
         public Modulo Modulo { get; set; }
     }
 }

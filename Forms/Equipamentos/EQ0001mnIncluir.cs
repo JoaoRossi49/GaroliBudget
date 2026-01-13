@@ -7,6 +7,7 @@ using Microsoft.VisualBasic;
 using System.Data;
 using System.Globalization;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace GaroliBudget
 {
@@ -63,18 +64,25 @@ namespace GaroliBudget
             CarregarComboMateriais();
             CarregarComboComponentes();
             CarregarComboProcessos();
+            CalcularTotalGeral();
         }
 
         private void CarregarDataGrid()
         {
             int idModulo = GetModuloSelecionado();
 
+            //dgvMateriais.DataSource = null;
+            //dgvMateriais.Columns.Clear();
             dgvMateriais.AutoGenerateColumns = false;
-            dgvMateriais.DataSource = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento, idModulo);
+            dgvMateriais.DataSource = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento, idModulo); ;
 
+            //dgvComponentes.DataSource = null;
+            //dgvMateriais.Columns.Clear();
             dgvComponentes.AutoGenerateColumns = false;
             dgvComponentes.DataSource = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento, idModulo);
 
+            //dgvProcessos.DataSource = null;
+            //dgvProcessos.Columns.Clear();
             dgvProcessos.AutoGenerateColumns = false;
             dgvProcessos.DataSource = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento, idModulo);
         }
@@ -504,10 +512,10 @@ namespace GaroliBudget
         private void CarregarModulos()
         {
             EquipamentoModuloRepository _moduloRepository = new EquipamentoModuloRepository();
-            
+
             List<Modulo> modulos = _moduloRepository.ObterPorEquipamentoId(_equipamento.IdEquipamento);
 
-            foreach(Modulo modulo in modulos)
+            foreach (Modulo modulo in modulos)
             {
                 AdicionarModuloTreeView(modulo);
             }
@@ -541,7 +549,11 @@ namespace GaroliBudget
             int idModulo = Convert.ToInt32(e.Node.Tag);
 
             treeViewModulos.Enabled = true;
-            
+
+            dgvMateriais.AutoGenerateColumns = false;
+            dgvProcessos.AutoGenerateColumns = false;
+            dgvComponentes.AutoGenerateColumns = false;
+
             dgvMateriais.DataSource = _equipamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
             dgvProcessos.DataSource = _equipamento.Processos.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
             dgvComponentes.DataSource = _equipamento.Componentes.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
@@ -554,6 +566,5 @@ namespace GaroliBudget
             dgvProcessos.DataSource = null;
         }
         #endregion
-
     }
 }

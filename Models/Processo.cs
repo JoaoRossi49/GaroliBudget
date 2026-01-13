@@ -13,6 +13,10 @@ namespace GaroliBudget.Models
         public decimal CustoHora { get; set; }
         public bool Ativo { get; set; }
         public decimal Quantidade { get; set; }
+        public decimal Total
+        {
+            get { return Quantidade * CustoHora; }
+        }
         public Modulo Modulo { get; set; }
     }
 }
