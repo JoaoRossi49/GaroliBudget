@@ -446,11 +446,31 @@ namespace GaroliBudget
             if (result == DialogResult.No)
                 return;
 
+            excluirItensModulo(_equipamento.Materiais, _equipamento.Componentes, _equipamento.Processos, idModulo);
+
             var repo = new EquipamentoModuloRepository();
             repo.RemoverPorId(idModulo);
 
             treeViewModulos.Nodes.Remove(treeViewModulos.SelectedNode);
             MessageBox.Show("Módulo excluído com sucesso!");
+        }
+
+        private void excluirItensModulo(List<Material> listaMaterial, List<Componente> listaComponente, List<Processo> listaProcesso, int idModulo)
+        {
+            var materiaisParaRemover = listaMaterial.Where(i => i.Modulo != null && i.Modulo.Id == idModulo).ToList();
+
+            foreach (var item in materiaisParaRemover)
+                listaMaterial.Remove(item);
+
+            var componentesParaRemover = listaComponente.Where(i => i.Modulo != null && i.Modulo.Id == idModulo).ToList();
+
+            foreach (var item in componentesParaRemover)
+                listaComponente.Remove(item);
+
+            var processosParaRemover = listaProcesso.Where(i => i.Modulo != null && i.Modulo.Id == idModulo).ToList();
+
+            foreach (var item in processosParaRemover)
+                listaProcesso.Remove(item);
         }
 
         private void CadastrarModulo(Modulo modulo, Equipamento equipamento)
