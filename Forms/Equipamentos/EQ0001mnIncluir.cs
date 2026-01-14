@@ -252,7 +252,7 @@ namespace GaroliBudget
                 TextBox quantidade,
                 DataGridView grid,
                 List<T> lista
-            ) where T : class
+            ) where T : class, new()
         {
             var node = treeViewModulos.SelectedNode;
 
@@ -262,10 +262,21 @@ namespace GaroliBudget
             int idModulo = GetModuloSelecionado();
             int qtd = Convert.ToInt32(quantidade.Text);
 
-            var item = combo.SelectedItem as dynamic;
+            var original = combo.SelectedItem as dynamic;
 
-            item.Quantidade = qtd;
-            item.Modulo = new Modulo { Id = idModulo };
+            var item = new T();
+
+            // Copia as propriedades relevantes manualmente
+            foreach (var prop in original.GetType().GetProperties())
+            {
+                if (prop.CanRead && prop.CanWrite && prop.Name != "Modulo")
+                {
+                    prop.SetValue(item, prop.GetValue(original));
+                }
+            }
+
+            ((dynamic)item).Quantidade = qtd;
+            ((dynamic)item).Modulo = new Modulo { Id = idModulo };
 
             lista.Add(item);
 
@@ -574,6 +585,9 @@ namespace GaroliBudget
             dgvProcessos.AutoGenerateColumns = false;
             dgvComponentes.AutoGenerateColumns = false;
 
+            dgvMateriais.DataSource = null;
+            dgvProcessos.DataSource = null;
+            dgvComponentes.DataSource = null;
             dgvMateriais.DataSource = _equipamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
             dgvProcessos.DataSource = _equipamento.Processos.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
             dgvComponentes.DataSource = _equipamento.Componentes.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();

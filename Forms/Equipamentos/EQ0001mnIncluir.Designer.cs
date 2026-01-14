@@ -54,6 +54,10 @@
             btnIncluirMaterial = new Button();
             btnEditar = new Button();
             dgvMateriais = new DataGridView();
+            Descricao = new DataGridViewTextBoxColumn();
+            Quantidade = new DataGridViewTextBoxColumn();
+            CustoUnitario = new DataGridViewTextBoxColumn();
+            valorTotalMaterial = new DataGridViewTextBoxColumn();
             tpComponentes = new TabPage();
             label7 = new Label();
             tbComponentesQuantidade = new TextBox();
@@ -63,6 +67,10 @@
             btnIncluirComponente = new Button();
             button3 = new Button();
             dgvComponentes = new DataGridView();
+            descricaoComponente = new DataGridViewTextBoxColumn();
+            quantidadeComponente = new DataGridViewTextBoxColumn();
+            valorUnitarioComponente = new DataGridViewTextBoxColumn();
+            valorTotalComponente = new DataGridViewTextBoxColumn();
             tpProcessos = new TabPage();
             label9 = new Label();
             tbProcessosQuantidade = new TextBox();
@@ -72,6 +80,10 @@
             btnIncluirProcesso = new Button();
             button6 = new Button();
             dgvProcessos = new DataGridView();
+            descricaoProcesso = new DataGridViewTextBoxColumn();
+            quantidadeProcesso = new DataGridViewTextBoxColumn();
+            valorUnitarioProcesso = new DataGridViewTextBoxColumn();
+            valorTotalProcesso = new DataGridViewTextBoxColumn();
             label5 = new Label();
             label6 = new Label();
             lblValorFinal = new Label();
@@ -79,18 +91,6 @@
             treeViewModulos = new TreeView();
             btnIncluirModulo = new FontAwesome.Sharp.IconButton();
             btnExcluirModulo = new FontAwesome.Sharp.IconButton();
-            Descricao = new DataGridViewTextBoxColumn();
-            Quantidade = new DataGridViewTextBoxColumn();
-            CustoUnitario = new DataGridViewTextBoxColumn();
-            valorTotalMaterial = new DataGridViewTextBoxColumn();
-            descricaoComponente = new DataGridViewTextBoxColumn();
-            quantidadeComponente = new DataGridViewTextBoxColumn();
-            valorUnitarioComponente = new DataGridViewTextBoxColumn();
-            valorTotalComponente = new DataGridViewTextBoxColumn();
-            descricaoProcesso = new DataGridViewTextBoxColumn();
-            quantidadeProcesso = new DataGridViewTextBoxColumn();
-            valorUnitarioProcesso = new DataGridViewTextBoxColumn();
-            valorTotalProcesso = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             tcItens.SuspendLayout();
             tpMateriais.SuspendLayout();
@@ -165,7 +165,6 @@
             tbObservacaoEquipamento.Name = "tbObservacaoEquipamento";
             tbObservacaoEquipamento.Size = new Size(402, 61);
             tbObservacaoEquipamento.TabIndex = 13;
-            tbObservacaoEquipamento.Text = "9999";
             // 
             // label11
             // 
@@ -182,7 +181,6 @@
             tbDescricaoEquipamento.Name = "tbDescricaoEquipamento";
             tbDescricaoEquipamento.Size = new Size(279, 23);
             tbDescricaoEquipamento.TabIndex = 11;
-            tbDescricaoEquipamento.Text = "9999";
             // 
             // label2
             // 
@@ -312,6 +310,41 @@
             dgvMateriais.Size = new Size(521, 268);
             dgvMateriais.TabIndex = 0;
             // 
+            // Descricao
+            // 
+            Descricao.DataPropertyName = "Descricao";
+            Descricao.HeaderText = "Descrição";
+            Descricao.Name = "Descricao";
+            Descricao.ReadOnly = true;
+            Descricao.Width = 180;
+            // 
+            // Quantidade
+            // 
+            Quantidade.DataPropertyName = "Quantidade";
+            Quantidade.HeaderText = "Quantidade";
+            Quantidade.Name = "Quantidade";
+            Quantidade.ReadOnly = true;
+            // 
+            // CustoUnitario
+            // 
+            CustoUnitario.DataPropertyName = "CustoUnitario";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle1;
+            CustoUnitario.HeaderText = "Valor unitário";
+            CustoUnitario.Name = "CustoUnitario";
+            CustoUnitario.ReadOnly = true;
+            // 
+            // valorTotalMaterial
+            // 
+            valorTotalMaterial.DataPropertyName = "Total";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            valorTotalMaterial.DefaultCellStyle = dataGridViewCellStyle2;
+            valorTotalMaterial.HeaderText = "Valor total";
+            valorTotalMaterial.Name = "valorTotalMaterial";
+            valorTotalMaterial.ReadOnly = true;
+            // 
             // tpComponentes
             // 
             tpComponentes.Controls.Add(label7);
@@ -418,6 +451,41 @@
             dgvComponentes.ReadOnly = true;
             dgvComponentes.Size = new Size(521, 268);
             dgvComponentes.TabIndex = 24;
+            // 
+            // descricaoComponente
+            // 
+            descricaoComponente.DataPropertyName = "Descricao";
+            descricaoComponente.HeaderText = "Descrição";
+            descricaoComponente.Name = "descricaoComponente";
+            descricaoComponente.ReadOnly = true;
+            descricaoComponente.Width = 180;
+            // 
+            // quantidadeComponente
+            // 
+            quantidadeComponente.DataPropertyName = "Quantidade";
+            quantidadeComponente.HeaderText = "Quantidade";
+            quantidadeComponente.Name = "quantidadeComponente";
+            quantidadeComponente.ReadOnly = true;
+            // 
+            // valorUnitarioComponente
+            // 
+            valorUnitarioComponente.DataPropertyName = "CustoUnitario";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            valorUnitarioComponente.DefaultCellStyle = dataGridViewCellStyle3;
+            valorUnitarioComponente.HeaderText = "Valor unitário";
+            valorUnitarioComponente.Name = "valorUnitarioComponente";
+            valorUnitarioComponente.ReadOnly = true;
+            // 
+            // valorTotalComponente
+            // 
+            valorTotalComponente.DataPropertyName = "Total";
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            valorTotalComponente.DefaultCellStyle = dataGridViewCellStyle4;
+            valorTotalComponente.HeaderText = "Valor total";
+            valorTotalComponente.Name = "valorTotalComponente";
+            valorTotalComponente.ReadOnly = true;
             // 
             // tpProcessos
             // 
@@ -526,6 +594,41 @@
             dgvProcessos.Size = new Size(521, 268);
             dgvProcessos.TabIndex = 24;
             // 
+            // descricaoProcesso
+            // 
+            descricaoProcesso.DataPropertyName = "Descricao";
+            descricaoProcesso.HeaderText = "Descrição";
+            descricaoProcesso.Name = "descricaoProcesso";
+            descricaoProcesso.ReadOnly = true;
+            descricaoProcesso.Width = 180;
+            // 
+            // quantidadeProcesso
+            // 
+            quantidadeProcesso.DataPropertyName = "Quantidade";
+            quantidadeProcesso.HeaderText = "Quantidade";
+            quantidadeProcesso.Name = "quantidadeProcesso";
+            quantidadeProcesso.ReadOnly = true;
+            // 
+            // valorUnitarioProcesso
+            // 
+            valorUnitarioProcesso.DataPropertyName = "CustoHora";
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            valorUnitarioProcesso.DefaultCellStyle = dataGridViewCellStyle5;
+            valorUnitarioProcesso.HeaderText = "Valor unitário";
+            valorUnitarioProcesso.Name = "valorUnitarioProcesso";
+            valorUnitarioProcesso.ReadOnly = true;
+            // 
+            // valorTotalProcesso
+            // 
+            valorTotalProcesso.DataPropertyName = "Total";
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            valorTotalProcesso.DefaultCellStyle = dataGridViewCellStyle6;
+            valorTotalProcesso.HeaderText = "Valor total";
+            valorTotalProcesso.Name = "valorTotalProcesso";
+            valorTotalProcesso.ReadOnly = true;
+            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -605,111 +708,6 @@
             btnExcluirModulo.TabIndex = 30;
             btnExcluirModulo.UseVisualStyleBackColor = true;
             btnExcluirModulo.Click += btnExcluirModulo_Click;
-            // 
-            // Descricao
-            // 
-            Descricao.DataPropertyName = "Descricao";
-            Descricao.HeaderText = "Descrição";
-            Descricao.Name = "Descricao";
-            Descricao.ReadOnly = true;
-            Descricao.Width = 180;
-            // 
-            // Quantidade
-            // 
-            Quantidade.DataPropertyName = "Quantidade";
-            Quantidade.HeaderText = "Quantidade";
-            Quantidade.Name = "Quantidade";
-            Quantidade.ReadOnly = true;
-            // 
-            // CustoUnitario
-            // 
-            CustoUnitario.DataPropertyName = "CustoUnitario";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle1;
-            CustoUnitario.HeaderText = "Valor unitário";
-            CustoUnitario.Name = "CustoUnitario";
-            CustoUnitario.ReadOnly = true;
-            // 
-            // valorTotalMaterial
-            // 
-            valorTotalMaterial.DataPropertyName = "Total";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            valorTotalMaterial.DefaultCellStyle = dataGridViewCellStyle2;
-            valorTotalMaterial.HeaderText = "Valor total";
-            valorTotalMaterial.Name = "valorTotalMaterial";
-            valorTotalMaterial.ReadOnly = true;
-            // 
-            // descricaoComponente
-            // 
-            descricaoComponente.DataPropertyName = "Descricao";
-            descricaoComponente.HeaderText = "Descrição";
-            descricaoComponente.Name = "descricaoComponente";
-            descricaoComponente.ReadOnly = true;
-            descricaoComponente.Width = 180;
-            // 
-            // quantidadeComponente
-            // 
-            quantidadeComponente.DataPropertyName = "Quantidade";
-            quantidadeComponente.HeaderText = "Quantidade";
-            quantidadeComponente.Name = "quantidadeComponente";
-            quantidadeComponente.ReadOnly = true;
-            // 
-            // valorUnitarioComponente
-            // 
-            valorUnitarioComponente.DataPropertyName = "CustoUnitario";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            valorUnitarioComponente.DefaultCellStyle = dataGridViewCellStyle3;
-            valorUnitarioComponente.HeaderText = "Valor unitário";
-            valorUnitarioComponente.Name = "valorUnitarioComponente";
-            valorUnitarioComponente.ReadOnly = true;
-            // 
-            // valorTotalComponente
-            // 
-            valorTotalComponente.DataPropertyName = "Total";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            valorTotalComponente.DefaultCellStyle = dataGridViewCellStyle4;
-            valorTotalComponente.HeaderText = "Valor total";
-            valorTotalComponente.Name = "valorTotalComponente";
-            valorTotalComponente.ReadOnly = true;
-            // 
-            // descricaoProcesso
-            // 
-            descricaoProcesso.DataPropertyName = "Descricao";
-            descricaoProcesso.HeaderText = "Descrição";
-            descricaoProcesso.Name = "descricaoProcesso";
-            descricaoProcesso.ReadOnly = true;
-            descricaoProcesso.Width = 180;
-            // 
-            // quantidadeProcesso
-            // 
-            quantidadeProcesso.DataPropertyName = "Quantidade";
-            quantidadeProcesso.HeaderText = "Quantidade";
-            quantidadeProcesso.Name = "quantidadeProcesso";
-            quantidadeProcesso.ReadOnly = true;
-            // 
-            // valorUnitarioProcesso
-            // 
-            valorUnitarioProcesso.DataPropertyName = "CustoHora";
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            valorUnitarioProcesso.DefaultCellStyle = dataGridViewCellStyle5;
-            valorUnitarioProcesso.HeaderText = "Valor unitário";
-            valorUnitarioProcesso.Name = "valorUnitarioProcesso";
-            valorUnitarioProcesso.ReadOnly = true;
-            // 
-            // valorTotalProcesso
-            // 
-            valorTotalProcesso.DataPropertyName = "Total";
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            valorTotalProcesso.DefaultCellStyle = dataGridViewCellStyle6;
-            valorTotalProcesso.HeaderText = "Valor total";
-            valorTotalProcesso.Name = "valorTotalProcesso";
-            valorTotalProcesso.ReadOnly = true;
             // 
             // EQ0001mnIncluir
             // 
