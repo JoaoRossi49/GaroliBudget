@@ -374,7 +374,67 @@ namespace GaroliBudget
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
+            if (tcItens.SelectedTab == tpMateriais)
+            {
+                ExcluirItem<Material>(
+                    dgvMateriais,
+                    _equipamento.Materiais
+                );
+            }
+            else if (tcItens.SelectedTab == tpComponentes)
+            {
+                ExcluirItem<Componente>(
+                    dgvComponentes,
+                    _equipamento.Componentes
+                );
+            }
+            else if (tcItens.SelectedTab == tpProcessos)
+            {
+                ExcluirItem<Processo>(
+                    dgvProcessos,
+                    _equipamento.Processos
+                );
+            }
 
+            CalcularTotalGeral();
+        }
+
+        private void ExcluirItem<T>(
+        DataGridView grid,
+        List<T> lista
+    ) where T : class, new()
+        {
+            if (grid.SelectedRows.Count == 1)
+            {
+                var selecionado = grid.SelectedRows[0].DataBoundItem as T;
+
+                if (selecionado != null)
+                {
+                    lista.Remove(selecionado);
+                }
+
+                grid.DataSource = null;
+                grid.DataSource = lista
+                    .Where(m => ((dynamic)m).Modulo != null &&
+                                ((dynamic)m).Modulo.Id == GetModuloSelecionado())
+                    .ToList();
+            }
+            else if (grid.SelectedRows.Count > 1)
+            {
+                MessageBox.Show(
+                    "Selecione apenas um registro por vez.",
+                    "A T E N Ç Ã O",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Selecione um item na lista para excluir.",
+                    "A T E N Ç Ã O",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
 
         #endregion
