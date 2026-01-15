@@ -370,24 +370,11 @@ namespace GaroliBudget
 
             return true;
         }
+       
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (dgvMateriais.SelectedRows.Count > 0)
-            {
-                foreach (DataGridViewRow row in dgvMateriais.SelectedRows)
-                {
-                    {
-                        dgvMateriais.Rows.Remove(row);
-                    }
-                }
 
-                CalcularTotalGeral();
-            }
-            else
-            {
-                MessageBox.Show("Selecione uma linha inteira clicando na barra lateral esquerda do Grid.");
-            }
         }
 
         #endregion

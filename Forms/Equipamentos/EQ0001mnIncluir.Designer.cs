@@ -52,7 +52,6 @@
             cbMateriais = new ComboBox();
             btnExcluir = new Button();
             btnIncluirMaterial = new Button();
-            btnEditar = new Button();
             dgvMateriais = new DataGridView();
             Descricao = new DataGridViewTextBoxColumn();
             Quantidade = new DataGridViewTextBoxColumn();
@@ -65,7 +64,6 @@
             cbComponentes = new ComboBox();
             button1 = new Button();
             btnIncluirComponente = new Button();
-            button3 = new Button();
             dgvComponentes = new DataGridView();
             descricaoComponente = new DataGridViewTextBoxColumn();
             quantidadeComponente = new DataGridViewTextBoxColumn();
@@ -78,7 +76,6 @@
             cbProcessos = new ComboBox();
             button4 = new Button();
             btnIncluirProcesso = new Button();
-            button6 = new Button();
             dgvProcessos = new DataGridView();
             descricaoProcesso = new DataGridViewTextBoxColumn();
             quantidadeProcesso = new DataGridViewTextBoxColumn();
@@ -210,7 +207,6 @@
             tpMateriais.Controls.Add(cbMateriais);
             tpMateriais.Controls.Add(btnExcluir);
             tpMateriais.Controls.Add(btnIncluirMaterial);
-            tpMateriais.Controls.Add(btnEditar);
             tpMateriais.Controls.Add(dgvMateriais);
             tpMateriais.Location = new Point(4, 24);
             tpMateriais.Name = "tpMateriais";
@@ -275,27 +271,13 @@
             btnIncluirMaterial.BackgroundImage = (Image)resources.GetObject("btnIncluirMaterial.BackgroundImage");
             btnIncluirMaterial.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirMaterial.Font = new Font("Segoe UI", 8F);
-            btnIncluirMaterial.Location = new Point(359, 31);
+            btnIncluirMaterial.Location = new Point(414, 31);
             btnIncluirMaterial.Name = "btnIncluirMaterial";
             btnIncluirMaterial.Size = new Size(47, 25);
             btnIncluirMaterial.TabIndex = 7;
             btnIncluirMaterial.TextAlign = ContentAlignment.TopCenter;
             btnIncluirMaterial.UseVisualStyleBackColor = false;
             btnIncluirMaterial.Click += btnIncluir_Click;
-            // 
-            // btnEditar
-            // 
-            btnEditar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnEditar.BackColor = Color.White;
-            btnEditar.BackgroundImage = (Image)resources.GetObject("btnEditar.BackgroundImage");
-            btnEditar.BackgroundImageLayout = ImageLayout.Center;
-            btnEditar.Font = new Font("Segoe UI", 8F);
-            btnEditar.Location = new Point(412, 31);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(47, 25);
-            btnEditar.TabIndex = 8;
-            btnEditar.TextAlign = ContentAlignment.TopCenter;
-            btnEditar.UseVisualStyleBackColor = false;
             // 
             // dgvMateriais
             // 
@@ -353,7 +335,6 @@
             tpComponentes.Controls.Add(cbComponentes);
             tpComponentes.Controls.Add(button1);
             tpComponentes.Controls.Add(btnIncluirComponente);
-            tpComponentes.Controls.Add(button3);
             tpComponentes.Controls.Add(dgvComponentes);
             tpComponentes.Location = new Point(4, 24);
             tpComponentes.Name = "tpComponentes";
@@ -409,6 +390,7 @@
             button1.TabIndex = 27;
             button1.TextAlign = ContentAlignment.TopCenter;
             button1.UseVisualStyleBackColor = false;
+            button1.Click += btnExcluir_Click;
             // 
             // btnIncluirComponente
             // 
@@ -417,27 +399,13 @@
             btnIncluirComponente.BackgroundImage = (Image)resources.GetObject("btnIncluirComponente.BackgroundImage");
             btnIncluirComponente.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirComponente.Font = new Font("Segoe UI", 8F);
-            btnIncluirComponente.Location = new Point(359, 31);
+            btnIncluirComponente.Location = new Point(414, 31);
             btnIncluirComponente.Name = "btnIncluirComponente";
             btnIncluirComponente.Size = new Size(47, 25);
             btnIncluirComponente.TabIndex = 25;
             btnIncluirComponente.TextAlign = ContentAlignment.TopCenter;
             btnIncluirComponente.UseVisualStyleBackColor = false;
             btnIncluirComponente.Click += btnIncluir_Click;
-            // 
-            // button3
-            // 
-            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button3.BackColor = Color.White;
-            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
-            button3.BackgroundImageLayout = ImageLayout.Center;
-            button3.Font = new Font("Segoe UI", 8F);
-            button3.Location = new Point(412, 31);
-            button3.Name = "button3";
-            button3.Size = new Size(47, 25);
-            button3.TabIndex = 26;
-            button3.TextAlign = ContentAlignment.TopCenter;
-            button3.UseVisualStyleBackColor = false;
             // 
             // dgvComponentes
             // 
@@ -495,7 +463,6 @@
             tpProcessos.Controls.Add(cbProcessos);
             tpProcessos.Controls.Add(button4);
             tpProcessos.Controls.Add(btnIncluirProcesso);
-            tpProcessos.Controls.Add(button6);
             tpProcessos.Controls.Add(dgvProcessos);
             tpProcessos.Location = new Point(4, 24);
             tpProcessos.Name = "tpProcessos";
@@ -551,6 +518,7 @@
             button4.TabIndex = 27;
             button4.TextAlign = ContentAlignment.TopCenter;
             button4.UseVisualStyleBackColor = false;
+            button4.Click += btnExcluir_Click;
             // 
             // btnIncluirProcesso
             // 
@@ -559,27 +527,13 @@
             btnIncluirProcesso.BackgroundImage = (Image)resources.GetObject("btnIncluirProcesso.BackgroundImage");
             btnIncluirProcesso.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirProcesso.Font = new Font("Segoe UI", 8F);
-            btnIncluirProcesso.Location = new Point(359, 31);
+            btnIncluirProcesso.Location = new Point(414, 31);
             btnIncluirProcesso.Name = "btnIncluirProcesso";
             btnIncluirProcesso.Size = new Size(47, 25);
             btnIncluirProcesso.TabIndex = 25;
             btnIncluirProcesso.TextAlign = ContentAlignment.TopCenter;
             btnIncluirProcesso.UseVisualStyleBackColor = false;
             btnIncluirProcesso.Click += btnIncluir_Click;
-            // 
-            // button6
-            // 
-            button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button6.BackColor = Color.White;
-            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
-            button6.BackgroundImageLayout = ImageLayout.Center;
-            button6.Font = new Font("Segoe UI", 8F);
-            button6.Location = new Point(412, 31);
-            button6.Name = "button6";
-            button6.Size = new Size(47, 25);
-            button6.TabIndex = 26;
-            button6.TextAlign = ContentAlignment.TopCenter;
-            button6.UseVisualStyleBackColor = false;
             // 
             // dgvProcessos
             // 
@@ -761,7 +715,6 @@
         private ComboBox cbMateriais;
         private Button btnExcluir;
         private Button btnIncluirMaterial;
-        private Button btnEditar;
         private Label label4;
         private TextBox tbMateriaisQuantidade;
         private Label label5;
@@ -773,7 +726,6 @@
         private ComboBox cbComponentes;
         private Button button1;
         private Button btnIncluirComponente;
-        private Button button3;
         private DataGridView dgvComponentes;
         private Label label9;
         private TextBox tbProcessosQuantidade;
@@ -781,7 +733,6 @@
         private ComboBox cbProcessos;
         private Button button4;
         private Button btnIncluirProcesso;
-        private Button button6;
         private DataGridView dgvProcessos;
         private NumericUpDown nmMargem;
         private TextBox tbDescricaoEquipamento;
