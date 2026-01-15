@@ -2,6 +2,7 @@ using GaroliBudget.Infrastructure;
 using GaroliBudget.Models;
 using GaroliBudget.Repositories;
 using GaroliBudget.Repositories.Interfaces;
+using GaroliBudget.Repositories.ItensEquipamento;
 using GaroliBudget.Services;
 using Microsoft.VisualBasic;
 using System.Data;
@@ -21,6 +22,7 @@ namespace GaroliBudget
         private ProcessoService _processoService;
 
         private Equipamento _equipamento = new Equipamento();
+        EquipamentoModuloRepository _moduloRepository = new EquipamentoModuloRepository();
 
         public EQ0001mnIncluir(IEquipamentoService equipamentoService)
         {
@@ -592,8 +594,6 @@ namespace GaroliBudget
 
         private void CarregarModulos()
         {
-            EquipamentoModuloRepository _moduloRepository = new EquipamentoModuloRepository();
-
             List<Modulo> modulos = _moduloRepository.ObterPorEquipamentoId(_equipamento.IdEquipamento);
 
             foreach (Modulo modulo in modulos)

@@ -9,16 +9,16 @@ using GaroliBudget.Repositories.Interfaces;
 using GaroliBudget.Services;
 using Npgsql;
 
-namespace GaroliBudget.Repositories
+namespace GaroliBudget.Repositories.ItensOrcamento
 {
-    public class EquipamentoMaterialRepository : IEquipamentoMaterialRepository
+    public class OrcamentoMaterialRepository : IOrcamentoMaterialRepository
     {
-        private EquipamentoModuloRepository _moduloRepository  = new EquipamentoModuloRepository();
+        private OrcamentoModuloRepository _moduloRepository  = new OrcamentoModuloRepository();
 
         private readonly IMaterialRepository _materialRepository = new MaterialRepository();
 
         public void InserirLista(
-            int idEquipamento,
+            int idOrcamento,
             List<Material> materiais,
             NpgsqlConnection conn,
             NpgsqlTransaction tran)
@@ -35,7 +35,7 @@ namespace GaroliBudget.Repositories
                 VALUES
                 (@id, @mod, @idMaterial, @descricao, @qtd, @und)";
 
-                    cmd.Parameters.AddWithValue("@id", idEquipamento);
+                    cmd.Parameters.AddWithValue("@id", idOrcamento);
                     cmd.Parameters.AddWithValue("@mod", m.Modulo.Id);
                     cmd.Parameters.AddWithValue("@idMaterial", m.IdMaterial);
                     cmd.Parameters.AddWithValue("@descricao", m.Descricao);
@@ -47,8 +47,8 @@ namespace GaroliBudget.Repositories
             }
         }
 
-        public void RemoverPorEquipamento(
-            int idEquipamento,
+        public void RemoverPorOrcamento(
+            int idOrcamento,
             NpgsqlConnection conn,
             NpgsqlTransaction tran)
         {
@@ -57,11 +57,11 @@ namespace GaroliBudget.Repositories
             cmd.CommandText =
                 "DELETE FROM EQUIPAMENTO_MATERIAL WHERE ID_EQUIPAMENTO = @id";
 
-            cmd.Parameters.AddWithValue("@id", idEquipamento);
+            cmd.Parameters.AddWithValue("@id", idOrcamento);
             cmd.ExecuteNonQuery();
         }
 
-        public List<Material> ListarPorEquipamentoId(int IdEquipamento, int idModulo = 0)
+        public List<Material> ListarPorOrcamentoId(int IdOrcamento, int idModulo = 0)
         {
             var lista = new List<Material>();
 
@@ -69,7 +69,7 @@ namespace GaroliBudget.Repositories
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MATERIAL WHERE ID_EQUIPAMENTO = {IdEquipamento} " +
+            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MATERIAL WHERE ID_EQUIPAMENTO = {IdOrcamento} " +
                 (idModulo > 0 ? $"AND ID_MODULO = {idModulo};" : ";");
 
             using var reader = cmd.ExecuteReader();

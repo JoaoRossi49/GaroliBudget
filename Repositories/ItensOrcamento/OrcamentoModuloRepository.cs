@@ -7,9 +7,9 @@ using GaroliBudget.Infrastructure;
 using GaroliBudget.Models;
 using Npgsql;
 
-namespace GaroliBudget.Repositories
+namespace GaroliBudget.Repositories.ItensOrcamento
 {
-    public class EquipamentoModuloRepository
+    public class OrcamentoModuloRepository
     {
         public int Inserir(
             Modulo modulo,
@@ -26,7 +26,7 @@ namespace GaroliBudget.Repositories
             (@equip, @nome, @ordem)
             RETURNING ID_MODULO";
 
-            cmd.Parameters.AddWithValue("@equip", modulo.IdEquipamento);
+            cmd.Parameters.AddWithValue("@equip", modulo.IdOrcamento);
             cmd.Parameters.AddWithValue("@nome", modulo.Nome);
             cmd.Parameters.AddWithValue("@ordem", modulo.Ordem);
 
@@ -52,7 +52,7 @@ namespace GaroliBudget.Repositories
             return Mapear(dr);
         }
 
-        public List<Modulo> ObterPorEquipamentoId(int idEquipamento)
+        public List<Modulo> ObterPorOrcamentoId(int idOrcamento)
         {
             var lista = new List<Modulo>();
 
@@ -60,7 +60,7 @@ namespace GaroliBudget.Repositories
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MODULO WHERE ID_EQUIPAMENTO = {idEquipamento};";
+            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MODULO WHERE ID_EQUIPAMENTO = {idOrcamento};";
 
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -91,7 +91,7 @@ namespace GaroliBudget.Repositories
             return new Modulo
             {
                 Id = reader.GetInt32(reader.GetOrdinal("ID_MODULO")),
-                IdEquipamento = reader.GetInt32(reader.GetOrdinal("ID_EQUIPAMENTO")),
+                IdOrcamento = reader.GetInt32(reader.GetOrdinal("ID_EQUIPAMENTO")),
                 Nome = reader["NOME_MODULO"].ToString(),
                 Ordem = Convert.ToInt32(reader["ORDEM"])
             };

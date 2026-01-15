@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GaroliBudget.Infrastructure;
 using GaroliBudget.Models;
-using GaroliBudget.Repositories;
 using GaroliBudget.Repositories.Interfaces;
+using GaroliBudget.Repositories.ItensEquipamento;
 
 namespace GaroliBudget.Services
 {

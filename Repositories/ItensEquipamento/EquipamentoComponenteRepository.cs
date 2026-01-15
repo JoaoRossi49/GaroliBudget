@@ -8,7 +8,7 @@ using GaroliBudget.Models;
 using GaroliBudget.Repositories.Interfaces;
 using Npgsql;
 
-namespace GaroliBudget.Repositories
+namespace GaroliBudget.Repositories.ItensEquipamento
 {
     public class EquipamentoComponenteRepository : IEquipamentoComponenteRepository
     {
