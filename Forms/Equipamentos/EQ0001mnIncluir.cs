@@ -176,7 +176,8 @@ namespace GaroliBudget
 
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            AtualizaObjeto();
+            if (!AtualizaObjeto())
+                return;
 
             //Salva itens do equipamento
             _equipamentoService.Salvar(_equipamento);
@@ -184,14 +185,16 @@ namespace GaroliBudget
             this.Close();
         }
 
-        private void AtualizaObjeto()
+        private bool AtualizaObjeto()
         {
             if (!ValidaFormularioPai())
-            { return; }
+            { return false; }
 
             _equipamento.Descricao = tbDescricaoEquipamento.Text;
             _equipamento.Codigo = tbCodigoEquipamento.Text;
             _equipamento.Observacao = tbObservacaoEquipamento.Text;
+
+            return true;
         }
 
         private bool ValidaFormularioPai()

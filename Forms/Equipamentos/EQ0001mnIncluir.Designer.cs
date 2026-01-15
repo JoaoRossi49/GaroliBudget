@@ -243,6 +243,8 @@
             // 
             // cbMateriais
             // 
+            cbMateriais.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbMateriais.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbMateriais.FormattingEnabled = true;
             cbMateriais.Location = new Point(6, 34);
             cbMateriais.Name = "cbMateriais";

@@ -13,7 +13,7 @@ namespace GaroliBudget.Infrastructure
         private static string Host = "127.0.0.1";
         private static string Database = "garoli";
         private static string User = "postgres";
-        private static string Password = "1234";
+        private static string Password = "123";
 
         public static string ConnectionString =>
                     $"Host={Host};Username={User};Password={Password};Database={Database};Port=5432;";
