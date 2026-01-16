@@ -15,15 +15,22 @@ namespace GaroliBudget.Repositories
 
             var cmd = conn.CreateCommand();
             cmd.CommandText = @"
-                INSERT INTO EQUIPAMENTO 
-                (CODIGO, DESCRICAO, OBSERVACOES, ATIVO)
+                INSERT INTO ORCAMENTO 
+                (NUMERO, DATA_ORCAMENTO, ID_CLIENTE, ID_EQUIPAMENTO, DESCRICAO, MARGEM_CONTRIBUICAO,
+                VALOR_TOTAL, STATUS, OBSERVACOES)
                 VALUES 
-                (@codigo, @descricao, @observacao, 1)
+                (@numero, @dat, @cliente, @eq, @descricao, @margem, @total, @status, @observacao)
                 RETURNING ID_EQUIPAMENTO";
 
-            cmd.Parameters.AddWithValue("@codigo", m.Codigo);
+            cmd.Parameters.AddWithValue("@numero", m.Numero);
+            cmd.Parameters.AddWithValue("@dat", m.Data);
+            cmd.Parameters.AddWithValue("@cliente", m.cliente.IdCliente);
+            cmd.Parameters.AddWithValue("@eq", m.equipamento.IdEquipamento);
             cmd.Parameters.AddWithValue("@descricao", m.Descricao);
-            cmd.Parameters.AddWithValue("@observacao", m.Observacao == null ? "" : m.Observacao);
+            cmd.Parameters.AddWithValue("@margem", m.MargemContribuicao);
+            cmd.Parameters.AddWithValue("@total", m.ValorTotal);
+            cmd.Parameters.AddWithValue("@status", m.Status);
+            cmd.Parameters.AddWithValue("@observacao", m.Observacao);
 
             return System.Convert.ToInt32(cmd.ExecuteScalar());
         }
@@ -36,17 +43,28 @@ namespace GaroliBudget.Repositories
             var cmd = conn.CreateCommand();
 
             cmd.CommandText =
-                @"UPDATE EQUIPAMENTO
-              SET CODIGO = @codigo,
-                  DESCRICAO = @descricao,
-                  OBSERVACOES = @observacao,
-                  ATIVO = @ativo
-              WHERE ID_EQUIPAMENTO = @id;";
+                @"UPDATE ORCAMENTO
+                SET NUMERO = @numero,
+                    DATA_ORCAMENTO = @dat,
+                    ID_CLIENTE = @cliente, 
+                    ID_EQUIPAMENTO = @eq, 
+                    DESCRICAO = @descricao, 
+                    MARGEM_CONTRIBUICAO = @margem,
+                    VALOR_TOTAL = total, 
+                    STATUS = @status, 
+                    OBSERVACOES = @observacao
+              WHERE ID_ORCAMENTO = @id;";
 
-            cmd.Parameters.AddWithValue("@codigo", m.Codigo);
+            cmd.Parameters.AddWithValue("@numero", m.Numero);
+            cmd.Parameters.AddWithValue("@dat", m.Data);
+            cmd.Parameters.AddWithValue("@cliente", m.cliente.IdCliente);
+            cmd.Parameters.AddWithValue("@eq", m.equipamento.IdEquipamento);
             cmd.Parameters.AddWithValue("@descricao", m.Descricao);
+            cmd.Parameters.AddWithValue("@margem", m.MargemContribuicao);
+            cmd.Parameters.AddWithValue("@total", m.ValorTotal);
+            cmd.Parameters.AddWithValue("@status", m.Status);
             cmd.Parameters.AddWithValue("@observacao", m.Observacao);
-            cmd.Parameters.AddWithValue("@ativo", m.Ativo ? 1 : 0);
+
             cmd.Parameters.AddWithValue("@id", m.IdOrcamento);
 
             cmd.ExecuteNonQuery();
@@ -95,7 +113,7 @@ namespace GaroliBudget.Repositories
 
             cmd.CommandText =
             @"SELECT *
-              FROM EQUIPAMENTO WHERE ID_EQUIPAMENTO = @id;";
+              FROM ORCAMENTO WHERE ID_ORCAMENTO = @id;";
 
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -105,25 +123,12 @@ namespace GaroliBudget.Repositories
             return Mapear(dr);
         }
 
-        public void Inativar(int id)
-        {
-            using var conn = DBPostgres.GetConnection();
-            conn.Open();
-
-            var cmd = conn.CreateCommand();
-            cmd.CommandText =
-                @"UPDATE EQUIPAMENTO SET ATIVO = 0 WHERE ID_EQUIPAMENTO = @id;";
-
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.ExecuteNonQuery();
-        }
-
         private Orcamento Mapear(NpgsqlDataReader reader)
         {
             return new Orcamento
             {
                 IdOrcamento = reader.GetInt32(reader.GetOrdinal("ID_EQUIPAMENTO")),
-                Codigo = reader["CODIGO"].ToString(),
+                Numero = reader["CODIGO"].ToString(),
                 Descricao = reader["DESCRICAO"].ToString(),
                 Observacao = reader["OBSERVACOES"].ToString(),
                 Ativo = reader.GetInt32(reader.GetOrdinal("ATIVO")) == 1

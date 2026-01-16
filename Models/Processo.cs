@@ -18,5 +18,6 @@ namespace GaroliBudget.Models
             get { return Quantidade * CustoHora; }
         }
         public Modulo Modulo { get; set; }
+        public int IdEquipamento { get; set; }
     }
 }

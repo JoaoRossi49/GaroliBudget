@@ -17,7 +17,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
         private readonly IProcessoRepository _processoRepository = new ProcessoRepository();
 
         public void InserirLista(
-            int idOrcamento,
+            int idEquipamento,
             List<Processo> processos,
             NpgsqlConnection conn,
             NpgsqlTransaction tran)
@@ -29,12 +29,12 @@ namespace GaroliBudget.Repositories.ItensOrcamento
                     var cmd = conn.CreateCommand();
                     cmd.Transaction = tran;
                     cmd.CommandText = @"
-                INSERT INTO EQUIPAMENTO_MAO_OBRA
+                INSERT INTO ORCAMENTO_MAO_OBRA
                 (ID_EQUIPAMENTO, ID_MODULO, ID_PROCESSO, DESCRICAO_PROCESSO, HORAS_PADRAO)
                 VALUES
                 (@id, @mod, @idProcesso, @descricao, @qtd)";
 
-                    cmd.Parameters.AddWithValue("@id", idOrcamento);
+                    cmd.Parameters.AddWithValue("@id", idEquipamento);
                     cmd.Parameters.AddWithValue("@mod", p.Modulo.Id);
                     cmd.Parameters.AddWithValue("@idProcesso", p.IdProcesso);
                     cmd.Parameters.AddWithValue("@descricao", p.Descricao);
@@ -52,7 +52,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             var cmd = conn.CreateCommand();
             cmd.Transaction = tran;
             cmd.CommandText =
-                "DELETE FROM EQUIPAMENTO_MAO_OBRA WHERE ID_EQUIPAMENTO = @id";
+                "DELETE FROM ORCAMENTO_MAO_OBRA WHERE ID_ORCAMENTO = @id";
 
             cmd.Parameters.AddWithValue("@id", idOrcamento);
             cmd.ExecuteNonQuery();
@@ -67,7 +67,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MAO_OBRA WHERE ID_EQUIPAMENTO = {IdOrcamento} " +
+            cmd.CommandText = $"SELECT * FROM ORCAMENTO_MAO_OBRA WHERE ID_ORCAMENTO = {IdOrcamento} " +
                 (idModulo > 0 ? $"AND ID_MODULO = {idModulo};" : ";");
 
             using var reader = cmd.ExecuteReader();

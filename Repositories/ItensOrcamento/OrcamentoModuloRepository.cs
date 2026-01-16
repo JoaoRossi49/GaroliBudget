@@ -20,13 +20,13 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             cmd.Transaction = tran;
 
             cmd.CommandText = @"
-            INSERT INTO EQUIPAMENTO_MODULO
-            (ID_EQUIPAMENTO, NOME_MODULO, ORDEM)
+            INSERT INTO ORCAMENTO_MODULO
+            (ID_ORCAMENTO, NOME_MODULO, ORDEM)
             VALUES
-            (@equip, @nome, @ordem)
+            (@orca, @nome, @ordem)
             RETURNING ID_MODULO";
 
-            cmd.Parameters.AddWithValue("@equip", modulo.IdOrcamento);
+            cmd.Parameters.AddWithValue("@orca", modulo.IdOrcamento);
             cmd.Parameters.AddWithValue("@nome", modulo.Nome);
             cmd.Parameters.AddWithValue("@ordem", modulo.Ordem);
 
@@ -42,7 +42,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
 
             cmd.CommandText =
             @"SELECT *
-              FROM EQUIPAMENTO_MODULO WHERE ID_MODULO = @id;";
+              FROM ORCAMENTO_MODULO WHERE ID_MODULO = @id;";
 
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -60,7 +60,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO_MODULO WHERE ID_EQUIPAMENTO = {idOrcamento};";
+            cmd.CommandText = $"SELECT * FROM ORCAMENTO_MODULO WHERE ID_ORCAMENTO = {idOrcamento};";
 
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -80,7 +80,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             var cmd = conn.CreateCommand();
 
             cmd.CommandText =
-                "DELETE FROM EQUIPAMENTO_MODULO WHERE ID_MODULO = @id";
+                "DELETE FROM ORCAMENTO_MODULO WHERE ID_MODULO = @id";
 
             cmd.Parameters.AddWithValue("@id", idModulo);
             cmd.ExecuteNonQuery();
@@ -91,7 +91,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             return new Modulo
             {
                 Id = reader.GetInt32(reader.GetOrdinal("ID_MODULO")),
-                IdOrcamento = reader.GetInt32(reader.GetOrdinal("ID_EQUIPAMENTO")),
+                IdOrcamento = reader.GetInt32(reader.GetOrdinal("ID_ORCAMENTO")),
                 Nome = reader["NOME_MODULO"].ToString(),
                 Ordem = Convert.ToInt32(reader["ORDEM"])
             };
