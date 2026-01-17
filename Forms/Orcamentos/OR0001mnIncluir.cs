@@ -2,7 +2,7 @@ using GaroliBudget.Infrastructure;
 using GaroliBudget.Models;
 using GaroliBudget.Repositories;
 using GaroliBudget.Repositories.Interfaces;
-using GaroliBudget.Repositories.ItensEquipamento;
+using GaroliBudget.Repositories.ItensOrcamento;
 using GaroliBudget.Services;
 using Microsoft.VisualBasic;
 using System.Data;
@@ -14,7 +14,8 @@ namespace GaroliBudget
 {
     public partial class OR0001mnIncluir : Form
     {
-        private readonly IEquipamentoService _equipamentoService;
+        private IEquipamentoService _equipamentoService;
+        private readonly IOrcamentoService _orcamentoService;
 
 
         private MaterialService _materialService;
@@ -22,24 +23,29 @@ namespace GaroliBudget
         private ProcessoService _processoService;
 
         private Equipamento _equipamento = new Equipamento();
-        EquipamentoModuloRepository _moduloRepository = new EquipamentoModuloRepository();
+        //EquipamentoModuloRepository _moduloRepository = new EquipamentoModuloRepository();
 
-        public OR0001mnIncluir(IEquipamentoService equipamentoService)
+        private Orcamento _orcamento = new Orcamento();
+
+        public OR0001mnIncluir(IOrcamentoService orcamentoService)
         {
             InitializeComponent();
             CarregarServices();
-            _equipamentoService = equipamentoService;
+            _orcamentoService = orcamentoService;
             _equipamento.Materiais = new List<Material>();
             _equipamento.Processos = new List<Processo>();
             _equipamento.Componentes = new List<Componente>();
+            _orcamento.equipamento = _equipamento;
 
             this.Text = "Novo Equipamento";
         }
 
-        public OR0001mnIncluir(IEquipamentoService equipamentoService, Equipamento equipamentoParaEditar) : this(equipamentoService)
+        public OR0001mnIncluir(IOrcamentoService orcamentoService, Orcamento orcamentoParaEditar) : this(orcamentoService)
         {
             CarregarServices();
-            _equipamento = equipamentoParaEditar;
+            _orcamento = orcamentoParaEditar;
+
+            _equipamento = _orcamento.equipamento;
             _equipamento.Materiais = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento);
             _equipamento.Processos = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento);
             _equipamento.Componentes = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento);
@@ -51,6 +57,9 @@ namespace GaroliBudget
 
         public void CarregarServices()
         {
+            IEquipamentoRepository reporEquipamento = new EquipamentoRepository();
+            _equipamentoService = new EquipamentoService(reporEquipamento);
+
             IMaterialRepository repoMaterial = new MaterialRepository();
             _materialService = new MaterialService(repoMaterial);
 
@@ -62,11 +71,35 @@ namespace GaroliBudget
         }
         private void OR0001mnIncluir_Load(object sender, EventArgs e)
         {
+            CarregarComboEquipamentos();
+            CarregarComboClientes();
             CarregarDataGrid();
             CarregarComboMateriais();
             CarregarComboComponentes();
             CarregarComboProcessos();
             CalcularTotalGeral();
+        }
+
+        private void CarregarComboEquipamentos()
+        {
+            cbEquipamento.Items.Clear();
+            cbEquipamento.DataSource = _equipamentoService.ListarAtivos();
+
+            cbEquipamento.DisplayMember = "Descricao";
+            cbEquipamento.ValueMember = "IdEquipamento";
+            cbEquipamento.SelectedIndex = -1;
+        }
+
+        private void CarregarComboClientes()
+        {
+            IClienteRepository clienteRepository = new ClienteRepository();
+            ClienteService cs = new ClienteService(clienteRepository);
+            cbCliente.Items.Clear();
+            cbCliente.DataSource = cs.ListarAtivos();
+
+            cbCliente.DisplayMember = "NomeFantasia";
+            cbCliente.ValueMember = "IdCliente";
+            cbCliente.SelectedIndex = -1;
         }
 
         private void CarregarDataGrid()
@@ -124,9 +157,8 @@ namespace GaroliBudget
 
         private void PreencherCampos()
         {
-            tbDescricaoEquipamento.Text = _equipamento.Descricao;
-            tbCodigoEquipamento.Text = _equipamento.Codigo;
-            tbObservacaoEquipamento.Text = _equipamento.Observacao;
+            tbNumeroOrcamento.Text = _orcamento.Numero;
+            tbObservacoes.Text = _orcamento.Observacao;
         }
         private void nmMargem_ValueChanged(object sender, EventArgs e)
         {
@@ -192,26 +224,36 @@ namespace GaroliBudget
             if (!ValidaFormularioPai())
             { return false; }
 
-            _equipamento.Descricao = tbDescricaoEquipamento.Text;
-            _equipamento.Codigo = tbCodigoEquipamento.Text;
-            _equipamento.Observacao = tbObservacaoEquipamento.Text;
+            //_orcamento.cliente =
+            //_orcamento.Descricao =
+
+            //_equipamento.Descricao = tbDescricaoEquipamento.Text;
+            //_equipamento.Codigo = tbNumeroOrcamento.Text;
+            //_equipamento.Observacao = tbObservacaoEquipamento.Text;
 
             return true;
         }
 
         private bool ValidaFormularioPai()
         {
-            if (tbDescricaoEquipamento.Text.Length == 0)
+            if (String.IsNullOrEmpty(tbNumeroOrcamento.Text))
             {
-                MessageBox.Show("Informe uma DESCRICAO válida para o equipamento", "A T E N Ç Ã O");
-                tbDescricaoEquipamento.Focus();
+                MessageBox.Show("Informe um número para o orçamento", "A T E N Ç Ã O");
+                tbNumeroOrcamento.Focus();
                 return false;
             }
 
-            if (tbCodigoEquipamento.Text.Length == 0)
+            if (cbCliente.SelectedIndex == -1)
             {
-                MessageBox.Show("Informe um CÓDIGO válido para o equipamento", "A T E N Ç Ã O");
-                tbCodigoEquipamento.Focus();
+                MessageBox.Show("Selecione um cliente para o orçamento", "A T E N Ç Ã O");
+                cbCliente.Focus();
+                return false;
+            }
+
+            if (cbEquipamento.SelectedIndex == -1)
+            {
+                MessageBox.Show("Selecione um equipamento para o orçamento", "A T E N Ç Ã O");
+                tbNumeroOrcamento.Focus();
                 return false;
             }
 
@@ -375,7 +417,7 @@ namespace GaroliBudget
 
             return true;
         }
-       
+
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
@@ -511,8 +553,8 @@ namespace GaroliBudget
 
             excluirItensModulo(_equipamento.Materiais, _equipamento.Componentes, _equipamento.Processos, idModulo);
 
-            var repo = new EquipamentoModuloRepository();
-            repo.RemoverPorId(idModulo);
+            //var repo = new EquipamentoModuloRepository();
+            //repo.RemoverPorId(idModulo);
 
             treeViewModulos.Nodes.Remove(treeViewModulos.SelectedNode);
             MessageBox.Show("Módulo excluído com sucesso!");
@@ -544,10 +586,10 @@ namespace GaroliBudget
             using var tran = conn.BeginTransaction();
             try
             {
-                var repo = new EquipamentoModuloRepository();
-                modulo.IdEquipamento = equipamento.IdEquipamento;
-                modulo.Id = repo.Inserir(modulo, conn, tran);
-                tran.Commit();
+                //var repo = new EquipamentoModuloRepository();
+                //modulo.IdEquipamento = equipamento.IdEquipamento;
+                //modulo.Id = repo.Inserir(modulo, conn, tran);
+                //tran.Commit();
             }
             catch (Exception ex)
             {
@@ -559,33 +601,41 @@ namespace GaroliBudget
 
         private bool PreCadastroEquipamento()
         {
-            if (!ValidarEquipamento())
-                return false;
+            //if (!ValidarEquipamento())
+            //    return false;
 
-            _equipamento.Codigo = tbCodigoEquipamento.Text;
-            _equipamento.Descricao = tbDescricaoEquipamento.Text;
-            _equipamento.Observacao = tbObservacaoEquipamento.Text;
+            //_orcamento.Numero = tbNumeroOrcamento.Text;
+            //_orcamento.Observacao = tbObservacoes.Text;
 
-            _equipamento.IdEquipamento = _equipamentoService.CriarEquipamento(_equipamento);
+            //_orcamento.IdOrcamento = _orcamentoService.CriarOrcamento(_orcamento);
 
-            tbCodigoEquipamento.ReadOnly = true;
-            tbObservacaoEquipamento.ReadOnly = true;
-            tbDescricaoEquipamento.ReadOnly = true;
+            //tbNumeroOrcamento.ReadOnly = true;
+            //tbObservacaoEquipamento.ReadOnly = true;
+            //tbDescricaoEquipamento.ReadOnly = true;
 
             return (_equipamento.IdEquipamento > 0);
         }
 
-        private bool ValidarEquipamento()
+        private bool ValidarOrcamento()
         {
-            if (tbCodigoEquipamento.Text.Length == 0)
+            if (tbNumeroOrcamento.Text.Length == 0)
             {
-                MessageBox.Show("Informe um código para o equipamento", "A T E N Ç Ã O");
+                MessageBox.Show("Informe um número para o orçamento", "A T E N Ç Ã O");
+                tbNumeroOrcamento.Focus();
                 return false;
             }
 
-            if (tbDescricaoEquipamento.Text.Length == 0)
+            if (cbCliente.SelectedIndex == -1)
             {
-                MessageBox.Show("Informe uma descrição para o equipamento", "A T E N Ç Ã O");
+                MessageBox.Show("Informe um cliente", "A T E N Ç Ã O");
+                cbCliente.Focus();
+                return false;
+            }
+
+            if (cbEquipamento.SelectedIndex == -1)
+            {
+                MessageBox.Show("Informe um equipamento", "A T E N Ç Ã O");
+                cbEquipamento.Focus();
                 return false;
             }
 
@@ -594,12 +644,12 @@ namespace GaroliBudget
 
         private void CarregarModulos()
         {
-            List<Modulo> modulos = _moduloRepository.ObterPorEquipamentoId(_equipamento.IdEquipamento);
+            //List<Modulo> modulos = _moduloRepository.ObterPorEquipamentoId(_equipamento.IdEquipamento);
 
-            foreach (Modulo modulo in modulos)
-            {
-                AdicionarModuloTreeView(modulo);
-            }
+            //foreach (Modulo modulo in modulos)
+            //{
+            //    AdicionarModuloTreeView(modulo);
+            //}
 
             var firstNode = treeViewModulos.Nodes[0];
             treeViewModulos.SelectedNode = firstNode;
@@ -650,5 +700,18 @@ namespace GaroliBudget
             dgvProcessos.DataSource = null;
         }
         #endregion
+
+        private void cbEquipamento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbEquipamento.SelectedIndex != -1)
+            {
+                gbOrcamento.Enabled = true;
+            }
+
+            if (cbEquipamento.SelectedItem != null)
+            {
+                _equipamento = (Equipamento)cbEquipamento.SelectedItem;
+            }
+        }
     }
 }

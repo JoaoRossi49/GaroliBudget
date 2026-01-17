@@ -13,7 +13,7 @@ namespace GaroliBudget.Models
         public Equipamento equipamento { get; set; }
         public string Numero { get; set; }
         public DateTime Data { get; set; }
-        public string Descricao { get; set; }
+        public string Descricao { get { return Numero + " - " + equipamento.Descricao; } }
         public string Observacao { get; set; }
         public string Status { get; set; }
         public decimal MargemContribuicao { get; set; }

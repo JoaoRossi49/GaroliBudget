@@ -8,13 +8,13 @@ namespace GaroliBudget
 {
     public partial class OR0001 : Form
     {
-        private readonly ClienteService _clienteService;
+        private readonly OrcamentoService _orcamentoService;
 
         public OR0001()
         {
             InitializeComponent();
-            IClienteRepository repo = new ClienteRepository();
-            _clienteService = new ClienteService(repo);
+            IOrcamentoRepository repo = new OrcamentoRepository();
+            _orcamentoService = new OrcamentoService(repo);
         }
 
         private void tbNomeCliente_TextChanged(object sender, EventArgs e)
@@ -38,12 +38,12 @@ namespace GaroliBudget
             sqlWhere += nFantasia.Length > 0 ? $@"AND NOME_FANTASIA LIKE '%{nFantasia}%' " : "";
             sqlWhere += rSocial.Length > 0 ? $@"AND RAZAO_SOCIAL LIKE '%{rSocial}%' " : "";
 
-            dgvClientes.DataSource = _clienteService.ListarWhere(sqlWhere);
+            dgvClientes.DataSource = _orcamentoService.ListarWhere(sqlWhere);
         }
 
         private void btnIncluir_Click(object sender, EventArgs e)
         {
-            OR0001mnIncluir form = new OR0001mnIncluir(_clienteService);
+            OR0001mnIncluir form = new OR0001mnIncluir(_orcamentoService);
             form.ShowDialog();
         }
 
@@ -78,30 +78,30 @@ namespace GaroliBudget
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.SelectedRows.Count <= 0)
-            { return; }
+            //if (dgvClientes.SelectedRows.Count <= 0)
+            //{ return; }
 
-            foreach (DataRow row in dgvClientes.SelectedRows)
-            {
-                _clienteService.InativarCliente(Convert.ToInt32(row["IdCliente"]));
-            }
+            //foreach (DataRow row in dgvClientes.SelectedRows)
+            //{
+            //    _clienteService.InativarCliente(Convert.ToInt32(row["IdCliente"]));
+            //}
         }
 
         private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                var clienteSelecionado = (Cliente)dgvClientes.Rows[e.RowIndex].DataBoundItem;
-                Cliente cliente = _clienteService.ObterPorId(clienteSelecionado.IdCliente);
+            //if (e.RowIndex >= 0)
+            //{
+            //    var clienteSelecionado = (Cliente)dgvClientes.Rows[e.RowIndex].DataBoundItem;
+            //    Cliente cliente = _clienteService.ObterPorId(clienteSelecionado.IdCliente);
 
-                using (var form = new CL0001mnIncluir(_clienteService, cliente))
-                {
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
-                        pesquisar();
-                    }
-                }
-            }
+            //    using (var form = new CL0001mnIncluir(_clienteService, cliente))
+            //    {
+            //        if (form.ShowDialog() == DialogResult.OK)
+            //        {
+            //            pesquisar();
+            //        }
+            //    }
+            //}
         }
 
     }

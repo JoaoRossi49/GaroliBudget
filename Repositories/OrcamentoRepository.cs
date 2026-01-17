@@ -129,7 +129,7 @@ namespace GaroliBudget.Repositories
             {
                 IdOrcamento = reader.GetInt32(reader.GetOrdinal("ID_EQUIPAMENTO")),
                 Numero = reader["CODIGO"].ToString(),
-                Descricao = reader["DESCRICAO"].ToString(),
+                //Descricao = reader["DESCRICAO"].ToString(),
                 Observacao = reader["OBSERVACOES"].ToString(),
                 Ativo = reader.GetInt32(reader.GetOrdinal("ATIVO")) == 1
             };

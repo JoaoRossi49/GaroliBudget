@@ -29,23 +29,29 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OR0001mnIncluir));
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             label1 = new Label();
-            btnCancelar = new Button();
-            btnGravar = new Button();
-            tbCodigoEquipamento = new TextBox();
+            tbNumeroOrcamento = new TextBox();
             panel1 = new Panel();
-            textBox1 = new TextBox();
+            tbObservacoes = new TextBox();
             label12 = new Label();
             label11 = new Label();
-            comboBox2 = new ComboBox();
+            cbCliente = new ComboBox();
             label2 = new Label();
-            comboBox1 = new ComboBox();
+            cbEquipamento = new ComboBox();
+            gbOrcamento = new GroupBox();
+            btnExcluirModulo = new FontAwesome.Sharp.IconButton();
+            btnIncluirModulo = new FontAwesome.Sharp.IconButton();
+            treeViewModulos = new TreeView();
+            nmMargem = new NumericUpDown();
+            lblValorFinal = new Label();
+            label6 = new Label();
+            label5 = new Label();
             tcItens = new TabControl();
             tpMateriais = new TabPage();
             label4 = new Label();
@@ -83,14 +89,11 @@
             quantidadeProcesso = new DataGridViewTextBoxColumn();
             valorUnitarioProcesso = new DataGridViewTextBoxColumn();
             valorTotalProcesso = new DataGridViewTextBoxColumn();
-            label5 = new Label();
-            label6 = new Label();
-            lblValorFinal = new Label();
-            nmMargem = new NumericUpDown();
-            treeViewModulos = new TreeView();
-            btnIncluirModulo = new FontAwesome.Sharp.IconButton();
-            btnExcluirModulo = new FontAwesome.Sharp.IconButton();
+            btnCancelar = new Button();
+            btnGravar = new Button();
             panel1.SuspendLayout();
+            gbOrcamento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nmMargem).BeginInit();
             tcItens.SuspendLayout();
             tpMateriais.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMateriais).BeginInit();
@@ -98,132 +101,201 @@
             ((System.ComponentModel.ISupportInitialize)dgvComponentes).BeginInit();
             tpProcessos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProcessos).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nmMargem).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(16, 50);
+            label1.Location = new Point(16, 6);
             label1.Name = "label1";
-            label1.Size = new Size(129, 15);
+            label1.Size = new Size(51, 15);
             label1.TabIndex = 10;
-            label1.Text = "Número do orçamento";
+            label1.Text = "Número";
             // 
-            // btnCancelar
+            // tbNumeroOrcamento
             // 
-            btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
-            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(673, 539);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 23);
-            btnCancelar.TabIndex = 9;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.TextAlign = ContentAlignment.MiddleRight;
-            btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
-            // 
-            // btnGravar
-            // 
-            btnGravar.Image = (Image)resources.GetObject("btnGravar.Image");
-            btnGravar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGravar.Location = new Point(586, 539);
-            btnGravar.Name = "btnGravar";
-            btnGravar.Size = new Size(75, 23);
-            btnGravar.TabIndex = 8;
-            btnGravar.Text = "Gravar";
-            btnGravar.TextAlign = ContentAlignment.MiddleRight;
-            btnGravar.UseVisualStyleBackColor = true;
-            btnGravar.Click += btnGravar_Click;
-            // 
-            // tbCodigoEquipamento
-            // 
-            tbCodigoEquipamento.Location = new Point(16, 68);
-            tbCodigoEquipamento.Name = "tbCodigoEquipamento";
-            tbCodigoEquipamento.Size = new Size(142, 23);
-            tbCodigoEquipamento.TabIndex = 6;
+            tbNumeroOrcamento.Location = new Point(16, 23);
+            tbNumeroOrcamento.Name = "tbNumeroOrcamento";
+            tbNumeroOrcamento.Size = new Size(78, 23);
+            tbNumeroOrcamento.TabIndex = 6;
             // 
             // panel1
             // 
             panel1.BackColor = Color.RosyBrown;
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(tbObservacoes);
             panel1.Controls.Add(label12);
             panel1.Controls.Add(label11);
-            panel1.Controls.Add(comboBox2);
+            panel1.Controls.Add(cbCliente);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(comboBox1);
-            panel1.Controls.Add(tbCodigoEquipamento);
+            panel1.Controls.Add(cbEquipamento);
+            panel1.Controls.Add(tbNumeroOrcamento);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(-4, -2);
             panel1.Name = "panel1";
             panel1.Size = new Size(767, 106);
             panel1.TabIndex = 20;
             // 
-            // textBox1
+            // tbObservacoes
             // 
-            textBox1.Location = new Point(378, 24);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(314, 68);
-            textBox1.TabIndex = 25;
+            tbObservacoes.Location = new Point(437, 24);
+            tbObservacoes.Multiline = true;
+            tbObservacoes.Name = "tbObservacoes";
+            tbObservacoes.Size = new Size(314, 68);
+            tbObservacoes.TabIndex = 25;
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(378, 5);
+            label12.Location = new Point(437, 5);
             label12.Name = "label12";
-            label12.Size = new Size(116, 15);
+            label12.Size = new Size(74, 15);
             label12.TabIndex = 26;
-            label12.Text = "Descrição do projeto";
+            label12.Text = "Observações";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(181, 50);
+            label11.Location = new Point(110, 5);
             label11.Name = "label11";
             label11.Size = new Size(44, 15);
             label11.TabIndex = 24;
             label11.Text = "Cliente";
             // 
-            // comboBox2
+            // cbCliente
             // 
-            comboBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(177, 68);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(167, 23);
-            comboBox2.TabIndex = 23;
+            cbCliente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbCliente.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbCliente.FormattingEnabled = true;
+            cbCliente.Location = new Point(106, 23);
+            cbCliente.Name = "cbCliente";
+            cbCliente.Size = new Size(310, 23);
+            cbCliente.TabIndex = 23;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(16, 5);
+            label2.Location = new Point(16, 49);
             label2.Name = "label2";
             label2.Size = new Size(78, 15);
             label2.TabIndex = 22;
             label2.Text = "Equipamento";
             // 
-            // comboBox1
+            // cbEquipamento
             // 
-            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(16, 24);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(328, 23);
-            comboBox1.TabIndex = 21;
+            cbEquipamento.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbEquipamento.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbEquipamento.FormattingEnabled = true;
+            cbEquipamento.Location = new Point(16, 68);
+            cbEquipamento.Name = "cbEquipamento";
+            cbEquipamento.Size = new Size(400, 23);
+            cbEquipamento.TabIndex = 21;
+            cbEquipamento.SelectedIndexChanged += cbEquipamento_SelectedIndexChanged;
+            // 
+            // gbOrcamento
+            // 
+            gbOrcamento.Controls.Add(btnExcluirModulo);
+            gbOrcamento.Controls.Add(btnIncluirModulo);
+            gbOrcamento.Controls.Add(treeViewModulos);
+            gbOrcamento.Controls.Add(nmMargem);
+            gbOrcamento.Controls.Add(lblValorFinal);
+            gbOrcamento.Controls.Add(label6);
+            gbOrcamento.Controls.Add(label5);
+            gbOrcamento.Controls.Add(tcItens);
+            gbOrcamento.Controls.Add(btnCancelar);
+            gbOrcamento.Controls.Add(btnGravar);
+            gbOrcamento.Enabled = false;
+            gbOrcamento.Location = new Point(4, 107);
+            gbOrcamento.Name = "gbOrcamento";
+            gbOrcamento.Size = new Size(751, 467);
+            gbOrcamento.TabIndex = 21;
+            gbOrcamento.TabStop = false;
+            // 
+            // btnExcluirModulo
+            // 
+            btnExcluirModulo.IconChar = FontAwesome.Sharp.IconChar.DeleteLeft;
+            btnExcluirModulo.IconColor = Color.Black;
+            btnExcluirModulo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnExcluirModulo.IconSize = 25;
+            btnExcluirModulo.Location = new Point(151, 7);
+            btnExcluirModulo.Name = "btnExcluirModulo";
+            btnExcluirModulo.Size = new Size(44, 30);
+            btnExcluirModulo.TabIndex = 40;
+            btnExcluirModulo.UseVisualStyleBackColor = true;
+            // 
+            // btnIncluirModulo
+            // 
+            btnIncluirModulo.IconChar = FontAwesome.Sharp.IconChar.AlignRight;
+            btnIncluirModulo.IconColor = Color.Black;
+            btnIncluirModulo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnIncluirModulo.IconSize = 18;
+            btnIncluirModulo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnIncluirModulo.Location = new Point(3, 7);
+            btnIncluirModulo.Name = "btnIncluirModulo";
+            btnIncluirModulo.Size = new Size(142, 30);
+            btnIncluirModulo.TabIndex = 39;
+            btnIncluirModulo.Text = "Adicionar módulo";
+            btnIncluirModulo.UseVisualStyleBackColor = true;
+            // 
+            // treeViewModulos
+            // 
+            treeViewModulos.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            treeViewModulos.FullRowSelect = true;
+            treeViewModulos.HideSelection = false;
+            treeViewModulos.Location = new Point(3, 43);
+            treeViewModulos.Name = "treeViewModulos";
+            treeViewModulos.Size = new Size(213, 333);
+            treeViewModulos.TabIndex = 38;
+            // 
+            // nmMargem
+            // 
+            nmMargem.DecimalPlaces = 2;
+            nmMargem.Font = new Font("Segoe UI", 15F);
+            nmMargem.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+            nmMargem.Location = new Point(7, 403);
+            nmMargem.Name = "nmMargem";
+            nmMargem.Size = new Size(120, 34);
+            nmMargem.TabIndex = 37;
+            nmMargem.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // lblValorFinal
+            // 
+            lblValorFinal.AutoSize = true;
+            lblValorFinal.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            lblValorFinal.Location = new Point(385, 409);
+            lblValorFinal.Name = "lblValorFinal";
+            lblValorFinal.Size = new Size(53, 28);
+            lblValorFinal.TabIndex = 36;
+            lblValorFinal.Text = "0.00";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(7, 385);
+            label6.Name = "label6";
+            label6.Size = new Size(138, 15);
+            label6.TabIndex = 35;
+            label6.Text = "Margem de contribuição";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            label5.Location = new Point(312, 409);
+            label5.Name = "label5";
+            label5.Size = new Size(83, 28);
+            label5.TabIndex = 34;
+            label5.Text = "TOTAL: ";
             // 
             // tcItens
             // 
             tcItens.Controls.Add(tpMateriais);
             tcItens.Controls.Add(tpComponentes);
             tcItens.Controls.Add(tpProcessos);
-            tcItens.Location = new Point(223, 122);
+            tcItens.Location = new Point(218, 19);
             tcItens.Name = "tcItens";
             tcItens.SelectedIndex = 0;
             tcItens.Size = new Size(529, 357);
-            tcItens.TabIndex = 21;
+            tcItens.TabIndex = 33;
             // 
             // tpMateriais
             // 
@@ -245,7 +317,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(163, 15);
+            label4.Location = new Point(166, 18);
             label4.Name = "label4";
             label4.Size = new Size(69, 15);
             label4.TabIndex = 23;
@@ -261,7 +333,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(6, 16);
+            label3.Location = new Point(9, 19);
             label3.Name = "label3";
             label3.Size = new Size(50, 15);
             label3.TabIndex = 21;
@@ -284,13 +356,12 @@
             btnExcluir.BackgroundImage = (Image)resources.GetObject("btnExcluir.BackgroundImage");
             btnExcluir.BackgroundImageLayout = ImageLayout.Center;
             btnExcluir.Font = new Font("Segoe UI", 8F);
-            btnExcluir.Location = new Point(467, 31);
+            btnExcluir.Location = new Point(785, 34);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(47, 25);
             btnExcluir.TabIndex = 9;
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
-            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnIncluirMaterial
             // 
@@ -299,13 +370,12 @@
             btnIncluirMaterial.BackgroundImage = (Image)resources.GetObject("btnIncluirMaterial.BackgroundImage");
             btnIncluirMaterial.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirMaterial.Font = new Font("Segoe UI", 8F);
-            btnIncluirMaterial.Location = new Point(414, 31);
+            btnIncluirMaterial.Location = new Point(732, 34);
             btnIncluirMaterial.Name = "btnIncluirMaterial";
             btnIncluirMaterial.Size = new Size(47, 25);
             btnIncluirMaterial.TabIndex = 7;
             btnIncluirMaterial.TextAlign = ContentAlignment.TopCenter;
             btnIncluirMaterial.UseVisualStyleBackColor = false;
-            btnIncluirMaterial.Click += btnIncluir_Click;
             // 
             // dgvMateriais
             // 
@@ -314,10 +384,10 @@
             dgvMateriais.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvMateriais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvMateriais.Columns.AddRange(new DataGridViewColumn[] { Descricao, Quantidade, CustoUnitario, valorTotalMaterial });
-            dgvMateriais.Location = new Point(0, 65);
+            dgvMateriais.Location = new Point(3, 291);
             dgvMateriais.Name = "dgvMateriais";
             dgvMateriais.ReadOnly = true;
-            dgvMateriais.Size = new Size(521, 268);
+            dgvMateriais.Size = new Size(836, 268);
             dgvMateriais.TabIndex = 0;
             // 
             // Descricao
@@ -338,9 +408,9 @@
             // CustoUnitario
             // 
             CustoUnitario.DataPropertyName = "CustoUnitario";
-            dataGridViewCellStyle13.Format = "C2";
-            dataGridViewCellStyle13.NullValue = null;
-            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle7;
             CustoUnitario.HeaderText = "Valor unitário";
             CustoUnitario.Name = "CustoUnitario";
             CustoUnitario.ReadOnly = true;
@@ -348,9 +418,9 @@
             // valorTotalMaterial
             // 
             valorTotalMaterial.DataPropertyName = "Total";
-            dataGridViewCellStyle14.Format = "C2";
-            dataGridViewCellStyle14.NullValue = null;
-            valorTotalMaterial.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.NullValue = null;
+            valorTotalMaterial.DefaultCellStyle = dataGridViewCellStyle8;
             valorTotalMaterial.HeaderText = "Valor total";
             valorTotalMaterial.Name = "valorTotalMaterial";
             valorTotalMaterial.ReadOnly = true;
@@ -375,7 +445,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(163, 15);
+            label7.Location = new Point(166, 18);
             label7.Name = "label7";
             label7.Size = new Size(69, 15);
             label7.TabIndex = 31;
@@ -391,7 +461,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(6, 16);
+            label8.Location = new Point(9, 19);
             label8.Name = "label8";
             label8.Size = new Size(77, 15);
             label8.TabIndex = 29;
@@ -414,13 +484,12 @@
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Center;
             button1.Font = new Font("Segoe UI", 8F);
-            button1.Location = new Point(467, 31);
+            button1.Location = new Point(785, 34);
             button1.Name = "button1";
             button1.Size = new Size(47, 25);
             button1.TabIndex = 27;
             button1.TextAlign = ContentAlignment.TopCenter;
             button1.UseVisualStyleBackColor = false;
-            button1.Click += btnExcluir_Click;
             // 
             // btnIncluirComponente
             // 
@@ -429,13 +498,12 @@
             btnIncluirComponente.BackgroundImage = (Image)resources.GetObject("btnIncluirComponente.BackgroundImage");
             btnIncluirComponente.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirComponente.Font = new Font("Segoe UI", 8F);
-            btnIncluirComponente.Location = new Point(414, 31);
+            btnIncluirComponente.Location = new Point(732, 34);
             btnIncluirComponente.Name = "btnIncluirComponente";
             btnIncluirComponente.Size = new Size(47, 25);
             btnIncluirComponente.TabIndex = 25;
             btnIncluirComponente.TextAlign = ContentAlignment.TopCenter;
             btnIncluirComponente.UseVisualStyleBackColor = false;
-            btnIncluirComponente.Click += btnIncluir_Click;
             // 
             // dgvComponentes
             // 
@@ -444,10 +512,10 @@
             dgvComponentes.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvComponentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvComponentes.Columns.AddRange(new DataGridViewColumn[] { descricaoComponente, quantidadeComponente, valorUnitarioComponente, valorTotalComponente });
-            dgvComponentes.Location = new Point(0, 65);
+            dgvComponentes.Location = new Point(3, 291);
             dgvComponentes.Name = "dgvComponentes";
             dgvComponentes.ReadOnly = true;
-            dgvComponentes.Size = new Size(521, 268);
+            dgvComponentes.Size = new Size(836, 268);
             dgvComponentes.TabIndex = 24;
             // 
             // descricaoComponente
@@ -468,9 +536,9 @@
             // valorUnitarioComponente
             // 
             valorUnitarioComponente.DataPropertyName = "CustoUnitario";
-            dataGridViewCellStyle15.Format = "C2";
-            dataGridViewCellStyle15.NullValue = null;
-            valorUnitarioComponente.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle9.Format = "C2";
+            dataGridViewCellStyle9.NullValue = null;
+            valorUnitarioComponente.DefaultCellStyle = dataGridViewCellStyle9;
             valorUnitarioComponente.HeaderText = "Valor unitário";
             valorUnitarioComponente.Name = "valorUnitarioComponente";
             valorUnitarioComponente.ReadOnly = true;
@@ -478,9 +546,9 @@
             // valorTotalComponente
             // 
             valorTotalComponente.DataPropertyName = "Total";
-            dataGridViewCellStyle16.Format = "C2";
-            dataGridViewCellStyle16.NullValue = null;
-            valorTotalComponente.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle10.Format = "C2";
+            dataGridViewCellStyle10.NullValue = null;
+            valorTotalComponente.DefaultCellStyle = dataGridViewCellStyle10;
             valorTotalComponente.HeaderText = "Valor total";
             valorTotalComponente.Name = "valorTotalComponente";
             valorTotalComponente.ReadOnly = true;
@@ -505,7 +573,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(163, 15);
+            label9.Location = new Point(166, 18);
             label9.Name = "label9";
             label9.Size = new Size(69, 15);
             label9.TabIndex = 31;
@@ -521,7 +589,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(6, 16);
+            label10.Location = new Point(9, 19);
             label10.Name = "label10";
             label10.Size = new Size(54, 15);
             label10.TabIndex = 29;
@@ -544,13 +612,12 @@
             button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
             button4.BackgroundImageLayout = ImageLayout.Center;
             button4.Font = new Font("Segoe UI", 8F);
-            button4.Location = new Point(467, 31);
+            button4.Location = new Point(785, 34);
             button4.Name = "button4";
             button4.Size = new Size(47, 25);
             button4.TabIndex = 27;
             button4.TextAlign = ContentAlignment.TopCenter;
             button4.UseVisualStyleBackColor = false;
-            button4.Click += btnExcluir_Click;
             // 
             // btnIncluirProcesso
             // 
@@ -559,13 +626,12 @@
             btnIncluirProcesso.BackgroundImage = (Image)resources.GetObject("btnIncluirProcesso.BackgroundImage");
             btnIncluirProcesso.BackgroundImageLayout = ImageLayout.Center;
             btnIncluirProcesso.Font = new Font("Segoe UI", 8F);
-            btnIncluirProcesso.Location = new Point(414, 31);
+            btnIncluirProcesso.Location = new Point(732, 34);
             btnIncluirProcesso.Name = "btnIncluirProcesso";
             btnIncluirProcesso.Size = new Size(47, 25);
             btnIncluirProcesso.TabIndex = 25;
             btnIncluirProcesso.TextAlign = ContentAlignment.TopCenter;
             btnIncluirProcesso.UseVisualStyleBackColor = false;
-            btnIncluirProcesso.Click += btnIncluir_Click;
             // 
             // dgvProcessos
             // 
@@ -574,10 +640,10 @@
             dgvProcessos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvProcessos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProcessos.Columns.AddRange(new DataGridViewColumn[] { descricaoProcesso, quantidadeProcesso, valorUnitarioProcesso, valorTotalProcesso });
-            dgvProcessos.Location = new Point(0, 65);
+            dgvProcessos.Location = new Point(3, 291);
             dgvProcessos.Name = "dgvProcessos";
             dgvProcessos.ReadOnly = true;
-            dgvProcessos.Size = new Size(521, 268);
+            dgvProcessos.Size = new Size(836, 268);
             dgvProcessos.TabIndex = 24;
             // 
             // descricaoProcesso
@@ -598,9 +664,9 @@
             // valorUnitarioProcesso
             // 
             valorUnitarioProcesso.DataPropertyName = "CustoHora";
-            dataGridViewCellStyle17.Format = "C2";
-            dataGridViewCellStyle17.NullValue = null;
-            valorUnitarioProcesso.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            valorUnitarioProcesso.DefaultCellStyle = dataGridViewCellStyle11;
             valorUnitarioProcesso.HeaderText = "Valor unitário";
             valorUnitarioProcesso.Name = "valorUnitarioProcesso";
             valorUnitarioProcesso.ReadOnly = true;
@@ -608,115 +674,52 @@
             // valorTotalProcesso
             // 
             valorTotalProcesso.DataPropertyName = "Total";
-            dataGridViewCellStyle18.Format = "C2";
-            dataGridViewCellStyle18.NullValue = null;
-            valorTotalProcesso.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle12.Format = "C2";
+            dataGridViewCellStyle12.NullValue = null;
+            valorTotalProcesso.DefaultCellStyle = dataGridViewCellStyle12;
             valorTotalProcesso.HeaderText = "Valor total";
             valorTotalProcesso.Name = "valorTotalProcesso";
             valorTotalProcesso.ReadOnly = true;
             // 
-            // label5
+            // btnCancelar
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            label5.Location = new Point(317, 512);
-            label5.Name = "label5";
-            label5.Size = new Size(83, 28);
-            label5.TabIndex = 22;
-            label5.Text = "TOTAL: ";
+            btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(668, 436);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.TabIndex = 32;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TextAlign = ContentAlignment.MiddleRight;
+            btnCancelar.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // btnGravar
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(12, 488);
-            label6.Name = "label6";
-            label6.Size = new Size(138, 15);
-            label6.TabIndex = 25;
-            label6.Text = "Margem de contribuição";
-            // 
-            // lblValorFinal
-            // 
-            lblValorFinal.AutoSize = true;
-            lblValorFinal.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            lblValorFinal.Location = new Point(390, 512);
-            lblValorFinal.Name = "lblValorFinal";
-            lblValorFinal.Size = new Size(53, 28);
-            lblValorFinal.TabIndex = 26;
-            lblValorFinal.Text = "0.00";
-            // 
-            // nmMargem
-            // 
-            nmMargem.DecimalPlaces = 2;
-            nmMargem.Font = new Font("Segoe UI", 15F);
-            nmMargem.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            nmMargem.Location = new Point(12, 506);
-            nmMargem.Name = "nmMargem";
-            nmMargem.Size = new Size(120, 34);
-            nmMargem.TabIndex = 27;
-            nmMargem.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            nmMargem.ValueChanged += nmMargem_ValueChanged;
-            // 
-            // treeViewModulos
-            // 
-            treeViewModulos.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            treeViewModulos.FullRowSelect = true;
-            treeViewModulos.HideSelection = false;
-            treeViewModulos.Location = new Point(8, 146);
-            treeViewModulos.Name = "treeViewModulos";
-            treeViewModulos.Size = new Size(213, 333);
-            treeViewModulos.TabIndex = 28;
-            treeViewModulos.AfterSelect += treeViewModulos_AfterSelect;
-            // 
-            // btnIncluirModulo
-            // 
-            btnIncluirModulo.IconChar = FontAwesome.Sharp.IconChar.AlignRight;
-            btnIncluirModulo.IconColor = Color.Black;
-            btnIncluirModulo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnIncluirModulo.IconSize = 18;
-            btnIncluirModulo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnIncluirModulo.Location = new Point(8, 110);
-            btnIncluirModulo.Name = "btnIncluirModulo";
-            btnIncluirModulo.Size = new Size(142, 30);
-            btnIncluirModulo.TabIndex = 29;
-            btnIncluirModulo.Text = "Adicionar módulo";
-            btnIncluirModulo.UseVisualStyleBackColor = true;
-            btnIncluirModulo.Click += btnIncluirModulo_Click;
-            // 
-            // btnExcluirModulo
-            // 
-            btnExcluirModulo.IconChar = FontAwesome.Sharp.IconChar.DeleteLeft;
-            btnExcluirModulo.IconColor = Color.Black;
-            btnExcluirModulo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnExcluirModulo.IconSize = 25;
-            btnExcluirModulo.Location = new Point(156, 110);
-            btnExcluirModulo.Name = "btnExcluirModulo";
-            btnExcluirModulo.Size = new Size(44, 30);
-            btnExcluirModulo.TabIndex = 30;
-            btnExcluirModulo.UseVisualStyleBackColor = true;
-            btnExcluirModulo.Click += btnExcluirModulo_Click;
+            btnGravar.Image = (Image)resources.GetObject("btnGravar.Image");
+            btnGravar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnGravar.Location = new Point(581, 436);
+            btnGravar.Name = "btnGravar";
+            btnGravar.Size = new Size(75, 23);
+            btnGravar.TabIndex = 31;
+            btnGravar.Text = "Gravar";
+            btnGravar.TextAlign = ContentAlignment.MiddleRight;
+            btnGravar.UseVisualStyleBackColor = true;
             // 
             // OR0001mnIncluir
             // 
-            AcceptButton = btnGravar;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(755, 574);
-            Controls.Add(btnExcluirModulo);
-            Controls.Add(btnIncluirModulo);
-            Controls.Add(treeViewModulos);
-            Controls.Add(nmMargem);
-            Controls.Add(lblValorFinal);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(tcItens);
+            Controls.Add(gbOrcamento);
             Controls.Add(panel1);
-            Controls.Add(btnCancelar);
-            Controls.Add(btnGravar);
             Name = "OR0001mnIncluir";
             Text = "OR0001 - Orçamentos";
             Load += OR0001mnIncluir_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            gbOrcamento.ResumeLayout(false);
+            gbOrcamento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nmMargem).EndInit();
             tcItens.ResumeLayout(false);
             tpMateriais.ResumeLayout(false);
             tpMateriais.PerformLayout();
@@ -727,31 +730,45 @@
             tpProcessos.ResumeLayout(false);
             tpProcessos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProcessos).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nmMargem).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
         private Label label1;
-        private Button btnCancelar;
-        private Button btnGravar;
-        private TextBox tbCodigoEquipamento;
+        private TextBox tbNumeroOrcamento;
         private Panel panel1;
+        private DataGridViewTextBoxColumn descricaoMaterial;
+        private DataGridViewTextBoxColumn quantidadeMaterial;
+        private DataGridViewTextBoxColumn valorUnitarioMaterial;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private Label label11;
+        private ComboBox cbCliente;
+        private Label label2;
+        private ComboBox cbEquipamento;
+        private TextBox tbObservacoes;
+        private Label label12;
+        private GroupBox gbOrcamento;
+        private FontAwesome.Sharp.IconButton btnExcluirModulo;
+        private FontAwesome.Sharp.IconButton btnIncluirModulo;
+        private TreeView treeViewModulos;
+        private NumericUpDown nmMargem;
+        private Label lblValorFinal;
+        private Label label6;
+        private Label label5;
         private TabControl tcItens;
         private TabPage tpMateriais;
-        private TabPage tpComponentes;
-        private DataGridView dgvMateriais;
-        private TabPage tpProcessos;
+        private Label label4;
+        private TextBox tbMateriaisQuantidade;
         private Label label3;
         private ComboBox cbMateriais;
         private Button btnExcluir;
         private Button btnIncluirMaterial;
-        private Label label4;
-        private TextBox tbMateriaisQuantidade;
-        private Label label5;
-        private Label label6;
-        private Label lblValorFinal;
+        private DataGridView dgvMateriais;
+        private DataGridViewTextBoxColumn Descricao;
+        private DataGridViewTextBoxColumn Quantidade;
+        private DataGridViewTextBoxColumn CustoUnitario;
+        private DataGridViewTextBoxColumn valorTotalMaterial;
+        private TabPage tpComponentes;
         private Label label7;
         private TextBox tbComponentesQuantidade;
         private Label label8;
@@ -759,6 +776,11 @@
         private Button button1;
         private Button btnIncluirComponente;
         private DataGridView dgvComponentes;
+        private DataGridViewTextBoxColumn descricaoComponente;
+        private DataGridViewTextBoxColumn quantidadeComponente;
+        private DataGridViewTextBoxColumn valorUnitarioComponente;
+        private DataGridViewTextBoxColumn valorTotalComponente;
+        private TabPage tpProcessos;
         private Label label9;
         private TextBox tbProcessosQuantidade;
         private Label label10;
@@ -766,31 +788,11 @@
         private Button button4;
         private Button btnIncluirProcesso;
         private DataGridView dgvProcessos;
-        private NumericUpDown nmMargem;
-        private TreeView treeViewModulos;
-        private FontAwesome.Sharp.IconButton btnIncluirModulo;
-        private DataGridViewTextBoxColumn descricaoMaterial;
-        private DataGridViewTextBoxColumn quantidadeMaterial;
-        private DataGridViewTextBoxColumn valorUnitarioMaterial;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private FontAwesome.Sharp.IconButton btnExcluirModulo;
-        private DataGridViewTextBoxColumn Descricao;
-        private DataGridViewTextBoxColumn Quantidade;
-        private DataGridViewTextBoxColumn CustoUnitario;
-        private DataGridViewTextBoxColumn valorTotalMaterial;
-        private DataGridViewTextBoxColumn descricaoComponente;
-        private DataGridViewTextBoxColumn quantidadeComponente;
-        private DataGridViewTextBoxColumn valorUnitarioComponente;
-        private DataGridViewTextBoxColumn valorTotalComponente;
         private DataGridViewTextBoxColumn descricaoProcesso;
         private DataGridViewTextBoxColumn quantidadeProcesso;
         private DataGridViewTextBoxColumn valorUnitarioProcesso;
         private DataGridViewTextBoxColumn valorTotalProcesso;
-        private Label label11;
-        private ComboBox comboBox2;
-        private Label label2;
-        private ComboBox comboBox1;
-        private TextBox textBox1;
-        private Label label12;
+        private Button btnCancelar;
+        private Button btnGravar;
     }
 }
