@@ -3,6 +3,7 @@ using GaroliBudget.Models;
 using GaroliBudget.Repositories;
 using GaroliBudget.Repositories.Interfaces;
 using GaroliBudget.Repositories.ItensOrcamento;
+using GaroliBudget.Repositories.ItensEquipamento;
 using GaroliBudget.Services;
 using Microsoft.VisualBasic;
 using System.Data;
@@ -23,7 +24,8 @@ namespace GaroliBudget
         private ProcessoService _processoService;
 
         private Equipamento _equipamento = new Equipamento();
-        //EquipamentoModuloRepository _moduloRepository = new EquipamentoModuloRepository();
+        EquipamentoModuloRepository _equipamentoModuloRepository = new EquipamentoModuloRepository();
+        OrcamentoModuloRepository _orcamentoModuloRepository = new OrcamentoModuloRepository();
 
         private Orcamento _orcamento = new Orcamento();
 
@@ -487,39 +489,39 @@ namespace GaroliBudget
         #endregion
 
         #region Controles TreeView Módulos
-        private void btnIncluirModulo_Click(object sender, EventArgs e)
-        {
-            string nome = Interaction.InputBox(
-                "Informe o nome do módulo:",
-                "Novo módulo",
-                ""
-            ).Trim();
+        //private void btnIncluirModulo_Click(object sender, EventArgs e)
+        //{
+        //    string nome = Interaction.InputBox(
+        //        "Informe o nome do módulo:",
+        //        "Novo módulo",
+        //        ""
+        //    ).Trim();
 
-            if (string.IsNullOrEmpty(nome))
-            {
-                MessageBox.Show("Informe o nome do módulo.");
-                return;
-            }
+        //    if (string.IsNullOrEmpty(nome))
+        //    {
+        //        MessageBox.Show("Informe o nome do módulo.");
+        //        return;
+        //    }
 
-            if (_equipamento.IdEquipamento == 0)
-            {
-                if (!PreCadastroEquipamento())
-                    return;
-            }
+        //    if (_equipamento.IdEquipamento == 0)
+        //    {
+        //        if (!PreCadastroEquipamento())
+        //            return;
+        //    }
 
-            var modulo = new Modulo
-            {
-                IdEquipamento = _equipamento.IdEquipamento,
-                Nome = nome
-            };
+        //    var modulo = new Modulo
+        //    {
+        //        IdEquipamento = _equipamento.IdEquipamento,
+        //        Nome = nome
+        //    };
 
-            //Cadastra módulo no banco
-            CadastrarModulo(modulo, _equipamento);
+        //    //Cadastra módulo no banco
+        //    CadastrarModulo(modulo, _equipamento);
 
-            //Adicionar no banco e retornar ID
-            AdicionarModuloTreeView(modulo);
+        //    //Adicionar no banco e retornar ID
+        //    AdicionarModuloTreeView(modulo);
 
-        }
+        //}
 
         private int GetModuloSelecionado()
         {
@@ -534,31 +536,31 @@ namespace GaroliBudget
             return idModulo;
         }
 
-        private void btnExcluirModulo_Click(object sender, EventArgs e)
-        {
-            int idModulo = GetModuloSelecionado();
+        //private void btnExcluirModulo_Click(object sender, EventArgs e)
+        //{
+        //    int idModulo = GetModuloSelecionado();
 
-            if (idModulo == 0)
-                return;
+        //    if (idModulo == 0)
+        //        return;
 
-            var result = MessageBox.Show(
-                "Deseja realmente exluir este módulo?",
-                "A T E N Ç Ã O",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
+        //    var result = MessageBox.Show(
+        //        "Deseja realmente exluir este módulo?",
+        //        "A T E N Ç Ã O",
+        //        MessageBoxButtons.YesNo,
+        //        MessageBoxIcon.Question
+        //    );
 
-            if (result == DialogResult.No)
-                return;
+        //    if (result == DialogResult.No)
+        //        return;
 
-            excluirItensModulo(_equipamento.Materiais, _equipamento.Componentes, _equipamento.Processos, idModulo);
+        //    excluirItensModulo(_equipamento.Materiais, _equipamento.Componentes, _equipamento.Processos, idModulo);
 
-            //var repo = new EquipamentoModuloRepository();
-            //repo.RemoverPorId(idModulo);
+        //    var repo = new EquipamentoModuloRepository();
+        //    repo.RemoverPorId(idModulo);
 
-            treeViewModulos.Nodes.Remove(treeViewModulos.SelectedNode);
-            MessageBox.Show("Módulo excluído com sucesso!");
-        }
+        //    treeViewModulos.Nodes.Remove(treeViewModulos.SelectedNode);
+        //    MessageBox.Show("Módulo excluído com sucesso!");
+        //}
 
         private void excluirItensModulo(List<Material> listaMaterial, List<Componente> listaComponente, List<Processo> listaProcesso, int idModulo)
         {
@@ -578,40 +580,50 @@ namespace GaroliBudget
                 listaProcesso.Remove(item);
         }
 
-        private void CadastrarModulo(Modulo modulo, Equipamento equipamento)
-        {
-            using var conn = DBPostgres.GetConnection();
-            conn.Open();
+        //Não tem por enquando rsrsr
+        //private void CadastrarModulo(Modulo modulo, Equipamento equipamento)
+        //{
+        //    using var conn = DBPostgres.GetConnection();
+        //    conn.Open();
 
-            using var tran = conn.BeginTransaction();
-            try
-            {
-                //var repo = new EquipamentoModuloRepository();
-                //modulo.IdEquipamento = equipamento.IdEquipamento;
-                //modulo.Id = repo.Inserir(modulo, conn, tran);
-                //tran.Commit();
-            }
-            catch (Exception ex)
-            {
-                tran.Rollback();
-                MessageBox.Show("Erro ao inserir módulo:\n" + ex.Message);
-            }
+        //    using var tran = conn.BeginTransaction();
+        //    try
+        //    {
+        //        var repo = new EquipamentoModuloRepository();
+        //        modulo.IdEquipamento = equipamento.IdEquipamento;
+        //        modulo.Id = repo.Inserir(modulo, conn, tran);
+        //        tran.Commit();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        tran.Rollback();
+        //        MessageBox.Show("Erro ao inserir módulo:\n" + ex.Message);
+        //    }
 
-        }
+        //}
 
         private bool PreCadastroEquipamento()
         {
-            //if (!ValidarEquipamento())
-            //    return false;
+            if (!ValidarOrcamento())
+                return false;
 
-            //_orcamento.Numero = tbNumeroOrcamento.Text;
-            //_orcamento.Observacao = tbObservacoes.Text;
+            _orcamento.Numero = tbNumeroOrcamento.Text;
+            _orcamento.Observacao = tbObservacoes.Text;
 
-            //_orcamento.IdOrcamento = _orcamentoService.CriarOrcamento(_orcamento);
+            Cliente cliente = new Cliente();
+            cliente = (Cliente)cbCliente.SelectedItem;
+            _orcamento.cliente = cliente;
 
-            //tbNumeroOrcamento.ReadOnly = true;
-            //tbObservacaoEquipamento.ReadOnly = true;
-            //tbDescricaoEquipamento.ReadOnly = true;
+            Equipamento equipamento = new Equipamento();
+            equipamento = (Equipamento)cbEquipamento.SelectedItem;
+            _orcamento.equipamento = equipamento;
+
+            _orcamento.IdOrcamento = _orcamentoService.CriarOrcamento(_orcamento);
+
+            tbNumeroOrcamento.ReadOnly = true;
+            cbCliente.Enabled = false;
+            cbEquipamento.Enabled = false;
+            tbObservacoes.ReadOnly = true;
 
             return (_equipamento.IdEquipamento > 0);
         }
@@ -644,12 +656,12 @@ namespace GaroliBudget
 
         private void CarregarModulos()
         {
-            //List<Modulo> modulos = _moduloRepository.ObterPorEquipamentoId(_equipamento.IdEquipamento);
+            List<Modulo> modulos = _equipamentoModuloRepository.ObterPorEquipamentoId(_equipamento.IdEquipamento);
 
-            //foreach (Modulo modulo in modulos)
-            //{
-            //    AdicionarModuloTreeView(modulo);
-            //}
+            foreach (Modulo modulo in modulos)
+            {
+                AdicionarModuloTreeView(modulo);
+            }
 
             var firstNode = treeViewModulos.Nodes[0];
             treeViewModulos.SelectedNode = firstNode;

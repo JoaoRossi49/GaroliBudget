@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OR0001mnIncluir));
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             label1 = new Label();
             tbNumeroOrcamento = new TextBox();
             panel1 = new Panel();
@@ -221,6 +221,7 @@
             btnExcluirModulo.Size = new Size(44, 30);
             btnExcluirModulo.TabIndex = 40;
             btnExcluirModulo.UseVisualStyleBackColor = true;
+            btnExcluirModulo.Visible = false;
             // 
             // btnIncluirModulo
             // 
@@ -235,6 +236,7 @@
             btnIncluirModulo.TabIndex = 39;
             btnIncluirModulo.Text = "Adicionar módulo";
             btnIncluirModulo.UseVisualStyleBackColor = true;
+            btnIncluirModulo.Visible = false;
             // 
             // treeViewModulos
             // 
@@ -245,6 +247,7 @@
             treeViewModulos.Name = "treeViewModulos";
             treeViewModulos.Size = new Size(213, 333);
             treeViewModulos.TabIndex = 38;
+            treeViewModulos.AfterSelect += treeViewModulos_AfterSelect;
             // 
             // nmMargem
             // 
@@ -408,9 +411,9 @@
             // CustoUnitario
             // 
             CustoUnitario.DataPropertyName = "CustoUnitario";
-            dataGridViewCellStyle7.Format = "C2";
-            dataGridViewCellStyle7.NullValue = null;
-            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle1;
             CustoUnitario.HeaderText = "Valor unitário";
             CustoUnitario.Name = "CustoUnitario";
             CustoUnitario.ReadOnly = true;
@@ -418,9 +421,9 @@
             // valorTotalMaterial
             // 
             valorTotalMaterial.DataPropertyName = "Total";
-            dataGridViewCellStyle8.Format = "C2";
-            dataGridViewCellStyle8.NullValue = null;
-            valorTotalMaterial.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            valorTotalMaterial.DefaultCellStyle = dataGridViewCellStyle2;
             valorTotalMaterial.HeaderText = "Valor total";
             valorTotalMaterial.Name = "valorTotalMaterial";
             valorTotalMaterial.ReadOnly = true;
@@ -536,9 +539,9 @@
             // valorUnitarioComponente
             // 
             valorUnitarioComponente.DataPropertyName = "CustoUnitario";
-            dataGridViewCellStyle9.Format = "C2";
-            dataGridViewCellStyle9.NullValue = null;
-            valorUnitarioComponente.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            valorUnitarioComponente.DefaultCellStyle = dataGridViewCellStyle3;
             valorUnitarioComponente.HeaderText = "Valor unitário";
             valorUnitarioComponente.Name = "valorUnitarioComponente";
             valorUnitarioComponente.ReadOnly = true;
@@ -546,9 +549,9 @@
             // valorTotalComponente
             // 
             valorTotalComponente.DataPropertyName = "Total";
-            dataGridViewCellStyle10.Format = "C2";
-            dataGridViewCellStyle10.NullValue = null;
-            valorTotalComponente.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            valorTotalComponente.DefaultCellStyle = dataGridViewCellStyle4;
             valorTotalComponente.HeaderText = "Valor total";
             valorTotalComponente.Name = "valorTotalComponente";
             valorTotalComponente.ReadOnly = true;
@@ -664,9 +667,9 @@
             // valorUnitarioProcesso
             // 
             valorUnitarioProcesso.DataPropertyName = "CustoHora";
-            dataGridViewCellStyle11.Format = "C2";
-            dataGridViewCellStyle11.NullValue = null;
-            valorUnitarioProcesso.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            valorUnitarioProcesso.DefaultCellStyle = dataGridViewCellStyle5;
             valorUnitarioProcesso.HeaderText = "Valor unitário";
             valorUnitarioProcesso.Name = "valorUnitarioProcesso";
             valorUnitarioProcesso.ReadOnly = true;
@@ -674,9 +677,9 @@
             // valorTotalProcesso
             // 
             valorTotalProcesso.DataPropertyName = "Total";
-            dataGridViewCellStyle12.Format = "C2";
-            dataGridViewCellStyle12.NullValue = null;
-            valorTotalProcesso.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            valorTotalProcesso.DefaultCellStyle = dataGridViewCellStyle6;
             valorTotalProcesso.HeaderText = "Valor total";
             valorTotalProcesso.Name = "valorTotalProcesso";
             valorTotalProcesso.ReadOnly = true;
