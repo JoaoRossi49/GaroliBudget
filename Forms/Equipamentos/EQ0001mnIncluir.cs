@@ -137,32 +137,19 @@ namespace GaroliBudget
         {
             decimal totalGeral = 0;
 
-            foreach (DataGridViewRow linha in dgvMateriais.Rows)
+            foreach (Material material in _equipamento.Materiais)
             {
-                // Verifica se a linha não está vazia (aquela linha em branco no final do grid)
-                if (linha.Cells["valorTotalMaterial"].Value != null)
-                {
-                    string valorString = linha.Cells["valorTotalMaterial"].Value.ToString();
-                    totalGeral += Convert.ToDecimal(valorString, CultureInfo.InvariantCulture);
-                }
+                totalGeral += Convert.ToDecimal(material.Total, CultureInfo.InvariantCulture);
             }
 
-            foreach (DataGridViewRow linha in dgvComponentes.Rows)
+            foreach (Componente componente in _equipamento.Componentes)
             {
-                if (linha.Cells["valorTotalComponente"].Value != null)
-                {
-                    string valorString = linha.Cells["valorTotalComponente"].Value.ToString();
-                    totalGeral += Convert.ToDecimal(valorString, CultureInfo.InvariantCulture);
-                }
+                totalGeral += Convert.ToDecimal(componente.Total, CultureInfo.InvariantCulture);
             }
 
-            foreach (DataGridViewRow linha in dgvProcessos.Rows)
+            foreach (Processo processo in _equipamento.Processos)
             {
-                if (linha.Cells["valorTotalProcesso"].Value != null)
-                {
-                    string valorString = linha.Cells["valorTotalProcesso"].Value.ToString();
-                    totalGeral += Convert.ToDecimal(valorString, CultureInfo.InvariantCulture);
-                }
+                totalGeral += Convert.ToDecimal(processo.Total, CultureInfo.InvariantCulture);
             }
 
             totalGeral = totalGeral * nmMargem.Value;

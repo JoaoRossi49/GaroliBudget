@@ -10,6 +10,8 @@ using System.Data;
 using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
+using Material = GaroliBudget.Models.Material;
 
 namespace GaroliBudget
 {
@@ -111,17 +113,20 @@ namespace GaroliBudget
             //dgvMateriais.DataSource = null;
             //dgvMateriais.Columns.Clear();
             dgvMateriais.AutoGenerateColumns = false;
-            dgvMateriais.DataSource = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento, idModulo); ;
+            _equipamento.Materiais = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento, idModulo);
+            dgvMateriais.DataSource = _equipamento.Materiais;
 
             //dgvComponentes.DataSource = null;
             //dgvMateriais.Columns.Clear();
             dgvComponentes.AutoGenerateColumns = false;
-            dgvComponentes.DataSource = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento, idModulo);
+            _equipamento.Componentes = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento, idModulo);
+            dgvComponentes.DataSource = _equipamento.Componentes;
 
             //dgvProcessos.DataSource = null;
             //dgvProcessos.Columns.Clear();
             dgvProcessos.AutoGenerateColumns = false;
-            dgvProcessos.DataSource = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento, idModulo);
+            _equipamento.Processos = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento, idModulo);
+            dgvProcessos.DataSource = _equipamento.Processos;
         }
 
         private void CarregarComboMateriais()
@@ -171,32 +176,19 @@ namespace GaroliBudget
         {
             decimal totalGeral = 0;
 
-            foreach (DataGridViewRow linha in dgvMateriais.Rows)
+            foreach (Material material in _equipamento.Materiais)
             {
-                // Verifica se a linha não está vazia (aquela linha em branco no final do grid)
-                if (linha.Cells["valorTotalMaterial"].Value != null)
-                {
-                    string valorString = linha.Cells["valorTotalMaterial"].Value.ToString();
-                    totalGeral += Convert.ToDecimal(valorString, CultureInfo.InvariantCulture);
-                }
+                totalGeral += Convert.ToDecimal(material.Total, CultureInfo.InvariantCulture);
             }
 
-            foreach (DataGridViewRow linha in dgvComponentes.Rows)
+            foreach (Componente componente in _equipamento.Componentes)
             {
-                if (linha.Cells["valorTotalComponente"].Value != null)
-                {
-                    string valorString = linha.Cells["valorTotalComponente"].Value.ToString();
-                    totalGeral += Convert.ToDecimal(valorString, CultureInfo.InvariantCulture);
-                }
+                totalGeral += Convert.ToDecimal(componente.Total, CultureInfo.InvariantCulture);
             }
 
-            foreach (DataGridViewRow linha in dgvProcessos.Rows)
+            foreach (Processo processo in _equipamento.Processos)
             {
-                if (linha.Cells["valorTotalProcesso"].Value != null)
-                {
-                    string valorString = linha.Cells["valorTotalProcesso"].Value.ToString();
-                    totalGeral += Convert.ToDecimal(valorString, CultureInfo.InvariantCulture);
-                }
+                totalGeral += Convert.ToDecimal(processo.Total, CultureInfo.InvariantCulture);
             }
 
             totalGeral = totalGeral * nmMargem.Value;
@@ -701,6 +693,7 @@ namespace GaroliBudget
             dgvComponentes.AutoGenerateColumns = false;
 
             LimparGridsModulo();
+            CarregarDataGrid();
 
             if (_equipamento.Materiais != null)
                 dgvMateriais.DataSource = _equipamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
