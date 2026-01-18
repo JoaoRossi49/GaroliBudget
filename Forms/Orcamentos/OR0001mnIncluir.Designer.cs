@@ -73,6 +73,8 @@
             valorUnitarioComponente = new DataGridViewTextBoxColumn();
             valorTotalComponente = new DataGridViewTextBoxColumn();
             tpProcessos = new TabPage();
+            button5 = new Button();
+            button6 = new Button();
             label9 = new Label();
             tbProcessosQuantidade = new TextBox();
             label10 = new Label();
@@ -92,8 +94,6 @@
             label5 = new Label();
             btnCancelar = new Button();
             btnGravar = new Button();
-            button5 = new Button();
-            button6 = new Button();
             panel1.SuspendLayout();
             gbOrcamento.SuspendLayout();
             tcItens.SuspendLayout();
@@ -223,7 +223,6 @@
             tcItens.SelectedIndex = 0;
             tcItens.Size = new Size(529, 357);
             tcItens.TabIndex = 41;
-            tcItens.Click += btnExcluir_Click;
             // 
             // tpMateriais
             // 
@@ -531,6 +530,35 @@
             tpProcessos.Text = "Mão de Obra";
             tpProcessos.UseVisualStyleBackColor = true;
             // 
+            // button5
+            // 
+            button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button5.BackColor = Color.White;
+            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImageLayout = ImageLayout.Center;
+            button5.Font = new Font("Segoe UI", 8F);
+            button5.Location = new Point(468, 31);
+            button5.Name = "button5";
+            button5.Size = new Size(47, 25);
+            button5.TabIndex = 35;
+            button5.TextAlign = ContentAlignment.TopCenter;
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += btnExcluir_Click;
+            // 
+            // button6
+            // 
+            button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button6.BackColor = Color.White;
+            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
+            button6.BackgroundImageLayout = ImageLayout.Center;
+            button6.Font = new Font("Segoe UI", 8F);
+            button6.Location = new Point(415, 31);
+            button6.Name = "button6";
+            button6.Size = new Size(47, 25);
+            button6.TabIndex = 34;
+            button6.TextAlign = ContentAlignment.TopCenter;
+            button6.UseVisualStyleBackColor = false;
+            // 
             // label9
             // 
             label9.AutoSize = true;
@@ -728,34 +756,6 @@
             btnGravar.Text = "Gravar";
             btnGravar.TextAlign = ContentAlignment.MiddleRight;
             btnGravar.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button5.BackColor = Color.White;
-            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
-            button5.BackgroundImageLayout = ImageLayout.Center;
-            button5.Font = new Font("Segoe UI", 8F);
-            button5.Location = new Point(468, 31);
-            button5.Name = "button5";
-            button5.Size = new Size(47, 25);
-            button5.TabIndex = 35;
-            button5.TextAlign = ContentAlignment.TopCenter;
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button6.BackColor = Color.White;
-            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
-            button6.BackgroundImageLayout = ImageLayout.Center;
-            button6.Font = new Font("Segoe UI", 8F);
-            button6.Location = new Point(415, 31);
-            button6.Name = "button6";
-            button6.Size = new Size(47, 25);
-            button6.TabIndex = 34;
-            button6.TextAlign = ContentAlignment.TopCenter;
-            button6.UseVisualStyleBackColor = false;
             // 
             // OR0001mnIncluir
             // 

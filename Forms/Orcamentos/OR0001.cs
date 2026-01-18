@@ -25,7 +25,7 @@ namespace GaroliBudget
         private void pesquisar()
         {
             dgvOrcamentos.AutoGenerateColumns = false;
-            string sqlWhere = "WHERE ATIVO = 1\n";
+            string sqlWhere = "";
 
             string descricao = tbDescricao.Text;
             string numero = tbNumeroOrcamento.Text;

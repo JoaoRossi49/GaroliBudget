@@ -39,6 +39,9 @@
             label2 = new Label();
             tbDescricao = new TextBox();
             gbFiltros = new GroupBox();
+            IdOrcamento = new DataGridViewTextBoxColumn();
+            Descricao = new DataGridViewTextBoxColumn();
+            valorTotal = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvOrcamentos).BeginInit();
             gbFiltros.SuspendLayout();
             SuspendLayout();
@@ -63,6 +66,7 @@
             dgvOrcamentos.BorderStyle = BorderStyle.Fixed3D;
             dgvOrcamentos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dgvOrcamentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOrcamentos.Columns.AddRange(new DataGridViewColumn[] { IdOrcamento, Descricao, valorTotal });
             dgvOrcamentos.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvOrcamentos.GridColor = SystemColors.ScrollBar;
             dgvOrcamentos.Location = new Point(12, 84);
@@ -167,6 +171,29 @@
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros";
             // 
+            // IdOrcamento
+            // 
+            IdOrcamento.HeaderText = "IdOrcamento";
+            IdOrcamento.Name = "IdOrcamento";
+            IdOrcamento.ReadOnly = true;
+            IdOrcamento.Visible = false;
+            // 
+            // Descricao
+            // 
+            Descricao.DataPropertyName = "Descricao";
+            Descricao.HeaderText = "Descricao";
+            Descricao.Name = "Descricao";
+            Descricao.ReadOnly = true;
+            Descricao.Width = 500;
+            // 
+            // valorTotal
+            // 
+            valorTotal.DataPropertyName = "ValorTotal";
+            valorTotal.HeaderText = "Valor total";
+            valorTotal.Name = "valorTotal";
+            valorTotal.ReadOnly = true;
+            valorTotal.Width = 180;
+            // 
             // OR0001
             // 
             AcceptButton = btnPesquisar;
@@ -195,5 +222,8 @@
         private Label label2;
         private TextBox tbDescricao;
         private GroupBox gbFiltros;
+        private DataGridViewTextBoxColumn IdOrcamento;
+        private DataGridViewTextBoxColumn Descricao;
+        private DataGridViewTextBoxColumn valorTotal;
     }
 }

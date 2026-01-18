@@ -8,6 +8,9 @@ namespace GaroliBudget.Repositories
 {
     public class OrcamentoRepository : IOrcamentoRepository
     {
+
+        private readonly IEquipamentoRepository _equipamentoRepository = new EquipamentoRepository();
+
         public int Inserir(Orcamento m)
         {
             using var conn = DBPostgres.GetConnection();
@@ -120,13 +123,22 @@ namespace GaroliBudget.Repositories
 
         private Orcamento Mapear(NpgsqlDataReader reader)
         {
+            Equipamento equipamento = new Equipamento();
+            var idEquipamento = reader.GetInt32(reader.GetOrdinal("ID_EQUIPAMENTO"));
+            equipamento = _equipamentoRepository.ObterPorId(idEquipamento);
+
             return new Orcamento
             {
-                IdOrcamento = reader.GetInt32(reader.GetOrdinal("ID_EQUIPAMENTO")),
-                Numero = reader["CODIGO"].ToString(),
+                IdOrcamento = reader.GetInt32(reader.GetOrdinal("ID_ORCAMENTO")),
+                Numero = reader["NUMERO"].ToString(),
+                Data = Convert.ToDateTime(reader["DATA_ORCAMENTO"]),
+                cliente = new Cliente { IdCliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE")) },
+                equipamento = equipamento,
                 //Descricao = reader["DESCRICAO"].ToString(),
-                Observacao = reader["OBSERVACOES"].ToString(),
-                Ativo = reader.GetInt32(reader.GetOrdinal("ATIVO")) == 1
+                MargemContribuicao = Convert.ToDecimal(reader["MARGEM_CONTRIBUICAO"]),
+                ValorTotal = Convert.ToDecimal(reader["VALOR_TOTAL"]),
+                Status = reader["STATUS"].ToString(),
+                Observacao = reader["OBSERVACOES"].ToString()
             };
         }
     }
