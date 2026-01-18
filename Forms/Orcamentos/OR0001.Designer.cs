@@ -30,16 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OR0001));
             btnPesquisar = new Button();
-            dgvClientes = new DataGridView();
-            tbRazaoSocial = new TextBox();
+            dgvOrcamentos = new DataGridView();
+            tbNumeroOrcamento = new TextBox();
             label1 = new Label();
             btnExcluir = new Button();
             btnIncluir = new Button();
             btnEditar = new Button();
             label2 = new Label();
-            tbNomeCliente = new TextBox();
+            tbDescricao = new TextBox();
             gbFiltros = new GroupBox();
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOrcamentos).BeginInit();
             gbFiltros.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,40 +54,39 @@
             btnPesquisar.UseVisualStyleBackColor = true;
             btnPesquisar.Click += btnPesquisar_Click;
             // 
-            // dgvClientes
+            // dgvOrcamentos
             // 
-            dgvClientes.AllowUserToAddRows = false;
-            dgvClientes.AllowUserToDeleteRows = false;
-            dgvClientes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvClientes.BackgroundColor = SystemColors.Control;
-            dgvClientes.BorderStyle = BorderStyle.Fixed3D;
-            dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClientes.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dgvClientes.GridColor = SystemColors.ScrollBar;
-            dgvClientes.Location = new Point(12, 84);
-            dgvClientes.Name = "dgvClientes";
-            dgvClientes.ReadOnly = true;
-            dgvClientes.Size = new Size(702, 315);
-            dgvClientes.TabIndex = 7;
-            dgvClientes.CellDoubleClick += dgvClientes_CellDoubleClick;
+            dgvOrcamentos.AllowUserToAddRows = false;
+            dgvOrcamentos.AllowUserToDeleteRows = false;
+            dgvOrcamentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvOrcamentos.BackgroundColor = SystemColors.Control;
+            dgvOrcamentos.BorderStyle = BorderStyle.Fixed3D;
+            dgvOrcamentos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgvOrcamentos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOrcamentos.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgvOrcamentos.GridColor = SystemColors.ScrollBar;
+            dgvOrcamentos.Location = new Point(12, 84);
+            dgvOrcamentos.Name = "dgvOrcamentos";
+            dgvOrcamentos.ReadOnly = true;
+            dgvOrcamentos.Size = new Size(702, 315);
+            dgvOrcamentos.TabIndex = 7;
+            dgvOrcamentos.CellDoubleClick += dgvClientes_CellDoubleClick;
             // 
-            // tbRazaoSocial
+            // tbNumeroOrcamento
             // 
-            tbRazaoSocial.Location = new Point(5, 41);
-            tbRazaoSocial.Name = "tbRazaoSocial";
-            tbRazaoSocial.Size = new Size(256, 23);
-            tbRazaoSocial.TabIndex = 0;
-            tbRazaoSocial.TextChanged += tbNomeCliente_TextChanged;
+            tbNumeroOrcamento.Location = new Point(5, 41);
+            tbNumeroOrcamento.Name = "tbNumeroOrcamento";
+            tbNumeroOrcamento.Size = new Size(256, 23);
+            tbNumeroOrcamento.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(5, 23);
             label1.Name = "label1";
-            label1.Size = new Size(44, 15);
+            label1.Size = new Size(51, 15);
             label1.TabIndex = 3;
-            label1.Text = "Cliente";
+            label1.Text = "Número";
             // 
             // btnExcluir
             // 
@@ -143,20 +142,20 @@
             label2.TabIndex = 16;
             label2.Text = "Código";
             // 
-            // tbNomeCliente
+            // tbDescricao
             // 
-            tbNomeCliente.Location = new Point(280, 41);
-            tbNomeCliente.Name = "tbNomeCliente";
-            tbNomeCliente.Size = new Size(236, 23);
-            tbNomeCliente.TabIndex = 1;
+            tbDescricao.Location = new Point(280, 41);
+            tbDescricao.Name = "tbDescricao";
+            tbDescricao.Size = new Size(236, 23);
+            tbDescricao.TabIndex = 1;
             // 
             // gbFiltros
             // 
             gbFiltros.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            gbFiltros.Controls.Add(tbRazaoSocial);
+            gbFiltros.Controls.Add(tbNumeroOrcamento);
             gbFiltros.Controls.Add(label1);
             gbFiltros.Controls.Add(label2);
-            gbFiltros.Controls.Add(tbNomeCliente);
+            gbFiltros.Controls.Add(tbDescricao);
             gbFiltros.Controls.Add(btnExcluir);
             gbFiltros.Controls.Add(btnIncluir);
             gbFiltros.Controls.Add(btnEditar);
@@ -175,10 +174,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(717, 403);
             Controls.Add(gbFiltros);
-            Controls.Add(dgvClientes);
+            Controls.Add(dgvOrcamentos);
             Name = "OR0001";
             Text = "CL0001 - Listagem de clientes";
-            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOrcamentos).EndInit();
             gbFiltros.ResumeLayout(false);
             gbFiltros.PerformLayout();
             ResumeLayout(false);
@@ -187,14 +186,14 @@
         #endregion
 
         private Button btnPesquisar;
-        private DataGridView dgvClientes;
-        private TextBox tbRazaoSocial;
+        private DataGridView dgvOrcamentos;
+        private TextBox tbNumeroOrcamento;
         private Label label1;
         private Button btnExcluir;
         private Button btnIncluir;
         private Button btnEditar;
         private Label label2;
-        private TextBox tbNomeCliente;
+        private TextBox tbDescricao;
         private GroupBox gbFiltros;
     }
 }

@@ -14,7 +14,6 @@ namespace GaroliBudget.Repositories.Interfaces
         int Salvar(Orcamento Orcamento);
         void AtualizarOrcamento(Orcamento Orcamento);
         Orcamento ObterPorId(int idOrcamento);
-        List<Orcamento> ListarAtivos();
         List<Orcamento> ListarTodos();
         List<Material> ListarMateriais(int idOrcamento, int idModulo = 0);
         List<Processo> ListarProcessos(int idOrcamento, int idModulo = 0);
@@ -26,7 +25,6 @@ namespace GaroliBudget.Repositories.Interfaces
         int Inserir(Orcamento Orcamento);
         void Atualizar(Orcamento Orcamento);
         Orcamento ObterPorId(int idOrcamento);
-        List<Orcamento> ListarAtivos();
         List<Orcamento> ListarTodos();
         List<Orcamento> ListarWhere(string where);
 

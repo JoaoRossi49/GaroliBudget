@@ -81,11 +81,6 @@ namespace GaroliBudget.Services
             return _orcamentoRepository.ObterPorId(idOrcamento);
         }
 
-        public List<Orcamento> ListarAtivos()
-        {
-            return _orcamentoRepository.ListarAtivos();
-        }
-
         public List<Orcamento> ListarTodos()
         {
             return _orcamentoRepository.ListarTodos();

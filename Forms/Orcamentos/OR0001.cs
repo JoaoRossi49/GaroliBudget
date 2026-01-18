@@ -17,11 +17,6 @@ namespace GaroliBudget
             _orcamentoService = new OrcamentoService(repo);
         }
 
-        private void tbNomeCliente_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             pesquisar();
@@ -29,16 +24,16 @@ namespace GaroliBudget
 
         private void pesquisar()
         {
-            dgvClientes.AutoGenerateColumns = false;
+            dgvOrcamentos.AutoGenerateColumns = false;
             string sqlWhere = "WHERE ATIVO = 1\n";
 
-            string nFantasia = tbNomeCliente.Text;
-            string rSocial = tbRazaoSocial.Text;
+            string descricao = tbDescricao.Text;
+            string numero = tbNumeroOrcamento.Text;
 
-            sqlWhere += nFantasia.Length > 0 ? $@"AND NOME_FANTASIA LIKE '%{nFantasia}%' " : "";
-            sqlWhere += rSocial.Length > 0 ? $@"AND RAZAO_SOCIAL LIKE '%{rSocial}%' " : "";
+            sqlWhere += descricao.Length > 0 ? $@"AND DESCRICAO_PROJETO LIKE '%{descricao}%' " : "";
+            sqlWhere += numero.Length > 0 ? $@"AND NUMERO LIKE '%{numero}%' " : "";
 
-            dgvClientes.DataSource = _orcamentoService.ListarWhere(sqlWhere);
+            dgvOrcamentos.DataSource = _orcamentoService.ListarWhere(sqlWhere);
         }
 
         private void btnIncluir_Click(object sender, EventArgs e)

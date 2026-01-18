@@ -70,11 +70,6 @@ namespace GaroliBudget.Repositories
             cmd.ExecuteNonQuery();
         }
 
-        public List<Orcamento> ListarAtivos()
-        {
-            return Listar("WHERE ATIVO = 1");
-        }
-
         public List<Orcamento> ListarTodos()
         {
             return Listar(string.Empty);
@@ -93,7 +88,7 @@ namespace GaroliBudget.Repositories
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT * FROM EQUIPAMENTO {where};";
+            cmd.CommandText = $"SELECT * FROM ORCAMENTO {where};";
 
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
