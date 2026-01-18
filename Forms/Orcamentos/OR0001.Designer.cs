@@ -74,7 +74,7 @@
             dgvOrcamentos.ReadOnly = true;
             dgvOrcamentos.Size = new Size(702, 315);
             dgvOrcamentos.TabIndex = 7;
-            dgvOrcamentos.CellDoubleClick += dgvClientes_CellDoubleClick;
+            dgvOrcamentos.CellDoubleClick += dgvOrcamentos_CellDoubleClick;
             // 
             // tbNumeroOrcamento
             // 

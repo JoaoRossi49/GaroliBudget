@@ -656,6 +656,9 @@ namespace GaroliBudget
 
         private void CarregarModulos()
         {
+            //Limpa os módulos
+            treeViewModulos.Nodes.Clear();
+
             List<Modulo> modulos = _equipamentoModuloRepository.ObterPorEquipamentoId(_equipamento.IdEquipamento);
 
             foreach (Modulo modulo in modulos)
@@ -697,12 +700,14 @@ namespace GaroliBudget
             dgvProcessos.AutoGenerateColumns = false;
             dgvComponentes.AutoGenerateColumns = false;
 
-            dgvMateriais.DataSource = null;
-            dgvProcessos.DataSource = null;
-            dgvComponentes.DataSource = null;
-            dgvMateriais.DataSource = _equipamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
-            dgvProcessos.DataSource = _equipamento.Processos.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
-            dgvComponentes.DataSource = _equipamento.Componentes.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+            LimparGridsModulo();
+
+            if (_equipamento.Materiais != null)
+                dgvMateriais.DataSource = _equipamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+            if (_equipamento.Processos != null)
+                dgvProcessos.DataSource = _equipamento.Processos.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+            if (_equipamento.Componentes != null)
+                dgvComponentes.DataSource = _equipamento.Componentes.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
         }
 
         private void LimparGridsModulo()
@@ -715,15 +720,23 @@ namespace GaroliBudget
 
         private void cbEquipamento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbEquipamento.SelectedIndex != -1)
+            if (cbEquipamento.SelectedIndex != -1)
             {
                 gbOrcamento.Enabled = true;
+            }
+            else
+            {
+                gbOrcamento.Enabled = false;
             }
 
             if (cbEquipamento.SelectedItem != null)
             {
                 _equipamento = (Equipamento)cbEquipamento.SelectedItem;
             }
+
+            CarregarModulos();
+            CarregarDataGrid();
+            CalcularTotalGeral();
         }
     }
 }
