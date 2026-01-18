@@ -19,7 +19,7 @@ namespace GaroliBudget
     {
         private IEquipamentoService _equipamentoService;
         private readonly IOrcamentoService _orcamentoService;
-
+        private bool _edicao = false;
 
         private MaterialService _materialService;
         private ComponenteService _componenteService;
@@ -46,13 +46,14 @@ namespace GaroliBudget
 
         public OR0001mnIncluir(IOrcamentoService orcamentoService, Orcamento orcamentoParaEditar) : this(orcamentoService)
         {
+            _edicao = true;
             CarregarServices();
             _orcamento = orcamentoParaEditar;
-
-            _equipamento = _orcamento.equipamento;
-            _equipamento.Materiais = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento);
-            _equipamento.Processos = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento);
-            _equipamento.Componentes = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento);
+            
+            _equipamento.Materiais = _orcamentoService.ListarMateriais(_orcamento.IdOrcamento);
+            _equipamento.Processos = _orcamentoService.ListarProcessos(_orcamento.IdOrcamento);
+            _equipamento.Componentes = _orcamentoService.ListarComponentes(_orcamento.IdOrcamento);
+            _orcamento.equipamento = _equipamento;
 
             this.Text = "Editar Equipamento";
             PreencherCampos();
@@ -110,23 +111,36 @@ namespace GaroliBudget
         {
             int idModulo = GetModuloSelecionado();
 
-            //dgvMateriais.DataSource = null;
-            //dgvMateriais.Columns.Clear();
-            dgvMateriais.AutoGenerateColumns = false;
-            _equipamento.Materiais = _equipamentoService.ListarMateriais(_equipamento.IdEquipamento, idModulo);
-            dgvMateriais.DataSource = _equipamento.Materiais;
+            Equipamento equipamento = _orcamento.equipamento;
 
-            //dgvComponentes.DataSource = null;
-            //dgvMateriais.Columns.Clear();
-            dgvComponentes.AutoGenerateColumns = false;
-            _equipamento.Componentes = _equipamentoService.ListarComponentes(_equipamento.IdEquipamento, idModulo);
-            dgvComponentes.DataSource = _equipamento.Componentes;
+            if (!_edicao)
+            {
+                dgvMateriais.AutoGenerateColumns = false;
+                equipamento.Materiais = _equipamentoService.ListarMateriais(equipamento.IdEquipamento, idModulo);
+                dgvMateriais.DataSource = equipamento.Materiais;
 
-            //dgvProcessos.DataSource = null;
-            //dgvProcessos.Columns.Clear();
-            dgvProcessos.AutoGenerateColumns = false;
-            _equipamento.Processos = _equipamentoService.ListarProcessos(_equipamento.IdEquipamento, idModulo);
-            dgvProcessos.DataSource = _equipamento.Processos;
+                dgvComponentes.AutoGenerateColumns = false;
+                equipamento.Componentes = _equipamentoService.ListarComponentes(equipamento.IdEquipamento, idModulo);
+                dgvComponentes.DataSource = equipamento.Componentes;
+
+                dgvProcessos.AutoGenerateColumns = false;
+                equipamento.Processos = _equipamentoService.ListarProcessos(equipamento.IdEquipamento, idModulo);
+                dgvProcessos.DataSource = equipamento.Processos;
+            }
+            else
+            {
+                dgvMateriais.AutoGenerateColumns = false;
+                 equipamento.Materiais = _orcamentoService.ListarMateriais(equipamento.IdEquipamento, idModulo);
+                dgvMateriais.DataSource =  equipamento.Materiais;
+
+                dgvComponentes.AutoGenerateColumns = false;
+                 equipamento.Componentes = _orcamentoService.ListarComponentes(equipamento.IdEquipamento, idModulo);
+                dgvComponentes.DataSource =  equipamento.Componentes;
+
+                dgvProcessos.AutoGenerateColumns = false;
+                 equipamento.Processos = _orcamentoService.ListarProcessos(equipamento.IdEquipamento, idModulo);
+                dgvProcessos.DataSource =  equipamento.Processos;
+            }
         }
 
         private void CarregarComboMateriais()
@@ -176,22 +190,25 @@ namespace GaroliBudget
         {
             decimal totalGeral = 0;
 
-            foreach (Material material in _equipamento.Materiais)
+            foreach (Material material in _orcamento.Materiais)
             {
                 totalGeral += Convert.ToDecimal(material.Total, CultureInfo.InvariantCulture);
             }
 
-            foreach (Componente componente in _equipamento.Componentes)
+            foreach (Componente componente in _orcamento.Componentes)
             {
                 totalGeral += Convert.ToDecimal(componente.Total, CultureInfo.InvariantCulture);
             }
 
-            foreach (Processo processo in _equipamento.Processos)
+            foreach (Processo processo in _orcamento.Processos)
             {
                 totalGeral += Convert.ToDecimal(processo.Total, CultureInfo.InvariantCulture);
             }
 
             totalGeral = totalGeral * nmMargem.Value;
+
+            //Atualiza objeto
+            _orcamento.ValorTotal = totalGeral;
 
             // 3. Atualiza a tela com o símbolo de Real (C2 = Currency 2 casas decimais)
             lblValorFinal.Text = totalGeral.ToString("C2");
@@ -208,22 +225,24 @@ namespace GaroliBudget
                 return;
 
             //Salva itens do equipamento
-            _equipamentoService.Salvar(_equipamento);
+            _orcamentoService.Salvar(_orcamento);
 
             this.Close();
         }
 
         private bool AtualizaObjeto()
         {
+            CalcularTotalGeral();
+
             if (!ValidaFormularioPai())
             { return false; }
 
-            //_orcamento.cliente =
-            //_orcamento.Descricao =
-
-            //_equipamento.Descricao = tbDescricaoEquipamento.Text;
-            //_equipamento.Codigo = tbNumeroOrcamento.Text;
-            //_equipamento.Observacao = tbObservacaoEquipamento.Text;
+            _orcamento.Numero = tbNumeroOrcamento.Text;
+            _orcamento.cliente = (Cliente)cbCliente.SelectedItem;
+            _orcamento.equipamento = (Equipamento)cbEquipamento.SelectedItem;
+            _orcamento.MargemContribuicao = nmMargem.Value;
+            _orcamento.Status = "APROVADO";
+            _orcamento.Observacao = tbObservacoes.Text;
 
             return true;
         }
@@ -263,7 +282,7 @@ namespace GaroliBudget
                     cbMateriais,
                     tbMateriaisQuantidade,
                     dgvMateriais,
-                    _equipamento.Materiais
+                    _orcamento.equipamento.Materiais
                 );
             }
             else if (tcItens.SelectedTab == tpComponentes)
@@ -272,7 +291,7 @@ namespace GaroliBudget
                     cbComponentes,
                     tbComponentesQuantidade,
                     dgvComponentes,
-                    _equipamento.Componentes
+                    _orcamento.equipamento.Componentes
                 );
             }
             else if (tcItens.SelectedTab == tpProcessos)
@@ -281,7 +300,7 @@ namespace GaroliBudget
                     cbProcessos,
                     tbProcessosQuantidade,
                     dgvProcessos,
-                    _equipamento.Processos
+                    _orcamento.equipamento.Processos
                 );
             }
 
@@ -419,21 +438,21 @@ namespace GaroliBudget
             {
                 ExcluirItem<Material>(
                     dgvMateriais,
-                    _equipamento.Materiais
+                    _orcamento.equipamento.Materiais
                 );
             }
             else if (tcItens.SelectedTab == tpComponentes)
             {
                 ExcluirItem<Componente>(
                     dgvComponentes,
-                    _equipamento.Componentes
+                    _orcamento.equipamento.Componentes
                 );
             }
             else if (tcItens.SelectedTab == tpProcessos)
             {
                 ExcluirItem<Processo>(
                     dgvProcessos,
-                    _equipamento.Processos
+                    _orcamento.equipamento.Processos
                 );
             }
 
@@ -650,18 +669,32 @@ namespace GaroliBudget
         {
             //Limpa os módulos
             treeViewModulos.Nodes.Clear();
+            List<Modulo> modulos = new List<Modulo>();
 
-            List<Modulo> modulos = _equipamentoModuloRepository.ObterPorEquipamentoId(_equipamento.IdEquipamento);
-
-            foreach (Modulo modulo in modulos)
+            if (_edicao)
             {
-                AdicionarModuloTreeView(modulo);
+                //Pega do orçamento já salvo
+                modulos = _orcamentoModuloRepository.ObterPorOrcamentoId(_orcamento.IdOrcamento);
+            }
+            else
+            {
+                //Pega do template caso seja uma inclusão de orçamento
+                modulos = _equipamentoModuloRepository.ObterPorEquipamentoId(_orcamento.equipamento.IdEquipamento);
             }
 
-            var firstNode = treeViewModulos.Nodes[0];
-            treeViewModulos.SelectedNode = firstNode;
-            firstNode.EnsureVisible();
-            treeViewModulos.Focus();
+            if (modulos.Count > 0)
+            {
+                foreach (Modulo modulo in modulos)
+                {
+                    AdicionarModuloTreeView(modulo);
+                }
+
+                var firstNode = treeViewModulos.Nodes[0];
+                treeViewModulos.SelectedNode = firstNode;
+                firstNode.EnsureVisible();
+                treeViewModulos.Focus();
+            }
+
         }
 
         private void AdicionarModuloTreeView(Modulo modulo)
@@ -696,11 +729,11 @@ namespace GaroliBudget
             CarregarDataGrid();
 
             if (_equipamento.Materiais != null)
-                dgvMateriais.DataSource = _equipamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+                dgvMateriais.DataSource = _orcamento.equipamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
             if (_equipamento.Processos != null)
-                dgvProcessos.DataSource = _equipamento.Processos.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+                dgvProcessos.DataSource = _orcamento.equipamento.Processos.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
             if (_equipamento.Componentes != null)
-                dgvComponentes.DataSource = _equipamento.Componentes.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+                dgvComponentes.DataSource = _orcamento.equipamento.Componentes.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
         }
 
         private void LimparGridsModulo()
@@ -724,7 +757,7 @@ namespace GaroliBudget
 
             if (cbEquipamento.SelectedItem != null)
             {
-                _equipamento = (Equipamento)cbEquipamento.SelectedItem;
+                _orcamento.equipamento = (Equipamento)cbEquipamento.SelectedItem;
             }
 
             CarregarModulos();

@@ -18,9 +18,9 @@ namespace GaroliBudget.Models
         public string Status { get; set; }
         public decimal MargemContribuicao { get; set; }
         public decimal ValorTotal { get; set; }
-        public List<Material> Materiais { get; set; }
-        public List<Componente> Componentes { get; set; }
-        public List<Processo> Processos { get; set; }
+        public List<Material> Materiais { get; set; } = new List<Material>();
+        public List<Componente> Componentes { get; set; } = new List<Componente>();
+        public List<Processo> Processos { get; set; } = new List<Processo>();
         public bool Ativo { get; set; }
     }
 

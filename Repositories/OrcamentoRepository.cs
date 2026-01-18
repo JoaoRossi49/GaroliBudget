@@ -22,11 +22,11 @@ namespace GaroliBudget.Repositories
                 (NUMERO, DATA_ORCAMENTO, ID_CLIENTE, ID_EQUIPAMENTO, DESCRICAO, MARGEM_CONTRIBUICAO,
                 VALOR_TOTAL, STATUS, OBSERVACOES)
                 VALUES 
-                (@numero, @dat, @cliente, @eq, @descricao, @margem, @total, @status, @observacao)
+                (@numero, CURRENT_TIMESTAMP, @cliente, @eq, @descricao, @margem, @total, @status, @observacao)
                 RETURNING ID_EQUIPAMENTO";
 
             cmd.Parameters.AddWithValue("@numero", m.Numero);
-            cmd.Parameters.AddWithValue("@dat", m.Data);
+            //cmd.Parameters.AddWithValue("@dat", m.Data);
             cmd.Parameters.AddWithValue("@cliente", m.cliente.IdCliente);
             cmd.Parameters.AddWithValue("@eq", m.equipamento.IdEquipamento);
             cmd.Parameters.AddWithValue("@descricao", m.Descricao);
@@ -48,7 +48,7 @@ namespace GaroliBudget.Repositories
             cmd.CommandText =
                 @"UPDATE ORCAMENTO
                 SET NUMERO = @numero,
-                    DATA_ORCAMENTO = @dat,
+                    --DATA_ORCAMENTO = @dat,
                     ID_CLIENTE = @cliente, 
                     ID_EQUIPAMENTO = @eq, 
                     DESCRICAO = @descricao, 
@@ -59,7 +59,7 @@ namespace GaroliBudget.Repositories
               WHERE ID_ORCAMENTO = @id;";
 
             cmd.Parameters.AddWithValue("@numero", m.Numero);
-            cmd.Parameters.AddWithValue("@dat", m.Data);
+            //cmd.Parameters.AddWithValue("@dat", m.Data);
             cmd.Parameters.AddWithValue("@cliente", m.cliente.IdCliente);
             cmd.Parameters.AddWithValue("@eq", m.equipamento.IdEquipamento);
             cmd.Parameters.AddWithValue("@descricao", m.Descricao);

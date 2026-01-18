@@ -46,20 +46,20 @@ namespace GaroliBudget.Repositories.ItensOrcamento
         }
 
         public void RemoverPorOrcamento(
-            int idEquipamento,
+            int idOrcamento,
             NpgsqlConnection conn,
             NpgsqlTransaction tran)
         {
             var cmd = conn.CreateCommand();
             cmd.Transaction = tran;
             cmd.CommandText =
-                "DELETE FROM ORCAMENTO_COMPONENTE WHERE ID_EQUIPAMENTO = @id";
+                "DELETE FROM ORCAMENTO_COMPONENTE WHERE ID_ORCAMENTO = @id";
 
-            cmd.Parameters.AddWithValue("@id", idEquipamento);
+            cmd.Parameters.AddWithValue("@id", idOrcamento);
             cmd.ExecuteNonQuery();
         }
 
-        public List<Componente> ListarPorOrcamentoId(int idEquipamento, int idModulo = 0)
+        public List<Componente> ListarPorOrcamentoId(int idOrcamento, int idModulo = 0)
         {
             var lista = new List<Componente>();
 
@@ -67,7 +67,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT * FROM ORCAMENTO_COMPONENTE WHERE ID_EQUIPAMENTO = {idEquipamento} " +
+            cmd.CommandText = $"SELECT * FROM ORCAMENTO_COMPONENTE WHERE ID_ORCAMENTO = {idOrcamento} " +
                 (idModulo > 0 ? $"AND ID_MODULO = {idModulo};" : ";");
 
             using var reader = cmd.ExecuteReader();

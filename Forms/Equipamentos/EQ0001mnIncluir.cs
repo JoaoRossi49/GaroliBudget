@@ -133,7 +133,7 @@ namespace GaroliBudget
             CalcularTotalGeral();
         }
 
-        private void CalcularTotalGeral()
+               private void CalcularTotalGeral()
         {
             decimal totalGeral = 0;
 
