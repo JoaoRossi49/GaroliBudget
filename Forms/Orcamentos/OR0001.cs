@@ -44,59 +44,59 @@ namespace GaroliBudget
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            //if (dgvClientes.SelectedRows.Count == 1)
-            //{
-            //    var clienteSelecionado = (Cliente)dgvClientes.SelectedRows[0].DataBoundItem;
+            if (dgvOrcamentos.SelectedRows.Count == 1)
+            {
+                var orcamentoSelecionado = (Orcamento)dgvOrcamentos.SelectedRows[0].DataBoundItem;
 
-            //    Cliente cliente = _clienteService.ObterPorId(clienteSelecionado.IdCliente);
+                Orcamento orcamento = _orcamentoService.ObterPorId(orcamentoSelecionado.IdOrcamento);
 
 
-            //    using (var form = new CL0001mnIncluir(_clienteService, cliente))
-            //    {
-            //        var resultado = form.ShowDialog();
+                using (var form = new OR0001mnIncluir(_orcamentoService, orcamento))
+                {
+                    var resultado = form.ShowDialog();
 
-            //        if (resultado == DialogResult.OK)
-            //        {
-            //            pesquisar();
-            //        }
-            //    }
-            //}
-            //else if (dgvClientes.SelectedRows.Count > 1)
-            //{
-            //    MessageBox.Show("Selecione apenas um registro por vez.", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Selecione um cliente na lista para editar.", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+                    if (resultado == DialogResult.OK)
+                    {
+                        pesquisar();
+                    }
+                }
+            }
+            else if (dgvOrcamentos.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Selecione apenas um registro por vez.", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Selecione um orcamento na lista para editar.", "A T E N Ç Ã O", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            //if (dgvClientes.SelectedRows.Count <= 0)
-            //{ return; }
+            if (dgvOrcamentos.SelectedRows.Count <= 0)
+            { return; }
 
-            //foreach (DataRow row in dgvClientes.SelectedRows)
-            //{
-            //    _clienteService.InativarCliente(Convert.ToInt32(row["IdCliente"]));
-            //}
+            foreach (DataRow row in dgvOrcamentos.SelectedRows)
+            {
+                _orcamentoService.InativarOrcamento(Convert.ToInt32(row["IdOrcamento"]));
+            }
         }
 
-        private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvOrcamentos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (e.RowIndex >= 0)
-            //{
-            //    var clienteSelecionado = (Cliente)dgvClientes.Rows[e.RowIndex].DataBoundItem;
-            //    Cliente cliente = _clienteService.ObterPorId(clienteSelecionado.IdCliente);
+            if (e.RowIndex >= 0)
+            {
+                var orcamentoSelecionado = (Orcamento)dgvOrcamentos.Rows[e.RowIndex].DataBoundItem;
+                Orcamento orcamento = _orcamentoService.ObterPorId(orcamentoSelecionado.IdOrcamento);
 
-            //    using (var form = new CL0001mnIncluir(_clienteService, cliente))
-            //    {
-            //        if (form.ShowDialog() == DialogResult.OK)
-            //        {
-            //            pesquisar();
-            //        }
-            //    }
-            //}
+                using (var form = new OR0001mnIncluir(_orcamentoService, orcamento))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        pesquisar();
+                    }
+                }
+            }
         }
 
     }
