@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OR0001mnIncluir));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OR0001mnIncluir));
             label1 = new Label();
             tbNumeroOrcamento = new TextBox();
             panel1 = new Panel();
@@ -52,26 +52,26 @@
             lblValorFinal = new Label();
             label6 = new Label();
             label5 = new Label();
-            tcItens = new TabControl();
-            tpMateriais = new TabPage();
+            btnCancelar = new Button();
+            btnGravar = new Button();
             label4 = new Label();
             tbMateriaisQuantidade = new TextBox();
             label3 = new Label();
             cbMateriais = new ComboBox();
             btnExcluir = new Button();
-            btnIncluirMaterial = new Button();
             dgvMateriais = new DataGridView();
             Descricao = new DataGridViewTextBoxColumn();
             Quantidade = new DataGridViewTextBoxColumn();
             CustoUnitario = new DataGridViewTextBoxColumn();
             valorTotalMaterial = new DataGridViewTextBoxColumn();
+            tcItens = new TabControl();
+            tpMateriais = new TabPage();
             tpComponentes = new TabPage();
             label7 = new Label();
             tbComponentesQuantidade = new TextBox();
             label8 = new Label();
             cbComponentes = new ComboBox();
             button1 = new Button();
-            btnIncluirComponente = new Button();
             dgvComponentes = new DataGridView();
             descricaoComponente = new DataGridViewTextBoxColumn();
             quantidadeComponente = new DataGridViewTextBoxColumn();
@@ -83,20 +83,23 @@
             label10 = new Label();
             cbProcessos = new ComboBox();
             button4 = new Button();
-            btnIncluirProcesso = new Button();
             dgvProcessos = new DataGridView();
             descricaoProcesso = new DataGridViewTextBoxColumn();
             quantidadeProcesso = new DataGridViewTextBoxColumn();
             valorUnitarioProcesso = new DataGridViewTextBoxColumn();
             valorTotalProcesso = new DataGridViewTextBoxColumn();
-            btnCancelar = new Button();
-            btnGravar = new Button();
+            btnExcluirMaterial = new Button();
+            btnIncluirMaterial = new Button();
+            this.btnExcluirComponente = new Button();
+            btnIncluirComponente = new Button();
+            this.btnExcluirProcesso = new Button();
+            btnIncluirProcesso = new Button();
             panel1.SuspendLayout();
             gbOrcamento.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nmMargem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMateriais).BeginInit();
             tcItens.SuspendLayout();
             tpMateriais.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvMateriais).BeginInit();
             tpComponentes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvComponentes).BeginInit();
             tpProcessos.SuspendLayout();
@@ -193,6 +196,7 @@
             // 
             // gbOrcamento
             // 
+            gbOrcamento.Controls.Add(tcItens);
             gbOrcamento.Controls.Add(btnExcluirModulo);
             gbOrcamento.Controls.Add(btnIncluirModulo);
             gbOrcamento.Controls.Add(treeViewModulos);
@@ -200,7 +204,6 @@
             gbOrcamento.Controls.Add(lblValorFinal);
             gbOrcamento.Controls.Add(label6);
             gbOrcamento.Controls.Add(label5);
-            gbOrcamento.Controls.Add(tcItens);
             gbOrcamento.Controls.Add(btnCancelar);
             gbOrcamento.Controls.Add(btnGravar);
             gbOrcamento.Enabled = false;
@@ -289,33 +292,29 @@
             label5.TabIndex = 34;
             label5.Text = "TOTAL: ";
             // 
-            // tcItens
+            // btnCancelar
             // 
-            tcItens.Controls.Add(tpMateriais);
-            tcItens.Controls.Add(tpComponentes);
-            tcItens.Controls.Add(tpProcessos);
-            tcItens.Location = new Point(218, 19);
-            tcItens.Name = "tcItens";
-            tcItens.SelectedIndex = 0;
-            tcItens.Size = new Size(529, 357);
-            tcItens.TabIndex = 33;
+            btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(668, 436);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.TabIndex = 32;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TextAlign = ContentAlignment.MiddleRight;
+            btnCancelar.UseVisualStyleBackColor = true;
             // 
-            // tpMateriais
+            // btnGravar
             // 
-            tpMateriais.Controls.Add(label4);
-            tpMateriais.Controls.Add(tbMateriaisQuantidade);
-            tpMateriais.Controls.Add(label3);
-            tpMateriais.Controls.Add(cbMateriais);
-            tpMateriais.Controls.Add(btnExcluir);
-            tpMateriais.Controls.Add(btnIncluirMaterial);
-            tpMateriais.Controls.Add(dgvMateriais);
-            tpMateriais.Location = new Point(4, 24);
-            tpMateriais.Name = "tpMateriais";
-            tpMateriais.Padding = new Padding(3);
-            tpMateriais.Size = new Size(521, 329);
-            tpMateriais.TabIndex = 0;
-            tpMateriais.Text = "Materiais";
-            tpMateriais.UseVisualStyleBackColor = true;
+            btnGravar.Image = (Image)resources.GetObject("btnGravar.Image");
+            btnGravar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnGravar.Location = new Point(581, 436);
+            btnGravar.Name = "btnGravar";
+            btnGravar.Size = new Size(75, 23);
+            btnGravar.TabIndex = 31;
+            btnGravar.Text = "Gravar";
+            btnGravar.TextAlign = ContentAlignment.MiddleRight;
+            btnGravar.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -366,20 +365,6 @@
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
             // 
-            // btnIncluirMaterial
-            // 
-            btnIncluirMaterial.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnIncluirMaterial.BackColor = Color.White;
-            btnIncluirMaterial.BackgroundImage = (Image)resources.GetObject("btnIncluirMaterial.BackgroundImage");
-            btnIncluirMaterial.BackgroundImageLayout = ImageLayout.Center;
-            btnIncluirMaterial.Font = new Font("Segoe UI", 8F);
-            btnIncluirMaterial.Location = new Point(732, 34);
-            btnIncluirMaterial.Name = "btnIncluirMaterial";
-            btnIncluirMaterial.Size = new Size(47, 25);
-            btnIncluirMaterial.TabIndex = 7;
-            btnIncluirMaterial.TextAlign = ContentAlignment.TopCenter;
-            btnIncluirMaterial.UseVisualStyleBackColor = false;
-            // 
             // dgvMateriais
             // 
             dgvMateriais.AllowUserToAddRows = false;
@@ -387,10 +372,10 @@
             dgvMateriais.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvMateriais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvMateriais.Columns.AddRange(new DataGridViewColumn[] { Descricao, Quantidade, CustoUnitario, valorTotalMaterial });
-            dgvMateriais.Location = new Point(3, 291);
+            dgvMateriais.Location = new Point(2, 62);
             dgvMateriais.Name = "dgvMateriais";
             dgvMateriais.ReadOnly = true;
-            dgvMateriais.Size = new Size(836, 268);
+            dgvMateriais.Size = new Size(519, 267);
             dgvMateriais.TabIndex = 0;
             // 
             // Descricao
@@ -428,14 +413,45 @@
             valorTotalMaterial.Name = "valorTotalMaterial";
             valorTotalMaterial.ReadOnly = true;
             // 
+            // tcItens
+            // 
+            tcItens.Controls.Add(tpMateriais);
+            tcItens.Controls.Add(tpComponentes);
+            tcItens.Controls.Add(tpProcessos);
+            tcItens.Location = new Point(216, 19);
+            tcItens.Name = "tcItens";
+            tcItens.SelectedIndex = 0;
+            tcItens.Size = new Size(529, 357);
+            tcItens.TabIndex = 41;
+            tcItens.Click += btnExcluir_Click;
+            // 
+            // tpMateriais
+            // 
+            tpMateriais.Controls.Add(btnExcluirMaterial);
+            tpMateriais.Controls.Add(btnIncluirMaterial);
+            tpMateriais.Controls.Add(label4);
+            tpMateriais.Controls.Add(tbMateriaisQuantidade);
+            tpMateriais.Controls.Add(label3);
+            tpMateriais.Controls.Add(cbMateriais);
+            tpMateriais.Controls.Add(btnExcluir);
+            tpMateriais.Controls.Add(dgvMateriais);
+            tpMateriais.Location = new Point(4, 24);
+            tpMateriais.Name = "tpMateriais";
+            tpMateriais.Padding = new Padding(3);
+            tpMateriais.Size = new Size(521, 329);
+            tpMateriais.TabIndex = 0;
+            tpMateriais.Text = "Materiais";
+            tpMateriais.UseVisualStyleBackColor = true;
+            // 
             // tpComponentes
             // 
+            tpComponentes.Controls.Add(this.btnExcluirComponente);
+            tpComponentes.Controls.Add(btnIncluirComponente);
             tpComponentes.Controls.Add(label7);
             tpComponentes.Controls.Add(tbComponentesQuantidade);
             tpComponentes.Controls.Add(label8);
             tpComponentes.Controls.Add(cbComponentes);
             tpComponentes.Controls.Add(button1);
-            tpComponentes.Controls.Add(btnIncluirComponente);
             tpComponentes.Controls.Add(dgvComponentes);
             tpComponentes.Location = new Point(4, 24);
             tpComponentes.Name = "tpComponentes";
@@ -472,8 +488,6 @@
             // 
             // cbComponentes
             // 
-            cbComponentes.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cbComponentes.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbComponentes.FormattingEnabled = true;
             cbComponentes.Location = new Point(6, 34);
             cbComponentes.Name = "cbComponentes";
@@ -494,20 +508,6 @@
             button1.TextAlign = ContentAlignment.TopCenter;
             button1.UseVisualStyleBackColor = false;
             // 
-            // btnIncluirComponente
-            // 
-            btnIncluirComponente.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnIncluirComponente.BackColor = Color.White;
-            btnIncluirComponente.BackgroundImage = (Image)resources.GetObject("btnIncluirComponente.BackgroundImage");
-            btnIncluirComponente.BackgroundImageLayout = ImageLayout.Center;
-            btnIncluirComponente.Font = new Font("Segoe UI", 8F);
-            btnIncluirComponente.Location = new Point(732, 34);
-            btnIncluirComponente.Name = "btnIncluirComponente";
-            btnIncluirComponente.Size = new Size(47, 25);
-            btnIncluirComponente.TabIndex = 25;
-            btnIncluirComponente.TextAlign = ContentAlignment.TopCenter;
-            btnIncluirComponente.UseVisualStyleBackColor = false;
-            // 
             // dgvComponentes
             // 
             dgvComponentes.AllowUserToAddRows = false;
@@ -515,10 +515,10 @@
             dgvComponentes.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvComponentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvComponentes.Columns.AddRange(new DataGridViewColumn[] { descricaoComponente, quantidadeComponente, valorUnitarioComponente, valorTotalComponente });
-            dgvComponentes.Location = new Point(3, 291);
+            dgvComponentes.Location = new Point(2, 62);
             dgvComponentes.Name = "dgvComponentes";
             dgvComponentes.ReadOnly = true;
-            dgvComponentes.Size = new Size(836, 268);
+            dgvComponentes.Size = new Size(519, 268);
             dgvComponentes.TabIndex = 24;
             // 
             // descricaoComponente
@@ -558,12 +558,13 @@
             // 
             // tpProcessos
             // 
+            tpProcessos.Controls.Add(this.btnExcluirProcesso);
+            tpProcessos.Controls.Add(btnIncluirProcesso);
             tpProcessos.Controls.Add(label9);
             tpProcessos.Controls.Add(tbProcessosQuantidade);
             tpProcessos.Controls.Add(label10);
             tpProcessos.Controls.Add(cbProcessos);
             tpProcessos.Controls.Add(button4);
-            tpProcessos.Controls.Add(btnIncluirProcesso);
             tpProcessos.Controls.Add(dgvProcessos);
             tpProcessos.Location = new Point(4, 24);
             tpProcessos.Name = "tpProcessos";
@@ -600,8 +601,6 @@
             // 
             // cbProcessos
             // 
-            cbProcessos.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cbProcessos.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbProcessos.FormattingEnabled = true;
             cbProcessos.Location = new Point(6, 34);
             cbProcessos.Name = "cbProcessos";
@@ -622,20 +621,6 @@
             button4.TextAlign = ContentAlignment.TopCenter;
             button4.UseVisualStyleBackColor = false;
             // 
-            // btnIncluirProcesso
-            // 
-            btnIncluirProcesso.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnIncluirProcesso.BackColor = Color.White;
-            btnIncluirProcesso.BackgroundImage = (Image)resources.GetObject("btnIncluirProcesso.BackgroundImage");
-            btnIncluirProcesso.BackgroundImageLayout = ImageLayout.Center;
-            btnIncluirProcesso.Font = new Font("Segoe UI", 8F);
-            btnIncluirProcesso.Location = new Point(732, 34);
-            btnIncluirProcesso.Name = "btnIncluirProcesso";
-            btnIncluirProcesso.Size = new Size(47, 25);
-            btnIncluirProcesso.TabIndex = 25;
-            btnIncluirProcesso.TextAlign = ContentAlignment.TopCenter;
-            btnIncluirProcesso.UseVisualStyleBackColor = false;
-            // 
             // dgvProcessos
             // 
             dgvProcessos.AllowUserToAddRows = false;
@@ -643,10 +628,10 @@
             dgvProcessos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvProcessos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProcessos.Columns.AddRange(new DataGridViewColumn[] { descricaoProcesso, quantidadeProcesso, valorUnitarioProcesso, valorTotalProcesso });
-            dgvProcessos.Location = new Point(3, 291);
+            dgvProcessos.Location = new Point(2, 62);
             dgvProcessos.Name = "dgvProcessos";
             dgvProcessos.ReadOnly = true;
-            dgvProcessos.Size = new Size(836, 268);
+            dgvProcessos.Size = new Size(519, 268);
             dgvProcessos.TabIndex = 24;
             // 
             // descricaoProcesso
@@ -684,29 +669,94 @@
             valorTotalProcesso.Name = "valorTotalProcesso";
             valorTotalProcesso.ReadOnly = true;
             // 
-            // btnCancelar
+            // btnExcluirMaterial
             // 
-            btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
-            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(668, 436);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 23);
-            btnCancelar.TabIndex = 32;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.TextAlign = ContentAlignment.MiddleRight;
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnExcluirMaterial.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExcluirMaterial.BackColor = Color.White;
+            btnExcluirMaterial.BackgroundImage = (Image)resources.GetObject("btnExcluirMaterial.BackgroundImage");
+            btnExcluirMaterial.BackgroundImageLayout = ImageLayout.Center;
+            btnExcluirMaterial.Font = new Font("Segoe UI", 8F);
+            btnExcluirMaterial.Location = new Point(466, 31);
+            btnExcluirMaterial.Name = "btnExcluirMaterial";
+            btnExcluirMaterial.Size = new Size(47, 25);
+            btnExcluirMaterial.TabIndex = 25;
+            btnExcluirMaterial.TextAlign = ContentAlignment.TopCenter;
+            btnExcluirMaterial.UseVisualStyleBackColor = false;
+            btnExcluirMaterial.Click += btnExcluir_Click;
             // 
-            // btnGravar
+            // btnIncluirMaterial
             // 
-            btnGravar.Image = (Image)resources.GetObject("btnGravar.Image");
-            btnGravar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGravar.Location = new Point(581, 436);
-            btnGravar.Name = "btnGravar";
-            btnGravar.Size = new Size(75, 23);
-            btnGravar.TabIndex = 31;
-            btnGravar.Text = "Gravar";
-            btnGravar.TextAlign = ContentAlignment.MiddleRight;
-            btnGravar.UseVisualStyleBackColor = true;
+            btnIncluirMaterial.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnIncluirMaterial.BackColor = Color.White;
+            btnIncluirMaterial.BackgroundImage = (Image)resources.GetObject("btnIncluirMaterial.BackgroundImage");
+            btnIncluirMaterial.BackgroundImageLayout = ImageLayout.Center;
+            btnIncluirMaterial.Font = new Font("Segoe UI", 8F);
+            btnIncluirMaterial.Location = new Point(413, 31);
+            btnIncluirMaterial.Name = "btnIncluirMaterial";
+            btnIncluirMaterial.Size = new Size(47, 25);
+            btnIncluirMaterial.TabIndex = 24;
+            btnIncluirMaterial.TextAlign = ContentAlignment.TopCenter;
+            btnIncluirMaterial.UseVisualStyleBackColor = false;
+            btnIncluirMaterial.Click += btnIncluir_Click;
+            // 
+            // btnExcluirComponente
+            // 
+            this.btnExcluirComponente.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.btnExcluirComponente.BackColor = Color.White;
+            this.btnExcluirComponente.BackgroundImage = (Image)resources.GetObject("btnExcluirComponente.BackgroundImage");
+            this.btnExcluirComponente.BackgroundImageLayout = ImageLayout.Center;
+            this.btnExcluirComponente.Font = new Font("Segoe UI", 8F);
+            this.btnExcluirComponente.Location = new Point(466, 31);
+            this.btnExcluirComponente.Name = "btnExcluirComponente";
+            this.btnExcluirComponente.Size = new Size(47, 25);
+            this.btnExcluirComponente.TabIndex = 33;
+            this.btnExcluirComponente.TextAlign = ContentAlignment.TopCenter;
+            this.btnExcluirComponente.UseVisualStyleBackColor = false;
+            this.btnExcluirComponente.Click += this.btnExcluir_Click;
+            // 
+            // btnIncluirComponente
+            // 
+            btnIncluirComponente.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnIncluirComponente.BackColor = Color.White;
+            btnIncluirComponente.BackgroundImage = (Image)resources.GetObject("btnIncluirComponente.BackgroundImage");
+            btnIncluirComponente.BackgroundImageLayout = ImageLayout.Center;
+            btnIncluirComponente.Font = new Font("Segoe UI", 8F);
+            btnIncluirComponente.Location = new Point(413, 31);
+            btnIncluirComponente.Name = "btnIncluirComponente";
+            btnIncluirComponente.Size = new Size(47, 25);
+            btnIncluirComponente.TabIndex = 32;
+            btnIncluirComponente.TextAlign = ContentAlignment.TopCenter;
+            btnIncluirComponente.UseVisualStyleBackColor = false;
+            btnIncluirComponente.Click += this.btnIncluir_Click;
+            // 
+            // btnExcluirProcesso
+            // 
+            this.btnExcluirProcesso.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.btnExcluirProcesso.BackColor = Color.White;
+            this.btnExcluirProcesso.BackgroundImage = (Image)resources.GetObject("btnExcluirProcesso.BackgroundImage");
+            this.btnExcluirProcesso.BackgroundImageLayout = ImageLayout.Center;
+            this.btnExcluirProcesso.Font = new Font("Segoe UI", 8F);
+            this.btnExcluirProcesso.Location = new Point(466, 31);
+            this.btnExcluirProcesso.Name = "btnExcluirProcesso";
+            this.btnExcluirProcesso.Size = new Size(47, 25);
+            this.btnExcluirProcesso.TabIndex = 33;
+            this.btnExcluirProcesso.TextAlign = ContentAlignment.TopCenter;
+            this.btnExcluirProcesso.UseVisualStyleBackColor = false;
+            // 
+            // btnIncluirProcesso
+            // 
+            btnIncluirProcesso.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnIncluirProcesso.BackColor = Color.White;
+            btnIncluirProcesso.BackgroundImage = (Image)resources.GetObject("btnIncluirProcesso.BackgroundImage");
+            btnIncluirProcesso.BackgroundImageLayout = ImageLayout.Center;
+            btnIncluirProcesso.Font = new Font("Segoe UI", 8F);
+            btnIncluirProcesso.Location = new Point(413, 31);
+            btnIncluirProcesso.Name = "btnIncluirProcesso";
+            btnIncluirProcesso.Size = new Size(47, 25);
+            btnIncluirProcesso.TabIndex = 32;
+            btnIncluirProcesso.TextAlign = ContentAlignment.TopCenter;
+            btnIncluirProcesso.UseVisualStyleBackColor = false;
+            btnIncluirProcesso.Click += this.btnIncluir_Click;
             // 
             // OR0001mnIncluir
             // 
@@ -723,10 +773,10 @@
             gbOrcamento.ResumeLayout(false);
             gbOrcamento.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nmMargem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMateriais).EndInit();
             tcItens.ResumeLayout(false);
             tpMateriais.ResumeLayout(false);
             tpMateriais.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvMateriais).EndInit();
             tpComponentes.ResumeLayout(false);
             tpComponentes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvComponentes).EndInit();
@@ -758,6 +808,8 @@
         private Label lblValorFinal;
         private Label label6;
         private Label label5;
+        private Button btnCancelar;
+        private Button btnGravar;
         private TabControl tcItens;
         private TabPage tpMateriais;
         private Label label4;
@@ -765,7 +817,6 @@
         private Label label3;
         private ComboBox cbMateriais;
         private Button btnExcluir;
-        private Button btnIncluirMaterial;
         private DataGridView dgvMateriais;
         private DataGridViewTextBoxColumn Descricao;
         private DataGridViewTextBoxColumn Quantidade;
@@ -795,7 +846,11 @@
         private DataGridViewTextBoxColumn quantidadeProcesso;
         private DataGridViewTextBoxColumn valorUnitarioProcesso;
         private DataGridViewTextBoxColumn valorTotalProcesso;
-        private Button btnCancelar;
-        private Button btnGravar;
+        private Button btnExcluirMaterial;
+        private Button btnIncluirMaterial;
+        private Button button5;
+        private Button btnIncluirComponente;
+        private Button button7;
+        private Button btnIncluirProcesso;
     }
 }
