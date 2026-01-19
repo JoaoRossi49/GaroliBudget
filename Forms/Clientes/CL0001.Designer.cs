@@ -155,6 +155,7 @@
             btnExcluir.TabIndex = 6;
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
+            btnExcluir.Visible = false;
             btnExcluir.Click += btnExcluir_Click;
             // 
             // btnIncluir

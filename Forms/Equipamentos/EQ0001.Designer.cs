@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EQ0001));
             btnPesquisar = new Button();
             dgvEquipamentos = new DataGridView();
+            Codigo = new DataGridViewTextBoxColumn();
+            IdEquipamento = new DataGridViewTextBoxColumn();
+            Descricao = new DataGridViewTextBoxColumn();
             tbDescricao = new TextBox();
             label1 = new Label();
             btnExcluir = new Button();
@@ -39,9 +42,6 @@
             label2 = new Label();
             tbCodigo = new TextBox();
             gbFiltros = new GroupBox();
-            Codigo = new DataGridViewTextBoxColumn();
-            IdEquipamento = new DataGridViewTextBoxColumn();
-            Descricao = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvEquipamentos).BeginInit();
             gbFiltros.SuspendLayout();
             SuspendLayout();
@@ -76,6 +76,30 @@
             dgvEquipamentos.TabIndex = 7;
             dgvEquipamentos.CellDoubleClick += dgvClientes_CellDoubleClick;
             // 
+            // Codigo
+            // 
+            Codigo.DataPropertyName = "Codigo";
+            Codigo.HeaderText = "Codigo";
+            Codigo.Name = "Codigo";
+            Codigo.ReadOnly = true;
+            Codigo.Width = 200;
+            // 
+            // IdEquipamento
+            // 
+            IdEquipamento.DataPropertyName = "IdEquipamento";
+            IdEquipamento.HeaderText = "IdEquipamento";
+            IdEquipamento.Name = "IdEquipamento";
+            IdEquipamento.ReadOnly = true;
+            IdEquipamento.Visible = false;
+            // 
+            // Descricao
+            // 
+            Descricao.DataPropertyName = "Descricao";
+            Descricao.HeaderText = "Descricao";
+            Descricao.Name = "Descricao";
+            Descricao.ReadOnly = true;
+            Descricao.Width = 450;
+            // 
             // tbDescricao
             // 
             tbDescricao.Location = new Point(5, 41);
@@ -105,6 +129,7 @@
             btnExcluir.TabIndex = 6;
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
+            btnExcluir.Visible = false;
             btnExcluir.Click += btnExcluir_Click;
             // 
             // btnIncluir
@@ -170,30 +195,6 @@
             gbFiltros.TabIndex = 17;
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros";
-            // 
-            // Codigo
-            // 
-            Codigo.DataPropertyName = "Codigo";
-            Codigo.HeaderText = "Codigo";
-            Codigo.Name = "Codigo";
-            Codigo.ReadOnly = true;
-            Codigo.Width = 200;
-            // 
-            // IdEquipamento
-            // 
-            IdEquipamento.DataPropertyName = "IdEquipamento";
-            IdEquipamento.HeaderText = "IdEquipamento";
-            IdEquipamento.Name = "IdEquipamento";
-            IdEquipamento.ReadOnly = true;
-            IdEquipamento.Visible = false;
-            // 
-            // Descricao
-            // 
-            Descricao.DataPropertyName = "Descricao";
-            Descricao.HeaderText = "Descricao";
-            Descricao.Name = "Descricao";
-            Descricao.ReadOnly = true;
-            Descricao.Width = 450;
             // 
             // EQ0001
             // 

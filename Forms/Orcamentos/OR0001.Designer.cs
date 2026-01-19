@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OR0001));
             btnPesquisar = new Button();
             dgvOrcamentos = new DataGridView();
+            IdOrcamento = new DataGridViewTextBoxColumn();
+            Descricao = new DataGridViewTextBoxColumn();
+            valorTotal = new DataGridViewTextBoxColumn();
             tbNumeroOrcamento = new TextBox();
             label1 = new Label();
             btnExcluir = new Button();
@@ -39,9 +42,6 @@
             label2 = new Label();
             tbDescricao = new TextBox();
             gbFiltros = new GroupBox();
-            IdOrcamento = new DataGridViewTextBoxColumn();
-            Descricao = new DataGridViewTextBoxColumn();
-            valorTotal = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvOrcamentos).BeginInit();
             gbFiltros.SuspendLayout();
             SuspendLayout();
@@ -76,6 +76,29 @@
             dgvOrcamentos.TabIndex = 7;
             dgvOrcamentos.CellDoubleClick += dgvOrcamentos_CellDoubleClick;
             // 
+            // IdOrcamento
+            // 
+            IdOrcamento.HeaderText = "IdOrcamento";
+            IdOrcamento.Name = "IdOrcamento";
+            IdOrcamento.ReadOnly = true;
+            IdOrcamento.Visible = false;
+            // 
+            // Descricao
+            // 
+            Descricao.DataPropertyName = "Descricao";
+            Descricao.HeaderText = "Descricao";
+            Descricao.Name = "Descricao";
+            Descricao.ReadOnly = true;
+            Descricao.Width = 500;
+            // 
+            // valorTotal
+            // 
+            valorTotal.DataPropertyName = "ValorTotal";
+            valorTotal.HeaderText = "Valor total";
+            valorTotal.Name = "valorTotal";
+            valorTotal.ReadOnly = true;
+            valorTotal.Width = 180;
+            // 
             // tbNumeroOrcamento
             // 
             tbNumeroOrcamento.Location = new Point(5, 41);
@@ -105,6 +128,7 @@
             btnExcluir.TabIndex = 6;
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
+            btnExcluir.Visible = false;
             btnExcluir.Click += btnExcluir_Click;
             // 
             // btnIncluir
@@ -170,29 +194,6 @@
             gbFiltros.TabIndex = 17;
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros";
-            // 
-            // IdOrcamento
-            // 
-            IdOrcamento.HeaderText = "IdOrcamento";
-            IdOrcamento.Name = "IdOrcamento";
-            IdOrcamento.ReadOnly = true;
-            IdOrcamento.Visible = false;
-            // 
-            // Descricao
-            // 
-            Descricao.DataPropertyName = "Descricao";
-            Descricao.HeaderText = "Descricao";
-            Descricao.Name = "Descricao";
-            Descricao.ReadOnly = true;
-            Descricao.Width = 500;
-            // 
-            // valorTotal
-            // 
-            valorTotal.DataPropertyName = "ValorTotal";
-            valorTotal.HeaderText = "Valor total";
-            valorTotal.Name = "valorTotal";
-            valorTotal.ReadOnly = true;
-            valorTotal.Width = 180;
             // 
             // OR0001
             // 

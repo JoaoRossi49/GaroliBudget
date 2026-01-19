@@ -28,10 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MT0001));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MT0001));
             dgvMateriais = new DataGridView();
+            IdMaterial = new DataGridViewTextBoxColumn();
+            Codigo = new DataGridViewTextBoxColumn();
+            Descricao = new DataGridViewTextBoxColumn();
+            UnidadeMedida = new DataGridViewTextBoxColumn();
+            CustoUnitario = new DataGridViewTextBoxColumn();
+            ativo = new DataGridViewTextBoxColumn();
             btnExcluir = new Button();
             btnIncluir = new Button();
             btnEditar = new Button();
@@ -39,12 +45,6 @@
             tbDescricao = new TextBox();
             label1 = new Label();
             gbFiltros = new GroupBox();
-            IdMaterial = new DataGridViewTextBoxColumn();
-            Codigo = new DataGridViewTextBoxColumn();
-            Descricao = new DataGridViewTextBoxColumn();
-            UnidadeMedida = new DataGridViewTextBoxColumn();
-            CustoUnitario = new DataGridViewTextBoxColumn();
-            ativo = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvMateriais).BeginInit();
             gbFiltros.SuspendLayout();
             SuspendLayout();
@@ -68,6 +68,55 @@
             dgvMateriais.TabIndex = 18;
             dgvMateriais.CellDoubleClick += dgvMateriais_CellDoubleClick;
             // 
+            // IdMaterial
+            // 
+            IdMaterial.DataPropertyName = "IdMaterial";
+            IdMaterial.HeaderText = "IdMaterial";
+            IdMaterial.Name = "IdMaterial";
+            IdMaterial.ReadOnly = true;
+            IdMaterial.Visible = false;
+            // 
+            // Codigo
+            // 
+            Codigo.DataPropertyName = "Codigo";
+            Codigo.HeaderText = "Codigo";
+            Codigo.Name = "Codigo";
+            Codigo.ReadOnly = true;
+            // 
+            // Descricao
+            // 
+            Descricao.DataPropertyName = "Descricao";
+            Descricao.HeaderText = "Descricao";
+            Descricao.Name = "Descricao";
+            Descricao.ReadOnly = true;
+            Descricao.Width = 400;
+            // 
+            // UnidadeMedida
+            // 
+            UnidadeMedida.DataPropertyName = "Unidade";
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            UnidadeMedida.DefaultCellStyle = dataGridViewCellStyle1;
+            UnidadeMedida.HeaderText = "Unidade de medida";
+            UnidadeMedida.Name = "UnidadeMedida";
+            UnidadeMedida.ReadOnly = true;
+            // 
+            // CustoUnitario
+            // 
+            CustoUnitario.DataPropertyName = "CustoUnitario";
+            dataGridViewCellStyle2.Format = "C2";
+            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle2;
+            CustoUnitario.HeaderText = "Custo unitário";
+            CustoUnitario.Name = "CustoUnitario";
+            CustoUnitario.ReadOnly = true;
+            // 
+            // ativo
+            // 
+            ativo.DataPropertyName = "Ativo";
+            ativo.HeaderText = "Ativo";
+            ativo.Name = "ativo";
+            ativo.ReadOnly = true;
+            ativo.Visible = false;
+            // 
             // btnExcluir
             // 
             btnExcluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -81,6 +130,7 @@
             btnExcluir.TabIndex = 22;
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
+            btnExcluir.Visible = false;
             btnExcluir.Click += btnExcluir_Click;
             // 
             // btnIncluir
@@ -155,55 +205,6 @@
             gbFiltros.TabIndex = 25;
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros";
-            // 
-            // IdMaterial
-            // 
-            IdMaterial.DataPropertyName = "IdMaterial";
-            IdMaterial.HeaderText = "IdMaterial";
-            IdMaterial.Name = "IdMaterial";
-            IdMaterial.ReadOnly = true;
-            IdMaterial.Visible = false;
-            // 
-            // Codigo
-            // 
-            Codigo.DataPropertyName = "Codigo";
-            Codigo.HeaderText = "Codigo";
-            Codigo.Name = "Codigo";
-            Codigo.ReadOnly = true;
-            // 
-            // Descricao
-            // 
-            Descricao.DataPropertyName = "Descricao";
-            Descricao.HeaderText = "Descricao";
-            Descricao.Name = "Descricao";
-            Descricao.ReadOnly = true;
-            Descricao.Width = 400;
-            // 
-            // UnidadeMedida
-            // 
-            UnidadeMedida.DataPropertyName = "Unidade";
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            UnidadeMedida.DefaultCellStyle = dataGridViewCellStyle1;
-            UnidadeMedida.HeaderText = "Unidade de medida";
-            UnidadeMedida.Name = "UnidadeMedida";
-            UnidadeMedida.ReadOnly = true;
-            // 
-            // CustoUnitario
-            // 
-            CustoUnitario.DataPropertyName = "CustoUnitario";
-            dataGridViewCellStyle2.Format = "C2";
-            CustoUnitario.DefaultCellStyle = dataGridViewCellStyle2;
-            CustoUnitario.HeaderText = "Custo unitário";
-            CustoUnitario.Name = "CustoUnitario";
-            CustoUnitario.ReadOnly = true;
-            // 
-            // ativo
-            // 
-            ativo.DataPropertyName = "Ativo";
-            ativo.HeaderText = "Ativo";
-            ativo.Name = "ativo";
-            ativo.ReadOnly = true;
-            ativo.Visible = false;
             // 
             // MT0001
             // 
