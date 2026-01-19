@@ -88,7 +88,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             var idComponente = reader.GetInt32(reader.GetOrdinal("ID_COMPONENTE"));
             componente = _componenteRepository.ObterPorId(idComponente);
 
-            componente.Quantidade = Convert.ToInt32(reader["QUANTIDADE_PADRAO"]);
+            componente.Quantidade = Convert.ToInt32(reader["QUANTIDADE"]);
 
             var idModulo = reader.GetInt32(reader.GetOrdinal("ID_MODULO"));
             var modulo = _moduloRepository.ObterPorId(idModulo);

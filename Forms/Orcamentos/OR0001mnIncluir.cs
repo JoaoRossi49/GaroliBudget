@@ -55,7 +55,7 @@ namespace GaroliBudget
             _equipamento.Componentes = _orcamentoService.ListarComponentes(_orcamento.IdOrcamento);
             _orcamento.equipamento = _equipamento;
 
-            this.Text = "Editar Equipamento";
+            this.Text = "Editar Orçamento";
             PreencherCampos();
             CarregarModulos();
         }

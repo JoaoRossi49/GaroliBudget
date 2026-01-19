@@ -90,7 +90,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             var idMaterial = reader.GetInt32(reader.GetOrdinal("ID_MATERIAL"));
             material = _materialRepository.ObterPorId(idMaterial);
 
-            material.Quantidade = Convert.ToDecimal(reader["QUANTIDADE_PADRAO"]);
+            material.Quantidade = Convert.ToDecimal(reader["QUANTIDADE"]);
 
             var idModulo = reader.GetInt32(reader.GetOrdinal("ID_MODULO"));
             var modulo = _moduloRepository.ObterPorId(idModulo);

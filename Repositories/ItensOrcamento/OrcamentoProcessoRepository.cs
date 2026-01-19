@@ -88,7 +88,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
             var idProcesso = reader.GetInt32(reader.GetOrdinal("ID_PROCESSO"));
             processo = _processoRepository.ObterPorId(idProcesso);
 
-            processo.Quantidade = Convert.ToInt32(reader["HORAS_PADRAO"]);
+            processo.Quantidade = Convert.ToInt32(reader["HORAS"]);
 
             var idModulo = reader.GetInt32(reader.GetOrdinal("ID_MODULO"));
             var modulo = _moduloRepository.ObterPorId(idModulo);
