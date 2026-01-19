@@ -19,11 +19,11 @@ namespace GaroliBudget.Repositories
             var cmd = conn.CreateCommand();
             cmd.CommandText = @"
                 INSERT INTO ORCAMENTO 
-                (NUMERO, DATA_ORCAMENTO, ID_CLIENTE, ID_EQUIPAMENTO, DESCRICAO, MARGEM_CONTRIBUICAO,
+                (NUMERO, DATA_ORCAMENTO, ID_CLIENTE, ID_EQUIPAMENTO, DESCRICAO_PROJETO, MARGEM_CONTRIBUICAO,
                 VALOR_TOTAL, STATUS, OBSERVACOES)
                 VALUES 
                 (@numero, CURRENT_TIMESTAMP, @cliente, @eq, @descricao, @margem, @total, @status, @observacao)
-                RETURNING ID_EQUIPAMENTO";
+                RETURNING ID_ORCAMENTO";
 
             cmd.Parameters.AddWithValue("@numero", m.Numero);
             //cmd.Parameters.AddWithValue("@dat", m.Data);
@@ -51,9 +51,9 @@ namespace GaroliBudget.Repositories
                     --DATA_ORCAMENTO = @dat,
                     ID_CLIENTE = @cliente, 
                     ID_EQUIPAMENTO = @eq, 
-                    DESCRICAO = @descricao, 
+                    DESCRICAO_PROJETO = @descricao, 
                     MARGEM_CONTRIBUICAO = @margem,
-                    VALOR_TOTAL = total, 
+                    VALOR_TOTAL = @total, 
                     STATUS = @status, 
                     OBSERVACOES = @observacao
               WHERE ID_ORCAMENTO = @id;";

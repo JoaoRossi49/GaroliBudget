@@ -703,6 +703,7 @@
             nmMargem.Size = new Size(120, 34);
             nmMargem.TabIndex = 37;
             nmMargem.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            nmMargem.ValueChanged += nmMargem_ValueChanged;
             // 
             // lblValorFinal
             // 
@@ -757,6 +758,7 @@
             btnGravar.Text = "Gravar";
             btnGravar.TextAlign = ContentAlignment.MiddleRight;
             btnGravar.UseVisualStyleBackColor = true;
+            btnGravar.Click += btnGravar_Click;
             // 
             // OR0001mnIncluir
             // 

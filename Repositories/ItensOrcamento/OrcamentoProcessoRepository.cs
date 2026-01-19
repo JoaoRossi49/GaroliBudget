@@ -17,7 +17,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
         private readonly IProcessoRepository _processoRepository = new ProcessoRepository();
 
         public void InserirLista(
-            int idEquipamento,
+            int idOrcamento,
             List<Processo> processos,
             NpgsqlConnection conn,
             NpgsqlTransaction tran)
@@ -30,15 +30,17 @@ namespace GaroliBudget.Repositories.ItensOrcamento
                     cmd.Transaction = tran;
                     cmd.CommandText = @"
                 INSERT INTO ORCAMENTO_MAO_OBRA
-                (ID_EQUIPAMENTO, ID_MODULO, ID_PROCESSO, DESCRICAO_PROCESSO, HORAS_PADRAO)
+                (ID_ORCAMENTO, ID_MODULO, ID_PROCESSO, DESCRICAO, HORAS, CUSTO_HORA, CUSTO_TOTAL)
                 VALUES
-                (@id, @mod, @idProcesso, @descricao, @qtd)";
+                (@id, @mod, @idProcesso, @descricao, @qtd, @unit, @total)";
 
-                    cmd.Parameters.AddWithValue("@id", idEquipamento);
+                    cmd.Parameters.AddWithValue("@id", idOrcamento);
                     cmd.Parameters.AddWithValue("@mod", p.Modulo.Id);
                     cmd.Parameters.AddWithValue("@idProcesso", p.IdProcesso);
                     cmd.Parameters.AddWithValue("@descricao", p.Descricao);
                     cmd.Parameters.AddWithValue("@qtd", p.Quantidade);
+                    cmd.Parameters.AddWithValue("@unit", p.CustoHora);
+                    cmd.Parameters.AddWithValue("@total", p.Total);
 
                     cmd.ExecuteNonQuery();
                 }

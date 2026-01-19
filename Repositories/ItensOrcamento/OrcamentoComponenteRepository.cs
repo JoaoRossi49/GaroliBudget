@@ -17,7 +17,7 @@ namespace GaroliBudget.Repositories.ItensOrcamento
         private readonly IComponenteRepository _componenteRepository = new ComponenteRepository();
 
         public void InserirLista(
-            int idEquipamento,
+            int idOrcamento,
             List<Componente> componentes,
             NpgsqlConnection conn,
             NpgsqlTransaction tran)
@@ -30,15 +30,17 @@ namespace GaroliBudget.Repositories.ItensOrcamento
                     cmd.Transaction = tran;
                     cmd.CommandText = @"
                 INSERT INTO ORCAMENTO_COMPONENTE
-                (ID_EQUIPAMENTO, ID_MODULO, ID_EQUIPAMENTO, ID_COMPONENTE, DESCRICAO_COMPONENTE, QUANTIDADE_PADRAO)
+                (ID_ORCAMENTO, ID_MODULO, ID_COMPONENTE, DESCRICAO, QUANTIDADE, CUSTO_UNITARIO, CUSTO_TOTAL)
                 VALUES
-                (@id, @mod, @idComponente, @descricao, @qtd)";
+                (@id, @mod, @idComponente, @descricao, @qtd, @unit, @total)";
 
-                    cmd.Parameters.AddWithValue("@id", idEquipamento);
+                    cmd.Parameters.AddWithValue("@id", idOrcamento);
                     cmd.Parameters.AddWithValue("@mod", c.Modulo.Id);
                     cmd.Parameters.AddWithValue("@idComponente", c.IdComponente);
                     cmd.Parameters.AddWithValue("@descricao", c.Descricao);
                     cmd.Parameters.AddWithValue("@qtd", c.Quantidade);
+                    cmd.Parameters.AddWithValue("@unit", c.CustoUnitario);
+                    cmd.Parameters.AddWithValue("@total", c.Total);
 
                     cmd.ExecuteNonQuery();
                 }

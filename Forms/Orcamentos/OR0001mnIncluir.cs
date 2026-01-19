@@ -49,7 +49,7 @@ namespace GaroliBudget
             _edicao = true;
             CarregarServices();
             _orcamento = orcamentoParaEditar;
-            
+
             _equipamento.Materiais = _orcamentoService.ListarMateriais(_orcamento.IdOrcamento);
             _equipamento.Processos = _orcamentoService.ListarProcessos(_orcamento.IdOrcamento);
             _equipamento.Componentes = _orcamentoService.ListarComponentes(_orcamento.IdOrcamento);
@@ -111,35 +111,35 @@ namespace GaroliBudget
         {
             int idModulo = GetModuloSelecionado();
 
+            dgvMateriais.AutoGenerateColumns = false;
+            dgvComponentes.AutoGenerateColumns = false;
+            dgvProcessos.AutoGenerateColumns = false;
+
             Equipamento equipamento = _orcamento.equipamento;
 
             if (!_edicao)
             {
-                dgvMateriais.AutoGenerateColumns = false;
-                equipamento.Materiais = _equipamentoService.ListarMateriais(equipamento.IdEquipamento, idModulo);
-                dgvMateriais.DataSource = equipamento.Materiais;
+                //Tem que carregar o template e inserir no orçamento
+                _orcamento.Materiais = _equipamentoService.ListarMateriais(equipamento.IdEquipamento, idModulo);
+                dgvMateriais.DataSource = _orcamento.Materiais;
 
-                dgvComponentes.AutoGenerateColumns = false;
-                equipamento.Componentes = _equipamentoService.ListarComponentes(equipamento.IdEquipamento, idModulo);
-                dgvComponentes.DataSource = equipamento.Componentes;
+                _orcamento.Componentes = _equipamentoService.ListarComponentes(equipamento.IdEquipamento, idModulo);
+                dgvComponentes.DataSource = _orcamento.Componentes;
 
-                dgvProcessos.AutoGenerateColumns = false;
-                equipamento.Processos = _equipamentoService.ListarProcessos(equipamento.IdEquipamento, idModulo);
-                dgvProcessos.DataSource = equipamento.Processos;
+                _orcamento.Processos = _equipamentoService.ListarProcessos(equipamento.IdEquipamento, idModulo);
+                dgvProcessos.DataSource = _orcamento.Processos;
             }
             else
             {
-                dgvMateriais.AutoGenerateColumns = false;
-                 equipamento.Materiais = _orcamentoService.ListarMateriais(equipamento.IdEquipamento, idModulo);
-                dgvMateriais.DataSource =  equipamento.Materiais;
+                //Se for uma edição, ele deve carregar do que já existe
+                _orcamento.Materiais = _orcamentoService.ListarMateriais(_orcamento.IdOrcamento, idModulo);
+                dgvMateriais.DataSource = _orcamento.Materiais;
 
-                dgvComponentes.AutoGenerateColumns = false;
-                 equipamento.Componentes = _orcamentoService.ListarComponentes(equipamento.IdEquipamento, idModulo);
-                dgvComponentes.DataSource =  equipamento.Componentes;
+                _orcamento.Componentes = _orcamentoService.ListarComponentes(_orcamento.IdOrcamento, idModulo);
+                dgvComponentes.DataSource = _orcamento.Componentes;
 
-                dgvProcessos.AutoGenerateColumns = false;
-                 equipamento.Processos = _orcamentoService.ListarProcessos(equipamento.IdEquipamento, idModulo);
-                dgvProcessos.DataSource =  equipamento.Processos;
+                _orcamento.Processos = _orcamentoService.ListarProcessos(_orcamento.IdOrcamento, idModulo);
+                dgvProcessos.DataSource = _orcamento.Processos;
             }
         }
 
@@ -224,6 +224,31 @@ namespace GaroliBudget
             if (!AtualizaObjeto())
                 return;
 
+            //Se não for uma edição, recria todos os módulos do equipamento para o orçamento
+            if (!_edicao)
+            {
+                if (_orcamento.IdOrcamento == 0)
+                {
+                    if (!PreCadastroOrcamento())
+                        return;
+                }
+
+                foreach (Material material in _orcamento.Materiais)
+                {
+                    CadastrarModulo(material.Modulo, _orcamento);
+                }
+
+                foreach (Componente componente in _orcamento.Componentes)
+                {
+                    CadastrarModulo(componente.Modulo, _orcamento);
+                }
+
+                foreach (Processo processo in _orcamento.Processos)
+                {
+                    CadastrarModulo(processo.Modulo, _orcamento);
+                }
+            }
+
             //Salva itens do equipamento
             _orcamentoService.Salvar(_orcamento);
 
@@ -282,7 +307,7 @@ namespace GaroliBudget
                     cbMateriais,
                     tbMateriaisQuantidade,
                     dgvMateriais,
-                    _orcamento.equipamento.Materiais
+                    _orcamento.Materiais
                 );
             }
             else if (tcItens.SelectedTab == tpComponentes)
@@ -291,7 +316,7 @@ namespace GaroliBudget
                     cbComponentes,
                     tbComponentesQuantidade,
                     dgvComponentes,
-                    _orcamento.equipamento.Componentes
+                    _orcamento.Componentes
                 );
             }
             else if (tcItens.SelectedTab == tpProcessos)
@@ -300,7 +325,7 @@ namespace GaroliBudget
                     cbProcessos,
                     tbProcessosQuantidade,
                     dgvProcessos,
-                    _orcamento.equipamento.Processos
+                    _orcamento.Processos
                 );
             }
 
@@ -368,10 +393,11 @@ namespace GaroliBudget
 
             int idModulo = GetModuloSelecionado();
             var selecionado = combo.SelectedItem;
+            var equipamento = _orcamento.equipamento;
 
             if (selecionado is Componente componente)
             {
-                bool jaExiste = _equipamento.Componentes.Any(c =>
+                bool jaExiste = equipamento.Componentes.Any(c =>
                     c.IdComponente == componente.IdComponente &&
                     c.Modulo != null &&
                     c.Modulo.Id == idModulo
@@ -390,7 +416,7 @@ namespace GaroliBudget
             }
             else if (selecionado is Material material)
             {
-                bool jaExiste = _equipamento.Materiais.Any(m =>
+                bool jaExiste = equipamento.Materiais.Any(m =>
                     m.IdMaterial == material.IdMaterial &&
                     m.Modulo != null &&
                     m.Modulo.Id == idModulo
@@ -409,7 +435,7 @@ namespace GaroliBudget
             }
             else if (selecionado is Processo processo)
             {
-                bool jaExiste = _equipamento.Processos.Any(m =>
+                bool jaExiste = equipamento.Processos.Any(m =>
                     m.IdProcesso == processo.IdProcesso &&
                     m.Modulo != null &&
                     m.Modulo.Id == idModulo
@@ -438,21 +464,21 @@ namespace GaroliBudget
             {
                 ExcluirItem<Material>(
                     dgvMateriais,
-                    _orcamento.equipamento.Materiais
+                    _orcamento.Materiais
                 );
             }
             else if (tcItens.SelectedTab == tpComponentes)
             {
                 ExcluirItem<Componente>(
                     dgvComponentes,
-                    _orcamento.equipamento.Componentes
+                    _orcamento.Componentes
                 );
             }
             else if (tcItens.SelectedTab == tpProcessos)
             {
                 ExcluirItem<Processo>(
                     dgvProcessos,
-                    _orcamento.equipamento.Processos
+                    _orcamento.Processos
                 );
             }
 
@@ -591,29 +617,28 @@ namespace GaroliBudget
                 listaProcesso.Remove(item);
         }
 
-        //Não tem por enquando rsrsr
-        //private void CadastrarModulo(Modulo modulo, Equipamento equipamento)
-        //{
-        //    using var conn = DBPostgres.GetConnection();
-        //    conn.Open();
+        private void CadastrarModulo(Modulo modulo, Orcamento orcamento)
+        {
+            using var conn = DBPostgres.GetConnection();
+            conn.Open();
 
-        //    using var tran = conn.BeginTransaction();
-        //    try
-        //    {
-        //        var repo = new EquipamentoModuloRepository();
-        //        modulo.IdEquipamento = equipamento.IdEquipamento;
-        //        modulo.Id = repo.Inserir(modulo, conn, tran);
-        //        tran.Commit();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        tran.Rollback();
-        //        MessageBox.Show("Erro ao inserir módulo:\n" + ex.Message);
-        //    }
+            using var tran = conn.BeginTransaction();
+            try
+            {
+                var repo = new OrcamentoModuloRepository();
+                modulo.IdOrcamento = orcamento.IdOrcamento;
+                modulo.Id = repo.Inserir(modulo, conn, tran);
+                tran.Commit();
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                MessageBox.Show("Erro ao inserir módulo:\n" + ex.Message);
+            }
 
-        //}
+        }
 
-        private bool PreCadastroEquipamento()
+        private bool PreCadastroOrcamento()
         {
             if (!ValidarOrcamento())
                 return false;
@@ -636,7 +661,7 @@ namespace GaroliBudget
             cbEquipamento.Enabled = false;
             tbObservacoes.ReadOnly = true;
 
-            return (_equipamento.IdEquipamento > 0);
+            return (_orcamento.IdOrcamento > 0);
         }
 
         private bool ValidarOrcamento()
@@ -729,11 +754,11 @@ namespace GaroliBudget
             CarregarDataGrid();
 
             if (_equipamento.Materiais != null)
-                dgvMateriais.DataSource = _orcamento.equipamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+                dgvMateriais.DataSource = _orcamento.Materiais.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
             if (_equipamento.Processos != null)
-                dgvProcessos.DataSource = _orcamento.equipamento.Processos.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+                dgvProcessos.DataSource = _orcamento.Processos.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
             if (_equipamento.Componentes != null)
-                dgvComponentes.DataSource = _orcamento.equipamento.Componentes.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
+                dgvComponentes.DataSource = _orcamento.Componentes.Where(m => m.Modulo != null && m.Modulo.Id == idModulo).ToList();
         }
 
         private void LimparGridsModulo()
