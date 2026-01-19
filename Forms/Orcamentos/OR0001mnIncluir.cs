@@ -397,7 +397,7 @@ namespace GaroliBudget
 
             if (selecionado is Componente componente)
             {
-                bool jaExiste = equipamento.Componentes.Any(c =>
+                bool jaExiste = _orcamento.Componentes.Any(c =>
                     c.IdComponente == componente.IdComponente &&
                     c.Modulo != null &&
                     c.Modulo.Id == idModulo
@@ -416,7 +416,7 @@ namespace GaroliBudget
             }
             else if (selecionado is Material material)
             {
-                bool jaExiste = equipamento.Materiais.Any(m =>
+                bool jaExiste = _orcamento.Materiais.Any(m =>
                     m.IdMaterial == material.IdMaterial &&
                     m.Modulo != null &&
                     m.Modulo.Id == idModulo
@@ -435,7 +435,7 @@ namespace GaroliBudget
             }
             else if (selecionado is Processo processo)
             {
-                bool jaExiste = equipamento.Processos.Any(m =>
+                bool jaExiste = _orcamento.Processos.Any(m =>
                     m.IdProcesso == processo.IdProcesso &&
                     m.Modulo != null &&
                     m.Modulo.Id == idModulo
@@ -771,14 +771,14 @@ namespace GaroliBudget
 
         private void cbEquipamento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbEquipamento.SelectedIndex != -1)
-            {
-                gbOrcamento.Enabled = true;
-            }
-            else
-            {
-                gbOrcamento.Enabled = false;
-            }
+            //if (cbEquipamento.SelectedIndex != -1)
+            //{
+            //    gbOrcamento.Enabled = true;
+            //}
+            //else
+            //{
+            //    gbOrcamento.Enabled = false;
+            //}
 
             if (cbEquipamento.SelectedItem != null)
             {

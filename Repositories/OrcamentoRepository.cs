@@ -91,7 +91,7 @@ namespace GaroliBudget.Repositories
             conn.Open();
 
             var cmd = conn.CreateCommand();
-            cmd.CommandText = $"SELECT * FROM ORCAMENTO {where};";
+            cmd.CommandText = $"SELECT * FROM ORCAMENTO WHERE 1 = 1 {where};";
 
             using var reader = cmd.ExecuteReader();
             while (reader.Read())

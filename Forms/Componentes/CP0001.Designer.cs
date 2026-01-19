@@ -114,6 +114,7 @@
             btnExcluir.BackColor = Color.White;
             btnExcluir.BackgroundImage = (Image)resources.GetObject("btnExcluir.BackgroundImage");
             btnExcluir.BackgroundImageLayout = ImageLayout.Center;
+            btnExcluir.Enabled = false;
             btnExcluir.Font = new Font("Segoe UI", 8F);
             btnExcluir.Location = new Point(640, 52);
             btnExcluir.Name = "btnExcluir";
@@ -121,7 +122,6 @@
             btnExcluir.TabIndex = 22;
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
-            btnExcluir.Visible = false;
             btnExcluir.Click += btnExcluir_Click;
             // 
             // btnIncluir

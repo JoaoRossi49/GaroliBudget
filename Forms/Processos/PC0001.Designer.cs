@@ -28,9 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PC0001));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PC0001));
             dgvMateriais = new DataGridView();
+            IdProcesso = new DataGridViewTextBoxColumn();
+            Descricao = new DataGridViewTextBoxColumn();
+            CustoHora = new DataGridViewTextBoxColumn();
+            ativo = new DataGridViewTextBoxColumn();
             btnExcluir = new Button();
             btnIncluir = new Button();
             btnEditar = new Button();
@@ -38,10 +42,6 @@
             tbDescricao = new TextBox();
             label1 = new Label();
             gbFiltros = new GroupBox();
-            IdProcesso = new DataGridViewTextBoxColumn();
-            Descricao = new DataGridViewTextBoxColumn();
-            CustoHora = new DataGridViewTextBoxColumn();
-            ativo = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvMateriais).BeginInit();
             gbFiltros.SuspendLayout();
             SuspendLayout();
@@ -65,12 +65,48 @@
             dgvMateriais.TabIndex = 18;
             dgvMateriais.CellDoubleClick += dgvMateriais_CellDoubleClick;
             // 
+            // IdProcesso
+            // 
+            IdProcesso.DataPropertyName = "IdProcesso";
+            IdProcesso.HeaderText = "IdProcesso";
+            IdProcesso.Name = "IdProcesso";
+            IdProcesso.ReadOnly = true;
+            IdProcesso.Visible = false;
+            // 
+            // Descricao
+            // 
+            Descricao.DataPropertyName = "Descricao";
+            Descricao.HeaderText = "Descricao";
+            Descricao.Name = "Descricao";
+            Descricao.ReadOnly = true;
+            Descricao.Width = 400;
+            // 
+            // CustoHora
+            // 
+            CustoHora.DataPropertyName = "CustoHora";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            CustoHora.DefaultCellStyle = dataGridViewCellStyle1;
+            CustoHora.HeaderText = "Custo hora";
+            CustoHora.Name = "CustoHora";
+            CustoHora.ReadOnly = true;
+            CustoHora.Width = 250;
+            // 
+            // ativo
+            // 
+            ativo.DataPropertyName = "Ativo";
+            ativo.HeaderText = "Ativo";
+            ativo.Name = "ativo";
+            ativo.ReadOnly = true;
+            ativo.Visible = false;
+            // 
             // btnExcluir
             // 
             btnExcluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnExcluir.BackColor = Color.White;
             btnExcluir.BackgroundImage = (Image)resources.GetObject("btnExcluir.BackgroundImage");
             btnExcluir.BackgroundImageLayout = ImageLayout.Center;
+            btnExcluir.Enabled = false;
             btnExcluir.Font = new Font("Segoe UI", 8F);
             btnExcluir.Location = new Point(640, 52);
             btnExcluir.Name = "btnExcluir";
@@ -78,6 +114,7 @@
             btnExcluir.TabIndex = 22;
             btnExcluir.TextAlign = ContentAlignment.TopCenter;
             btnExcluir.UseVisualStyleBackColor = false;
+            btnExcluir.Visible = false;
             btnExcluir.Click += btnExcluir_Click;
             // 
             // btnIncluir
@@ -152,41 +189,6 @@
             gbFiltros.TabIndex = 25;
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros";
-            // 
-            // IdProcesso
-            // 
-            IdProcesso.DataPropertyName = "IdProcesso";
-            IdProcesso.HeaderText = "IdProcesso";
-            IdProcesso.Name = "IdProcesso";
-            IdProcesso.ReadOnly = true;
-            IdProcesso.Visible = false;
-            // 
-            // Descricao
-            // 
-            Descricao.DataPropertyName = "Descricao";
-            Descricao.HeaderText = "Descricao";
-            Descricao.Name = "Descricao";
-            Descricao.ReadOnly = true;
-            Descricao.Width = 400;
-            // 
-            // CustoHora
-            // 
-            CustoHora.DataPropertyName = "CustoHora";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            CustoHora.DefaultCellStyle = dataGridViewCellStyle1;
-            CustoHora.HeaderText = "Custo hora";
-            CustoHora.Name = "CustoHora";
-            CustoHora.ReadOnly = true;
-            CustoHora.Width = 250;
-            // 
-            // ativo
-            // 
-            ativo.DataPropertyName = "Ativo";
-            ativo.HeaderText = "Ativo";
-            ativo.Name = "ativo";
-            ativo.ReadOnly = true;
-            ativo.Visible = false;
             // 
             // PC0001
             // 
